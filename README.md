@@ -10,6 +10,7 @@ This boilerplate is updated with:
 - [Webpack 4+](https://webpack.js.org/)
 - [React Hot Loader](https://github.com/gaearon/react-hot-loader)
 - [eslint-config-react-app](https://www.npmjs.com/package/eslint-config-react-app)
+- [Prettier](https://prettier.io/)
 
 This boilerplate is heavily inspired by and adapted from [https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate](https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate), with additional support for React 16.6+ features and Webpack 4+.
 
