@@ -89,9 +89,6 @@ var options = {
       }
     }]),
     new CopyWebpackPlugin([{
-      from: 'src/assets/img'
-    }]),
-    new CopyWebpackPlugin([{
       from: 'src/pages/Content/content.styles.css'
     }]),
     new HtmlWebpackPlugin({
