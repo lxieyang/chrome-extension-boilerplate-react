@@ -9,7 +9,8 @@
   },
   "scripts": {
     "build": "node utils/build.js",
-    "start": "node utils/webserver.js"
+    "start": "node utils/webserver.js",
+    "prettier": "prettier --write '**/*.{js,jsx,css,html}'"
   },
   "dependencies": {
     "@hot-loader/react-dom": "^16.8.6",
