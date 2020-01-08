@@ -3,7 +3,7 @@ import './Newtab.css';
 
 class Newtab extends Component {
   state = {
-    reactVersion: '16.10',
+    reactVersion: '16.12',
     webpackVersion: '4',
   };
   render() {

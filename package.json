@@ -16,7 +16,7 @@
     "@hot-loader/react-dom": "^16.11.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-hot-loader": "^4.12.14"
+    "react-hot-loader": "^4.12.18"
   },
   "devDependencies": {
     "@babel/core": "^7.1.5",
@@ -43,7 +43,7 @@
     "prettier": "1.18.2",
     "style-loader": "^1.0.0",
     "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.7",
+    "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.2.1",
     "write-file-webpack-plugin": "^4.5.1"
   }
