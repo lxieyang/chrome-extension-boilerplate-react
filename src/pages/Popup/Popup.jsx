@@ -78,6 +78,10 @@ const Popup = () => {
     });
   }
 
+  useEffect(() => {
+    capture();
+  },[])
+
   return <>
     <Button color='primary' variant='contained' onClick={capture}>Capture</Button>
     <List>

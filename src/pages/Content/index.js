@@ -10,6 +10,7 @@ const getId = ()=>{
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === 'CAPTURE') {
     const video = document.querySelector('video');
+    if (!video) return;
     const canvas = document.createElement('canvas');
     canvas.setAttribute('width', video.videoWidth);
     canvas.setAttribute('height', video.videoHeight);
