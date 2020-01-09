@@ -21,5 +21,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     const title = document.title;
     chrome.runtime.sendMessage({dataUrl, time, url, title, id, type: 'res'})
   }
+  if (msg.type === 'JUMP') {
+    location.href = msg.href;
+  }
   return true;
 })
