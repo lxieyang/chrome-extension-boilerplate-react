@@ -1,5 +1,5 @@
 {
-  "name": "Chrome Extension with React & Webpack",
+  "name": "Capture Video Element",
   "options_page": "options.html",
   "background": {
     "page": "background.html"
@@ -7,9 +7,6 @@
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": "icon-34.png"
-  },
-  "chrome_url_overrides": {
-    "newtab": "newtab.html"
   },
   "icons": {
     "128": "icon-128.png"
@@ -23,6 +20,10 @@
     "content.styles.css",
     "icon-128.png",
     "icon-34.png"
+  ],
+  "permissions": [
+    "storage",
+    "unlimitedStorage"
   ],
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
