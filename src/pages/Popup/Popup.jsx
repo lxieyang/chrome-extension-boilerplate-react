@@ -44,6 +44,10 @@ const Popup = () => {
     const { dataUrl, title, url } = msg;
 
     const gyazoUrl = await gyazo({ image_url: dataUrl, title, url })
+
+    const newList = Object.assign([], list);
+    newList.push(msg);
+    setList(newList);
     
     const el = {
       ...msg,
