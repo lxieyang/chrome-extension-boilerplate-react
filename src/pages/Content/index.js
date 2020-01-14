@@ -19,18 +19,17 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     const time = parseInt(video.currentTime);
     const id = getId()
     const title = document.title;
-    let url = location.href;
-    // times option is only available at YouTube
-    if (url.startsWith("https://www.youtube.com/")) {
-      const suffix = "&t=" + time + "s";
-      // replace if url already has time info
-      if (url.indexOf("&t=") > 0) {
-        url.replace(/&t=.*/, suffix);
-      } else {
-        url = url + suffix;
-      }
+    
+    // Youtube Special Support
+    if (location.href.startsWith("https://www.youtube.com/")) {
+      const videoId = document.querySelector('ytd-watch-flexy').getAttribute('video-id');
+      const url = `https://www.youtube.com/watch?v=${videoId}&t=${time}s`;
+      chrome.runtime.sendMessage({ dataUrl, time, url, title, id, type: 'res' });
+    } else {
+      const url = location.href;
+      chrome.runtime.sendMessage({ dataUrl, time, url, title, id, type: 'res' })
     }
-    chrome.runtime.sendMessage({ dataUrl, time, url, title, id, type: 'res' })
+    
   }
   if (msg.type === 'SUBS') {
     const video = document.querySelector('video');
