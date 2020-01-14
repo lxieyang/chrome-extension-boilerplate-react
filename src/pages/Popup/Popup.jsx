@@ -18,6 +18,13 @@ const Capture = ({ item }) => {
     });
   }
 
+  const tweet = () => {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      const tab = tabs[0];
+      chrome.tabs.sendMessage(tab.id, { type: 'TWEET', url: gyazo });
+    });
+  }
+
   return <ListItem>
     <Card>
       <CardMedia component='img' src={dataUrl}></CardMedia>
@@ -32,6 +39,7 @@ const Capture = ({ item }) => {
       </CardContent>
       <CardActions>
         <Button color='primary' onClick={() => jump(gyazo)}>Gyazo</Button>
+        <Button color='secondary' onClick={() => tweet()}>Tweet</Button>
       </CardActions>
     </Card>
   </ListItem>

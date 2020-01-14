@@ -8,6 +8,9 @@ const getId = () => {
 
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  if (msg.type === 'TWEET') {
+    window.open(`https://twitter.com/intent/tweet?text=${msg.url}`, 't', 'width=600,height=300');
+  }
   if (msg.type === 'CAPTURE') {
     const video = document.querySelector('video');
     if (!video) return;
