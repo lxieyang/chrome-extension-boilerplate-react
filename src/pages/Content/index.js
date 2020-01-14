@@ -20,7 +20,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     const time = parseInt(video.currentTime);
     const id = getId()
     const title = document.title;
-    var url = location.href;
+    let url = location.href;
     // times option is only available at YouTube
     if (msg.times && url.startsWith("https://www.youtube.com/")) {
       const suffix = "&t=" + time + "s";
