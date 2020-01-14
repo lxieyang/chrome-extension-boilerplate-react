@@ -21,7 +21,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     const title = document.title;
     var url = location.href;
     if (msg.times && url.startsWith("https://www.youtube.com/")) {
-      url = url + "&t=" + time + "s";
+      const suffix = "&t=" + time + "s";
+      if (url.indexOf("&t=") < 0) {
+        url = url + suffix;
+      } else {
+        url.replace(/&t=.*/, suffix);
+      }
     }
     chrome.runtime.sendMessage({ dataUrl, time, url, title, id, type: 'res' })
   }
