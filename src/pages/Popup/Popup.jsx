@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Button, List, ListItem, Card, CardMedia, CardContent, Typography, Link, CardActions } from '@material-ui/core';
+import { Button, List, ListItem, Card, CardMedia, CardContent, Typography, Link, CardActions, Checkbox, FormControlLabel } from '@material-ui/core';
 import { gyazo } from './gyazo';
+import { trim } from './trim';
 
 const pad = (i) => {
   if (i < 10) return `0${i}`
@@ -38,6 +39,7 @@ const Capture = ({ item }) => {
 
 const Popup = () => {
   const [list, setList] = useState([]);
+  const [subs, setSubs] = useState(false);
   const push = async (msg) => {
     const { dataUrl, title, url } = msg;
 
@@ -59,31 +61,42 @@ const Popup = () => {
 
   useEffect(() => {
     chrome.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
-      if (msg.type == 'res') {
+      if (msg.type === 'res') {
         push(msg);
+      }
+      if (msg.type === 'rect') {
+        const { x, y, width, height } = msg;
+        chrome.tabs.captureVisibleTab(null, { format: 'png' }, async (dataUrl) => {
+          trim(dataUrl, x, y, width, height, (dataUrl) => {
+            push({ ...msg, dataUrl });
+          })
+        })
       }
     });
   }, [])
 
   useEffect(() => {
-    chrome.storage.local.get(['list'], (result) => {
+    chrome.storage.local.get(['list', 'subs'], (result) => {
       if (result.list) setList(result.list);
+      if (result.subs) setSubs(result.subs);
+      capture(result.subs);
     })
   }, [])
 
-  const capture = () => {
+  useEffect(() => { chrome.storage.local.set({ subs }); }, [subs])
+
+  const capture = (subs) => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const tab = tabs[0];
-      chrome.tabs.sendMessage(tab.id, { type: 'CAPTURE' })
+      const type = subs ? 'SUBS' : 'CAPTURE'
+      chrome.tabs.sendMessage(tab.id, { type })
     });
   }
 
-  useEffect(() => {
-    capture();
-  },[])
-
   return <>
-    <Button color='primary' variant='contained' onClick={capture}>Capture</Button>
+    <Button color='primary' variant='contained' onClick={() => capture(subs)}>Capture</Button>
+    <span style={{ width: 10 }}>&nbsp;&nbsp;</span>
+    <FormControlLabel label="with Subs" control={<Checkbox checked={subs} onChange={() => setSubs(!subs)} />} />
     <List>
       {list.map((l) => <Capture item={l} key={l.id} />)}
     </List>
