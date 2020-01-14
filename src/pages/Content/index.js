@@ -21,8 +21,18 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     const dataUrl = canvas.toDataURL();
     const time = parseInt(video.currentTime);
     const id = getId()
-    const url = location.href;
     const title = document.title;
+    var url = location.href;
+    // times option is only available at YouTube
+    if (msg.times && url.startsWith("https://www.youtube.com/")) {
+      const suffix = "&t=" + time + "s";
+      // replace if url already has time info
+      if (url.indexOf("&t=") > 0) {
+        url.replace(/&t=.*/, suffix);
+      } else {
+        url = url + suffix;
+      }
+    }
     chrome.runtime.sendMessage({ dataUrl, time, url, title, id, type: 'res' })
   }
   if (msg.type === 'SUBS') {
