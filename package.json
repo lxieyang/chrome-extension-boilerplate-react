@@ -1,11 +1,11 @@
 {
-  "name": "chrome-extension-boilerplate-react",
-  "version": "2.2.2",
-  "description": "A chrome extension boilerplate built with React 16 and Webpack 4",
+  "name": "video-capture",
+  "version": "1.0.0",
+  "description": "A chrome extension for capture video element with Gyazo.",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lxieyang/chrome-extension-boilerplate-react.git"
+    "url": "https://github.com/ssig33/video-capture.git"
   },
   "scripts": {
     "build": "node utils/build.js",

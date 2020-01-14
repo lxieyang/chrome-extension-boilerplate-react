@@ -18,3 +18,5 @@
 
 # secrets
 secrets.*.js
+
+build.crx
