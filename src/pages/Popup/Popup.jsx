@@ -107,8 +107,8 @@ const Popup = () => {
   return <>
     <Button color='primary' variant='contained' onClick={() => capture(subs, times)}>Capture</Button>
     <span style={{ width: 10 }}>&nbsp;&nbsp;</span>
-    <FormControlLabel label="with Time" control={<Checkbox checked={times} onChange={() => setTimes(!times)} />} />
     <FormControlLabel label="with Subs" control={<Checkbox checked={subs} onChange={() => setSubs(!subs)} />} />
+    <FormControlLabel label="with Time(only YouTube)" control={<Checkbox checked={times} onChange={() => setTimes(!times)} />} />
     <List>
       {list.map((l) => <Capture item={l} key={l.id} />)}
     </List>
