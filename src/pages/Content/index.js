@@ -18,8 +18,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     const dataUrl = canvas.toDataURL();
     const time = parseInt(video.currentTime);
     const id = getId()
-    const url = location.href;
     const title = document.title;
+    const url = location.href;
+    if (msg.times) {
+      const seconds = video.seconds;
+      url + "&t=" + seconds + "s";
+    }
     chrome.runtime.sendMessage({ dataUrl, time, url, title, id, type: 'res' })
   }
   if (msg.type === 'SUBS') {
