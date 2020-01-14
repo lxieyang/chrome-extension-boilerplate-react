@@ -40,26 +40,27 @@ const Capture = ({ item }) => {
 const Popup = () => {
   const [list, setList] = useState([]);
   const [subs, setSubs] = useState(false);
-  const push = async (msg) => {
+  const push = (msg) => {
     const { dataUrl, title, url } = msg;
 
-    const gyazoUrl = await gyazo({ image_url: dataUrl, title, url })
+    chrome.storage.sync.get(['blacklist'], async (result) => {
+      const blacklist = result.blacklist ? result.blacklist.split("\n").filter((n)=> !!n) : [];
+      const match = !!blacklist.filter(d => url.match(d))[0];
 
-    const newList = Object.assign([], list);
-    newList.push(msg);
-    setList(newList);
+      const gyazoUrl = match ? await gyazo({ image_url: dataUrl }) : await gyazo({ image_url: dataUrl, title, url });
+
+      const newList = Object.assign([], list);
+      newList.push(msg);
+      setList(newList);
     
-    const el = {
-      ...msg,
-      dataUrl: gyazoUrl.imageUrl,
-      gyazo: gyazoUrl.gyazo
-    }
-    chrome.storage.local.get(['list'], (result) => {
-      let list = []
-      if (result.list) list = result.list;
-      list.unshift(el);
-      setList(Object.assign([], list));
-      chrome.storage.local.set({ list: list.slice(0, 20) });
+      const el = { ...msg, dataUrl: gyazoUrl.imageUrl, gyazo: gyazoUrl.gyazo }
+      chrome.storage.local.get(['list'], (result) => {
+        let list = []
+        if (result.list) list = result.list;
+        list.unshift(el);
+        setList(Object.assign([], list));
+        chrome.storage.local.set({ list: list.slice(0, 20) });
+      });
     });
   }
 
@@ -85,6 +86,7 @@ const Popup = () => {
       if (result.subs) setSubs(result.subs);
       capture(result.subs);
     })
+    
   }, [])
 
   useEffect(() => { chrome.storage.local.set({ subs }); }, [subs])
