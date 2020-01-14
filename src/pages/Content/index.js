@@ -4,7 +4,6 @@ const getId = () => {
   return new Date().getTime().toString(16) + Math.floor(strong * Math.random()).toString(16)
 }
 
-
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === 'TWEET') {
     window.open(`https://twitter.com/intent/tweet?text=${msg.url}`, 't', 'width=600,height=300');
@@ -22,7 +21,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     const title = document.title;
     let url = location.href;
     // times option is only available at YouTube
-    if (msg.times && url.startsWith("https://www.youtube.com/")) {
+    if (url.startsWith("https://www.youtube.com/")) {
       const suffix = "&t=" + time + "s";
       // replace if url already has time info
       if (url.indexOf("&t=") > 0) {

@@ -48,7 +48,6 @@ const Capture = ({ item }) => {
 const Popup = () => {
   const [list, setList] = useState([]);
   const [subs, setSubs] = useState(false);
-  const [times, setTimes] = useState(false);
   const push = (msg) => {
     const { dataUrl, title, url } = msg;
 
@@ -90,33 +89,30 @@ const Popup = () => {
   }, [])
 
   useEffect(() => {
-    chrome.storage.local.get(['list', 'subs', 'times'], (result) => {
+    chrome.storage.local.get(['list', 'subs'], (result) => {
       if (result.list) setList(result.list);
       if (result.subs) setSubs(result.subs);
-      if (result.times) setTimes(result.times)
-      capture(result.subs, result.times);
+      capture(result.subs);
     })
 
   }, [])
 
   useEffect(() => {
     chrome.storage.local.set({ subs });
-    chrome.storage.local.set({ times });
-  }, [subs, times])
+  }, [subs])
 
-  const capture = (subs, times) => {
+  const capture = (subs) => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const tab = tabs[0];
       const type = subs ? 'SUBS' : 'CAPTURE'
-      chrome.tabs.sendMessage(tab.id, { type, times })
+      chrome.tabs.sendMessage(tab.id, { type })
     });
   }
 
   return <>
-    <Button color='primary' variant='contained' onClick={() => capture(subs, times)}>Capture</Button>
+    <Button color='primary' variant='contained' onClick={() => capture(subs)}>Capture</Button>
     <span style={{ width: 10 }}>&nbsp;&nbsp;</span>
     <FormControlLabel label="with Subs" control={<Checkbox checked={subs} onChange={() => setSubs(!subs)} />} />
-    <FormControlLabel label="with Time(only YouTube)" control={<Checkbox checked={times} onChange={() => setTimes(!times)} />} />
     <List>
       {list.map((l) => <Capture item={l} key={l.id} />)}
     </List>
