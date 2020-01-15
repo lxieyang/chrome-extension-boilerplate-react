@@ -122,7 +122,10 @@ const Popup = () => {
   };
 
   useStorage({ key: 'list' }, setList);
-  useStorage({ key: 'subs' }, setSubs);
+  useStorage({ key: 'subs' }, (subs) => {
+    setSubs(subs);
+    capture(subs);
+  });
 
   useMessageFromContentScript(push);
 
