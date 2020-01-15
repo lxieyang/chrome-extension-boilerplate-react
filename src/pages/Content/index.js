@@ -77,5 +77,22 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === 'JUMP') {
     window.open(msg.href);
   }
+  if (msg.type === 'REMOTETWEET') {
+    const { imageId, body } = msg;
+    const payload = JSON.stringify({ body, type: 'image' });
+    const csrf = document
+      .querySelector("meta[name='csrf-token']")
+      .getAttribute('content');
+    const headers = {
+      'content-type': 'application/json',
+      accept: 'application/json',
+      'x-csrf-token': csrf,
+    };
+    fetch(`/api/internal/images/${imageId}/tweets`, {
+      method: 'POST',
+      body: payload,
+      headers,
+    });
+  }
   return true;
 });

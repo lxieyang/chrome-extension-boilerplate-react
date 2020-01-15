@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   Button,
-  List,
   ListItem,
   Card,
   CardMedia,
@@ -9,8 +8,6 @@ import {
   Typography,
   Link,
   CardActions,
-  Checkbox,
-  FormControlLabel,
 } from '@material-ui/core';
 import { sendMessage } from './chrome';
 
@@ -23,7 +20,20 @@ export const Capture = ({ item }) => {
   const { dataUrl, time, url, title, gyazo } = item;
 
   const jump = (href) => sendMessage({ type: 'JUMP', href });
-  const tweet = () => sendMessage({ type: 'TWEET', url: gyazo });
+  const tweet = () => {
+    chrome.tabs.query({ url: '*://gyazo.com/*' }, (tabs) => {
+      if (tabs[0]) {
+        const id = tabs[0].id;
+        chrome.tabs.sendMessage(id, {
+          type: 'REMOTETWEET',
+          imageId: gyazo.split('/')[3],
+          body: url,
+        });
+      } else {
+        sendMessage({ type: 'TWEET', url: gyazo });
+      }
+    });
+  };
 
   return (
     <ListItem>
