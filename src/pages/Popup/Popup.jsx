@@ -53,6 +53,24 @@ const Capture = ({ item }) => {
   </ListItem>
 }
 
+const useMessageFromContentScript = (callback) => {
+  useEffect(() => {
+    chrome.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
+      if (msg.type === 'res') {
+        callback(msg);
+      }
+      if (msg.type === 'rect') {
+        const { x, y, width, height } = msg;
+        chrome.tabs.captureVisibleTab(null, { format: 'png' }, async (dataUrl) => {
+          trim(dataUrl, x, y, width, height, (dataUrl) => {
+            callback({ ...msg, dataUrl });
+          })
+        })
+      }
+    });
+  }, [])
+}
+
 const Popup = () => {
   const [list, setList] = useState([]);
   const [subs, setSubs] = useState(false);
@@ -80,21 +98,7 @@ const Popup = () => {
   useStorage({ key: 'list' }, setList);
   useStorage({ key: 'subs' }, setSubs);
 
-  useEffect(() => {
-    chrome.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
-      if (msg.type === 'res') {
-        push(msg);
-      }
-      if (msg.type === 'rect') {
-        const { x, y, width, height } = msg;
-        chrome.tabs.captureVisibleTab(null, { format: 'png' }, async (dataUrl) => {
-          trim(dataUrl, x, y, width, height, (dataUrl) => {
-            push({ ...msg, dataUrl });
-          })
-        })
-      }
-    });
-  }, [])
+  useMessageFromContentScript(push)
 
   useEffect(() => {
     chrome.storage.local.set({ subs });
