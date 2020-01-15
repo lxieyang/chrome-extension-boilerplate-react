@@ -14,6 +14,7 @@ import {
 } from '@material-ui/core';
 import { gyazo } from './gyazo';
 import { trim } from './trim';
+import ReactHotkeys from 'react-hot-keys';
 
 const pad = (i) => {
   if (i < 10) return `0${i}`;
@@ -139,7 +140,7 @@ const Popup = () => {
   };
 
   return (
-    <>
+    <ReactHotkeys keyName="shift+c" onKeyUp={() => capture(subs)}>
       <Button color="primary" variant="contained" onClick={() => capture(subs)}>
         Capture
       </Button>
@@ -149,7 +150,7 @@ const Popup = () => {
         control={<Checkbox checked={subs} onChange={() => setSubs(!subs)} />}
       />
       <List>{list && list.map((l) => <Capture item={l} key={l.id} />)}</List>
-    </>
+    </ReactHotkeys>
   );
 };
 
