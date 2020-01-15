@@ -12,6 +12,12 @@
     "start": "node utils/webserver.js",
     "prettier": "prettier --write '**/*.{js,jsx,css,html}'"
   },
+  "lint-staged": {
+    "*.{js,jsx,css,html,json}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
   "dependencies": {
     "@hot-loader/react-dom": "^16.11.0",
     "@material-ui/core": "^4.8.3",
@@ -41,11 +47,18 @@
     "fs-extra": "^8.1.0",
     "html-loader": "0.5.5",
     "html-webpack-plugin": "3.2.0",
+    "husky": "^4.0.9",
+    "lint-staged": "^9.5.0",
     "prettier": "1.18.2",
     "style-loader": "^1.0.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.2.1",
     "write-file-webpack-plugin": "^4.5.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
