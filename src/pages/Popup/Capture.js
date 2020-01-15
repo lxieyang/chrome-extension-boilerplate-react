@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   ListItem,
@@ -10,6 +10,7 @@ import {
   CardActions,
 } from '@material-ui/core';
 import { sendMessage } from './chrome';
+import { MySnackbar } from '../../components/MySnackbar';
 
 const pad = (i) => {
   if (i < 10) return `0${i}`;
@@ -18,6 +19,7 @@ const pad = (i) => {
 
 export const Capture = ({ item }) => {
   const { dataUrl, time, url, title, gyazo } = item;
+  const [open, setOpen] = useState(false);
 
   const jump = (href) => sendMessage({ type: 'JUMP', href });
   const tweet = () => {
@@ -29,6 +31,7 @@ export const Capture = ({ item }) => {
           imageId: gyazo.split('/')[3],
           body: url,
         });
+        setOpen(true);
       } else {
         sendMessage({ type: 'TWEET', url: gyazo });
       }
@@ -37,6 +40,7 @@ export const Capture = ({ item }) => {
 
   return (
     <ListItem>
+      <MySnackbar open={open} setOpen={setOpen} message={'Tweeted'} />
       <Card>
         <CardMedia component="img" src={dataUrl}></CardMedia>
         <CardContent>
