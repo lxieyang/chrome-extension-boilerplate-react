@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Paper,
-  Typography,
-  TextareaAutosize,
-  Snackbar,
-} from '@material-ui/core';
+import { Paper, Typography, TextareaAutosize } from '@material-ui/core';
+import { MySnackbar } from '../../components/MySnackbar';
 
 const useDebounce = (value, delay) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -20,19 +16,6 @@ const useDebounce = (value, delay) => {
 
   return debouncedValue;
 };
-
-const MySnackbar = ({ open, setOpen }) => (
-  <Snackbar
-    open={open}
-    autoHideDuration={2000}
-    onClose={() => setOpen(false)}
-    message="Saved"
-    anchorOrigin={{
-      vertical: 'top',
-      horizontal: 'left',
-    }}
-  />
-);
 
 const Options = () => {
   const [open, setOpen] = useState(false);
@@ -70,7 +53,7 @@ const Options = () => {
         rowsMin={15}
         style={{ width: '95%' }}
       />
-      <MySnackbar open={open} setOpen={setOpen} />
+      <MySnackbar open={open} setOpen={setOpen} message={'Saved'} />
     </Paper>
   );
 };

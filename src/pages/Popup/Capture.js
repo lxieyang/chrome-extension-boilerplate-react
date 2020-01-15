@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Button,
-  List,
   ListItem,
   Card,
   CardMedia,
@@ -9,10 +8,9 @@ import {
   Typography,
   Link,
   CardActions,
-  Checkbox,
-  FormControlLabel,
 } from '@material-ui/core';
 import { sendMessage } from './chrome';
+import { MySnackbar } from '../../components/MySnackbar';
 
 const pad = (i) => {
   if (i < 10) return `0${i}`;
@@ -21,12 +19,28 @@ const pad = (i) => {
 
 export const Capture = ({ item }) => {
   const { dataUrl, time, url, title, gyazo } = item;
+  const [open, setOpen] = useState(false);
 
   const jump = (href) => sendMessage({ type: 'JUMP', href });
-  const tweet = () => sendMessage({ type: 'TWEET', url: gyazo });
+  const tweet = () => {
+    chrome.tabs.query({ url: '*://gyazo.com/*' }, (tabs) => {
+      if (tabs[0]) {
+        const id = tabs[0].id;
+        chrome.tabs.sendMessage(id, {
+          type: 'REMOTETWEET',
+          imageId: gyazo.split('/')[3],
+          body: url,
+        });
+        setOpen(true);
+      } else {
+        sendMessage({ type: 'TWEET', url: gyazo });
+      }
+    });
+  };
 
   return (
     <ListItem>
+      <MySnackbar open={open} setOpen={setOpen} message={'Tweeted'} />
       <Card>
         <CardMedia component="img" src={dataUrl}></CardMedia>
         <CardContent>
