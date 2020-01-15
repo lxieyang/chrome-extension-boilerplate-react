@@ -8,23 +8,15 @@ const pad = (i) => {
   return i
 }
 
+const currentTab = callback => chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => callback(tabs[0]));
+const sendMessage = message => currentTab(tab => chrome.tabs.sendMessage(tab.id, message))
+
 const Capture = ({ item }) => {
   const { dataUrl, time, url, title, gyazo } = item;
 
-  const jump = (href) => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      const tab = tabs[0];
-      chrome.tabs.sendMessage(tab.id, { type: 'JUMP', href })
-    });
-  }
-
-  const tweet = () => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      const tab = tabs[0];
-      chrome.tabs.sendMessage(tab.id, { type: 'TWEET', url: gyazo });
-    });
-  }
-
+  const jump = (href) => sendMessage({ type: 'JUMP', href });
+  const tweet = () => sendMessage({ type: 'TWEET', url: gyazo });
+    
   return <ListItem>
     <Card>
       <CardMedia component='img' src={dataUrl}></CardMedia>
@@ -102,11 +94,8 @@ const Popup = () => {
   }, [subs])
 
   const capture = (subs) => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      const tab = tabs[0];
-      const type = subs ? 'SUBS' : 'CAPTURE'
-      chrome.tabs.sendMessage(tab.id, { type })
-    });
+    const type = subs ? 'SUBS' : 'CAPTURE'
+    sendMessage({ type });
   }
 
   return <>
