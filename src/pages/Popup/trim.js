@@ -6,8 +6,18 @@ export const trim = (dataUrl, x, y, width, height, callback) => {
     const canvas = document.createElement('canvas');
     canvas.width = width * ratio;
     canvas.height = height * ratio;
-    const context = canvas.getContext("2d");
-    context.drawImage(img, x * ratio, y * ratio, width * ratio, height * ratio, 0, 0, width * ratio, height * ratio);
+    const context = canvas.getContext('2d');
+    context.drawImage(
+      img,
+      x * ratio,
+      y * ratio,
+      width * ratio,
+      height * ratio,
+      0,
+      0,
+      width * ratio,
+      height * ratio
+    );
     callback(canvas.toDataURL());
-  }
-}
+  };
+};
