@@ -38,7 +38,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         dataUrl,
         time,
         url,
-        title,
+        title: title.replace(/\(\d+?\) /, ''),
         id,
         type: 'res',
       });
@@ -59,7 +59,9 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     const { x, y, width, height } = video.getBoundingClientRect();
     const time = parseInt(video.currentTime);
     const id = getId();
-    const title = document.title;
+    const title = location.href.startsWith('https://www.youtube.com')
+      ? document.title.replace(/\(\d+?\) /, '')
+      : document.title;
     const url = location.href;
 
     chrome.runtime.sendMessage({
