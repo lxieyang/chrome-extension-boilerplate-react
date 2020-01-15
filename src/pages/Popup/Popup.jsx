@@ -11,6 +11,22 @@ const pad = (i) => {
 const currentTab = callback => chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => callback(tabs[0]));
 const sendMessage = message => currentTab(tab => chrome.tabs.sendMessage(tab.id, message))
 
+const useStorage = ({ storage = 'local', key }, callback) => {
+  const [value, setValue] = useState();
+  useEffect(() => {
+    chrome.storage[storage].get([key], (result) => {
+      setValue(result[key]);
+      if (callback) callback(result[key]);
+    })
+  }, []);
+  return value;
+}
+
+const useBlacklist = () => {
+  const list = useStorage({ storage: 'sync', key: 'blacklist' });
+  return list ? list.split("\n").filter((n) => !!n) : [];
+}
+
 const Capture = ({ item }) => {
   const { dataUrl, time, url, title, gyazo } = item;
 
@@ -40,29 +56,29 @@ const Capture = ({ item }) => {
 const Popup = () => {
   const [list, setList] = useState([]);
   const [subs, setSubs] = useState(false);
-  const push = (msg) => {
+  const blacklist = useBlacklist();
+  const push = async (msg) => {
     const { dataUrl, title, url } = msg;
+    const match = !!blacklist.filter(d => url.match(d))[0];
 
-    chrome.storage.sync.get(['blacklist'], async (result) => {
-      const blacklist = result.blacklist ? result.blacklist.split("\n").filter((n) => !!n) : [];
-      const match = !!blacklist.filter(d => url.match(d))[0];
+    const gyazoUrl = match ? await gyazo({ image_url: dataUrl }) : await gyazo({ image_url: dataUrl, title, url });
 
-      const gyazoUrl = match ? await gyazo({ image_url: dataUrl }) : await gyazo({ image_url: dataUrl, title, url });
+    const newList = Object.assign([], list);
+    newList.push(msg);
+    setList(newList);
 
-      const newList = Object.assign([], list);
-      newList.push(msg);
-      setList(newList);
-
-      const el = { ...msg, dataUrl: gyazoUrl.imageUrl, gyazo: gyazoUrl.gyazo }
-      chrome.storage.local.get(['list'], (result) => {
-        let list = []
-        if (result.list) list = result.list;
-        list.unshift(el);
-        setList(Object.assign([], list));
-        chrome.storage.local.set({ list: list.slice(0, 20) });
-      });
+    const el = { ...msg, dataUrl: gyazoUrl.imageUrl, gyazo: gyazoUrl.gyazo }
+    chrome.storage.local.get(['list'], (result) => {
+      let list = []
+      if (result.list) list = result.list;
+      list.unshift(el);
+      setList(Object.assign([], list));
+      chrome.storage.local.set({ list: list.slice(0, 20) });
     });
   }
+
+  useStorage({ key: 'list' }, setList);
+  useStorage({ key: 'subs' }, setSubs);
 
   useEffect(() => {
     chrome.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
@@ -81,15 +97,6 @@ const Popup = () => {
   }, [])
 
   useEffect(() => {
-    chrome.storage.local.get(['list', 'subs'], (result) => {
-      if (result.list) setList(result.list);
-      if (result.subs) setSubs(result.subs);
-      capture(result.subs);
-    })
-
-  }, [])
-
-  useEffect(() => {
     chrome.storage.local.set({ subs });
   }, [subs])
 
@@ -103,7 +110,7 @@ const Popup = () => {
     <span style={{ width: 10 }}>&nbsp;&nbsp;</span>
     <FormControlLabel label="with Subs" control={<Checkbox checked={subs} onChange={() => setSubs(!subs)} />} />
     <List>
-      {list.map((l) => <Capture item={l} key={l.id} />)}
+      {list && list.map((l) => <Capture item={l} key={l.id} />)}
     </List>
   </>
 }
