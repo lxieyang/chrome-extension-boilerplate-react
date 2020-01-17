@@ -2,6 +2,7 @@ import '../../assets/img/icon-34.png';
 import '../../assets/img/icon-128.png';
 import { gyazo } from './gyazo';
 import { trim } from './trim';
+import { sendMessage } from '../Popup/chrome';
 
 const push = (msg) => {
   const { dataUrl, title, url } = msg;
@@ -35,4 +36,16 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     });
   }
   return true;
+});
+
+chrome.contextMenus.create({
+  title: 'Capture and upload to Gyazo',
+  contexts: ['all'],
+  type: 'normal',
+  onclick: (info) => {
+    chrome.storage.local.get(['subs'], ({ subs }) => {
+      const type = subs ? 'SUBS' : 'CAPTURE';
+      sendMessage({ type });
+    });
+  },
 });
