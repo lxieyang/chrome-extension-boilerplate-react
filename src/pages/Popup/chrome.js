@@ -17,8 +17,3 @@ export const useStorage = ({ storage = 'local', key }, callback) => {
   }, []);
   return value;
 };
-
-export const useBlacklist = () => {
-  const list = useStorage({ storage: 'sync', key: 'blacklist' });
-  return list ? list.split('\n').filter((n) => !!n) : [];
-};
