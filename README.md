@@ -1,4 +1,4 @@
-# Chrome Extension Boilerplate with React 16.8+ and Webpack 4+
+# Chrome Extension Boilerplate with React 16.13 and Webpack 4
 
 [![npm](https://img.shields.io/npm/v/chrome-extension-boilerplate-react)](https://www.npmjs.com/package/chrome-extension-boilerplate-react)
 [![npm-download](https://img.shields.io/npm/dw/chrome-extension-boilerplate-react)](https://www.npmjs.com/package/chrome-extension-boilerplate-react)
@@ -13,13 +13,13 @@ This is a basic Chrome Extensions boilerplate to help you write modular and mode
 
 This boilerplate is updated with:
 
-- [React 16.8+](https://reactjs.org)
-- [Webpack 4+](https://webpack.js.org/)
+- [React 16.13](https://reactjs.org)
+- [Webpack 4](https://webpack.js.org/)
 - [React Hot Loader](https://github.com/gaearon/react-hot-loader)
 - [eslint-config-react-app](https://www.npmjs.com/package/eslint-config-react-app)
 - [Prettier](https://prettier.io/)
 
-This boilerplate is heavily inspired by and adapted from [https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate](https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate), with additional support for React 16.8+ features and Webpack 4+.
+This boilerplate is heavily inspired by and adapted from [https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate](https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate), with additional support for React 16.13 features and Webpack 4.
 
 Please open up an issue to nudge me to keep the npm packages up-to-date. FYI, it takes time to make different packages with different versions work together nicely.
 

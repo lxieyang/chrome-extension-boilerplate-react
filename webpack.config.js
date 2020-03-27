@@ -44,7 +44,7 @@ var options = {
     notHotReload: ['contentScript'],
   },
   output: {
-    path: path.join(__dirname, 'build'),
+    path: path.resolve(__dirname, 'build'),
     filename: '[name].bundle.js',
   },
   module: {
@@ -92,7 +92,7 @@ var options = {
           from: 'src/manifest.json',
           to: path.join(__dirname, 'build'),
           force: true,
-          transform: function(content, path) {
+          transform: function (content, path) {
             // generates the manifest file using the package.json informations
             return Buffer.from(
               JSON.stringify({

@@ -1,39 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
+import logo from '../../assets/img/logo.svg';
 import './Newtab.css';
 
-class Newtab extends Component {
-  state = {
-    reactVersion: '16.12',
-    webpackVersion: '4',
-  };
-  render() {
-    const { reactVersion, webpackVersion } = this.state;
-
-    return (
-      <div className="NewtabContainer">
-        <p>This is the new tab page.</p>
+const Newtab = () => {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          It uses{' '}
-          <a
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React {reactVersion}
-          </a>{' '}
-          and{' '}
-          <a
-            href="https://webpack.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Webpack {webpackVersion}
-          </a>
-          .
+          Edit <code>src/pages/Newtab/Newtab.js</code> and save to reload.
         </p>
-      </div>
-    );
-  }
-}
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
+};
 
 export default Newtab;
