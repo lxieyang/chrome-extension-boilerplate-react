@@ -38,7 +38,7 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
     "file-loader": "^4.3.0",
-    "fs-extra": "^8.1.0",
+    "fs-extra": "^9.0.0",
     "html-loader": "0.5.5",
     "html-webpack-plugin": "^4.0.2",
     "prettier": "^2.0.2",

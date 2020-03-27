@@ -1,6 +1,6 @@
 var webpack = require('webpack'),
   path = require('path'),
-  fileSystem = require('fs'),
+  fileSystem = require('fs-extra'),
   env = require('./utils/env'),
   { CleanWebpackPlugin } = require('clean-webpack-plugin'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
