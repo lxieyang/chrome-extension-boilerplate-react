@@ -1,6 +1,6 @@
 {
   "name": "chrome-extension-boilerplate-react",
-  "version": "2.4.2",
+  "version": "2.5.0",
   "description": "A chrome extension boilerplate built with React 16 and Webpack 4",
   "license": "MIT",
   "repository": {
@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@hot-loader/react-dom": "^16.13.0",
+    "@types/chrome": "0.0.104",
     "@types/react": "^16.9.26",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
