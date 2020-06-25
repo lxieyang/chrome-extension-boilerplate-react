@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/lxieyang/chrome-extension-boilerplate-react.git"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "scripts": {
     "build": "node utils/build.js",
     "start": "node utils/webserver.js",
