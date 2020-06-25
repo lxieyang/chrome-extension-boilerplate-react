@@ -49,10 +49,34 @@ var options = {
   },
   module: {
     rules: [
+      // {
+      //   test: /\.css$/,
+      //   loader: 'style-loader!css-loader',
+      //   exclude: /node_modules/,
+      // },
+      // {
+      //   test: /\.scss$/,
+      //   loader: 'sass-loader',
+      //   exclude: /node_modules/,
+      // },
       {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader',
-        exclude: /node_modules/,
+        // look for .css or .scss files
+        test: /\.(css|scss)$/,
+        // in the `src` directory
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
       },
       {
         test: new RegExp('.(' + fileExtensions.join('|') + ')$'),
