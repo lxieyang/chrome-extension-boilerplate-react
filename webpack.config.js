@@ -80,7 +80,10 @@ var options = {
       },
       {
         test: new RegExp('.(' + fileExtensions.join('|') + ')$'),
-        loader: 'file-loader?name=[name].[ext]',
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+        },
         exclude: /node_modules/,
       },
       {
@@ -110,8 +113,8 @@ var options = {
     }),
     // expose and write the allowed env vars on the compiled bundle
     new webpack.EnvironmentPlugin(['NODE_ENV']),
-    new CopyWebpackPlugin(
-      [
+    new CopyWebpackPlugin({
+      patterns: [
         {
           from: 'src/manifest.json',
           to: path.join(__dirname, 'build'),
@@ -128,24 +131,16 @@ var options = {
           },
         },
       ],
-      {
-        logLevel: 'info',
-        copyUnmodified: true,
-      }
-    ),
-    new CopyWebpackPlugin(
-      [
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
         {
           from: 'src/pages/Content/content.styles.css',
           to: path.join(__dirname, 'build'),
           force: true,
         },
       ],
-      {
-        logLevel: 'info',
-        copyUnmodified: true,
-      }
-    ),
+    }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'pages', 'Newtab', 'index.html'),
       filename: 'newtab.html',
@@ -172,12 +167,15 @@ var options = {
       filename: 'background.html',
       chunks: ['background'],
     }),
-    new WriteFilePlugin(),
+    // new WriteFilePlugin(),
   ],
+  infrastructureLogging: {
+    level: 'info',
+  },
 };
 
 if (env.NODE_ENV === 'development') {
-  options.devtool = 'cheap-module-eval-source-map';
+  options.devtool = 'eval-cheap-module-source-map';
 }
 
 module.exports = options;
