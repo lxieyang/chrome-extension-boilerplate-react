@@ -4,13 +4,14 @@ var webpack = require('webpack'),
   env = require('./utils/env'),
   { CleanWebpackPlugin } = require('clean-webpack-plugin'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
-  HtmlWebpackPlugin = require('html-webpack-plugin');
+  HtmlWebpackPlugin = require('html-webpack-plugin'),
+  TerserPlugin = require('terser-webpack-plugin');
 
-// load the secrets
 var alias = {
   'react-dom': '@hot-loader/react-dom',
 };
 
+// load the secrets
 var secretsPath = path.join(__dirname, 'secrets.' + env.NODE_ENV + '.js');
 
 var fileExtensions = [
@@ -48,16 +49,6 @@ var options = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.css$/,
-      //   loader: 'style-loader!css-loader',
-      //   exclude: /node_modules/,
-      // },
-      // {
-      //   test: /\.scss$/,
-      //   loader: 'sass-loader',
-      //   exclude: /node_modules/,
-      // },
       {
         // look for .css or .scss files
         test: /\.(css|scss)$/,
@@ -144,16 +135,19 @@ var options = {
       template: path.join(__dirname, 'src', 'pages', 'Newtab', 'index.html'),
       filename: 'newtab.html',
       chunks: ['newtab'],
+      cache: false,
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'pages', 'Options', 'index.html'),
       filename: 'options.html',
       chunks: ['options'],
+      cache: false,
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'pages', 'Popup', 'index.html'),
       filename: 'popup.html',
       chunks: ['popup'],
+      cache: false,
     }),
     new HtmlWebpackPlugin({
       template: path.join(
@@ -165,6 +159,7 @@ var options = {
       ),
       filename: 'background.html',
       chunks: ['background'],
+      cache: false,
     }),
   ],
   infrastructureLogging: {
@@ -174,6 +169,15 @@ var options = {
 
 if (env.NODE_ENV === 'development') {
   options.devtool = 'eval-cheap-module-source-map';
+} else {
+  options.optimization = {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false,
+      }),
+    ],
+  };
 }
 
 module.exports = options;
