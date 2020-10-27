@@ -7,7 +7,10 @@
 [![dependencies Status](https://david-dm.org/lxieyang/chrome-extension-boilerplate-react/status.svg)](https://david-dm.org/lxieyang/chrome-extension-boilerplate-react)
 [![devDependencies Status](https://david-dm.org/lxieyang/chrome-extension-boilerplate-react/dev-status.svg)](https://david-dm.org/lxieyang/chrome-extension-boilerplate-react?type=dev)
 
-**_Recently updated from React 16 to 17 and Webpack 4 to 5!_**
+## Announcements
+
+- **_Recently updated from React ~~16~~ to 17 and Webpack ~~4~~ to 5!_**
+- **_Recently added [TypeScript](https://www.typescriptlang.org/) Support!_**
 
 ## Features
 
@@ -20,6 +23,7 @@ This boilerplate is updated with:
 - [React Hot Loader](https://github.com/gaearon/react-hot-loader)
 - [eslint-config-react-app](https://www.npmjs.com/package/eslint-config-react-app)
 - [Prettier](https://prettier.io/)
+- [TypeScript](https://www.typescriptlang.org/)
 
 This boilerplate is heavily inspired by and adapted from [https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate](https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate), with additional support for React 17 features and Webpack 5.
 
@@ -47,6 +51,10 @@ Please open up an issue to nudge me to keep the npm packages up-to-date. FYI, it
 All your extension's code must be placed in the `src` folder.
 
 The boilerplate is already prepared to have a popup, an options page, a background page, and a new tab page (which replaces the new tab page of your browser). But feel free to customize these.
+
+## TypeScript
+
+This boilerplate now supports TypeScript! The `Options` Page is implemented using TypeScript. Please refer to `src/pages/Options/` for example usages.
 
 ## Webpack auto-reload and HRM
 

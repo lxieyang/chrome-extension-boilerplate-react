@@ -35,7 +35,7 @@ var options = {
   mode: process.env.NODE_ENV || 'development',
   entry: {
     newtab: path.join(__dirname, 'src', 'pages', 'Newtab', 'index.jsx'),
-    options: path.join(__dirname, 'src', 'pages', 'Options', 'index.jsx'),
+    options: path.join(__dirname, 'src', 'pages', 'Options', 'index.tsx'),
     popup: path.join(__dirname, 'src', 'pages', 'Popup', 'index.jsx'),
     background: path.join(__dirname, 'src', 'pages', 'Background', 'index.js'),
     contentScript: path.join(__dirname, 'src', 'pages', 'Content', 'index.js'),
@@ -81,9 +81,17 @@ var options = {
         loader: 'html-loader',
         exclude: /node_modules/,
       },
+      { test: /\.(ts|tsx)$/, loader: 'ts-loader', exclude: /node_modules/ },
       {
         test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
+        use: [
+          {
+            loader: 'source-map-loader',
+          },
+          {
+            loader: 'babel-loader',
+          },
+        ],
         exclude: /node_modules/,
       },
     ],
@@ -92,7 +100,7 @@ var options = {
     alias: alias,
     extensions: fileExtensions
       .map((extension) => '.' + extension)
-      .concat(['.jsx', '.js', '.css']),
+      .concat(['.js', '.jsx', '.ts', '.tsx', '.css']),
   },
   plugins: [
     new webpack.ProgressPlugin(),

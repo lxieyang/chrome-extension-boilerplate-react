@@ -4,4 +4,7 @@ import { render } from 'react-dom';
 import Options from './Options';
 import './index.css';
 
-render(<Options />, window.document.querySelector('#app-container'));
+render(
+  <Options title={'settings'} />,
+  window.document.querySelector('#app-container')
+);
