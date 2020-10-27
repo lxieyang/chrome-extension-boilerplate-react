@@ -4,8 +4,7 @@ var webpack = require('webpack'),
   env = require('./utils/env'),
   { CleanWebpackPlugin } = require('clean-webpack-plugin'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
-  HtmlWebpackPlugin = require('html-webpack-plugin'),
-  WriteFilePlugin = require('write-file-webpack-plugin');
+  HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // load the secrets
 var alias = {
@@ -167,7 +166,6 @@ var options = {
       filename: 'background.html',
       chunks: ['background'],
     }),
-    // new WriteFilePlugin(),
   ],
   infrastructureLogging: {
     level: 'info',
