@@ -122,15 +122,15 @@ var options = {
                 },
             ],
         }),
-        new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: "src/pages/Content/content.styles.scss",
-                    to: path.join(__dirname, "build"),
-                    force: true,
-                },
-            ],
-        }),
+        // new CopyWebpackPlugin({
+        //     patterns: [
+        //         {
+        //             from: "src/pages/Content/content.styles.scss",
+        //             to: path.join(__dirname, "build"),
+        //             force: true,
+        //         },
+        //     ],
+        // }),
         // new HtmlWebpackPlugin({
         //   template: path.join(__dirname, 'src', 'pages', 'Newtab', 'index.html'),
         //   filename: 'newtab.html',
