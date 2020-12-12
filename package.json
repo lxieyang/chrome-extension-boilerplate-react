@@ -1,7 +1,7 @@
 {
     "name": "SHRED",
     "version": "1.0.0",
-    "description": "Chrome Extention: Guitar tabs for music straming services",
+    "description": "Chrome Extension: Guitar tabs for music streaming services",
     "license": "MIT",
     "repository": {
         "type": "git",

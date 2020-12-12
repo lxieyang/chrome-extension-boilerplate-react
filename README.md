@@ -11,8 +11,8 @@
 
 ## Announcements
 
-- **_Recently updated from React ~~16~~ to 17 and Webpack ~~4~~ to 5!_**
-- **_Recently added [TypeScript](https://www.typescriptlang.org/) Support!_**
+-   **_Recently updated from React ~~16~~ to 17 and Webpack ~~4~~ to 5!_**
+-   **_Recently added [TypeScript](https://www.typescriptlang.org/) Support!_**
 
 ## Features
 
@@ -20,12 +20,12 @@ This is a basic Chrome Extensions boilerplate to help you write modular and mode
 
 This boilerplate is updated with:
 
-- [React 17](https://reactjs.org)
-- [Webpack 5](https://webpack.js.org/)
-- [React Hot Loader](https://github.com/gaearon/react-hot-loader)
-- [eslint-config-react-app](https://www.npmjs.com/package/eslint-config-react-app)
-- [Prettier](https://prettier.io/)
-- [TypeScript](https://www.typescriptlang.org/)
+-   [React 17](https://reactjs.org)
+-   [Webpack 5](https://webpack.js.org/)
+-   [React Hot Loader](https://github.com/gaearon/react-hot-loader)
+-   [eslint-config-react-app](https://www.npmjs.com/package/eslint-config-react-app)
+-   [Prettier](https://prettier.io/)
+-   [TypeScript](https://www.typescriptlang.org/)
 
 This boilerplate is heavily inspired by and adapted from [https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate](https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate), with additional support for React 17 features and Webpack 5.
 
@@ -42,10 +42,10 @@ Please open up an issue to nudge me to keep the npm packages up-to-date. FYI, it
 5. Run `npm install` to install the dependencies.
 6. Run `npm start`
 7. Load your extension on Chrome following:
-   1. Access `chrome://extensions/`
-   2. Check `Developer mode`
-   3. Click on `Load unpacked extension`
-   4. Select the `build` folder.
+    1. Access `chrome://extensions/`
+    2. Check `Developer mode`
+    3. Click on `Load unpacked extension`
+    4. Select the `build` folder.
 8. Happy hacking.
 
 ## Structure
@@ -56,7 +56,7 @@ The boilerplate is already prepared to have a popup, an options page, a backgrou
 
 ## TypeScript
 
-This boilerplate now supports TypeScript! The `Options` Page is implemented using TypeScript. Please refer to `src/pages/Options/` for example usages.
+This boilerplate now supports TypeScript! The `Options` Page is implemented using TypeScript. Please refer to `src/Options/` for example usages.
 
 ## Webpack auto-reload and HRM
 
@@ -91,12 +91,12 @@ and on your `src/manifest.json`:
 
 ```json
 {
-  "content_scripts": [
-    {
-      "matches": ["https://www.google.com/*"],
-      "js": ["myContentScript.bundle.js"]
-    }
-  ]
+    "content_scripts": [
+        {
+            "matches": ["https://www.google.com/*"],
+            "js": ["myContentScript.bundle.js"]
+        }
+    ]
 }
 ```
 
@@ -125,13 +125,13 @@ To this task this boilerplate import the file `./secrets.<THE-NODE_ENV>.js` on y
 _./secrets.development.js_
 
 ```js
-export default { key: '123' };
+export default { key: "123" };
 ```
 
 _./src/popup.js_
 
 ```js
-import secrets from 'secrets';
+import secrets from "secrets";
 ApiCall({ key: secrets.key });
 ```
 
@@ -139,8 +139,8 @@ ApiCall({ key: secrets.key });
 
 ## Resources:
 
-- [Webpack documentation](https://webpack.js.org/concepts/)
-- [Chrome Extension documentation](https://developer.chrome.com/extensions/getstarted)
+-   [Webpack documentation](https://webpack.js.org/concepts/)
+-   [Chrome Extension documentation](https://developer.chrome.com/extensions/getstarted)
 
 ---
 
