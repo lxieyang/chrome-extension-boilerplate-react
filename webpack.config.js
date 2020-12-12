@@ -64,7 +64,9 @@ var options = {
                 test: new RegExp(".(" + fileExtensions.join("|") + ")$"),
                 loader: "file-loader",
                 options: {
-                    name: "[name].[ext]",
+                    name: "[path][name].[ext]",
+                    context: "src",
+                    esModule: false,
                 },
                 exclude: /node_modules/,
             },
@@ -160,7 +162,7 @@ var options = {
 };
 
 if (env.NODE_ENV === "development") {
-    options.devtool = "eval-cheap-module-source-map";
+    options.devtool = "inline-source-map";
 } else {
     options.optimization = {
         minimize: true,

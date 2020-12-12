@@ -13,7 +13,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "noEmit": false,
-    "jsx": "react"
+    "jsx": "react",
+    "sourceMap": true
   },
   "include": ["src"],
   "exclude": ["build", "node_modules"]
