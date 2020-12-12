@@ -1,12 +1,9 @@
+import { StreamingServiceSong } from "../../shared/shared.model";
+
 export interface DomApi {
     getCurrentUrl(): string;
     querySelector: Document["querySelector"];
     querySelectorAll: Document["querySelectorAll"];
-}
-
-export interface StreamingServiceSong {
-    artist?: string;
-    title?: string;
 }
 
 export interface MusicStreamingServiceApi {

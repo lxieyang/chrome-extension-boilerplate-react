@@ -1,9 +1,10 @@
-import { MusicStreamingServiceApi, DomApi, MusicStreamingServiceApiClass, StreamingServiceSong } from "./music-streaming-api.model";
-import { TidalApiService } from "./music-streaming-apis/tidal-api";
+import { StreamingServiceSong } from "../../shared/shared.model";
+import { DomApi, MusicStreamingServiceApi, MusicStreamingServiceApiClass } from "./music-streaming-api.model";
+import { TidalApi } from "./music-streaming-services/tidal-api";
 
-const musicStreamingApiClasses: MusicStreamingServiceApiClass[] = [TidalApiService];
+const musicStreamingApiClasses: MusicStreamingServiceApiClass[] = [TidalApi];
 
-export class MusicStreamingApiService {
+export class MusicStreamingApi {
     private currentMusicStramingServiceApi: MusicStreamingServiceApi | undefined;
 
     constructor(private domApi: DomApi) {

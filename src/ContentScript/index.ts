@@ -1,29 +1,36 @@
+import { MessageAction } from "../shared/shared.model";
 import { createDomApi } from "./music-streaming-api/create-dom-api";
-import { MusicStreamingApiService } from "./music-streaming-api/music-streaming-api.service";
+import { MusicStreamingApi } from "./music-streaming-api/music-streaming-api";
 
-console.log("Content script works!");
-console.log("Must reload extension for modifications to take effect.");
+const messageActionToHandler: { [key in keyof typeof MessageAction]: (request: any, sender: chrome.runtime.MessageSender) => void } = {
+    [MessageAction.GetCurrentPlayingSong]: getCurrentPlayingSong,
+    [MessageAction.GetCurrentViewSongs]: getCurrentViewSongs,
+};
 
-let musicStreamingApiService: MusicStreamingApiService;
-function getCurrentSongs() {
-    console.time("getCurrentSongs");
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    console.log({ request, sender });
 
-    if (!musicStreamingApiService) {
+    if (request.action in messageActionToHandler) {
+        sendResponse(messageActionToHandler[request.action as MessageAction](request, sender));
+    }
+});
+
+let musicStreamingApi: MusicStreamingApi;
+
+function getCurrentPlayingSong() {
+    if (!musicStreamingApi) {
         const domApi = createDomApi();
-        musicStreamingApiService = new MusicStreamingApiService(domApi);
+        musicStreamingApi = new MusicStreamingApi(domApi);
     }
 
-    const currentPlayingSong = musicStreamingApiService.getCurrentPlayingSong();
-    const currentViewSongs = musicStreamingApiService.getCurrentViewSongs();
-
-    console.timeEnd("getCurrentSongs");
-
-    return {
-        currentPlayingSong,
-        currentViewSongs,
-    };
+    return musicStreamingApi.getCurrentPlayingSong();
 }
 
-setInterval(() => {
-    console.log(getCurrentSongs());
-}, 5000);
+function getCurrentViewSongs() {
+    if (!musicStreamingApi) {
+        const domApi = createDomApi();
+        musicStreamingApi = new MusicStreamingApi(domApi);
+    }
+
+    return musicStreamingApi.getCurrentViewSongs();
+}

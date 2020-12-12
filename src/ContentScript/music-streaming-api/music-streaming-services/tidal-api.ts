@@ -1,7 +1,8 @@
-import { DomApi, MusicStreamingServiceApi, StreamingServiceSong } from "../music-streaming-api.model";
+import { StreamingServiceSong } from "../../../shared/shared.model";
+import { DomApi, MusicStreamingServiceApi } from "../music-streaming-api.model";
 
-export class TidalApiService implements MusicStreamingServiceApi {
-    private selectors = {
+export class TidalApi implements MusicStreamingServiceApi {
+    protected selectors = {
         currentPlayingSong: {
             containerDomElement: `[data-test="left-column-footer-player"]`,
             titleDomElement: `[data-test="footer-track-title"] a`,
@@ -25,7 +26,7 @@ export class TidalApiService implements MusicStreamingServiceApi {
     }
 
     public isStillMatch(): boolean {
-        return TidalApiService.isMatch(this.domApi.getCurrentUrl(), this.domApi);
+        return TidalApi.isMatch(this.domApi.getCurrentUrl(), this.domApi);
     }
 
     public getCurrentPlayingSong(): StreamingServiceSong | undefined {
