@@ -11,7 +11,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log({ request, sender });
 
     if (request.action in messageActionToHandler) {
-        sendResponse(messageActionToHandler[request.action as MessageAction](request, sender));
+        const messageActionKey = MessageAction[request.action as MessageAction];
+        sendResponse(messageActionToHandler[messageActionKey](request, sender));
     }
 });
 
