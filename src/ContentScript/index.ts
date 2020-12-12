@@ -19,7 +19,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 let musicStreamingApi: MusicStreamingApi;
 
 function getCurrentPlayingSong() {
-    if (!musicStreamingApi) {
+    if (!musicStreamingApi?.isValid()) {
         const domApi = createDomApi();
         musicStreamingApi = new MusicStreamingApi(domApi);
     }
@@ -28,7 +28,7 @@ function getCurrentPlayingSong() {
 }
 
 function getCurrentViewSongs() {
-    if (!musicStreamingApi) {
+    if (!musicStreamingApi?.isValid()) {
         const domApi = createDomApi();
         musicStreamingApi = new MusicStreamingApi(domApi);
     }

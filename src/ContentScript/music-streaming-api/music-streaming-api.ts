@@ -1,8 +1,9 @@
 import { StreamingServiceSong } from "../../shared/shared.model";
 import { DomApi, MusicStreamingServiceApi, MusicStreamingServiceApiClass } from "./music-streaming-api.model";
+import { SpotifyApi } from "./music-streaming-services/spotify-api";
 import { TidalApi } from "./music-streaming-services/tidal-api";
 
-const musicStreamingApiClasses: MusicStreamingServiceApiClass[] = [TidalApi];
+const musicStreamingApiClasses: MusicStreamingServiceApiClass[] = [TidalApi, SpotifyApi];
 
 export class MusicStreamingApi {
     private currentMusicStramingServiceApi: MusicStreamingServiceApi | undefined;
