@@ -1,22 +1,9 @@
 import React, { useEffect } from "react";
-import { MessageAction, StreamingServiceSong } from "../shared/shared.model";
 import "./Popup.scss";
 const logo = require("../assets/img/logo.svg");
 
 const Popup = () => {
-    useEffect(() => {
-        chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
-            const activeTab = tabs[0];
-
-            chrome.tabs.sendMessage(activeTab.id!, { action: MessageAction.GetCurrentPlayingSong }, (song: StreamingServiceSong) => {
-                console.log({ song });
-            });
-
-            chrome.tabs.sendMessage(activeTab.id!, { action: MessageAction.GetCurrentViewSongs }, (songs: StreamingServiceSong[]) => {
-                console.log({ songs });
-            });
-        });
-    }, []);
+    useEffect(() => {}, []);
 
     return (
         <div className="App">

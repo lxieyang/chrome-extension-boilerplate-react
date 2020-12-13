@@ -1,4 +1,4 @@
-import { MessageAction } from "../shared/shared.model";
+import { GetCurrentPlayingSongResponse, GetCurrentViewSongsResponse, MessageAction } from "../shared/shared.model";
 import { createDomApi } from "./music-streaming-api/create-dom-api";
 import { MusicStreamingApi } from "./music-streaming-api/music-streaming-api";
 
@@ -12,13 +12,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     if (request.action in messageActionToHandler) {
         const messageActionKey = MessageAction[request.action as MessageAction];
-        sendResponse(messageActionToHandler[messageActionKey](request, sender));
+        sendResponse({ requestId: request.id, data: messageActionToHandler[messageActionKey](request, sender) });
     }
 });
 
 let musicStreamingApi: MusicStreamingApi;
 
-function getCurrentPlayingSong() {
+function getCurrentPlayingSong(): GetCurrentPlayingSongResponse["data"] {
     if (!musicStreamingApi?.isValid()) {
         const domApi = createDomApi();
         musicStreamingApi = new MusicStreamingApi(domApi);
@@ -27,7 +27,7 @@ function getCurrentPlayingSong() {
     return musicStreamingApi.getCurrentPlayingSong();
 }
 
-function getCurrentViewSongs() {
+function getCurrentViewSongs(): GetCurrentViewSongsResponse["data"] {
     if (!musicStreamingApi?.isValid()) {
         const domApi = createDomApi();
         musicStreamingApi = new MusicStreamingApi(domApi);
