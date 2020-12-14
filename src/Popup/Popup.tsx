@@ -1,9 +1,21 @@
 import React, { useEffect } from "react";
+import { subscribeToActiveTabUrlChange, getActiveTab } from "./api/browser-api";
+import { getCurrentPlayingSongFromTab, getCurrentViewSongsFromTab } from "./api/content-scripts-api";
 import "./Popup.scss";
 const logo = require("../assets/img/logo.svg");
 
 const Popup = () => {
-    useEffect(() => {}, []);
+    useEffect(() => {
+        getActiveTab().then((tab) => {
+            getCurrentPlayingSongFromTab(tab.id!).then(console.log);
+            getCurrentViewSongsFromTab(tab.id!).then(console.log);
+        });
+
+        return subscribeToActiveTabUrlChange((tabId) => {
+            getCurrentPlayingSongFromTab(tabId).then(console.log);
+            getCurrentViewSongsFromTab(tabId).then(console.log);
+        });
+    }, []);
 
     return (
         <div className="App">

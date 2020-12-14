@@ -1,7 +1,7 @@
 {
     "name": "SHRED",
     "version": "1.0.0",
-    "description": "Chrome Extension: Guitar tabs for music streaming services",
+    "description": "Browser Extension: Guitar tabs for music streaming services",
     "license": "MIT",
     "repository": {
         "type": "git",
@@ -14,7 +14,6 @@
     },
     "dependencies": {
         "@hot-loader/react-dom": "^17.0.0",
-        "@types/chrome": "0.0.126",
         "@types/react": "^17.0.0",
         "@types/react-dom": "^17.0.0",
         "react": "^17.0.1",
@@ -30,7 +29,7 @@
         "babel-loader": "^8.2.2",
         "babel-preset-react-app": "^10.0.0",
         "clean-webpack-plugin": "^3.0.0",
-        "copy-webpack-plugin": "^6.3.2",
+        "copy-webpack-plugin": "^7.0.0",
         "css-loader": "^5.0.0",
         "eslint": "^7.12.1",
         "eslint-config-react-app": "^6.0.0",
@@ -51,6 +50,8 @@
         "terser-webpack-plugin": "^5.0.3",
         "ts-loader": "^8.0.11",
         "typescript": "^4.1.2",
+        "webextension-polyfill": "^0.7.0",
+        "webextension-polyfill-ts": "^0.22.0",
         "webpack": "^5.9.0",
         "webpack-cli": "^4.2.0",
         "webpack-dev-server": "^3.11.0"

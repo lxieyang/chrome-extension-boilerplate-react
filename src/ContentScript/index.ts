@@ -1,37 +1,31 @@
+import { browser, Runtime } from "webextension-polyfill-ts";
 import { GetCurrentPlayingSongResponse, GetCurrentViewSongsResponse, MessageAction } from "../shared/shared.model";
 import { createDomApi } from "./music-streaming-api/create-dom-api";
 import { MusicStreamingApi } from "./music-streaming-api/music-streaming-api";
 
-const messageActionToHandler: { [key in keyof typeof MessageAction]: (request: any, sender: chrome.runtime.MessageSender) => void } = {
+const messageActionToHandler: {
+    [key in keyof typeof MessageAction]: (request: any, sender: Runtime.MessageSender) => Promise<any>;
+} = {
     [MessageAction.GetCurrentPlayingSong]: getCurrentPlayingSong,
     [MessageAction.GetCurrentViewSongs]: getCurrentViewSongs,
 };
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+browser.runtime.onMessage.addListener((request, sender) => {
     console.log({ request, sender });
 
-    if (request.action in messageActionToHandler) {
-        const messageActionKey = MessageAction[request.action as MessageAction];
-        sendResponse({ requestId: request.id, data: messageActionToHandler[messageActionKey](request, sender) });
+    const messageActionKey = MessageAction[request.action as MessageAction];
+    const handlerFunction = messageActionToHandler[messageActionKey];
+    if (handlerFunction) {
+        return handlerFunction(request, sender).then((data: any) => ({ requestId: request.id, data }));
     }
 });
 
-let musicStreamingApi: MusicStreamingApi;
+const musicStreamingApi = new MusicStreamingApi(createDomApi());
 
-function getCurrentPlayingSong(): GetCurrentPlayingSongResponse["data"] {
-    if (!musicStreamingApi?.isValid()) {
-        const domApi = createDomApi();
-        musicStreamingApi = new MusicStreamingApi(domApi);
-    }
-
+function getCurrentPlayingSong(): Promise<GetCurrentPlayingSongResponse["data"]> {
     return musicStreamingApi.getCurrentPlayingSong();
 }
 
-function getCurrentViewSongs(): GetCurrentViewSongsResponse["data"] {
-    if (!musicStreamingApi?.isValid()) {
-        const domApi = createDomApi();
-        musicStreamingApi = new MusicStreamingApi(domApi);
-    }
-
+function getCurrentViewSongs(): Promise<GetCurrentViewSongsResponse["data"]> {
     return musicStreamingApi.getCurrentViewSongs();
 }

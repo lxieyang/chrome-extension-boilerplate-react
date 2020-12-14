@@ -1,20 +1,27 @@
-import { StreamingServiceSong } from "../../shared/shared.model";
-
 export interface DomApi {
     getCurrentUrl(): string;
     querySelector: Document["querySelector"];
     querySelectorAll: Document["querySelectorAll"];
 }
 
-export interface MusicStreamingServiceApi {
-    isStillMatch(): boolean;
-
-    getCurrentPlayingSong(): StreamingServiceSong | undefined;
-    getCurrentViewSongs(): StreamingServiceSong[] | undefined;
+export interface MusicStreamingServiceConfig {
+    urlMatch: string;
+    currentPlayingSong: {
+        selectors: {
+            containerDomElement: string;
+            titleDomElement: string;
+            artistsDomElement: string;
+        };
+    };
+    currentViewSongs: {
+        views: {
+            urlMatch: string;
+            selectors: {
+                songsTable: string;
+                songRowDomElements: string;
+                titleDomElement: string;
+                artistDomElement: string;
+            };
+        }[];
+    };
 }
-
-export type MusicStreamingServiceApiClass = {
-    new (domApi: DomApi): MusicStreamingServiceApi;
-
-    isMatch(url: string, domApi: DomApi): boolean;
-};

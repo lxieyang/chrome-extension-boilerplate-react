@@ -1,17 +1,10 @@
 import { GetCurrentPlayingSongResponse, GetCurrentViewSongsResponse, MessageAction, StreamingServiceSong } from "../../shared/shared.model";
+import { sendMessageToTab } from "./browser-api";
 
-export function getCurrentPlayingSongFromTab(tab: chrome.tabs.Tab): Promise<StreamingServiceSong | undefined> {
-    return new Promise((resolve) => {
-        chrome.tabs.sendMessage(tab.id!, { action: MessageAction.GetCurrentPlayingSong }, (response: GetCurrentPlayingSongResponse) => {
-            resolve(response.data);
-        });
-    });
+export function getCurrentPlayingSongFromTab(tabId: number): Promise<StreamingServiceSong | undefined> {
+    return sendMessageToTab<GetCurrentPlayingSongResponse>(tabId, MessageAction.GetCurrentPlayingSong).then((response) => response.data);
 }
 
-export function getCurrentViewSongsFromTab(tab: chrome.tabs.Tab): Promise<StreamingServiceSong[] | undefined> {
-    return new Promise((resolve) => {
-        chrome.tabs.sendMessage(tab.id!, { action: MessageAction.GetCurrentViewSongs }, (response: GetCurrentViewSongsResponse) => {
-            resolve(response.data);
-        });
-    });
+export function getCurrentViewSongsFromTab(tabId: number): Promise<StreamingServiceSong[] | undefined> {
+    return sendMessageToTab<GetCurrentViewSongsResponse>(tabId, MessageAction.GetCurrentViewSongs).then((response) => response.data);
 }

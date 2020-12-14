@@ -1,31 +1,67 @@
+import { waitForElementToDisplay } from "../../shared/dom-helpers";
 import { StreamingServiceSong } from "../../shared/shared.model";
-import { DomApi, MusicStreamingServiceApi, MusicStreamingServiceApiClass } from "./music-streaming-api.model";
-import { SpotifyApi } from "./music-streaming-services/spotify-api";
-import { TidalApi } from "./music-streaming-services/tidal-api";
+import { DomApi } from "./music-streaming-api.model";
+import { spotifyConfig } from "./music-streaming-services/spotify-config";
+import { tidalConfig } from "./music-streaming-services/tidal-config";
 
-const musicStreamingApiClasses: MusicStreamingServiceApiClass[] = [TidalApi, SpotifyApi];
+const musicStreamingServiceConfigs = [tidalConfig, spotifyConfig];
 
 export class MusicStreamingApi {
-    private currentMusicStramingServiceApi: MusicStreamingServiceApi | undefined;
+    constructor(private domApi: DomApi) {}
 
-    constructor(private domApi: DomApi) {
-        const currentUrl = domApi.getCurrentUrl();
-
-        const matchedClass = musicStreamingApiClasses.find((musicStreamingApi) => musicStreamingApi.isMatch(currentUrl, this.domApi));
-        if (matchedClass) {
-            this.currentMusicStramingServiceApi = new matchedClass(domApi);
+    public async getCurrentPlayingSong(): Promise<StreamingServiceSong | undefined> {
+        const musicStreamingConfig = this.getMusicStreamingConfig();
+        const selectors = musicStreamingConfig?.currentPlayingSong.selectors;
+        if (!selectors) {
+            return;
         }
+
+        await waitForElementToDisplay(selectors.containerDomElement);
+
+        const containerDomElement = this.domApi.querySelector(selectors.containerDomElement);
+        const titleDomElement = containerDomElement?.querySelector(selectors.titleDomElement);
+        const title = titleDomElement?.textContent as string;
+        const artistsDomElement = containerDomElement?.querySelectorAll(selectors.artistsDomElement);
+        const artist = artistsDomElement?.[0]?.textContent as string;
+
+        return {
+            title,
+            artist,
+        };
     }
 
-    public isValid(): boolean {
-        return !!this.currentMusicStramingServiceApi?.isStillMatch();
+    public async getCurrentViewSongs(): Promise<StreamingServiceSong[] | undefined> {
+        const musicStreamingConfig = this.getMusicStreamingConfig();
+        const currentViewConfig = musicStreamingConfig?.currentViewSongs.views.find((view) =>
+            this.domApi.getCurrentUrl().includes(view.urlMatch)
+        );
+        const selectors = currentViewConfig?.selectors;
+        if (!selectors) {
+            return;
+        }
+
+        await waitForElementToDisplay(selectors.songsTable);
+
+        const songsTable = this.domApi.querySelector(selectors.songsTable);
+        const songRowDomElements = Array.from(songsTable?.querySelectorAll(selectors.songRowDomElements) ?? []);
+        if (!songRowDomElements.length) {
+            return;
+        }
+
+        return songRowDomElements.map((songRowDomElement) => {
+            const titleDomElement = songRowDomElement.querySelector(selectors.titleDomElement);
+            const artistDomElement = songRowDomElement.querySelector(selectors.artistDomElement);
+
+            return {
+                title: titleDomElement?.textContent as string,
+                artist: artistDomElement?.textContent as string,
+            };
+        });
     }
 
-    public getCurrentPlayingSong(): StreamingServiceSong | undefined {
-        return this.currentMusicStramingServiceApi?.getCurrentPlayingSong();
-    }
-
-    public getCurrentViewSongs(): StreamingServiceSong[] | undefined {
-        return this.currentMusicStramingServiceApi?.getCurrentViewSongs();
+    private getMusicStreamingConfig() {
+        return musicStreamingServiceConfigs.find((musicStreamingConfig) =>
+            this.domApi.getCurrentUrl().includes(musicStreamingConfig.urlMatch)
+        );
     }
 }

@@ -1,5 +1,5 @@
 {
-    "name": "Chrome Extension with React & Webpack",
+    "name": "SHRED",
     "options_page": "options.html",
     "background": {
         "page": "background.html"

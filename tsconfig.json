@@ -14,7 +14,8 @@
     "resolveJsonModule": true,
     "noEmit": false,
     "jsx": "react",
-    "sourceMap": true
+    "sourceMap": true,
+    "noImplicitAny": false
   },
   "include": ["src"],
   "exclude": ["build", "node_modules"]
