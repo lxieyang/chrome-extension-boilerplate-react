@@ -1,6 +1,6 @@
 export interface StreamingServiceSong {
     artist?: string;
-    title?: string;
+    title: string;
 }
 
 export enum MessageAction {
