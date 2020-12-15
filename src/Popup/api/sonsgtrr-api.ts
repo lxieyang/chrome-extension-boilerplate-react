@@ -43,7 +43,7 @@ interface InnerTrackInfo {
 }
 
 function removeSpecialCharacters(string: string): string {
-    return string.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, "_");
+    return string.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, "");
 }
 
 function findIndexWithUndefined<T>(array: T[], comperator: (item: T) => boolean): number | undefined {
