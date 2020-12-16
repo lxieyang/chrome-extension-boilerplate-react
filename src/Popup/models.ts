@@ -14,6 +14,7 @@ export enum TabsWebsite {
 }
 
 export interface SongInfo extends StreamingServiceSong {
+    artist: string;
     tuning: number[];
     difficulty: SongDifficulty;
     from: TabsWebsite;
