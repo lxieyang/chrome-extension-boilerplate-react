@@ -1,8 +1,8 @@
 import { waitForElementToDisplay } from "../../shared/dom-helpers";
 import { StreamingServiceSong } from "../../shared/shared.model";
 import { DomApi } from "./music-streaming-api.model";
-import { spotifyConfig } from "./music-streaming-services/spotify-config";
-import { tidalConfig } from "./music-streaming-services/tidal-config";
+import { spotifyConfig } from "./music-streaming-service-configs/spotify-config";
+import { tidalConfig } from "./music-streaming-service-configs/tidal-config";
 
 const musicStreamingServiceConfigs = [tidalConfig, spotifyConfig];
 

@@ -12,8 +12,8 @@ export const spotifyConfig: MusicStreamingServiceConfig = {
     currentPlayingSong: {
         selectors: {
             containerDomElement: `.now-playing`,
-            titleDomElement: `.now-playing div:nth-child(2) > div:nth-child(1)`,
-            artistsDomElement: `.now-playing > div:nth-child(2) > div:nth-child(2)`,
+            titleDomElement: `.now-playing div:nth-child(2) > div:nth-child(1) .standalone-ellipsis-one-line`,
+            artistsDomElement: `.now-playing > div:nth-child(2) > div:nth-child(2) .standalone-ellipsis-one-line`,
         },
     },
     currentViewSongs: {

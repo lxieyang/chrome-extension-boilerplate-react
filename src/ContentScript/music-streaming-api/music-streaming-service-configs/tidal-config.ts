@@ -2,7 +2,7 @@ import { MusicStreamingServiceConfig } from "../music-streaming-api.model";
 
 const sharedTableSelectors = {
     songRowDomElements: `[data-test="tracklist-row"]`,
-    titleDomElement: `[data-test="table-row-title"]`,
+    titleDomElement: `[data-test="table-row-title"] [data-test="table-cell-title"]`,
     artistDomElement: `[data-test="track-row-artist"]`,
 };
 
@@ -21,14 +21,14 @@ export const tidalConfig: MusicStreamingServiceConfig = {
                 urlMatch: "/playlist/",
                 selectors: {
                     ...sharedTableSelectors,
-                    songsTable: `[data-track--source-type="playlist"] [data-type="media-table"]`,
+                    songsTable: `[data-track--source-type="playlist"][data-type="media-table"]`,
                 },
             },
             {
                 urlMatch: "/album/",
                 selectors: {
                     ...sharedTableSelectors,
-                    songsTable: `[data-track--source-type="album"] [data-type="media-table"]`,
+                    songsTable: `[data-track--source-type="album"][data-type="media-table"]`,
                 },
             },
         ],
