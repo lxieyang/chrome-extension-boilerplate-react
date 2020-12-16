@@ -1,15 +1,15 @@
-import { SongstrrSongInfo } from "../songstrr.model";
+import { SongsterrSongInfo } from "../songsterr.model";
 import { findIndexWithUndefined } from "../../../../shared/utils";
 
-export function addClientProperties(innerSongInfo: SongstrrSongInfo) {
+export function addClientProperties(innerSongInfo: SongsterrSongInfo) {
     innerSongInfo.defaultTrackIndex = getDefaultTrackIndex(innerSongInfo);
     innerSongInfo.url = getSongUrl(innerSongInfo);
 }
 
-function getSongUrl(innerSongInfo: SongstrrSongInfo): string {
-    const songstrrTitle = toSongstrrTitle(`${innerSongInfo.artist}-${innerSongInfo.title}`);
+function getSongUrl(innerSongInfo: SongsterrSongInfo): string {
+    const songsterrTitle = toSongsterrTitle(`${innerSongInfo.artist}-${innerSongInfo.title}`);
 
-    return `https://www.songsterr.com/a/wsa/${songstrrTitle}-tab-s${innerSongInfo.songId}t${innerSongInfo.defaultTrackIndex}`;
+    return `https://www.songsterr.com/a/wsa/${songsterrTitle}-tab-s${innerSongInfo.songId}t${innerSongInfo.defaultTrackIndex}`;
 }
 
 const guitarInstrumentIds = new Set([
@@ -21,7 +21,7 @@ const bassGuitarInstrumentIds = new Set([
     34, // Electric Bass (pick)
 ]);
 
-function getDefaultTrackIndex(innerSongInfo: SongstrrSongInfo): number {
+function getDefaultTrackIndex(innerSongInfo: SongsterrSongInfo): number {
     return (
         innerSongInfo.defaultTrack ??
         findIndexWithUndefined(innerSongInfo.tracks, (track) => guitarInstrumentIds.has(track.instrumentId)) ??
@@ -30,7 +30,7 @@ function getDefaultTrackIndex(innerSongInfo: SongstrrSongInfo): number {
     );
 }
 
-function toSongstrrTitle(string: string): string {
+function toSongsterrTitle(string: string): string {
     // from original code
     return string
         .toLowerCase()

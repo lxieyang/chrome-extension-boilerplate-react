@@ -10,7 +10,7 @@ export enum SongDifficulty {
 }
 
 export enum TabsWebsite {
-    Songstrr = "Songstrr",
+    Songsterr = "Songsterr",
 }
 
 export interface SongInfo extends StreamingServiceSong {

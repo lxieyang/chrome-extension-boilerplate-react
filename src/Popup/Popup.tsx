@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { subscribeToActiveTabUrlChange, getActiveTab } from "./api/browser-api";
 import { getCurrentPlayingSongFromTab, getCurrentViewSongsFromTab } from "./api/content-scripts-api";
-import { getSongInfosFromSongstrr } from "./api/songstrr";
+import { getSongInfosFromSongsterr } from "./api/songsterr";
 import "./Popup.scss";
 const logo = require("../assets/img/logo.svg");
 
@@ -16,7 +16,7 @@ const Popup = () => {
             getCurrentPlayingSongFromTab(tabId).then(console.log);
             getCurrentViewSongsFromTab(tabId)
                 .then((songs) => {
-                    return Promise.all(songs?.map((song) => getSongInfosFromSongstrr(song.title, song.artist)) ?? []);
+                    return Promise.all(songs?.map((song) => getSongInfosFromSongsterr(song.title, song.artist)) ?? []);
                 })
                 .then(console.log);
         });

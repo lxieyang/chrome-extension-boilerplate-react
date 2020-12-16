@@ -1,4 +1,4 @@
-export interface SongstrrSongInfo {
+export interface SongsterrSongInfo {
     artist: string;
     title: string;
     artistId: number;
@@ -6,18 +6,18 @@ export interface SongstrrSongInfo {
     hasTracks: true;
     songId: number;
     defaultTrack?: number;
-    tracks: SongstrrTrackInfo[];
+    tracks: SongsterrTrackInfo[];
     defaultTrackIndex?: number; // client side
     url?: string; // client side
 }
 
-export interface SongstrrTrackInfo {
-    difficulty: SongstrrDifficulty;
+export interface SongsterrTrackInfo {
+    difficulty: SongsterrDifficulty;
     tuning: number[];
     instrumentId: number;
 }
 
-export enum SongstrrDifficulty {
+export enum SongsterrDifficulty {
     VERY_EASY = "VERY_EASY",
     EASY = "EASY",
     BELOW_INTERMEDIATE = "BELOW_INTERMEDIATE",
