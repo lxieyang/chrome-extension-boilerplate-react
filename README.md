@@ -100,6 +100,17 @@ and on your `src/manifest.json`:
 }
 ```
 
+You can change when the content script is executed by changing the value in manifest.json run_at property.
+
+```
+// "document_start", "document_end", "document_idle" */
+
+{
+ "run_at": "document_idle"
+}
+
+```
+
 ## Intelligent Code Completion
 
 Thanks to [@hudidit](https://github.com/lxieyang/chrome-extension-boilerplate-react/issues/4)'s kind suggestions, this boilerplate supports chrome-specific intelligent code completion using [@types/chrome](https://www.npmjs.com/package/@types/chrome). For example:
