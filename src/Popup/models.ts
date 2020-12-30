@@ -14,9 +14,10 @@ export enum TabsWebsite {
 }
 
 export interface SongInfo extends StreamingServiceSong {
-    artist: string;
-    tuning: number[];
-    difficulty: SongDifficulty;
-    from: TabsWebsite;
-    url: string;
+    url?: string;
+    tuning?: number[];
+    difficulty?: SongDifficulty;
+    from?: TabsWebsite;
 }
+
+export type StylesMap = { [key: string]: React.CSSProperties };

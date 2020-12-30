@@ -1,38 +1,53 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import { subscribeToActiveTabUrlChange, getActiveTab } from "./api/browser-api";
 import { getCurrentPlayingSongFromTab, getCurrentViewSongsFromTab } from "./api/content-scripts-api";
-import { getSongInfosFromSongsterr } from "./api/songsterr";
+import { getSongInfoFromSongsterr } from "./api/songsterr";
+import { SongInfo } from "./models";
 import "./Popup.scss";
-const logo = require("../assets/img/logo.svg");
+import { SongItemComponent } from "./song-item";
+
+const SongItemComponentWrapper = styled.div`
+    margin: 0.5em;
+`;
 
 const Popup = () => {
-    useEffect(() => {
-        getActiveTab().then((tab) => {
-            getCurrentPlayingSongFromTab(tab.id!).then(console.log);
-            getCurrentViewSongsFromTab(tab.id!).then(console.log);
-        });
+    const [currentPlayingSong, setCurrentPlayingSong] = useState<SongInfo | undefined>();
+    const [currentViewSongs, setCurrentViewSongs] = useState<SongInfo[]>([]);
 
-        return subscribeToActiveTabUrlChange((tabId) => {
-            getCurrentPlayingSongFromTab(tabId).then(console.log);
+    useEffect(() => {
+        getActiveTab().then((tab) => logCurrentViewData(tab.id!));
+
+        return subscribeToActiveTabUrlChange(logCurrentViewData);
+
+        function logCurrentViewData(tabId: number) {
+            getCurrentPlayingSongFromTab(tabId)
+                .then(async (song) => song && ((await getSongInfoFromSongsterr(song.title, song.artist)) ?? song))
+                .then(setCurrentPlayingSong);
+
             getCurrentViewSongsFromTab(tabId)
-                .then((songs) => {
-                    return Promise.all(songs?.map((song) => getSongInfosFromSongsterr(song.title, song.artist)) ?? []);
-                })
-                .then(console.log);
-        });
+                .then((songs) =>
+                    Promise.all(
+                        songs?.map((song) => getSongInfoFromSongsterr(song.title, song.artist).then((songInfo) => songInfo ?? song)) ?? []
+                    )
+                )
+                .then(setCurrentViewSongs);
+        }
     }, []);
 
     return (
         <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/Popup/Popup.js</code> and save to reload.
-                </p>
-                <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-                    Learn React
-                </a>
-            </header>
+            {currentPlayingSong && (
+                <SongItemComponentWrapper>
+                    <SongItemComponent songInfo={currentPlayingSong} />
+                </SongItemComponentWrapper>
+            )}
+
+            {currentViewSongs.map((viewedSong) => (
+                <SongItemComponentWrapper>
+                    <SongItemComponent songInfo={viewedSong!} key={viewedSong.title} />
+                </SongItemComponentWrapper>
+            ))}
         </div>
     );
 };

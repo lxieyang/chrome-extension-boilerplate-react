@@ -1,15 +1,35 @@
 body {
-    width: 300px;
-    height: 260px;
+    width: 340px;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
         "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    position: relative;
+    background-color: hsl(0, 0, 10%);
+    color: hsl(0, 0%, 90%);
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+a {
+    color: inherit;
+    text-decoration: none;
 }
+
+// .enable-scrollbar-styles {
+::-webkit-scrollbar {
+    width: auto;
+    max-width: 10px;
+    max-height: 10px;
+
+    &-corner,
+    &-track {
+        background: hsl(0, 0%, 16%);
+    }
+
+    &-thumb {
+        background: hsl(0, 0%, 35%);
+        border: 1px solid hsl(0, 0%, 16%);
+        border-radius: 10px;
+    }
+}
+// }
