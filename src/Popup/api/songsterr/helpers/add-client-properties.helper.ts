@@ -1,6 +1,7 @@
-import { SongsterrSongInfo } from "../songsterr.model";
+import { SongsterrSongInfo } from "./songsterr.model";
 import { findIndexWithUndefined } from "../../../../shared/utils";
 
+// mutate original object - add keys
 export function addClientProperties(innerSongInfo: SongsterrSongInfo) {
     innerSongInfo.defaultTrackIndex = getDefaultTrackIndex(innerSongInfo);
     innerSongInfo.url = getSongUrl(innerSongInfo);

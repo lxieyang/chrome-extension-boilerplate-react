@@ -1,23 +1,26 @@
-import { SongsterrSongInfo } from "../songsterr.model";
-import { addClientProperties } from "./add-client-properties.helper";
+import { SongsterrSongInfo } from "./songsterr.model";
 
-export async function fetchSongsterrSongInfos(title: string, artist?: string): Promise<SongsterrSongInfo[]> {
-    let songsterrSongInfos: SongsterrSongInfo[] | undefined;
-    if (artist) {
-        const pattern = `${title}%20${artist}`;
-
-        songsterrSongInfos = await fetchPattern(pattern);
-    }
-
-    if (!songsterrSongInfos?.length) {
-        songsterrSongInfos = await fetchPattern(title);
-    }
+export async function fetchSongsterrSongInfos(title: string, artist?: string): Promise<SongsterrSongInfo[] | undefined> {
+    const songsterrSongInfos = await tryTofetchSong(title, artist);
 
     // TODO: filter in case of wrong tabs
 
-    songsterrSongInfos.forEach(addClientProperties);
-
     return songsterrSongInfos;
+}
+
+async function tryTofetchSong(title: string, artist?: string): Promise<SongsterrSongInfo[] | undefined> {
+    let result: SongsterrSongInfo[] | undefined;
+    if (artist) {
+        const pattern = `${title}%20${artist}`;
+
+        result = await fetchPattern(pattern);
+    }
+
+    if (!result?.length) {
+        result = await fetchPattern(title);
+    }
+
+    return result;
 }
 
 async function fetchPattern(pattern: string, numberOfResults = 1): Promise<SongsterrSongInfo[]> {

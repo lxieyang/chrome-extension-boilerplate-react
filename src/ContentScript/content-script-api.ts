@@ -1,22 +1,21 @@
 import { browser, Runtime } from "webextension-polyfill-ts";
-import { GetCurrentPlayingSongResponse, GetCurrentViewSongsResponse, MessageAction } from "../shared/shared.model";
+import { ContentScriptRequest, GetCurrentPlayingSongResponse, GetCurrentViewSongsResponse, MessageAction } from "../shared/shared.model";
 import { createDomApi } from "./music-streaming-api/create-dom-api";
 import { MusicStreamingApi as MusicStreamingService } from "./music-streaming-api/music-streaming-api";
 
 const messageActionToHandler: {
-    [key in keyof typeof MessageAction]: (request: any, sender: Runtime.MessageSender) => Promise<any>;
+    [key in keyof typeof MessageAction]: (request: ContentScriptRequest, sender: Runtime.MessageSender) => Promise<any>;
 } = {
     [MessageAction.GetCurrentPlayingSong]: getCurrentPlayingSong,
     [MessageAction.GetCurrentViewSongs]: getCurrentViewSongs,
 };
 
-browser.runtime.onMessage.addListener((request, sender) => {
+browser.runtime.onMessage.addListener((request: ContentScriptRequest, sender) => {
     console.log({ request, sender });
 
-    const messageActionKey = MessageAction[request.action as MessageAction];
-    const handlerFunction = messageActionToHandler[messageActionKey];
+    const handlerFunction = messageActionToHandler[request.action];
     if (handlerFunction) {
-        return handlerFunction(request, sender).then((data: any) => ({ requestId: request.id, data }));
+        return handlerFunction(request, sender).then((data: any) => ({ requestId: request.requestId, data }));
     }
 });
 

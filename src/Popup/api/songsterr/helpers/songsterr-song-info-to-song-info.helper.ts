@@ -1,4 +1,4 @@
-import { SongsterrDifficulty, SongsterrSongInfo } from "../songsterr.model";
+import { SongsterrDifficulty, SongsterrSongInfo } from "./songsterr.model";
 import { SongDifficulty, SongInfo, TabsWebsite } from "../../../models";
 
 export function songsterrSongInfoToSongInfo(innerSongInfo: SongsterrSongInfo): SongInfo {

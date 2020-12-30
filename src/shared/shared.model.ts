@@ -8,7 +8,13 @@ export enum MessageAction {
     GetCurrentViewSongs = "GetCurrentViewSongs",
 }
 
-interface ContentScriptResponse {
+export interface ContentScriptRequest {
+    action: MessageAction;
+    data?: any;
+    requestId?: number;
+}
+
+export interface ContentScriptResponse {
     data: any;
     requestId?: number;
 }
