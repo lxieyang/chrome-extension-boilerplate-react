@@ -7,11 +7,7 @@ import { SongInfo } from "./models";
 import "./Popup.scss";
 import { SongItemComponent } from "./song-item";
 
-const SongItemComponentWrapper = styled.div`
-    margin: 0.8em;
-`;
-
-const Popup = () => {
+export const PopupComponent = () => {
     const [currentPlayingSong, setCurrentPlayingSong] = useState<SongInfo | undefined>();
     const [currentViewSongs, setCurrentViewSongs] = useState<SongInfo[]>([]);
 
@@ -52,4 +48,6 @@ const Popup = () => {
     );
 };
 
-export default Popup;
+const SongItemComponentWrapper = styled.div`
+    margin: 0.8em;
+`;
