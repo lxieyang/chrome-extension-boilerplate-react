@@ -19,10 +19,10 @@ export class MusicStreamingApi {
         await waitForElementToDisplay(selectors.containerDomElement);
 
         const containerDomElement = this.domApi.querySelector(selectors.containerDomElement);
-        const titleDomElement = containerDomElement?.querySelector(selectors.titleDomElement);
-        const title = titleDomElement?.textContent as string;
-        const artistsDomElement = containerDomElement?.querySelectorAll(selectors.artistsDomElement);
-        const artist = artistsDomElement?.[0]?.textContent as string;
+        const titleDomElement = containerDomElement?.querySelector<HTMLElement>(selectors.titleDomElement);
+        const title = titleDomElement?.innerText as string;
+        const artistsDomElement = containerDomElement?.querySelectorAll<HTMLElement>(selectors.artistsDomElement);
+        const artist = artistsDomElement?.[0]?.innerText as string;
 
         return {
             title,
@@ -40,7 +40,7 @@ export class MusicStreamingApi {
             return;
         }
 
-        await waitForElementToDisplay(selectors.songsTable);
+        await waitForElementToDisplay(`${selectors.songsTable} ${selectors.songRowDomElements}`);
 
         const songsTable = this.domApi.querySelector(selectors.songsTable);
         const songRowDomElements = Array.from(songsTable?.querySelectorAll(selectors.songRowDomElements) ?? []);
@@ -49,12 +49,12 @@ export class MusicStreamingApi {
         }
 
         return songRowDomElements.map((songRowDomElement) => {
-            const titleDomElement = songRowDomElement.querySelector(selectors.titleDomElement);
-            const artistDomElement = songRowDomElement.querySelector(selectors.artistDomElement);
+            const titleDomElement = songRowDomElement.querySelector<HTMLElement>(selectors.titleDomElement);
+            const artistDomElement = songRowDomElement.querySelector<HTMLElement>(selectors.artistDomElement);
 
             return {
-                title: titleDomElement?.textContent as string,
-                artist: artistDomElement?.textContent as string,
+                title: titleDomElement?.innerText as string,
+                artist: artistDomElement?.innerText as string,
             };
         });
     }

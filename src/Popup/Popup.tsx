@@ -8,7 +8,7 @@ import "./Popup.scss";
 import { SongItemComponent } from "./song-item";
 
 const SongItemComponentWrapper = styled.div`
-    margin: 0.5em;
+    margin: 0.8em;
 `;
 
 const Popup = () => {

@@ -21,14 +21,14 @@ export const tidalConfig: MusicStreamingServiceConfig = {
                 urlMatch: "/playlist/",
                 selectors: {
                     ...sharedTableSelectors,
-                    songsTable: `[data-track--source-type="playlist"][data-type="media-table"]`,
+                    songsTable: `[data-track--source-type="playlist"][data-type="media-table"] [role="rowgroup"]`,
                 },
             },
             {
                 urlMatch: "/album/",
                 selectors: {
                     ...sharedTableSelectors,
-                    songsTable: `[data-track--source-type="album"][data-type="media-table"]`,
+                    songsTable: `[data-track--source-type="album"][data-type="media-table"] [role="rowgroup"]`,
                 },
             },
         ],

@@ -4,7 +4,7 @@ const sharedTableSelectors = {
     songsTable: `[role="grid"]`,
     songRowDomElements: `[data-testid="tracklist-row"]`,
     titleDomElement: `[role="gridcell"]:nth-child(2) > div > div`,
-    artistDomElement: `[role="gridcell"]:nth-child(2) > div > span`,
+    artistDomElement: `[role="gridcell"]:nth-child(2) a[href^="/artist/"]`,
 };
 
 export const spotifyConfig: MusicStreamingServiceConfig = {
@@ -12,8 +12,8 @@ export const spotifyConfig: MusicStreamingServiceConfig = {
     currentPlayingSong: {
         selectors: {
             containerDomElement: `.now-playing`,
-            titleDomElement: `.now-playing div:nth-child(2) > div:nth-child(1) .standalone-ellipsis-one-line`,
-            artistsDomElement: `.now-playing > div:nth-child(2) > div:nth-child(2) .standalone-ellipsis-one-line`,
+            titleDomElement: `.now-playing .ellipsis-one-line a[href^="/album/"]`,
+            artistsDomElement: `.now-playing .ellipsis-one-line a[href^="/artist/"]`,
         },
     },
     currentViewSongs: {

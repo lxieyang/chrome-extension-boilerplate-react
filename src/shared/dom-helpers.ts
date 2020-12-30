@@ -1,4 +1,4 @@
-export function waitForElementToDisplay(selector: string, checkFrequencyInMs = 0.5 * 1000, maxTimeoutInMs = 30 * 1000): Promise<void> {
+export function waitForElementToDisplay(selector: string, checkFrequencyInMs = 0.5 * 1000, maxTimeoutInMs = 10 * 1000): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         const startTimeInMs = Date.now();
 

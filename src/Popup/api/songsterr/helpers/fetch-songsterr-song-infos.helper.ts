@@ -14,7 +14,7 @@ export async function fetchSongsterrSongInfo(title: string, artist?: string): Pr
 async function tryTofetchSong(title: string, artist?: string): Promise<SongsterrSongInfo | undefined> {
     let result: SongsterrSongInfo | undefined;
     if (artist) {
-        const pattern = `${title}%20${artist}`;
+        const pattern = `${artist}%20${title}`;
 
         result = await fetchPattern(pattern);
     }
