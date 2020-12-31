@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { subscribeToActiveTabUrlChange, getActiveTab } from "./api/browser-api";
+import { getActiveTab, subscribeToActiveTabUrlChange } from "./api/browser-api";
 import { getCurrentPlayingSongFromTab, getCurrentViewSongsFromTab } from "./api/content-scripts-api";
 import { getSongInfoFromSongsterr } from "./api/songsterr";
 import { SongInfo } from "./models";
 import "./Popup.scss";
-import { SongItemComponent } from "./song-item";
+import { SongItemComponent } from "./song-item.component";
 
 export const PopupComponent = () => {
     const [currentPlayingSong, setCurrentPlayingSong] = useState<SongInfo | undefined>();
@@ -39,9 +39,9 @@ export const PopupComponent = () => {
                 </SongItemComponentWrapper>
             )}
 
-            {currentViewSongs.map((viewedSong) => (
+            {currentViewSongs.map((viewedSong, index) => (
                 <SongItemComponentWrapper>
-                    <SongItemComponent songInfo={viewedSong!} key={viewedSong.title} />
+                    <SongItemComponent songInfo={viewedSong!} key={index} />
                 </SongItemComponentWrapper>
             ))}
         </div>

@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { SongInfo } from "./models";
 import { tuningNumberToString } from "./helpers/tuning-number-to-string.helper";
+import { SongInfo } from "./models";
+import { DifficultyBarComponent } from "./difficulty-bar.component";
 
 export const SongItemComponent = ({ songInfo }: { songInfo: SongInfo }) => {
     const tuningAsString = songInfo.tuning?.map(tuningNumberToString).reverse().join(" ");
@@ -10,7 +11,11 @@ export const SongItemComponent = ({ songInfo }: { songInfo: SongInfo }) => {
         <InlineLink href={songInfo.url} target="_blank" rel="noopener noreferrer">
             <StyledSongItem isLink={!!songInfo.url}>
                 <Title>{songInfo.title}</Title>
-                <Difficulty>{songInfo.difficulty}</Difficulty>
+                {songInfo.difficulty && (
+                    <Difficulty>
+                        <DifficultyBarComponent songDifficulty={songInfo.difficulty} />
+                    </Difficulty>
+                )}
                 <Artist>{songInfo.artist}</Artist>
                 <Tuning>{tuningAsString}</Tuning>
             </StyledSongItem>
@@ -45,7 +50,14 @@ const Artist = styled.div`
 `;
 const Difficulty = styled.div`
     grid-column: difficulty;
-    text-align: end;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    > * {
+        height: 0.6em;
+    }
 `;
 const Tuning = styled.div`
     grid-column: tuning;
