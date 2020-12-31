@@ -9,17 +9,19 @@ export const CurrentViewedSongsComponent = ({ currentViewSongs }: { currentViewS
         <Container>
             <SectionTitleComponent>Current View</SectionTitleComponent>
 
-            {currentViewSongs.map((viewedSong, index) => (
-                <SongItemComponentWrapper>
+            <SongItemList>
+                {currentViewSongs.map((viewedSong, index) => (
                     <SongItemComponent songInfo={viewedSong!} key={index} />
-                </SongItemComponentWrapper>
-            ))}
+                ))}
+            </SongItemList>
         </Container>
     );
 };
 
 const Container = styled.div``;
 
-const SongItemComponentWrapper = styled.div`
-    margin: 0.8em 0;
+const SongItemList = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
 `;

@@ -42,7 +42,7 @@ const StyledSongItem = styled.div<{ isLink: boolean }>`
 const Title = styled.div`
     grid-column: title;
     text-align: start;
-    font-weight: 700;
+    font-weight: bold;
 `;
 const Artist = styled.div`
     grid-column: artist;

@@ -41,7 +41,7 @@ export const PopupComponent = () => {
 };
 
 const Container = styled.div`
-    max-height: calc(600px - (0.8 * 2) em); // 600px is chrome limitation
+    max-height: calc(600px - 2 * 0.8em); // 600px is chrome limitation
     overflow: auto;
     padding: 0.8em;
 `;
