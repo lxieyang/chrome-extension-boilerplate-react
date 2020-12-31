@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { songDifficultySorted, songDifficultyToNumberMap } from "./helpers/song-difficulty-number";
-import { SongDifficulty } from "./models";
+import { times } from "../../shared/utils";
+import { songDifficultySorted, songDifficultyToNumberMap } from "../helpers/song-difficulty-number";
+import { SongDifficulty } from "../models";
 
 export const DifficultyBarComponent = ({ songDifficulty }: { songDifficulty: SongDifficulty }) => {
     const difficultyAsNumber: number | undefined = songDifficulty && +songDifficultyToNumberMap[songDifficulty];
 
     return (
         <DifficultyBar title={songDifficulty}>
-            {[...new Array(difficultyAsNumber)].map((x, index) => (
+            {times(difficultyAsNumber, (index) => (
                 <div key={index}></div>
             ))}
         </DifficultyBar>

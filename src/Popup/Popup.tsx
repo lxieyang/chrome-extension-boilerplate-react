@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { getActiveTab, subscribeToActiveTabUrlChange } from "./api/browser-api";
 import { getCurrentPlayingSongFromTab, getCurrentViewSongsFromTab } from "./api/content-scripts-api";
 import { getSongInfoFromSongsterr } from "./api/songsterr";
+import { CurrentPlayingSongComponent } from "./current-playing-song.component";
+import { CurrentViewedSongsComponent } from "./current-viewed-songs.component";
 import { SongInfo } from "./models";
-import "./Popup.scss";
-import { SongItemComponent } from "./song-item.component";
 
 export const PopupComponent = () => {
     const [currentPlayingSong, setCurrentPlayingSong] = useState<SongInfo | undefined>();
@@ -32,22 +32,16 @@ export const PopupComponent = () => {
     }, []);
 
     return (
-        <div className="App">
-            {currentPlayingSong && (
-                <SongItemComponentWrapper>
-                    <SongItemComponent songInfo={currentPlayingSong} />
-                </SongItemComponentWrapper>
-            )}
+        <Container>
+            {currentPlayingSong && <CurrentPlayingSongComponent currentPlayingSong={currentPlayingSong} />}
 
-            {currentViewSongs.map((viewedSong, index) => (
-                <SongItemComponentWrapper>
-                    <SongItemComponent songInfo={viewedSong!} key={index} />
-                </SongItemComponentWrapper>
-            ))}
-        </div>
+            {currentViewSongs.length ? <CurrentViewedSongsComponent currentViewSongs={currentViewSongs} /> : undefined}
+        </Container>
     );
 };
 
-const SongItemComponentWrapper = styled.div`
-    margin: 0.8em;
+const Container = styled.div`
+    max-height: calc(600px - (0.8 * 2) em); // 600px is chrome limitation
+    overflow: auto;
+    padding: 0.8em;
 `;

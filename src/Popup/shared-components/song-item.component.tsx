@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { tuningNumberToString } from "./helpers/tuning-number-to-string.helper";
-import { SongInfo } from "./models";
+import { tuningNumberToString } from "../helpers/tuning-number-to-string.helper";
+import { SongInfo } from "../models";
 import { DifficultyBarComponent } from "./difficulty-bar.component";
 
 export const SongItemComponent = ({ songInfo }: { songInfo: SongInfo }) => {
