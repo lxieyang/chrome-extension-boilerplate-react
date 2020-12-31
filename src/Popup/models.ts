@@ -5,6 +5,7 @@ export enum SongDifficulty {
     Easy = "Easy",
     BelowIntermediate = "BelowIntermediate",
     Intermediate = "Intermediate",
+    UpperIntermediate = "UpperIntermediate",
     Hard = "Hard",
     VaryHard = "VaryHard",
 }

@@ -25,6 +25,8 @@ function songsterrDifficultyToSongDifficulty(songsterrDifficulty: SongsterrDiffi
             return SongDifficulty.BelowIntermediate;
         case SongsterrDifficulty.INTERMEDIATE:
             return SongDifficulty.Intermediate;
+        case SongsterrDifficulty.UPPER_INTERMEDIATE:
+            return SongDifficulty.UpperIntermediate;
         case SongsterrDifficulty.HARD:
             return SongDifficulty.Hard;
         case SongsterrDifficulty.VERY_HARD:
