@@ -20,7 +20,7 @@ export class MusicStreamingApi {
 
         const containerDomElement = this.domApi.querySelector(selectors.containerDomElement);
         const titleDomElement = containerDomElement?.querySelector<HTMLElement>(selectors.titleDomElement);
-        const title = titleDomElement?.innerText as string;
+        const title = this.leanTitle(titleDomElement?.innerText as string);
         const artistsDomElement = containerDomElement?.querySelectorAll<HTMLElement>(selectors.artistsDomElement);
         const artist = artistsDomElement?.[0]?.innerText as string;
 
@@ -53,7 +53,7 @@ export class MusicStreamingApi {
             const artistDomElement = songRowDomElement.querySelector<HTMLElement>(selectors.artistDomElement);
 
             return {
-                title: titleDomElement?.innerText as string,
+                title: this.leanTitle(titleDomElement?.innerText as string),
                 artist: artistDomElement?.innerText as string,
             };
         });
@@ -63,5 +63,20 @@ export class MusicStreamingApi {
         return musicStreamingServiceConfigs.find((musicStreamingConfig) =>
             this.domApi.getCurrentUrl().includes(musicStreamingConfig.urlMatch)
         );
+    }
+
+    private leanTitle(title: string) {
+        let titleToReturn = title;
+        const stringContainRemaster = title.match(/(\(.*remaster.*\))|(remaster(rd)?)/gi);
+        if (stringContainRemaster?.length) {
+            titleToReturn = titleToReturn.replace(stringContainRemaster[0], "");
+        }
+
+        const stringContainAlbum = title.match(/(\(.*Album.*\))/gi);
+        if (stringContainAlbum?.length) {
+            titleToReturn = titleToReturn.replace(stringContainAlbum[0], "");
+        }
+
+        return titleToReturn;
     }
 }
