@@ -1,44 +1,26 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getActiveTab, subscribeToActiveTabUrlChange } from "./api/browser-api";
-import { getCurrentPlayingSongFromTab, getCurrentViewSongsFromTab } from "./api/content-scripts-api";
-import { getSongInfoFromSongsterr } from "./api/songsterr";
-import { CurrentPlayingSongComponent } from "./current-playing-song.component";
-import { CurrentViewedSongsComponent } from "./current-viewed-songs.component";
+import { CurrentPlayingSong } from "./CurrentPlayingSong";
+import { CurrentViewedSongs } from "./CurrentViewedSongs";
 import { SongInfo } from "./models";
+import { SongsProvider } from "./SongsProvider";
 
-export const PopupComponent = () => {
-    const [currentPlayingSong, setCurrentPlayingSong] = useState<SongInfo | undefined>();
-    const [currentViewSongs, setCurrentViewSongs] = useState<SongInfo[]>([]);
+type Props = {
+    currentPlayingSong: SongInfo | undefined;
+    currentViewSongs: SongInfo[];
+};
 
-    useEffect(() => {
-        getActiveTab().then((tab) => logCurrentViewData(tab.id!));
-
-        return subscribeToActiveTabUrlChange(logCurrentViewData);
-
-        function logCurrentViewData(tabId: number) {
-            getCurrentPlayingSongFromTab(tabId)
-                .then(async (song) => song && ((await getSongInfoFromSongsterr(song.title, song.artist)) ?? song))
-                .then(setCurrentPlayingSong);
-
-            getCurrentViewSongsFromTab(tabId)
-                .then((songs) =>
-                    Promise.all(
-                        songs?.map((song) => getSongInfoFromSongsterr(song.title, song.artist).then((songInfo) => songInfo ?? song)) ?? []
-                    )
-                )
-                .then(setCurrentViewSongs);
-        }
-    }, []);
-
+const PopupComponentWithoutProvider = ({ currentPlayingSong, currentViewSongs }: Props) => {
     return (
         <Container>
-            {currentPlayingSong && <CurrentPlayingSongComponent currentPlayingSong={currentPlayingSong} />}
+            {currentPlayingSong && <CurrentPlayingSong currentPlayingSong={currentPlayingSong} />}
 
-            {currentViewSongs.length ? <CurrentViewedSongsComponent currentViewSongs={currentViewSongs} /> : undefined}
+            {currentViewSongs.length ? <CurrentViewedSongs currentViewSongs={currentViewSongs} /> : undefined}
         </Container>
     );
 };
+
+export const PopupComponent = SongsProvider(PopupComponentWithoutProvider);
 
 const Container = styled.div`
     max-height: calc(600px - 2 * 0.8em); // 600px is chrome limitation

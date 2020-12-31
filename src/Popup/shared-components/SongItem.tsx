@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { tuningNumberToString } from "../helpers/tuning-number-to-string.helper";
 import { SongInfo } from "../models";
-import { DifficultyBarComponent } from "./difficulty-bar.component";
+import { DifficultyBar } from "./DifficultyBar";
 
-export const SongItemComponent = ({ songInfo }: { songInfo: SongInfo }) => {
+export const SongItem = ({ songInfo }: { songInfo: SongInfo }) => {
     const tuningAsString = songInfo.tuning?.map(tuningNumberToString).reverse().join(" ");
 
     return (
@@ -13,7 +13,7 @@ export const SongItemComponent = ({ songInfo }: { songInfo: SongInfo }) => {
                 <Title>{songInfo.title}</Title>
                 {songInfo.difficulty && (
                     <Difficulty>
-                        <DifficultyBarComponent songDifficulty={songInfo.difficulty} />
+                        <DifficultyBar songDifficulty={songInfo.difficulty} />
                     </Difficulty>
                 )}
                 <Artist>{songInfo.artist}</Artist>

@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import { SongInfo } from "./models";
-import { SectionTitleComponent } from "./shared-components/section-title.component";
-import { SongItemComponent } from "./shared-components/song-item.component";
+import { SectionTitle } from "./shared-components/SectionTitle";
+import { SongItem } from "./shared-components/SongItem";
 
-export const CurrentViewedSongsComponent = ({ currentViewSongs }: { currentViewSongs: SongInfo[] }) => {
+export const CurrentViewedSongs = ({ currentViewSongs }: { currentViewSongs: SongInfo[] }) => {
     return (
         <Container>
-            <SectionTitleComponent>Current View</SectionTitleComponent>
+            <SectionTitle>Current View</SectionTitle>
 
             <SongItemList>
                 {currentViewSongs.map((viewedSong, index) => (
-                    <SongItemComponent songInfo={viewedSong!} key={index} />
+                    <SongItem songInfo={viewedSong!} key={index} />
                 ))}
             </SongItemList>
         </Container>

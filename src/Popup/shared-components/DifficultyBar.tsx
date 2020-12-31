@@ -4,19 +4,19 @@ import { times } from "../../shared/utils";
 import { songDifficultySorted, songDifficultyToNumberMap } from "../helpers/song-difficulty-number";
 import { SongDifficulty } from "../models";
 
-export const DifficultyBarComponent = ({ songDifficulty }: { songDifficulty: SongDifficulty }) => {
+export const DifficultyBar = ({ songDifficulty }: { songDifficulty: SongDifficulty }) => {
     const difficultyAsNumber: number | undefined = songDifficulty && +songDifficultyToNumberMap[songDifficulty];
 
     return (
-        <DifficultyBar title={songDifficulty}>
+        <StyledDifficultyBar title={songDifficulty}>
             {times(difficultyAsNumber, (index) => (
                 <div key={index}></div>
             ))}
-        </DifficultyBar>
+        </StyledDifficultyBar>
     );
 };
 
-const DifficultyBar = styled.div`
+const StyledDifficultyBar = styled.div`
     display: grid;
     grid-template-columns: repeat(${songDifficultySorted.length + 1}, 3px);
     grid-gap: 2px;
