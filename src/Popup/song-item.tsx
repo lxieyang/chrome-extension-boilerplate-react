@@ -1,7 +1,22 @@
 import React from "react";
 import styled from "styled-components";
-import { SongInfo, StylesMap } from "./models";
+import { SongInfo } from "./models";
 import { tuningNumberToString } from "./helpers/tuning-number-to-string.helper";
+
+export const SongItemComponent = ({ songInfo }: { songInfo: SongInfo }) => {
+    const tuningAsString = songInfo.tuning?.map(tuningNumberToString).reverse().join(" ");
+
+    return (
+        <InlineLink href={songInfo.url} target="_blank" rel="noopener noreferrer">
+            <StyledSongItem isLink={!!songInfo.url}>
+                <Title>{songInfo.title}</Title>
+                <Difficulty>{songInfo.difficulty}</Difficulty>
+                <Artist>{songInfo.artist}</Artist>
+                <Tuning>{tuningAsString}</Tuning>
+            </StyledSongItem>
+        </InlineLink>
+    );
+};
 
 const StyledSongItem = styled.div<{ isLink: boolean }>`
     display: grid;
@@ -19,45 +34,23 @@ const StyledSongItem = styled.div<{ isLink: boolean }>`
     }
 `;
 
-type Props = {
-    songInfo: SongInfo;
-};
-export const SongItemComponent = ({ songInfo }: Props) => {
-    const tuningAsString = songInfo.tuning?.map(tuningNumberToString).reverse().join(" ");
-
-    return (
-        <>
-            <a style={styles.a} href={songInfo.url} target="_blank" rel="noopener noreferrer">
-                <StyledSongItem isLink={!!songInfo.url}>
-                    <div style={styles.title}>{songInfo.title}</div>
-                    <div style={styles.difficulty}>{songInfo.difficulty}</div>
-                    <div style={styles.artist}>{songInfo.artist}</div>
-                    <div style={styles.tuning}>{tuningAsString}</div>
-                </StyledSongItem>
-            </a>
-        </>
-    );
-};
-
-const styles: StylesMap = {
-    title: {
-        gridColumn: "title",
-        textAlign: "start",
-        fontWeight: 700,
-    },
-    artist: {
-        gridColumn: "artist",
-        textAlign: "start",
-    },
-    difficulty: {
-        gridColumn: "difficulty",
-        textAlign: "end",
-    },
-    tuning: {
-        gridColumn: "tuning",
-        textAlign: "end",
-    },
-    a: {
-        display: "inline",
-    },
-};
+const Title = styled.div`
+    grid-column: title;
+    text-align: start;
+    font-weight: 700;
+`;
+const Artist = styled.div`
+    grid-column: artist;
+    text-align: start;
+`;
+const Difficulty = styled.div`
+    grid-column: difficulty;
+    text-align: end;
+`;
+const Tuning = styled.div`
+    grid-column: tuning;
+    text-align: end;
+`;
+const InlineLink = styled.a`
+    display: inline;
+`;

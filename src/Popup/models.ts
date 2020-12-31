@@ -20,5 +20,3 @@ export interface SongInfo extends StreamingServiceSong {
     difficulty?: SongDifficulty;
     from?: TabsWebsite;
 }
-
-export type StylesMap = { [key: string]: React.CSSProperties };
