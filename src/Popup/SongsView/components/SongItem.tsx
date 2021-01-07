@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { tuningNumberToString } from "../../helpers/tuning-number-to-string.helper";
 import { SongInfo } from "../../models";
+import { EllipsisOneLineWithTooltip } from "../../shared-components/EllipsisDiv";
 import { DifficultyBar } from "./DifficultyBar";
 
 export const SongItem = ({ songInfo }: { songInfo: SongInfo }) => {
@@ -10,13 +11,13 @@ export const SongItem = ({ songInfo }: { songInfo: SongInfo }) => {
     return (
         <InlineLink href={songInfo.url} target="_blank" rel="noopener noreferrer">
             <StyledSongItem isLink={!!songInfo.url}>
-                <Title>{songInfo.title}</Title>
+                <Title text={songInfo.title} />
                 {songInfo.difficulty && (
                     <Difficulty>
                         <DifficultyBar songDifficulty={songInfo.difficulty} />
                     </Difficulty>
                 )}
-                <Artist>{songInfo.artist}</Artist>
+                <Artist text={songInfo.artist} />
                 <Tuning>{tuningAsString}</Tuning>
             </StyledSongItem>
         </InlineLink>
@@ -39,12 +40,12 @@ const StyledSongItem = styled.div<{ isLink: boolean }>`
     }
 `;
 
-const Title = styled.div`
+const Title = styled(EllipsisOneLineWithTooltip)`
     grid-column: title;
     text-align: start;
     font-weight: bold;
 `;
-const Artist = styled.div`
+const Artist = styled(EllipsisOneLineWithTooltip)`
     grid-column: artist;
     text-align: start;
 `;
