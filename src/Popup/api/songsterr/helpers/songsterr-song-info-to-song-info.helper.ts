@@ -1,18 +1,23 @@
-import { SongsterrDifficulty, SongsterrSongInfo } from "./songsterr.model";
+import { SongsterrDifficulty, SongsterrSongInfo, SongsterrTrackInfo } from "./songsterr.model";
 import { SongDifficulty, SongInfo, TabsWebsite } from "../../../models";
 
 export function songsterrSongInfoToSongInfo(innerSongInfo: SongsterrSongInfo): SongInfo {
     const defaultTrack = innerSongInfo.tracks[innerSongInfo.defaultTrackIndex!];
-    const difficulty = songsterrDifficultyToSongDifficulty(defaultTrack.difficulty);
 
     return {
         artist: innerSongInfo.artist,
         title: innerSongInfo.title,
         url: innerSongInfo.url!,
-        difficulty,
+        difficulty: getTrackDifficulty(defaultTrack),
         from: TabsWebsite.Songsterr,
         tuning: defaultTrack.tuning,
     };
+}
+function getTrackDifficulty(track: SongsterrTrackInfo): SongDifficulty {
+    const difficultyVersion = track.difficultyVersion;
+    const songsterrDifficulty: SongsterrDifficulty = track[`difficultyV${difficultyVersion}`] ?? track.difficulty;
+
+    return songsterrDifficultyToSongDifficulty(songsterrDifficulty);
 }
 
 function songsterrDifficultyToSongDifficulty(songsterrDifficulty: SongsterrDifficulty): SongDifficulty {

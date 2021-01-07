@@ -13,6 +13,8 @@ export interface SongsterrSongInfo {
 
 export interface SongsterrTrackInfo {
     difficulty: SongsterrDifficulty;
+    difficultyV3?: SongsterrDifficulty;
+    difficultyVersion?: number;
     tuning: number[];
     instrumentId: number;
 }
