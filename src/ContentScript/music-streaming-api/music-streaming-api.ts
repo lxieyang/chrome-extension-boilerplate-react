@@ -1,4 +1,5 @@
 import { waitForElementToDisplay } from "../../shared/dom-helpers";
+import { compose } from "../../shared/utils";
 import { StreamingServiceSong } from "../../shared/shared.model";
 import { DomApi } from "./music-streaming-api.model";
 import { spotifyConfig } from "./music-streaming-service-configs/spotify-config";
@@ -20,14 +21,16 @@ export class MusicStreamingApi {
 
         const containerDomElement = this.domApi.querySelector(selectors.containerDomElement);
         const titleDomElement = containerDomElement?.querySelector<HTMLElement>(selectors.titleDomElement);
-        const title = this.leanTitle(titleDomElement?.innerText as string);
+        const title = this.leanTitle(titleDomElement?.innerText);
         const artistsDomElement = containerDomElement?.querySelectorAll<HTMLElement>(selectors.artistsDomElement);
         const artist = artistsDomElement?.[0]?.innerText as string;
 
-        return {
-            title,
-            artist,
-        };
+        if (title) {
+            return {
+                title,
+                artist,
+            };
+        }
     }
 
     public async getCurrentViewSongs(): Promise<StreamingServiceSong[] | undefined> {
@@ -48,14 +51,18 @@ export class MusicStreamingApi {
             return;
         }
 
-        return songRowDomElements.map((songRowDomElement) => {
+        return songRowDomElements.flatMap((songRowDomElement) => {
             const titleDomElement = songRowDomElement.querySelector<HTMLElement>(selectors.titleDomElement);
             const artistDomElement = songRowDomElement.querySelector<HTMLElement>(selectors.artistDomElement);
 
-            return {
-                title: this.leanTitle(titleDomElement?.innerText as string),
-                artist: artistDomElement?.innerText as string,
-            };
+            const title = this.leanTitle(titleDomElement?.innerText);
+
+            return title
+                ? {
+                      title: this.leanTitle(titleDomElement?.innerText)!,
+                      artist: artistDomElement?.innerText,
+                  }
+                : [];
         });
     }
 
@@ -65,18 +72,22 @@ export class MusicStreamingApi {
         );
     }
 
-    private leanTitle(title: string) {
-        let titleToReturn = title;
-        const stringContainRemaster = title.match(/(\(.*remaster.*\))|(remaster(rd)?)/gi);
-        if (stringContainRemaster?.length) {
-            titleToReturn = titleToReturn.replace(stringContainRemaster[0], "");
+    private leanTitle(title?: string): string | undefined {
+        if (!title) {
+            return;
         }
 
-        const stringContainAlbum = title.match(/(\(.*Album.*\))/gi);
-        if (stringContainAlbum?.length) {
-            titleToReturn = titleToReturn.replace(stringContainAlbum[0], "");
-        }
+        const remasteredMatch = /(\(.*remaster.*\))|(remaster(rd)?)/gi;
+        const AlbumMatch = /(\(.*Album.*\))/gi;
 
-        return titleToReturn;
+        const removeMatches = compose(removeMatch(remasteredMatch), removeMatch(AlbumMatch));
+
+        return removeMatches(title);
     }
 }
+
+const removeMatch = (regexp: string | RegExp) => (text: string): string => {
+    const stringContainRemaster = text.match(regexp);
+
+    return stringContainRemaster?.length ? text!.replace(stringContainRemaster[0], "") : text;
+};
