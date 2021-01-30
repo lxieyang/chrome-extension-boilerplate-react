@@ -6,6 +6,11 @@ const sharedTableSelectors = {
     artistDomElement: `[data-test="track-row-artist"]`,
 };
 
+const artistTopTracksTableSelectors = {
+    ...sharedTableSelectors,
+    songsTable: `[data-track--source-type="artist"][data-type="media-table"] [role="rowgroup"]`,
+};
+
 export const tidalConfig: MusicStreamingServiceConfig = {
     urlMatch: "listen.tidal.com/",
     currentPlayingSong: {
@@ -30,6 +35,14 @@ export const tidalConfig: MusicStreamingServiceConfig = {
                     ...sharedTableSelectors,
                     songsTable: `[data-track--source-type="album"][data-type="media-table"] [role="rowgroup"]`,
                 },
+            },
+            {
+                urlMatch: "/artist/",
+                selectors: artistTopTracksTableSelectors,
+            },
+            {
+                urlMatch: "/view/pages/single-module-page/",
+                selectors: artistTopTracksTableSelectors,
             },
         ],
     },

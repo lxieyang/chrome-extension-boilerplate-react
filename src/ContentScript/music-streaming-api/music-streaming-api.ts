@@ -77,14 +77,14 @@ export class MusicStreamingApi {
             return;
         }
 
-        const remasteredMatch = /(\(.*remaster.*\))|(remaster(rd)?)/gi;
-        const AlbumMatch = /(\(.*Album.*\))/gi;
-
         const removeMatches = compose(removeMatch(remasteredMatch), removeMatch(AlbumMatch));
 
         return removeMatches(title);
     }
 }
+
+const remasteredMatch = /(\(.*remaster.*\))|(remaster(rd)?)/gi;
+const AlbumMatch = /(\(.*Album.*\))/gi;
 
 const removeMatch = (regexp: string | RegExp) => (text: string): string => {
     const stringContainRemaster = text.match(regexp);
