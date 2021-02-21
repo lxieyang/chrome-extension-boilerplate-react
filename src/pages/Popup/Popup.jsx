@@ -15,10 +15,24 @@ const Popup = () => {
 
 
   const requestCreateStream = _ => {
+    navigator.mediaDevices.getUserMedia({
+      video: true
+    })
+      .then(stream => {
+        debugger
+        console.log('stream is on in popup:', stream);
+        document.querySelector('#webcamVideo').srcObject = stream;
+
+      })
+      .catch(err => {
+        console.error(err);
+      });
+
+
     chrome.runtime.sendMessage({ type: 'start-stream' },
       (response) => {
 
-        document.querySelector('#webcamVideo').srcObject = response.stream;
+        // document.querySelector('#webcamVideo').srcObject = response.stream;
         console.log('content type response', response.response)
         return true
       })
