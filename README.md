@@ -13,6 +13,7 @@
 
 - **_Recently updated from React ~~16~~ to 17 and Webpack ~~4~~ to 5!_**
 - **_Recently added [TypeScript](https://www.typescriptlang.org/) Support!_**
+- **_Recently added [devtools](https://developer.chrome.com/docs/extensions/mv3/devtools/) Support! Thanks [GeekaholicLin](https://github.com/lxieyang/chrome-extension-boilerplate-react/issues/17)!_**
 
 ## Features
 
