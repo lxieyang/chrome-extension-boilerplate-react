@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+
+let streamRef = null
 const Popup = () => {
 
   // const [stream, setStream] = useState(null)
@@ -20,6 +22,7 @@ const Popup = () => {
     })
       .then(stream => {
         debugger
+        streamRef = stream
         console.log('stream is on in popup:', stream);
         document.querySelector('#webcamVideo').srcObject = stream;
 
@@ -39,6 +42,11 @@ const Popup = () => {
   }
 
   const requestDestroyStream = _ => {
+    streamRef.getTracks().forEach(function (track) {
+      if (track.readyState === 'live' && track.kind === 'video') {
+          track.stop();
+      }
+    })
     chrome.runtime.sendMessage({ type: 'stop-stream' },
       (response) => {
         console.log('content type response', response.response)

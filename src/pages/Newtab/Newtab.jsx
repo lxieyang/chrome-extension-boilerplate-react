@@ -37,7 +37,7 @@ const Newtab = () => {
   // stop only camera
   const stopVideoOnly = (stream) => {
     stream.getTracks().forEach(function (track) {
-      if (track.readyState === 'live' && track.kind === 'video') {
+      if (track.readyState == 'live' && track.kind === 'video') {
         track.stop();
       }
     });
