@@ -11,9 +11,11 @@
 
 ## Announcements
 
-- **_Recently updated from React ~~16~~ to 17 and Webpack ~~4~~ to 5!_**
-- **_Recently added [TypeScript](https://www.typescriptlang.org/) Support!_**
-- **_Recently added [devtools](https://developer.chrome.com/docs/extensions/mv3/devtools/) Support! Thanks [GeekaholicLin](https://github.com/lxieyang/chrome-extension-boilerplate-react/issues/17)!_**
+- **_This boilerplate adopts [Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-overview/)!_** For V2 users, please check out the [manifest-v2](https://github.com/lxieyang/chrome-extension-boilerplate-react/tree/manifest-v2) branch, or use version [3.x](https://www.npmjs.com/package/chrome-extension-boilerplate-react/v/3.3.0).
+  - Check out the [Manifest V3 Migration Guide](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/).
+- Recently added [devtools](https://developer.chrome.com/docs/extensions/mv3/devtools/) Support! Thanks [GeekaholicLin](https://github.com/lxieyang/chrome-extension-boilerplate-react/issues/17)!
+- Recently updated from React ~~16~~ to **17** and Webpack ~~4~~ to **5**!
+- Recently added [TypeScript](https://www.typescriptlang.org/) Support!
 
 ## Features
 
@@ -21,6 +23,7 @@ This is a basic Chrome Extensions boilerplate to help you write modular and mode
 
 This boilerplate is updated with:
 
+- [Chrome Extension Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-overview/)
 - [React 17](https://reactjs.org)
 - [Webpack 5](https://webpack.js.org/)
 - [React Hot Loader](https://github.com/gaearon/react-hot-loader)
