@@ -2,37 +2,37 @@ import React, { useEffect, useState } from 'react';
 
 const Popup = () => {
 
-  const [stream, setStream] = useState(null)
+  // const [stream, setStream] = useState(null)
   useEffect(() => {
     // constructor
-    setupStream()
+    // setupStream()
     return () => {
     }
   }, [])
 
 
-  const setupStream = async => {
-    navigator.mediaDevices.getUserMedia({
-      video: true
-    }).then(stream => {
-      setStream(stream)
-      debugger
-      console.log('stream is:', stream);
-      document.querySelector('#webcamVideo').srcObject = stream;
 
-    })
-      .catch(err => {
-        console.error(err);
-      });
+
+
+  const requestCreateStream = _ => {
+    chrome.runtime.sendMessage({ type: 'start-stream' },
+      (response) => {
+
+        document.querySelector('#webcamVideo').srcObject = response.stream;
+        console.log('content type response', response.response)
+        return true
+      })
   }
 
-  const stopVideoOnly = () => {
-    stream.getTracks().forEach(function (track) {
-      if (track.readyState === 'live' && track.kind === 'video') {
-        track.stop();
-      }
-    });
+  const requestDestroyStream = _ => {
+    chrome.runtime.sendMessage({ type: 'stop-stream' },
+      (response) => {
+        console.log('content type response', response.response)
+        return true
+      })
   }
+
+
 
   return (
     <div>
@@ -40,8 +40,8 @@ const Popup = () => {
         in the popup
       </div>
       <div className="buttons-container">
-        <button id="openStream" onClick={setupStream} >Open stream </button>
-        <button id="closeStream" onClick={stopVideoOnly} >Close stream</button>
+        <button id="openStream" onClick={requestCreateStream} >Open stream </button>
+        <button id="closeStream" onClick={requestDestroyStream} >Close stream</button>
       </div>
       <div>
         <video autoPlay={true} id="webcamVideo" width="227px" height="227px"></video>
