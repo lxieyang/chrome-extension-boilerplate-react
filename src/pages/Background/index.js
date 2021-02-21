@@ -1,11 +1,19 @@
 import '../../assets/img/icon-34.png';
 import '../../assets/img/icon-128.png';
+import ml5 from 'ml5'
 
 console.log('This is the background page.');
 console.log('Put the background scripts here.');
 chrome.tabs.create({ url: "chrome://newtab" })
-
-
+let poseNet = null
+let videoElm = null
+const poseNet_options = {
+    input_resolution: 720,
+    outputStride: 16,
+    maxPoseDetections: 2,
+    multiplier: 0.50,
+    detectionType: 'multiple'
+}
 
 let streamRef = null
 const setupStream = async _ => {
@@ -15,7 +23,8 @@ const setupStream = async _ => {
         streamRef = stream
         debugger
         console.log('stream is:', stream);
-        // document.querySelector('#webcamVideo').srcObject = stream;
+        videoElm = document.querySelector('#webcamVideoBg')
+        videoElm.srcObject = stream;
 
     })
         .catch(err => {
@@ -31,12 +40,34 @@ const stopVideoOnly = () => {
     });
 }
 
+const poseNetInitialized = _ => {
+
+    setInterval(() => {
+        poseNet.multiPose(videoElm)
+            .then((results) => {
+                console.log('results is:', results);
+            })
+
+            .catch(err => {
+                console.log('error while getting poses', err);
+            })
+
+
+    }, 1000);
+
+}
+const setupLibrary = _ => {
+    poseNet = ml5.poseNet(poseNetInitialized.bind(this), poseNet_options)
+
+}
+
 const initialize = _ => {
     navigator.mediaDevices.getUserMedia({
         video: true
     }).then(stream => {
         streamRef = stream
         stopVideoOnly()
+        setupLibrary()
 
     })
         .catch(err => {
