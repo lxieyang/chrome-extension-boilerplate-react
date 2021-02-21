@@ -14,16 +14,29 @@
   "icons": {
     "128": "icon-128.png"
   },
-  "content_scripts": [{
-    "matches": ["http://*/*", "https://*/*", "<all_urls>"],
-    "js": ["contentScript.bundle.js"],
-    "css": ["content.styles.css"]
-  }],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "<all_urls>"
+      ],
+      "js": [
+        "contentScript.bundle.js"
+      ],
+      "css": [
+        "content.styles.css"
+      ]
+    }
+  ],
   "web_accessible_resources": [
     "content.styles.css",
     "icon-128.png",
     "icon-34.png"
   ],
   "manifest_version": 2,
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "tabs"
+  ]
 }

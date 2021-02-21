@@ -1,5 +1,5 @@
 {
-  "name": "chrome-extension-boilerplate-react",
+  "name": "chrome-upright",
   "version": "3.2.1",
   "description": "A chrome extension boilerplate built with React 17 and Webpack 5",
   "license": "MIT",

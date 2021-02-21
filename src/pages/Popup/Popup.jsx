@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from '../../assets/img/logo.svg';
-import Greetings from '../../containers/Greetings/Greetings';
-import './Popup.css';
+import React, { useEffect } from 'react';
 
 const Popup = () => {
+
+  useEffect(() => {
+    setupStream()
+    return () => {
+    }
+  }, [])
+
+
+  const setupStream = async => {
+    navigator.mediaDevices.getUserMedia({
+      video: true
+    }).then(stream => {
+      debugger
+      console.log('stream is:', stream);
+      document.querySelector('#webcamVideo').srcObject = stream;
+      // document.querySelector('#status').innerHTML =
+      //   'Webcam access granted for extension, please close this tab';
+      // chrome.storage.local.set({
+      //   'camAccess': true
+      // }, () => {});
+    })
+      .catch(err => {
+        // document.querySelector('#status').innerHTML =
+        //   'Error getting webcam access for extension: ' + err.toString();
+        console.error(err);
+      });
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/pages/Popup/Popup.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div>
+        in the popup
+      </div>
+      <div>
+        <video autoPlay={true} id="webcamVideo" width="227px" height="227px"></video>
+      </div>
     </div>
+
+
   );
 };
 
