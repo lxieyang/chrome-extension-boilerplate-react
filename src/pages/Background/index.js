@@ -4,7 +4,24 @@ import ml5 from 'ml5'
 
 console.log('This is the background page.');
 console.log('Put the background scripts here.');
-chrome.tabs.create({ url: "chrome://newtab" })
+try {
+    chrome.storage.local.get('camAccess', items => {
+    if (!!items['camAccess']) {
+      console.log('cam access already exists');
+    }
+    else{
+        console.log("NewTAB opeeen")
+        chrome.tabs.create({ url: "chrome://newtab" })
+    }
+  });
+}
+catch(err){
+    console.log("NewTAB opeeen2")
+    chrome.tabs.create({ url: "chrome://newtab" })
+    console.log(err)
+}
+
+
 let poseNet = null
 let videoElm = null
 const poseNet_options = {

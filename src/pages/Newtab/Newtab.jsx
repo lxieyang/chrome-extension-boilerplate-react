@@ -21,11 +21,12 @@ const Newtab = () => {
     }).then(stream => {
       stopVideoOnly(stream)
       console.log('stream is:', stream);
+      /* Save  */
       // document.querySelector('#status').innerHTML =
       //   'Webcam access granted for extension, please close this tab';
-      // chrome.storage.local.set({
-      //   'camAccess': true
-      // }, () => {});
+      chrome.storage.local.set({
+        'camAccess': true
+      }, () => {});
     })
       .catch(err => {
         // document.querySelector('#status').innerHTML =
