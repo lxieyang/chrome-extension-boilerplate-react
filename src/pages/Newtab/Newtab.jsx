@@ -4,18 +4,10 @@ import './Newtab.css';
 import './Newtab.scss';
 
 const Newtab = () => {
-  useEffect(async () => {
-    console.log('inside newTab ctor')
-    await setupStream()
 
 
-    return () => {
 
-    }
-  }, [])
-
-
-  const setupStream = async => {
+  const setupStream = _ => {
     navigator.mediaDevices.getUserMedia({
       video: true
     }).then(stream => {
@@ -26,7 +18,7 @@ const Newtab = () => {
       //   'Webcam access granted for extension, please close this tab';
       chrome.storage.local.set({
         'camAccess': true
-      }, () => {});
+      }, () => { });
     })
       .catch(err => {
         // document.querySelector('#status').innerHTML =
@@ -45,6 +37,15 @@ const Newtab = () => {
   }
 
 
+  useEffect(() => {
+    console.log('inside newTab ctor')
+    setupStream()
+
+
+    return () => {
+
+    }
+  }, [])
 
   return (
     <div>

@@ -2,28 +2,16 @@ import '../../assets/img/icon-34.png';
 import '../../assets/img/icon-128.png';
 import ml5 from 'ml5'
 
-console.log('This is the background page.');
-console.log('Put the background scripts here.');
-try {
-    chrome.storage.local.get('camAccess', items => {
-    if (!!items['camAccess']) {
-      console.log('cam access already exists');
-    }
-    else{
-        console.log("NewTAB opeeen")
-        chrome.tabs.create({ url: "chrome://newtab" })
-    }
-  });
-}
-catch(err){
-    console.log("NewTAB opeeen2")
-    chrome.tabs.create({ url: "chrome://newtab" })
-    console.log(err)
-}
+
+
+console.log('This is the background page.')
 
 
 let poseNet = null
 let videoElm = null
+let poseNetInterval = null
+let streamRef = null
+
 const poseNet_options = {
     input_resolution: 720,
     outputStride: 16,
@@ -32,7 +20,39 @@ const poseNet_options = {
     detectionType: 'multiple'
 }
 
-let streamRef = null
+const isCameraPermissionGranted = _ => {
+    try {
+        chrome.storage.local.get('camAccess', items => {
+            if (!!items['camAccess']) {
+                console.log('cam access already exists');
+                return true
+            }
+            else {
+                console.log("new tab open")
+                return false
+            }
+        });
+    }
+    catch (err) {
+        console.log('error while getting data from storage: camAccess', err)
+        return null
+    }
+}
+
+const openNewTab = _ => {
+
+    const newTab = chrome.runtime.getURL('Newtab.html')
+    chrome.tabs.create(
+        {
+            url: newTab,
+            active: true
+        },
+        data => {
+            console.log(data)
+        }
+    )
+}
+
 const setupStream = async _ => {
     navigator.mediaDevices.getUserMedia({
         video: true
@@ -51,73 +71,73 @@ const setupStream = async _ => {
 
 const stopVideoOnly = () => {
     streamRef.getTracks().forEach(function (track) {
-        if (track.readyState === 'live' && track.kind === 'video') {
+        if (track.kind === 'video') {
             track.stop();
         }
     });
 }
 
-const poseNetInitialized = _ => {
+const startReceivingPoses = _ => {
 
-    setInterval(() => {
+    if (!streamRef) {
+        return
+    }
+    poseNetInterval = setInterval(() => {
         poseNet.multiPose(videoElm)
             .then((results) => {
                 console.log('results is:', results);
             })
-
             .catch(err => {
                 console.log('error while getting poses', err);
             })
-
-
     }, 1000);
 
 }
-const setupLibrary = _ => {
-    poseNet = ml5.poseNet(poseNetInitialized.bind(this), poseNet_options)
+
+const stopReceivingPoses = _ => {
+    clearInterval(poseNetInterval)
+}
+const setupPosesLibrary = _ => {
+    poseNet = ml5.poseNet(startReceivingPoses.bind(this), poseNet_options)
 
 }
 
-const initialize = _ => {
-    navigator.mediaDevices.getUserMedia({
-        video: true
-    }).then(stream => {
-        streamRef = stream
-        stopVideoOnly()
-        setupLibrary()
+const setupListeners = _ => {
+    chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+        switch (message.type) {
+            case 'start-stream':
+                await setupStream()
+                startReceivingPoses()
+                sendResponse({ stream: streamRef, response: 'stream-started' })
+                break
+
+            case 'stop-stream':
+                await stopVideoOnly()
+                stopReceivingPoses()
+                sendResponse({ response: 'stream-ended' })
+
+                break
+
+            default:
+                break;
+        }
+        return true
 
     })
-        .catch(err => {
-            console.error(err);
-        });
 }
 
-chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
-    // Arbitrary string allowing the background to distinguish
-    // message types. You might also be able to determine this
-    // from the `sender`.
 
-    switch (message.type) {
-        case 'start-stream':
-            await setupStream()
-            sendResponse({ stream: streamRef, response: 'stream-started' })
-            break
-
-        case 'stop-stream':
-            await stopVideoOnly()
-            sendResponse({ response: 'stream-ended' })
-
-            break
-
-        default:
-            break;
+const init = _ => {
+    setupListeners()
+    setupPosesLibrary()
+    if (!isCameraPermissionGranted()) {
+        openNewTab()
     }
-    return true
 
-})
+}
 
 
-initialize()
+init()
 
 
 
