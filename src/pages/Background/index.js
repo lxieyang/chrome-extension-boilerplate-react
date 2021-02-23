@@ -2,8 +2,6 @@ import '../../assets/img/icon-34.png';
 import '../../assets/img/icon-128.png';
 import ml5 from 'ml5'
 
-
-
 console.log('This is the background page.')
 
 
@@ -100,7 +98,6 @@ const stopReceivingPoses = _ => {
 
 const setupPosesLibrary = _ => {
     poseNet = ml5.poseNet(startReceivingPoses.bind(this), poseNet_options)
-
 }
 
 const setupListeners = _ => {
@@ -134,7 +131,6 @@ const init = _ => {
     if (!isCameraPermissionGranted()) {
         openNewTab()
     }
-
 }
 
 

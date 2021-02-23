@@ -5,8 +5,6 @@ import './Newtab.scss';
 
 const Newtab = () => {
 
-
-
   const setupStream = async _ => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true })
@@ -21,8 +19,6 @@ const Newtab = () => {
     }
   }
 
-
-  // stop camera
   const stopStream = (stream) => {
     stream.getTracks().forEach(function (track) {
       if (track.kind === 'video') {
@@ -30,7 +26,6 @@ const Newtab = () => {
       }
     });
   }
-
 
   useEffect(() => {
     console.log('inside newTab ctor')
