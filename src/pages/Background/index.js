@@ -58,7 +58,6 @@ const setupStream = async _ => {
         video: true
     }).then(stream => {
         streamRef = stream
-        debugger
         console.log('stream is:', stream);
         videoElm = document.querySelector('#webcamVideoBg')
         videoElm.srcObject = stream;
@@ -82,14 +81,15 @@ const startReceivingPoses = _ => {
     if (!streamRef) {
         return
     }
-    poseNetInterval = setInterval(() => {
-        poseNet.multiPose(videoElm)
-            .then((results) => {
-                console.log('results is:', results);
-            })
-            .catch(err => {
-                console.log('error while getting poses', err);
-            })
+    poseNetInterval = setInterval(async () => {
+        try {
+            const poses = await poseNet.multiPose(videoElm)
+            console.log('results is:', poses);
+        }
+
+        catch (err) {
+            console.log('error while getting poses', err);
+        }
     }, 1000);
 
 }
@@ -97,6 +97,7 @@ const startReceivingPoses = _ => {
 const stopReceivingPoses = _ => {
     clearInterval(poseNetInterval)
 }
+
 const setupPosesLibrary = _ => {
     poseNet = ml5.poseNet(startReceivingPoses.bind(this), poseNet_options)
 

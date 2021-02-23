@@ -7,30 +7,25 @@ const Newtab = () => {
 
 
 
-  const setupStream = _ => {
-    navigator.mediaDevices.getUserMedia({
-      video: true
-    }).then(stream => {
-      stopVideoOnly(stream)
-      console.log('stream is:', stream);
-      /* Save  */
-      // document.querySelector('#status').innerHTML =
-      //   'Webcam access granted for extension, please close this tab';
+  const setupStream = async _ => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true })
+      stopStream(stream)
       chrome.storage.local.set({
         'camAccess': true
       }, () => { });
-    })
-      .catch(err => {
-        // document.querySelector('#status').innerHTML =
-        //   'Error getting webcam access for extension: ' + err.toString();
-        console.error(err);
-      });
+    }
+
+    catch (err) {
+      console.error('error while setupStream', err);
+    }
   }
 
-  // stop only camera
-  const stopVideoOnly = (stream) => {
+
+  // stop camera
+  const stopStream = (stream) => {
     stream.getTracks().forEach(function (track) {
-      if (track.readyState == 'live' && track.kind === 'video') {
+      if (track.kind === 'video') {
         track.stop();
       }
     });
@@ -41,7 +36,6 @@ const Newtab = () => {
     console.log('inside newTab ctor')
     setupStream()
 
-
     return () => {
 
     }
@@ -49,7 +43,7 @@ const Newtab = () => {
 
   return (
     <div>
-      I'm NewTab, Nevo Sayag
+      Please grant the Camera permission
     </div>
   );
 };
