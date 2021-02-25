@@ -82,6 +82,11 @@ const startReceivingPoses = _ => {
     poseNetInterval = setInterval(async () => {
         try {
             const poses = await poseNet.multiPose(videoElm)
+            chrome.runtime.sendMessage({ type: 'posenet-state',  data: poses},
+            (response) => {
+                console.log('content type response', response.response)
+                return true
+            })
             console.log('results is:', poses);
         }
 

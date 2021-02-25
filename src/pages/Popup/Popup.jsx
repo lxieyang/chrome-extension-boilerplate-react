@@ -2,8 +2,25 @@ import React, { useEffect, useState } from 'react';
 
 
 let streamRef = null
-const Popup = () => {
 
+const Popup = () => {
+  const [curPose, setCurPose] = useState("Default");
+  const setupListeners = _ => {
+    chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+        switch (message.type) {
+            case 'posenet-state':
+                setCurPose(message.data[0].pose.score)
+                console.log("result from background : ", message.data)
+                sendResponse({ response: 'get-result' })
+                break;
+            default:
+              break;
+        }
+        return true
+  
+    })
+  }
+  setupListeners()
   // const [stream, setStream] = useState(null)
   useEffect(() => {
     // constructor
@@ -53,7 +70,7 @@ const Popup = () => {
         return true
       })
   }
-
+  
 
 
   return (
@@ -68,10 +85,14 @@ const Popup = () => {
       <div>
         <video autoPlay={true} id="webcamVideo" width="227px" height="227px"></video>
       </div>
+      <div>
+        {curPose}
+      </div>
     </div>
 
 
   );
 };
+
 
 export default Popup;
