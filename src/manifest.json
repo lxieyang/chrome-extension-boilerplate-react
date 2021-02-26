@@ -2,11 +2,7 @@
   "manifest_version": 3,
   "name": "Chrome Extension with React & Webpack",
   "options_page": "options.html",
-  "background": [
-    {
-      "service_worker": ["background.bundle.js"]
-    }
-  ],
+  "background": { "service_worker": "background.bundle.js" },
   "action": {
     "default_popup": "popup.html",
     "default_icon": "icon-34.png"
