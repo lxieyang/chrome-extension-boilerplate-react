@@ -36,13 +36,13 @@ if (fileSystem.existsSync(secretsPath)) {
 var options = {
   mode: process.env.NODE_ENV || 'development',
   entry: {
-    newtab: path.join(__dirname, 'src', 'pages', 'Newtab', 'index.jsx'),
-    options: path.join(__dirname, 'src', 'pages', 'Options', 'index.jsx'),
-    popup: path.join(__dirname, 'src', 'pages', 'Popup', 'index.jsx'),
-    background: path.join(__dirname, 'src', 'pages', 'Background', 'index.js'),
-    contentScript: path.join(__dirname, 'src', 'pages', 'Content', 'index.js'),
-    devtools: path.join(__dirname, 'src', 'pages', 'Devtools', 'index.js'),
-    panel: path.join(__dirname, 'src', 'pages', 'Panel', 'index.jsx'),
+    newtab: path.join(__dirname, 'src', 'pages', 'Newtab'),
+    options: path.join(__dirname, 'src', 'pages', 'Options'),
+    popup: path.join(__dirname, 'src', 'pages', 'Popup'),
+    background: path.join(__dirname, 'src', 'pages', 'Background'),
+    contentScript: path.join(__dirname, 'src', 'pages', 'Content'),
+    devtools: path.join(__dirname, 'src', 'pages', 'Devtools'),
+    panel: path.join(__dirname, 'src', 'pages', 'Panel'),
   },
   chromeExtensionBoilerplate: {
     notHotReload: ['contentScript', 'devtools'],
@@ -105,7 +105,7 @@ var options = {
     alias: alias,
     extensions: fileExtensions
       .map((extension) => '.' + extension)
-      .concat(['.js', '.jsx', '.ts', '.tsx', '.css']),
+      .concat(['.js', '.jsx', '.ts', '.tsx', '.css', '.scss', '.sass']),
   },
   plugins: [
     new webpack.ProgressPlugin(),
