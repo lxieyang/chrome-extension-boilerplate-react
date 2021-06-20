@@ -1,10 +1,12 @@
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+process.env.PORT = process.env.PORT || 3000;
+
 var webpack = require('webpack'),
   path = require('path'),
-  fileSystem = require('fs-extra'),
-  env = require('./utils/env'),
   { CleanWebpackPlugin } = require('clean-webpack-plugin'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
+  DotenvWebpackPlugin = require('dotenv-webpack'),
   TerserPlugin = require('terser-webpack-plugin');
 
 const ASSET_PATH = process.env.ASSET_PATH || '/';
@@ -13,8 +15,6 @@ var alias = {
   'react-dom': '@hot-loader/react-dom',
 };
 
-// load the secrets
-var secretsPath = path.join(__dirname, 'secrets.' + env.NODE_ENV + '.js');
 
 var fileExtensions = [
   'jpg',
@@ -29,9 +29,7 @@ var fileExtensions = [
   'woff2',
 ];
 
-if (fileSystem.existsSync(secretsPath)) {
-  alias['secrets'] = secretsPath;
-}
+
 
 var options = {
   mode: process.env.NODE_ENV || 'development',
@@ -115,7 +113,7 @@ var options = {
       cleanStaleWebpackAssets: true,
     }),
     // expose and write the allowed env vars on the compiled bundle
-    new webpack.EnvironmentPlugin(['NODE_ENV']),
+    new DotenvWebpackPlugin(),
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -198,7 +196,7 @@ var options = {
   },
 };
 
-if (env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development') {
   options.devtool = 'cheap-module-source-map';
 } else {
   options.optimization = {

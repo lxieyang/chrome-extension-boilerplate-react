@@ -120,26 +120,30 @@ $ NODE_ENV=production npm run build
 
 Now, the content of `build` folder will be the extension ready to be submitted to the Chrome Web Store. Just take a look at the [official guide](https://developer.chrome.com/webstore/publish) to more infos about publishing.
 
-## Secrets
+:point_right: don't forget to create `./.env.production` if you need environment variables in production.
+## Managing Environment Variables
 
-If you are developing an extension that talks with some API you probably are using different keys for testing and production. Is a good practice you not commit your secret keys and expose to anyone that have access to the repository.
+If you are developing an extension that talks with some API you probably are using different values for testing and production. Is a good practice you not commit your environment variables values and expose to anyone that have access to the repository.
 
-To this task this boilerplate import the file `./secrets.<THE-NODE_ENV>.js` on your modules through the module named as `secrets`, so you can do things like this:
+You can now use [dotenv](https://github.com/motdotla/dotenv) to manage your environment variables and get it compiled to your code.
 
-_./secrets.development.js_
+You need to create `.env` file with your environment variables, `./.env.<THE-NODE_ENV>` and just `./.env` to test locally.
 
-```js
-export default { key: '123' };
+You can check the [dotenv documentation](https://github.com/motdotla/dotenv) for more details
+
+_./.env_
+
+```
+KEY=123
 ```
 
 _./src/popup.js_
 
 ```js
-import secrets from 'secrets';
-ApiCall({ key: secrets.key });
+ApiCall({ key: process.env.KEY });
 ```
 
-:point_right: The files with name `secrets.*.js` already are ignored on the repository.
+:point_right: sensible default .env files already are ignored on the repository.
 
 ## Resources:
 
