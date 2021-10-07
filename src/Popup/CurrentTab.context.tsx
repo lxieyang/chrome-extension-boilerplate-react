@@ -4,7 +4,7 @@ import { getActiveTab, subscribeToActiveTabUrlChange } from "./api/browser-api";
 
 type CurrentTabContextData = Tabs.Tab | undefined;
 
-const CurrentTabContextWithProvider = createContext<CurrentTabContextData>(undefined);
+export const CurrentTabContext = createContext<CurrentTabContextData>(undefined);
 
 export const CurrentTabContextProvider: React.FunctionComponent<{}> = ({ children }) => {
     const [currentTab, setCurrentTab] = useState<CurrentTabContextData>();
@@ -15,7 +15,5 @@ export const CurrentTabContextProvider: React.FunctionComponent<{}> = ({ childre
         return subscribeToActiveTabUrlChange((tabId, changeInfo, tab) => setCurrentTab(tab));
     }, []);
 
-    return <CurrentTabContextWithProvider.Provider value={currentTab}>{children}</CurrentTabContextWithProvider.Provider>;
+    return <CurrentTabContext.Provider value={currentTab}>{children}</CurrentTabContext.Provider>;
 };
-
-export const CurrentTabContext: Exclude<React.Context<CurrentTabContextData>, "Provider"> = CurrentTabContextWithProvider;

@@ -1,10 +1,12 @@
-import { ReactElement, useContext, useEffect, useState } from "react";
+import React, { createContext, ReactElement, useContext, useEffect, useState } from "react";
 import { getCurrentViewSongsFromTab } from "../api/content-scripts-api";
 import { getSongInfoFromSongsterr } from "../api/songsterr";
 import { CurrentTabContext } from "../CurrentTab.context";
 import { SongInfo } from "../models";
 
-export const CurrentViewSongsProvider = ({ children }: { children: (value: SongInfo[]) => ReactElement }) => {
+export const CurrentViewSongsContext = createContext<SongInfo[]>([]);
+
+export const CurrentViewSongsProvider: React.FunctionComponent<{}> = ({ children }) => {
     const currentTab = useContext(CurrentTabContext);
     const currentTabId = currentTab?.id;
 
@@ -22,5 +24,5 @@ export const CurrentViewSongsProvider = ({ children }: { children: (value: SongI
         }
     }, [currentTab]);
 
-    return children(currentViewSongs);
+    return <CurrentViewSongsContext.Provider value={currentViewSongs}>{children}</CurrentViewSongsContext.Provider>;
 };

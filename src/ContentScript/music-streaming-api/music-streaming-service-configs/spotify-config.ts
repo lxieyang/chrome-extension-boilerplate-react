@@ -11,9 +11,9 @@ export const spotifyConfig: MusicStreamingServiceConfig = {
     urlMatch: "open.spotify.com/",
     currentPlayingSong: {
         selectors: {
-            containerDomElement: `.now-playing`,
-            titleDomElement: `.now-playing .ellipsis-one-line a[href^="/album/"]`,
-            artistsDomElement: `.now-playing .ellipsis-one-line a[href^="/artist/"]`,
+            containerDomElement: `[data-testid="now-playing-widget"]`,
+            titleDomElement: `[data-testid="context-item-info-title"]`,
+            artistsDomElement: `[data-testid="context-item-info-subtitles"]`,
         },
     },
     currentViewSongs: {
@@ -26,6 +26,12 @@ export const spotifyConfig: MusicStreamingServiceConfig = {
             },
             {
                 urlMatch: "/album/",
+                selectors: {
+                    ...sharedTableSelectors,
+                },
+            },
+            {
+                urlMatch: "/artist/",
                 selectors: {
                     ...sharedTableSelectors,
                 },

@@ -44,10 +44,12 @@ const Title = styled(EllipsisOneLineWithTooltip)`
     grid-column: title;
     text-align: start;
     font-weight: bold;
+    height: 1.4em;
 `;
 const Artist = styled(EllipsisOneLineWithTooltip)`
     grid-column: artist;
     text-align: start;
+    height: 1.4em;
 `;
 const Difficulty = styled.div`
     grid-column: difficulty;

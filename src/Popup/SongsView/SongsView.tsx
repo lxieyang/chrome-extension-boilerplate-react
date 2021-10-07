@@ -1,19 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 import { SongList } from "./components/SongList";
-import { CurrentPlayingSongProvider } from "./CurrentPlayingSong.provider";
-import { CurrentViewSongsProvider } from "./CurrentViewSongs.provider";
+import { CurrentPlayingSongContext, CurrentPlayingSongProvider } from "./CurrentPlayingSong.context";
+import { CurrentViewSongsContext, CurrentViewSongsProvider } from "./CurrentViewSongs.context";
 
 export const SongsView: React.FunctionComponent = () => (
     <Container>
         <CurrentPlayingSongProvider>
-            {(currentPlayingSong) => <>{currentPlayingSong && <SongList songList={[currentPlayingSong]} title="Playing Now" />}</>}
+            <CurrentPlayingSongContext.Consumer>
+                {(currentPlayingSong) => <>{currentPlayingSong && <SongList songList={[currentPlayingSong]} title="Playing Now" />}</>}
+            </CurrentPlayingSongContext.Consumer>
         </CurrentPlayingSongProvider>
 
         <CurrentViewSongsProvider>
-            {(currentViewSongs) => (
-                <>{currentViewSongs.length ? <SongList songList={currentViewSongs} title="Current View" /> : undefined}</>
-            )}
+            <CurrentViewSongsContext.Consumer>
+                {(currentViewSongs) => (
+                    <>{currentViewSongs.length ? <SongList songList={currentViewSongs} title="Current View" /> : undefined}</>
+                )}
+            </CurrentViewSongsContext.Consumer>
         </CurrentViewSongsProvider>
     </Container>
 );
