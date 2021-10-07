@@ -4,7 +4,7 @@ import {
     GetCurrentViewSongsResponse,
     MessageAction,
     StreamingServiceSong,
-} from "../../shared/shared.model";
+} from "../../../shared/shared.model";
 import { sendMessageToTab } from "./browser-api";
 
 export function getCurrentPlayingSongFromTab(tabId: number): Promise<StreamingServiceSong | undefined> {

@@ -5,7 +5,7 @@ import {
     GetCurrentPlayingSongResponse,
     GetCurrentViewSongsResponse,
     MessageAction,
-} from "../shared/shared.model";
+} from "../../shared/shared.model";
 import { createDomApi } from "./music-streaming-api/create-dom-api";
 import { MusicStreamingApi as MusicStreamingService } from "./music-streaming-api/music-streaming-api";
 

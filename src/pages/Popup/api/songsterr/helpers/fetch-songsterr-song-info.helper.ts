@@ -1,6 +1,6 @@
 import { SongsterrSongInfo } from "./songsterr.model";
 import { addClientProperties } from "./add-client-properties.helper";
-import { getStringsSimilarity } from "../../../../shared/get-strings-similarity";
+import { getStringsSimilarity } from "../../../../../shared/get-strings-similarity";
 
 const MIN_ACCEPTEBLE_SIMILARITY = 0.5;
 

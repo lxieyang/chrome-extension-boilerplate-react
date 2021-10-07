@@ -1,5 +1,5 @@
 import { browser, Tabs } from "webextension-polyfill-ts";
-import { ContentScriptRequest, ContentScriptResponse, MessageAction } from "../../shared/shared.model";
+import { ContentScriptRequest, ContentScriptResponse, MessageAction } from "../../../shared/shared.model";
 
 let nextRequestId = 1;
 

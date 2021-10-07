@@ -1,6 +1,6 @@
-import { waitForElementToDisplay } from "../../shared/dom-helpers";
-import { compose } from "../../shared/utils";
-import { StreamingServiceSong } from "../../shared/shared.model";
+import { waitForElementToDisplay } from "../../../shared/dom-helpers";
+import { pipe } from "../../../shared/utils";
+import { StreamingServiceSong } from "../../../shared/shared.model";
 import { DomApi } from "./music-streaming-api.model";
 import { spotifyConfig } from "./music-streaming-service-configs/spotify-config";
 import { tidalConfig } from "./music-streaming-service-configs/tidal-config";
@@ -77,7 +77,7 @@ export class MusicStreamingApi {
             return;
         }
 
-        const removeMatches = compose(removeMatch(remasteredMatch), removeMatch(AlbumMatch));
+        const removeMatches = pipe(removeMatch(remasteredMatch), removeMatch(AlbumMatch));
 
         return removeMatches(title);
     }

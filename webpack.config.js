@@ -25,11 +25,10 @@ if (fileSystem.existsSync(secretsPath)) {
 var options = {
     mode: process.env.NODE_ENV || "development",
     entry: {
-        // newtab: path.join(__dirname, 'src', 'Newtab', 'index.jsx'),
-        options: path.join(__dirname, "src", "Options", "index.tsx"),
-        popup: path.join(__dirname, "src", "Popup", "index.tsx"),
-        background: path.join(__dirname, "src", "Background", "index.ts"),
-        contentScript: path.join(__dirname, "src", "ContentScript", "index.ts"),
+        options: path.join(__dirname, "src", "pages", "Options", "index.tsx"),
+        popup: path.join(__dirname, "src", "pages", "Popup", "index.tsx"),
+        background: path.join(__dirname, "src", "pages", "Background", "index.ts"),
+        contentScript: path.join(__dirname, "src", "pages", "Content", "index.ts"),
     },
     chromeExtensionBoilerplate: {
         notHotReload: ["contentScript"],
@@ -134,26 +133,20 @@ var options = {
         //         },
         //     ],
         // }),
-        // new HtmlWebpackPlugin({
-        //   template: path.join(__dirname, 'src', 'Newtab', 'index.html'),
-        //   filename: 'newtab.html',
-        //   chunks: ['newtab'],
-        //   cache: false,
-        // }),
         new HtmlWebpackPlugin({
-            template: path.join(__dirname, "src", "Options", "index.html"),
+            template: path.join(__dirname, "src", "pages", "Options", "index.html"),
             filename: "options.html",
             chunks: ["options"],
             cache: false,
         }),
         new HtmlWebpackPlugin({
-            template: path.join(__dirname, "src", "Popup", "index.html"),
+            template: path.join(__dirname, "src", "pages", "Popup", "index.html"),
             filename: "popup.html",
             chunks: ["popup"],
             cache: false,
         }),
         new HtmlWebpackPlugin({
-            template: path.join(__dirname, "src", "Background", "index.html"),
+            template: path.join(__dirname, "src", "pages", "Background", "index.html"),
             filename: "background.html",
             chunks: ["background"],
             cache: false,

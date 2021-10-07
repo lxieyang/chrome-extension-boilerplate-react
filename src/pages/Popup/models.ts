@@ -1,4 +1,4 @@
-import { StreamingServiceSong } from "../shared/shared.model";
+import { StreamingServiceSong } from "../../shared/shared.model";
 
 export enum SongDifficulty {
     VaryEasy = "VaryEasy",

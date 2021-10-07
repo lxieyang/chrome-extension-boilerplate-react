@@ -1,5 +1,5 @@
 import { SongsterrSongInfo } from "./songsterr.model";
-import { findIndexWithUndefined } from "../../../../shared/utils";
+import { findIndexWithUndefined } from "../../../../../shared/utils";
 
 // mutate original object - add keys
 export function addClientProperties(innerSongInfo: SongsterrSongInfo) {
