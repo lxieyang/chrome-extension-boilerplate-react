@@ -7,7 +7,7 @@ export function getActiveTab(): Promise<Tabs.Tab> {
     return browser.tabs.query({ currentWindow: true, active: true }).then(([currentTab]) => currentTab);
 }
 
-export function sendMessageToTab<T extends ContentScriptResponse>(tabId: number, action: MessageAction, data?: any): Promise<T> {
+export function sendMessageToTab<T>(tabId: number, action: MessageAction, data?: any): Promise<ContentScriptResponse<T>> {
     const request: ContentScriptRequest = { action, data, requestId: nextRequestId++ };
 
     return browser.tabs.sendMessage(tabId, request);

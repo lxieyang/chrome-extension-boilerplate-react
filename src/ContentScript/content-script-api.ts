@@ -1,5 +1,11 @@
 import { browser, Runtime } from "webextension-polyfill-ts";
-import { ContentScriptRequest, GetCurrentPlayingSongResponse, GetCurrentViewSongsResponse, MessageAction } from "../shared/shared.model";
+import {
+    ContentScriptRequest,
+    ContentScriptResponse,
+    GetCurrentPlayingSongResponse,
+    GetCurrentViewSongsResponse,
+    MessageAction,
+} from "../shared/shared.model";
 import { createDomApi } from "./music-streaming-api/create-dom-api";
 import { MusicStreamingApi as MusicStreamingService } from "./music-streaming-api/music-streaming-api";
 
@@ -15,7 +21,7 @@ browser.runtime.onMessage.addListener((request: ContentScriptRequest, sender) =>
 
     const handlerFunction = messageActionToHandler[request.action];
     if (handlerFunction) {
-        return handlerFunction(request, sender).then((data: any) => ({ requestId: request.requestId, data }));
+        return handlerFunction(request, sender).then((data: any) => ({ requestId: request.requestId, data } as ContentScriptResponse<any>));
     }
 });
 

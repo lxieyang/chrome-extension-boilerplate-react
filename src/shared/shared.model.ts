@@ -14,7 +14,7 @@ export interface ContentScriptRequest {
     requestId?: number;
 }
 
-export interface ContentScriptResponse<T = any> {
+export interface ContentScriptResponse<T> {
     data: T;
     requestId?: number;
 }
