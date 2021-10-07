@@ -4,7 +4,7 @@ import { createDomApi } from "./music-streaming-api/create-dom-api";
 import { MusicStreamingApi as MusicStreamingService } from "./music-streaming-api/music-streaming-api";
 
 const messageActionToHandler: {
-    [key in keyof typeof MessageAction]: (request: ContentScriptRequest, sender: Runtime.MessageSender) => Promise<any>;
+    [key in MessageAction]: (request: ContentScriptRequest, sender: Runtime.MessageSender) => Promise<any>;
 } = {
     [MessageAction.GetCurrentPlayingSong]: getCurrentPlayingSong,
     [MessageAction.GetCurrentViewSongs]: getCurrentViewSongs,
@@ -21,10 +21,10 @@ browser.runtime.onMessage.addListener((request: ContentScriptRequest, sender) =>
 
 const musicStreamingApi = new MusicStreamingService(createDomApi());
 
-function getCurrentPlayingSong(): Promise<GetCurrentPlayingSongResponse["data"]> {
+function getCurrentPlayingSong(): Promise<GetCurrentPlayingSongResponse> {
     return musicStreamingApi.getCurrentPlayingSong();
 }
 
-function getCurrentViewSongs(): Promise<GetCurrentViewSongsResponse["data"]> {
+function getCurrentViewSongs(): Promise<GetCurrentViewSongsResponse> {
     return musicStreamingApi.getCurrentViewSongs();
 }

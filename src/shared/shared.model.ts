@@ -14,15 +14,11 @@ export interface ContentScriptRequest {
     requestId?: number;
 }
 
-export interface ContentScriptResponse {
-    data: any;
+export interface ContentScriptResponse<T = any> {
+    data: T;
     requestId?: number;
 }
 
-export interface GetCurrentPlayingSongResponse extends ContentScriptResponse {
-    data: StreamingServiceSong | undefined;
-}
+export type GetCurrentPlayingSongResponse = StreamingServiceSong | undefined;
 
-export interface GetCurrentViewSongsResponse extends ContentScriptResponse {
-    data: StreamingServiceSong[] | undefined;
-}
+export type GetCurrentViewSongsResponse = StreamingServiceSong[] | undefined;
