@@ -1,8 +1,7 @@
 import React from 'react';
-
 import './Panel.css';
 
-const Panel = (): JSX.Element => {
+const Panel: React.FC = () => {
   return (
     <div className="container">
       <h1>Dev Tools Panel</h1>
