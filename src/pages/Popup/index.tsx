@@ -5,3 +5,5 @@ import { PopupComponent } from "./Popup";
 import "./global-styles.scss";
 
 render(<PopupComponent />, window.document.querySelector("#app-container"));
+
+if (module.hot) module.hot.accept();
