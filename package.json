@@ -10,10 +10,11 @@
     "scripts": {
         "build": "node utils/build.js",
         "start": "node utils/webserver.js",
-        "prettier": "prettier --write \"{src,utils}/**/*.{js,jsx,ts,tsx,css,scss,html,json}\""
+        "prettier": "prettier --write '**/*.{js,jsx,css,html}'"
     },
     "dependencies": {
         "@hot-loader/react-dom": "^17.0.1",
+        "@types/chrome": "0.0.126",
         "@types/react": "^17.0.0",
         "@types/react-dom": "^17.0.0",
         "react": "^17.0.1",
@@ -22,7 +23,7 @@
         "styled-components": "^5.2.1"
     },
     "devDependencies": {
-        "@babel/core": "^7.12.9",
+        "@babel/core": "^7.12.10",
         "@babel/plugin-proposal-class-properties": "^7.12.1",
         "@babel/preset-env": "^7.12.10",
         "@babel/preset-react": "^7.12.10",
