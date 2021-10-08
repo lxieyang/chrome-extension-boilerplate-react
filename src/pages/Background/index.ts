@@ -4,7 +4,13 @@ console.log("This is the background page.");
 console.log("Put the background scripts here.");
 
 chrome.runtime.onInstalled.addListener(() => {
-    chrome.tabs.onUpdated.addListener((tabId, tabInfo, tab) => updateActionButton(tabId, tab.url));
+    chrome.tabs.onUpdated.addListener((tabId, tabInfo, tab) => {
+        const isRefreshed = tabInfo.status === "loading";
+        if (isRefreshed) {
+            updateActionButton(tabId, tab.url);
+        }
+    });
+
     chrome.tabs.onActivated.addListener((tabInfo) => {
         chrome.action.disable(tabInfo.tabId);
 
