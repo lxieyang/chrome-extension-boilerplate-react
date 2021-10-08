@@ -17,11 +17,17 @@ const messageActionToHandler: {
 };
 
 browser.runtime.onMessage.addListener((request: ContentScriptRequest, sender) => {
-    console.log({ request, sender });
+    console.log("SHRED content-script request", { request, sender });
 
     const handlerFunction = messageActionToHandler[request.action];
     if (handlerFunction) {
-        return handlerFunction(request, sender).then((data: any) => ({ requestId: request.requestId, data } as ContentScriptResponse<any>));
+        return handlerFunction(request, sender).then((data: any) => {
+            const response: ContentScriptResponse<any> = { requestId: request.requestId, data };
+
+            console.log("SHRED content-script response", { response });
+
+            return response;
+        });
     }
 });
 
