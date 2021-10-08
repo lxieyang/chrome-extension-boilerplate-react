@@ -1,18 +1,16 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { contentScriptApi } from "../api/content-scripts-api";
 import { getSongInfoFromSongsterr } from "../api/songsterr";
 import { CurrentTabContext } from "../CurrentTab.context";
 import { SongInfo } from "../models";
 
-type CurrentPlayingSongContextData = SongInfo | undefined;
+type CurrentPlayingSongData = SongInfo | undefined;
 
-export const CurrentPlayingSongContext = createContext<CurrentPlayingSongContextData>(undefined);
-
-export const CurrentPlayingSongProvider: React.FunctionComponent<{}> = ({ children }) => {
+export function useCurrentPlayingSong(): CurrentPlayingSongData {
     const currentTab = useContext(CurrentTabContext);
     const currentTabId = currentTab?.id;
 
-    const [currentPlayingSong, setCurrentPlayingSong] = useState<CurrentPlayingSongContextData>();
+    const [currentPlayingSong, setCurrentPlayingSong] = useState<CurrentPlayingSongData>();
 
     useEffect(() => {
         if (currentTabId !== undefined) {
@@ -25,5 +23,5 @@ export const CurrentPlayingSongProvider: React.FunctionComponent<{}> = ({ childr
         }
     }, [currentTab]);
 
-    return <CurrentPlayingSongContext.Provider value={currentPlayingSong}>{children}</CurrentPlayingSongContext.Provider>;
-};
+    return currentPlayingSong;
+}
