@@ -28,6 +28,7 @@
         "@babel/preset-env": "^7.12.17",
         "@babel/preset-react": "^7.12.13",
         "@types/styled-components": "^5.1.7",
+        "@types/webpack-env": "^1.16.2",
         "babel-eslint": "^10.1.0",
         "babel-loader": "^8.2.2",
         "babel-preset-react-app": "^10.0.0",
