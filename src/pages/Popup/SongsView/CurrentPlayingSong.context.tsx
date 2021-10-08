@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
-import { getCurrentPlayingSongFromTab } from "../api/content-scripts-api";
+import { contentScriptApi } from "../api/content-scripts-api";
 import { getSongInfoFromSongsterr } from "../api/songsterr";
 import { CurrentTabContext } from "../CurrentTab.context";
 import { SongInfo } from "../models";
@@ -16,9 +16,12 @@ export const CurrentPlayingSongProvider: React.FunctionComponent<{}> = ({ childr
 
     useEffect(() => {
         if (currentTabId !== undefined) {
-            getCurrentPlayingSongFromTab(currentTabId)
-                .then(async (song) => song && ((await getSongInfoFromSongsterr(song.title, song.artist)) ?? song))
-                .then(setCurrentPlayingSong);
+            return contentScriptApi.subscribeToCurrentPlayingSongFromTab(currentTabId, () =>
+                contentScriptApi
+                    .getCurrentPlayingSongFromTab(currentTabId)
+                    .then(async (song) => song && ((await getSongInfoFromSongsterr(song.title, song.artist)) ?? song))
+                    .then(setCurrentPlayingSong)
+            );
         }
     }, [currentTab]);
 

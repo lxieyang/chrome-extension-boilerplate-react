@@ -3,13 +3,17 @@ export interface StreamingServiceSong {
     title: string;
 }
 
-export enum MessageAction {
+export enum ContentScriptEndpoint {
     GetCurrentPlayingSong = "GetCurrentPlayingSong",
     GetCurrentViewSongs = "GetCurrentViewSongs",
 }
 
+export enum ContentScriptEvents {
+    CurrentPlayingSongChanged = "CurrentPlayingSongChanged",
+}
+
 export interface ContentScriptRequest {
-    action: MessageAction;
+    endpoint: ContentScriptEndpoint;
     data?: any;
     requestId?: number;
 }

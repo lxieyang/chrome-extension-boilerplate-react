@@ -1,1 +1,1 @@
-import "./content-script-api";
+import "./content-script";

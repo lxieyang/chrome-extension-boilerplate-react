@@ -1,40 +1,55 @@
-import { browser, Tabs } from "webextension-polyfill-ts";
-import { ContentScriptRequest, ContentScriptResponse, MessageAction } from "../../../shared/shared.model";
+import { browser, Runtime, Tabs } from "webextension-polyfill-ts";
+import { ContentScriptRequest, ContentScriptResponse, ContentScriptEndpoint, ContentScriptEvents } from "../../../shared/shared.model";
 
-let nextRequestId = 1;
+class BrowserApi {
+    private nextRequestId = 1;
 
-export function getActiveTab(): Promise<Tabs.Tab> {
-    return browser.tabs.query({ currentWindow: true, active: true }).then(([currentTab]) => currentTab);
-}
+    getActiveTab(): Promise<Tabs.Tab> {
+        return browser.tabs.query({ currentWindow: true, active: true }).then(([currentTab]) => currentTab);
+    }
 
-export function sendMessageToTab<T>(tabId: number, action: MessageAction, data?: any): Promise<ContentScriptResponse<T>> {
-    const request: ContentScriptRequest = { action, data, requestId: nextRequestId++ };
+    sendMessageToTab<T>(tabId: number, endpoint: ContentScriptEndpoint, data?: any): Promise<ContentScriptResponse<T>> {
+        const request: ContentScriptRequest = { endpoint, data, requestId: this.nextRequestId++ };
 
-    return browser.tabs.sendMessage(tabId, request);
-}
+        return browser.tabs.sendMessage(tabId, request);
+    }
 
-export function subscribeToActiveTabUrlChange(
-    callback: (tabId: number, changeInfo: Tabs.OnUpdatedChangeInfoType, tab: Tabs.Tab) => void
-): () => void {
-    let waitingForPageToComplete = false;
+    subscribeToActiveTabUrlChanges(callback: (tabId: number, changeInfo: Tabs.OnUpdatedChangeInfoType, tab: Tabs.Tab) => void): () => void {
+        let waitingForPageToComplete = false;
 
-    const onUpdateCallback = (tabId: number, changeInfo: Tabs.OnUpdatedChangeInfoType, tab: Tabs.Tab) => {
-        if (tab.active) {
-            if (changeInfo.status === "loading") {
-                waitingForPageToComplete = true;
+        const onUpdateCallback = (tabId: number, changeInfo: Tabs.OnUpdatedChangeInfoType, tab: Tabs.Tab) => {
+            if (tab.active) {
+                if (changeInfo.status === "loading") {
+                    waitingForPageToComplete = true;
+                }
+
+                if (waitingForPageToComplete && changeInfo.status === "complete") {
+                    callback(tabId, changeInfo, tab);
+                }
             }
+        };
 
-            if (waitingForPageToComplete && changeInfo.status === "complete") {
-                callback(tabId, changeInfo, tab);
+        browser.tabs.onUpdated.addListener(onUpdateCallback);
+        const unsubscribeFunction = () => browser.tabs.onUpdated.removeListener(onUpdateCallback);
+
+        return unsubscribeFunction;
+    }
+
+    subscribeToCurrentPlayingSongChanged(callback: (tabId: number, tab: Tabs.Tab) => void): () => void {
+        const onMessageCallback = (message: any, sender: Runtime.MessageSender) => {
+            if (message?.event === ContentScriptEvents.CurrentPlayingSongChanged && sender.tab?.active) {
+                callback(sender.tab.id!, sender.tab);
             }
-        }
-    };
+        };
 
-    browser.tabs.onUpdated.addListener(onUpdateCallback);
-    const unsubscribeFunction = () => browser.tabs.onUpdated.removeListener(onUpdateCallback);
+        browser.runtime.onMessage.addListener(onMessageCallback);
+        const unsubscribeFunction = () => browser.runtime.onMessage.removeListener(onMessageCallback);
 
-    return unsubscribeFunction;
+        return unsubscribeFunction;
+    }
 }
+
+export const browserApi = new BrowserApi();
 
 /* 
  * should not use that. popup is closed when switching between tabs.

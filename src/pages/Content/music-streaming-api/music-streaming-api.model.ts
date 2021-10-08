@@ -1,9 +1,3 @@
-export interface DomApi {
-    getCurrentUrl(): string;
-    querySelector: Document["querySelector"];
-    querySelectorAll: Document["querySelectorAll"];
-}
-
 export interface MusicStreamingServiceConfig {
     urlMatch: string;
     currentPlayingSong: {

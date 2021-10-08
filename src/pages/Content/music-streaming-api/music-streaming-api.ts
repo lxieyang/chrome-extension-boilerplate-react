@@ -1,18 +1,22 @@
 import { waitForElementToDisplay } from "../../../shared/dom-helpers";
-import { pipe } from "../../../shared/utils";
 import { StreamingServiceSong } from "../../../shared/shared.model";
-import { DomApi } from "./music-streaming-api.model";
+import { pipe } from "../../../shared/utils";
+import { DomApi } from "../helpers/dom-api";
+import { MusicStreamingServiceConfig } from "./music-streaming-api.model";
 import { spotifyConfig } from "./music-streaming-service-configs/spotify-config";
 import { tidalConfig } from "./music-streaming-service-configs/tidal-config";
 
 const musicStreamingServiceConfigs = [tidalConfig, spotifyConfig];
 
 export class MusicStreamingApi {
-    constructor(private domApi: DomApi) {}
+    private musicStreamingConfig: MusicStreamingServiceConfig | undefined;
+
+    constructor(private domApi: DomApi) {
+        this.musicStreamingConfig = this.getMusicStreamingConfig();
+    }
 
     public async getCurrentPlayingSong(): Promise<StreamingServiceSong | undefined> {
-        const musicStreamingConfig = this.getMusicStreamingConfig();
-        const selectors = musicStreamingConfig?.currentPlayingSong.selectors;
+        const selectors = this.musicStreamingConfig?.currentPlayingSong.selectors;
         if (!selectors) {
             return;
         }
@@ -34,8 +38,7 @@ export class MusicStreamingApi {
     }
 
     public async getCurrentViewSongs(): Promise<StreamingServiceSong[] | undefined> {
-        const musicStreamingConfig = this.getMusicStreamingConfig();
-        const currentViewConfig = musicStreamingConfig?.currentViewSongs.views.find((view) =>
+        const currentViewConfig = this.musicStreamingConfig?.currentViewSongs.views.find((view) =>
             this.domApi.getCurrentUrl().includes(view.urlMatch)
         );
         const selectors = currentViewConfig?.selectors;
@@ -66,7 +69,21 @@ export class MusicStreamingApi {
         });
     }
 
-    private getMusicStreamingConfig() {
+    public async getCurrentPlayingSongTitleContainerElement(): Promise<Element | undefined> {
+        const selectors = this.musicStreamingConfig?.currentPlayingSong.selectors;
+        if (!selectors) {
+            return;
+        }
+
+        await waitForElementToDisplay(selectors.containerDomElement);
+
+        const containerDomElement = this.domApi.querySelector(selectors.containerDomElement);
+        const titleDomElement = containerDomElement?.querySelector<HTMLElement>(selectors.titleDomElement);
+
+        return titleDomElement ?? undefined;
+    }
+
+    private getMusicStreamingConfig(): MusicStreamingServiceConfig | undefined {
         return musicStreamingServiceConfigs.find((musicStreamingConfig) =>
             this.domApi.getCurrentUrl().includes(musicStreamingConfig.urlMatch)
         );

@@ -1,16 +1,45 @@
 import {
-    ContentScriptResponse,
     GetCurrentPlayingSongResponse,
     GetCurrentViewSongsResponse,
-    MessageAction,
+    ContentScriptEndpoint,
     StreamingServiceSong,
 } from "../../../shared/shared.model";
-import { sendMessageToTab } from "./browser-api";
+import { browserApi } from "./browser-api";
 
-export function getCurrentPlayingSongFromTab(tabId: number): Promise<StreamingServiceSong | undefined> {
-    return sendMessageToTab<GetCurrentPlayingSongResponse>(tabId, MessageAction.GetCurrentPlayingSong).then((response) => response.data);
+class ContentScriptApi {
+    getCurrentPlayingSongFromTab(tabId: number): Promise<StreamingServiceSong | undefined> {
+        return browserApi
+            .sendMessageToTab<GetCurrentPlayingSongResponse>(tabId, ContentScriptEndpoint.GetCurrentPlayingSong)
+            .then((response) => response.data);
+    }
+
+    getCurrentViewSongsFromTab(tabId: number): Promise<StreamingServiceSong[] | undefined> {
+        return browserApi
+            .sendMessageToTab<GetCurrentViewSongsResponse>(tabId, ContentScriptEndpoint.GetCurrentViewSongs)
+            .then((response) => response.data);
+    }
+
+    subscribeToCurrentPlayingSongFromTab(
+        tabId: number,
+        callback: (currentPlayingSong: StreamingServiceSong | undefined) => void
+    ): () => void {
+        let isUnsubscribed = false;
+
+        const getCurrentPlayingSong = () =>
+            this.getCurrentPlayingSongFromTab(tabId).then((currentPlayingSong) => {
+                if (!isUnsubscribed) {
+                    callback(currentPlayingSong);
+                }
+            });
+
+        getCurrentPlayingSong();
+        const unsubscriveToCurrentPlayingSongChanges = browserApi.subscribeToCurrentPlayingSongChanged(getCurrentPlayingSong);
+
+        return () => {
+            isUnsubscribed = true;
+            unsubscriveToCurrentPlayingSongChanges();
+        };
+    }
 }
 
-export function getCurrentViewSongsFromTab(tabId: number): Promise<StreamingServiceSong[] | undefined> {
-    return sendMessageToTab<GetCurrentViewSongsResponse>(tabId, MessageAction.GetCurrentViewSongs).then((response) => response.data);
-}
+export const contentScriptApi = new ContentScriptApi();
