@@ -2,15 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useResizeOberver } from "../helpers/use-resize-oberver.hook";
 
-export const DynamicHeightTransition: React.FunctionComponent<{ getHeightRule: (containerSize: number) => string; className?: string }> = ({
-    children,
-    getHeightRule,
-    className,
-}) => {
+export const DynamicHeightTransition: React.FunctionComponent<{ className?: string }> = ({ children, className }) => {
     const contentContainer = useRef<HTMLDivElement | null>(null);
 
     const [containerSize, setContainerSize] = useState<number>(0);
-    const [heightRule, setHeightRule] = useState<string>(() => getHeightRule(containerSize));
 
     const wrapperResizeCallback = useRef((resizeObserverEntry: ResizeObserverEntry) => {
         if (resizeObserverEntry) {
@@ -25,22 +20,17 @@ export const DynamicHeightTransition: React.FunctionComponent<{ getHeightRule: (
         setTarget(contentContainer.current as any);
     }, [contentContainer.current]);
 
-    useEffect(() => {
-        setHeightRule(getHeightRule(containerSize));
-    }, [containerSize]);
-
     return (
-        <WrapperContainer heightRule={heightRule} className={className}>
+        <WrapperContainer containerSize={containerSize} className={className}>
             <ContentContainer ref={contentContainer}>{children}</ContentContainer>
         </WrapperContainer>
     );
 };
 
-const WrapperContainer = styled.div<{ heightRule: string }>`
-    height: ${(props) => props.heightRule};
+const WrapperContainer = styled.div<{ containerSize: number }>`
+    height: ${(props) => props.containerSize}px;
     transition: height 0.3s ease-in-out;
+    overflow: hidden;
 `;
 
-const ContentContainer = styled.div`
-    overflow-y: scroll;
-`;
+const ContentContainer = styled.div``;
