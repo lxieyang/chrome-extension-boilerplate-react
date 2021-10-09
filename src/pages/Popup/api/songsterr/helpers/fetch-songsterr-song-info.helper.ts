@@ -1,11 +1,11 @@
-import { SongsterrSongInfo } from "./songsterr.model";
-import { addClientProperties } from "./add-client-properties.helper";
 import { getStringsSimilarity } from "../../../../../shared/get-strings-similarity";
+import { addClientProperties } from "./add-client-properties.helper";
+import { SongsterrSongInfo } from "./songsterr.model";
 
 const MIN_ACCEPTEBLE_SIMILARITY = 0.5;
 
 export async function fetchSongsterrSongInfo(title: string, artist?: string): Promise<SongsterrSongInfo | undefined> {
-    const songsterrSongInfos = await tryTofetchSong(title, artist);
+    const songsterrSongInfos = await tryToFetchSong(title, artist);
 
     if (songsterrSongInfos) {
         const songsterrSongInfo = songsterrSongInfos.find((info) => isSimilar(info, title, artist));
@@ -16,7 +16,7 @@ export async function fetchSongsterrSongInfo(title: string, artist?: string): Pr
     }
 }
 
-async function tryTofetchSong(title: string, artist?: string): Promise<SongsterrSongInfo[] | undefined> {
+async function tryToFetchSong(title: string, artist?: string): Promise<SongsterrSongInfo[] | undefined> {
     let result: SongsterrSongInfo[] | undefined;
     if (artist) {
         const pattern = `${artist}%20${title}`;

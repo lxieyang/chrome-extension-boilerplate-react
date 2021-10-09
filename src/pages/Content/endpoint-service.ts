@@ -1,4 +1,4 @@
-import { browser, Runtime } from "webextension-polyfill-ts";
+import { browser } from "webextension-polyfill-ts";
 import {
     ContentScriptEndpoint,
     ContentScriptRequest,
@@ -8,7 +8,7 @@ import {
 } from "../../shared/shared.model";
 import { MusicStreamingApi } from "./music-streaming-api/music-streaming-api";
 
-export class EnpointService {
+export class EndpointService {
     constructor(private musicStreamingApi: MusicStreamingApi) {}
 
     public init() {
