@@ -1,21 +1,23 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import { CurrentTabContextProvider } from "./CurrentTab.context";
+import { DynamicHeightTransition } from "./shared-components/DynamicHeightTransition";
 import { SongsView } from "./SongsView/SongsView";
 
 export const PopupComponent: React.FunctionComponent = () => {
+    const getHeightRule = useRef((containerSize: number) => `min(calc(${containerSize}px, 600px - 2 * 0.8em))`); // 600px is chrome limitation
+
     return (
         <CurrentTabContextProvider>
-            <Container>
+            <StyledDynamicHeightTransitionstyled getHeightRule={getHeightRule.current as any}>
                 <SongsView />
-            </Container>
+            </StyledDynamicHeightTransitionstyled>
         </CurrentTabContextProvider>
     );
 };
 
-const Container = styled.div`
-    max-height: calc(600px - 2 * 0.8em); // 600px is chrome limitation
-    overflow-y: scroll;
+const StyledDynamicHeightTransitionstyled = styled(DynamicHeightTransition)`
+    overflow: hidden;
     padding: 0.8em;
-    padding-right: max(calc(0.8em - 10px), 2px);
+    padding-inline-end: max(calc(0.8em - 10px), 2px);
 `;
