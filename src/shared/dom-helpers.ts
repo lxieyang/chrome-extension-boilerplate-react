@@ -8,7 +8,7 @@ export function waitForElementToDisplay(selector: string, checkFrequencyInMs = 0
             } else {
                 setTimeout(() => {
                     if (maxTimeoutInMs && Date.now() - startTimeInMs > maxTimeoutInMs) {
-                        reject();
+                        reject(`Could not resolve selector: ${selector}`);
                     } else {
                         loopSearch();
                     }

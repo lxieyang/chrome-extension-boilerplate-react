@@ -19,13 +19,15 @@ export class EndpointService {
         browser.runtime.onMessage.addListener((request: ContentScriptRequest, sender) => {
             console.log("SHRED content-script request", { request, sender });
 
-            return this.handleEndpointRequest(request, sender).then((data: any) => {
-                const response: ContentScriptResponse<any> = { requestId: request.requestId, data };
+            return this.handleEndpointRequest(request, sender)
+                .then((data: any) => {
+                    const response: ContentScriptResponse<any> = { requestId: request.requestId, data };
 
-                console.log("SHRED content-script response", { response });
+                    console.log("SHRED content-script response", { response });
 
-                return response;
-            });
+                    return response;
+                })
+                .catch((error) => console.info("SHRED content-script error", error));
         });
     }
 

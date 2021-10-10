@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useResizeOberver } from "../helpers/use-resize-oberver.hook";
 
@@ -7,17 +7,17 @@ export const DynamicHeightTransition: React.FunctionComponent<{ className?: stri
 
     const [containerSize, setContainerSize] = useState<number>(0);
 
-    const wrapperResizeCallback = useRef((resizeObserverEntry: ResizeObserverEntry) => {
+    const wrapperResizeCallback = useCallback((resizeObserverEntry: ResizeObserverEntry) => {
         if (resizeObserverEntry) {
             const newContainerSize = resizeObserverEntry.borderBoxSize[0].blockSize;
 
-            setContainerSize(Math.min(newContainerSize));
+            setContainerSize(newContainerSize);
         }
-    });
+    }, []);
 
-    const [setTarget, setCallback] = useResizeOberver(contentContainer.current, wrapperResizeCallback.current);
+    const [setTarget, setCallback] = useResizeOberver(contentContainer.current, wrapperResizeCallback);
     useEffect(() => {
-        setTarget(contentContainer.current as any);
+        setTarget(contentContainer.current);
     }, [contentContainer.current]);
 
     return (
