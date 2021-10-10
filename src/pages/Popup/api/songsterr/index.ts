@@ -5,7 +5,11 @@ import { songsterrSongInfoToSongInfo } from "./helpers/songsterr-song-info-to-so
 // TODO: set as an interface to support more APIs
 
 export async function getSongInfoFromSongsterr(title: string, artist?: string): Promise<SongInfo | undefined> {
-    const songsterrTrackInfo = await fetchSongsterrSongInfo(title, artist);
+    try {
+        const songsterrTrackInfo = await fetchSongsterrSongInfo(title, artist);
 
-    return songsterrTrackInfo && songsterrSongInfoToSongInfo(songsterrTrackInfo);
+        return songsterrTrackInfo && songsterrSongInfoToSongInfo(songsterrTrackInfo);
+    } catch (error) {
+        console.info("SHRED getSongInfoFromSongsterr error:", error);
+    }
 }

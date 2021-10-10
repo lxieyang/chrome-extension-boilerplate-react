@@ -28,6 +28,6 @@ export class EventService {
     private sendEvent(event: ContentScriptEvents) {
         console.log("SHRED content-script event", { event });
 
-        browser.runtime.sendMessage({ event });
+        browser.runtime.sendMessage({ event }).catch((error) => console.info("SHRED content-script EventService.sendEvent error", error));
     }
 }

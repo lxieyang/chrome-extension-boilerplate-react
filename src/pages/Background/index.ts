@@ -1,8 +1,5 @@
 const SUPPORTED_URLS = ["spotify.com", "tidal.com"];
 
-console.log("This is the background page.");
-console.log("Put the background scripts here.");
-
 chrome.runtime.onInstalled.addListener(() => {
     chrome.tabs.onUpdated.addListener((tabId, tabInfo, tab) => {
         const isRefreshed = tabInfo.status === "loading";
