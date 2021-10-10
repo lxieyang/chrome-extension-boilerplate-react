@@ -9,22 +9,20 @@ export const SongItem = ({ songInfo }: { songInfo: SongInfo }) => {
     const tuningAsString = songInfo.tuning?.map(tuningNumberToString).reverse().join(" ");
 
     return (
-        <InlineLink href={songInfo.url} target="_blank" rel="noopener noreferrer">
-            <StyledSongItem isLink={!!songInfo.url}>
-                <Title text={songInfo.title} />
-                {songInfo.difficulty && (
-                    <Difficulty>
-                        <DifficultyBar songDifficulty={songInfo.difficulty} />
-                    </Difficulty>
-                )}
-                <Artist text={songInfo.artist} />
-                <Tuning>{tuningAsString}</Tuning>
-            </StyledSongItem>
-        </InlineLink>
+        <StyledSongItem href={songInfo.url} target="_blank" rel="noopener noreferrer" isLink={!!songInfo.url}>
+            <Title text={songInfo.title} />
+            {songInfo.difficulty && (
+                <Difficulty>
+                    <DifficultyBar songDifficulty={songInfo.difficulty} />
+                </Difficulty>
+            )}
+            <Artist text={songInfo.artist} />
+            <Tuning>{tuningAsString}</Tuning>
+        </StyledSongItem>
     );
 };
 
-const StyledSongItem = styled.div<{ isLink: boolean }>`
+const StyledSongItem = styled.a<{ isLink: boolean }>`
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-rows: auto;
@@ -65,7 +63,4 @@ const Difficulty = styled.div`
 const Tuning = styled.div`
     grid-column: tuning;
     text-align: end;
-`;
-const InlineLink = styled.a`
-    display: inline;
 `;

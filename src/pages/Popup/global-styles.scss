@@ -1,13 +1,22 @@
+:root {
+    --background-color: hsl(0, 0%, 10%);
+    --text-color: hsl(0, 0%, 90%);
+
+    --scrollbar-color: hsl(0, 4%, 74%);
+    --scrollbar-border-color: hsl(0, 0%, 16%);
+}
+
 body {
     width: 340px;
     margin: 0;
+
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
         "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    background-color: hsl(0, 0, 10%);
-    color: hsl(0, 0%, 90%);
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
 a {
@@ -26,8 +35,8 @@ a {
     }
 
     &-thumb {
-        background: hsl(0, 0%, 35%);
-        border: 1px solid hsl(0, 0%, 16%);
+        background: var(--scrollbar-color);
+        border: 1px solid var(--scrollbar-border-color);
         border-radius: 10px;
     }
 }

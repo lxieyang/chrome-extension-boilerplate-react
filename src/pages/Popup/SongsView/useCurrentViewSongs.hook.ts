@@ -6,11 +6,12 @@ import { SongInfo } from "../models";
 
 export function useCurrentViewSongs(): SongInfo[] {
     const currentTab = useContext(CurrentTabContext);
-    const currentTabId = currentTab?.id;
 
     const [currentViewSongs, setCurrentViewSongs] = useState<SongInfo[]>([]);
 
     useEffect(() => {
+        const currentTabId = currentTab?.id;
+
         if (currentTabId !== undefined) {
             contentScriptApi
                 .getCurrentViewSongsFromTab(currentTabId)

@@ -8,11 +8,12 @@ type CurrentPlayingSongData = SongInfo | undefined;
 
 export function useCurrentPlayingSong(): CurrentPlayingSongData {
     const currentTab = useContext(CurrentTabContext);
-    const currentTabId = currentTab?.id;
 
     const [currentPlayingSong, setCurrentPlayingSong] = useState<CurrentPlayingSongData>();
 
     useEffect(() => {
+        const currentTabId = currentTab?.id;
+
         if (currentTabId !== undefined) {
             return contentScriptApi.subscribeToCurrentPlayingSongFromTab(currentTabId, () =>
                 contentScriptApi
