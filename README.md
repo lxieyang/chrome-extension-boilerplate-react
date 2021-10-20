@@ -1,10 +1,11 @@
 # LeetCode Mistake Tracker Chrome Extension
 
-This is a Chrome Extensions to help LeetCode users keep track of the LeetCode questions they would like to re-do in the future. 
+This is a Chrome Extensions to help LeetCode users keep track of the LeetCode questions they would like to re-do in the future.
 
 After users specified time period, the extension will remind the users to re-do the LeetCode question selected.
 
 ## User Installation
+
 TODO
 
 ## Features
@@ -21,8 +22,8 @@ This Chrome Extension currently supports:
 2. Clone this repository.
 3. Change the package's `name`, `description`, and `repository` fields in `package.json`.
 4. Change the name of your extension on `src/manifest.json`.
-5. Run `npm install` to install the dependencies.
-6. Run `npm start`
+5. Run `npm install` or `yarn install` to install the dependencies.
+6. Run `npm start` or `yarn start`
 7. Load your extension on Chrome following:
    1. Access `chrome://extensions/`
    2. Check `Developer mode`
