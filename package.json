@@ -1,6 +1,6 @@
 {
   "name": "chrome-extension-boilerplate-react",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "A chrome extension boilerplate built with React 17 and Webpack 5",
   "license": "MIT",
   "repository": {
@@ -29,7 +29,6 @@
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
     "babel-preset-react-app": "^10.0.0",
-    "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^7.0.0",
     "css-loader": "^5.2.7",
     "eslint": "^7.32.0",
