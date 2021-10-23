@@ -1,0 +1,5 @@
+services:
+    mistake:
+        build: ./
+        volumes:
+            - ./build/:/usr/src/app/build/

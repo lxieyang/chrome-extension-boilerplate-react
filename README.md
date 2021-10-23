@@ -16,7 +16,7 @@ This Chrome Extension currently supports:
 
 ## Developer Installing and Running
 
-### Procedures:
+### Procedures
 
 1. Check if your [Node.js](https://nodejs.org/) version is >= **14**.
 2. Clone this repository.
@@ -30,6 +30,12 @@ This Chrome Extension currently supports:
    3. Click on `Load unpacked extension`
    4. Select the `build` folder.
 8. Happy hacking.
+
+### Build by Docker
+For step 5 and 6 above, you can use the following
+```sh
+npm run compose
+```
 
 ## Structure
 
@@ -82,12 +88,6 @@ and on your `src/manifest.json`:
   ]
 }
 ```
-
-## Intelligent Code Completion
-
-Thanks to [@hudidit](https://github.com/lxieyang/chrome-extension-boilerplate-react/issues/4)'s kind suggestions, this boilerplate supports chrome-specific intelligent code completion using [@types/chrome](https://www.npmjs.com/package/@types/chrome). For example:
-
-![intellisense](https://lxieyang.github.io/static/chrome-extension-boilerplate-dev-intellisense-ed9e7c485d3eaf66417e5da4748e2c97.png)
 
 ## Packing
 
