@@ -1,7 +1,7 @@
 {
-  "name": "chrome-extension-boilerplate-react",
+  "name": "leetcode-mistake-tracker",
   "version": "4.0.1",
-  "description": "A chrome extension boilerplate built with React 17 and Webpack 5",
+  "description": "Help LeetCode users keep track of the LeetCode questions they would like to re-do in the future",
   "license": "MIT",
   "repository": {
     "type": "git",

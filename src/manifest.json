@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Chrome Extension with React & Webpack",
+  "name": "LeetCode Mistake Tracker",
   "action": {
     "default_popup": "popup.html",
     "default_icon": "icon-34.png"
