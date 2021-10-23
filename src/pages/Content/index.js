@@ -15,7 +15,7 @@ const timeValue = setInterval(function () {
 
     var theButton = document.getElementById('redoButton');
     const redo = {
-      uri: window.location.href,
+      uri: window.location.href.toString(),
       record: new Date().toLocaleString(),
     };
 
@@ -25,10 +25,19 @@ const timeValue = setInterval(function () {
         console.log(items);
         let redos;
         if (Object.keys(items).length === 0) {
+          printLine('items is empty');
           redos = [];
         } else {
           redos = items.data;
+          for(let i = 0; i < redos.length; i++) {
+            console.log(redos[i].uri === redo.uri);
+            if (redos[i].uri === redo.uri) {
+              alert('You already marked this question');
+              return;
+            }
+          }
         }
+        redo.id = redos.length + 1;
         redos.push(redo);
         chrome.storage.sync.set({ data: redos });
         theButton.style.display = 'none';

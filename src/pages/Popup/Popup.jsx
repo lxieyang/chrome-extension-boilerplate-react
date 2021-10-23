@@ -4,28 +4,31 @@ import Greetings from '../../containers/Greetings/Greetings';
 import Setter from '../../containers/Setter/Setter';
 import './Popup.css';
 
-// const Popup = () => {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/pages/Popup/Popup.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React!
-//         </a>
-//       </header>
-//       <Setter />
-//       <Greetings />
-//     </div>
-//   );
-// };
+// react material ui
+import { green, pink } from '@mui/material/colors';
+import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import ListSubheader from '@mui/material/ListSubheader';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+function WithoutTime(dateTime) {
+  var date = new Date(dateTime);
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
 
 class Popup extends Component {
   constructor(props) {
@@ -34,46 +37,105 @@ class Popup extends Component {
 
     // this.handleChange = this.handleChange.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
+    this.removebyid = this.removebyid.bind(this);
 
-    chrome.storage.sync.get('data', function (items) {
-      if (Object.keys(items).length > 0) {
-        this.setState({ data: items.data });
-        console.log(this.state);
-      }
-    }.bind(this));
+    chrome.storage.sync.get(
+      'data',
+      function (items) {
+        if (Object.keys(items).length > 0) {
+          this.setState({ data: items.data });
+          console.log(this.state);
+        }
+      }.bind(this)
+    );
   }
 
-  // handleChange(event) {
-  //   this.setState({ value: event.target.value });
-  // }
-
-  // async handleSubmit(event) {
-  //   set(1, this.state.value);
-  //   alert('A name was submitted: ' + (await get(1)));
-  //   event.preventDefault();
-  // }
+  removebyid(id) {
+    chrome.storage.sync.get(
+      'data',
+      function (items) {
+        let redos;
+        if (Object.keys(items).length === 0) {
+          redos = [];
+        } else {
+          redos = items.data;
+        }
+        let index = 0;
+        for (; index < redos.length; index++) {
+          if (redos[index].id === id) {
+            redos.splice(index, 1);
+            break;
+          }
+        }
+        chrome.storage.sync.set(
+          { data: redos },
+          function () {
+            chrome.storage.sync.get(
+              'data',
+              function (items) {
+                if (Object.keys(items).length > 0) {
+                  this.setState({ data: items.data });
+                }
+              }.bind(this)
+            );
+          }.bind(this)
+        );
+      }.bind(this)
+    );
+  }
 
   render() {
-    console.log('render');
-    console.log(this.state)
     const listItems = this.state.data.map((redo) => <li>{redo.uri}</li>);
+    const itemsList = this.state.data.map((redo) => {
+      let displayTitle = redo.uri.slice(0, -13);
+      const lastSlash = displayTitle.lastIndexOf('/');
+      displayTitle = displayTitle.slice(lastSlash + 1);
+      return (
+        <ListItem
+          key={redo.id}
+          button
+          component="a"
+          href={redo.uri}
+          onClick={() => chrome.tabs.update({ url: redo.uri })}
+          secondaryAction={
+            <IconButton
+              edge="end"
+              aria-label="delete"
+              onClick={() => this.removebyid(redo.id)}
+            >
+              <DeleteIcon />
+            </IconButton>
+          }
+        >
+          <ListItemAvatar>
+            <Avatar sx={{ bgcolor: green[700] }}>
+              <AssignmentIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText
+            primary={displayTitle}
+            secondary={WithoutTime(redo.record).toLocaleDateString()}
+          />
+        </ListItem>
+      );
+    });
+
+    console.log('itemsList');
+    console.log(itemsList);
     return (
       <div className="App">
         <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Changed here
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React!
-        </a>
-      </header>
-        <ul>{listItems}</ul>
+        <Typography variant="h6" component="div">
+            LeetCode List
+          </Typography>
+          <List
+            dense={false}
+            style={{ maxHeight: '100%', overflow: 'auto' }}
+            // subheader={<ListSubheader>Problem List</ListSubheader>}
+          >
+            {itemsList}
+          </List>
+        </header>
       </div>
     );
   }
