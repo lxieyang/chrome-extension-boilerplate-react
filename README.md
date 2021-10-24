@@ -13,7 +13,7 @@ TODO
 This Chrome Extension currently supports:
 
 - **Remind users to re-do LeetCode questions**
-![wrong_answers.png](./screenshots/wrong_answers.png?raw=true)
+![wrong_answers.png](screenshots/wrong_answers.png?raw=true)
 
 ## Developer Installing and Running
 
