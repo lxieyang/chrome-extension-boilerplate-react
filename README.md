@@ -12,8 +12,11 @@ TODO
 
 This Chrome Extension currently supports:
 
-- **Remind users to re-do LeetCode questions**
-![wrong_answers.png](/screenshots/wrong_answers.png?raw=true)
+- **Save the re-do LeetCode questions**
+![wrong_answers.png](/screenshots/wrong_answer.png?raw=true)
+- **Show the list of LeetCode questions by extension popup**
+![popup.png](/screenshots/popup.png?raw=true)
+
 
 ## Developer Installing and Running
 
