@@ -40,6 +40,10 @@ For step 5 and 6 above, you can use the following
 ```sh
 npm run compose
 ```
+or
+```sh
+yarn compose
+```
 
 ## Structure
 
