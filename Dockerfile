@@ -17,4 +17,4 @@ RUN yarn install --pure-lockfile
 # Bundle app source
 COPY . .
 
-CMD [ "yarn", "start" ]
+CMD [ "yarn", "build" ]

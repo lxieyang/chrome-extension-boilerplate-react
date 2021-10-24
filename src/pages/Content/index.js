@@ -14,9 +14,13 @@ const timeValue = setInterval(function () {
     clearInterval(timeValue);
 
     var theButton = document.getElementById('redoButton');
+
+    let reminderDate = new Date();
+    reminderDate.setDate(reminderDate.getDate() + 5);
     const redo = {
       uri: window.location.href.toString(),
       record: new Date().toLocaleString(),
+      reminderDate: reminderDate.toLocaleString(),
     };
 
     theButton.addEventListener('click', function () {
