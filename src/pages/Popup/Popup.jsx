@@ -29,6 +29,16 @@ function WithoutTime(dateTime) {
   return date;
 }
 
+function ISOStringToDate(ISOString) {
+  return ISOString.slice(0, 10);
+}
+
+function diffInDays(startDate, endDate) {
+  const diffInMs   = new Date(endDate) - new Date(startDate)
+const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+return Math.floor(diffInDays);
+}
+
 class Popup extends Component {
   constructor(props) {
     super(props);
@@ -84,11 +94,12 @@ class Popup extends Component {
   }
 
   render() {
-    const listItems = this.state.data.map((redo) => <li>{redo.uri}</li>);
     const itemsList = this.state.data.map((redo) => {
       let displayTitle = redo.uri.slice(0, -13);
       const lastSlash = displayTitle.lastIndexOf('/');
       displayTitle = displayTitle.slice(lastSlash + 1);
+      const today = new Date().toISOString();
+      let daysAway = diffInDays(ISOStringToDate(today), ISOStringToDate(redo.reminderDate));
       return (
         <ListItem
           key={redo.id}
@@ -113,7 +124,7 @@ class Popup extends Component {
           </ListItemAvatar>
           <ListItemText
             primary={displayTitle}
-            secondary={WithoutTime(redo.record).toLocaleDateString()}
+            secondary={`${daysAway} days away`}
           />
         </ListItem>
       );
