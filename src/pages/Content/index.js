@@ -1,7 +1,7 @@
 import { printLine } from './modules/print';
 
 printLine('Content Script loaded');
-
+ 
 const timeValue = setInterval(function () {
 
   var nodeList = document.querySelectorAll('[data-cy="submit-wrong-result"]');
