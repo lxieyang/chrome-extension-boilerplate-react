@@ -7,7 +7,7 @@ const timeValue = setInterval(function () {
   var nodeList = document.querySelectorAll('[data-cy="submit-wrong-result"]');
   if (nodeList.length > 0) {
     var button = document.createElement('button');
-    button.innerHTML = 'Redo';
+    button.innerHTML = 'Re-do Later';
     button.id = 'redoButton';
     button.type = 'button';
     nodeList[0].appendChild(button);
