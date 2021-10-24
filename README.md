@@ -12,7 +12,8 @@ TODO
 
 This Chrome Extension currently supports:
 
-- TODO
+- **Remind users to re-do LeetCode questions**
+
 
 ## Developer Installing and Running
 

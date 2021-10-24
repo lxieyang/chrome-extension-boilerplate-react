@@ -11,7 +11,8 @@
     "compose": "docker compose up --build",
     "build": "node utils/build.js",
     "start": "node utils/webserver.js",
-    "prettier": "prettier --write '**/*.{js,jsx,css,html}'"
+    "prettier": "prettier --write '**/*.{js,jsx,css,html}'",
+    "test": ""
   },
   "dependencies": {
     "@emotion/react": "^11.5.0",
