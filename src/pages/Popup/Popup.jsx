@@ -22,6 +22,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { ListItemSecondaryAction } from '@mui/material';
 
 function WithoutTime(dateTime) {
   var date = new Date(dateTime);
@@ -34,9 +35,9 @@ function ISOStringToDate(ISOString) {
 }
 
 function diffInDays(startDate, endDate) {
-  const diffInMs   = new Date(endDate) - new Date(startDate)
-const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
-return Math.floor(diffInDays);
+  const diffInMs = new Date(endDate) - new Date(startDate)
+  const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+  return Math.floor(diffInDays);
 }
 
 class Popup extends Component {
@@ -107,18 +108,7 @@ class Popup extends Component {
           button
           component="a"
           href={redo.uri}
-          onClick={(e) => {chrome.tabs.update({ url: redo.uri }); e.preventDefault();}}
-          secondaryAction={
-            <IconButton
-              edge="end"
-              aria-label="delete"
-              onClick={(e) => {
-                e.preventDefault();
-                this.removebyid(redo.id)}}
-            >
-              <DeleteIcon />
-            </IconButton>
-          }
+          onClick={(e) => { chrome.tabs.update({ url: redo.uri }); e.preventDefault(); }}
         >
           <ListItemAvatar>
             <Avatar sx={{ bgcolor: avatarBgColor }}>
@@ -129,6 +119,18 @@ class Popup extends Component {
             primary={displayTitle}
             secondary={`${daysAway} days away`}
           />
+          <ListItemSecondaryAction>
+            <IconButton
+              edge="end"
+              aria-label="delete"
+              onClick={(e) => {
+                e.preventDefault();
+                this.removebyid(redo.id)
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </ListItemSecondaryAction>
         </ListItem>
       );
     });
@@ -138,13 +140,13 @@ class Popup extends Component {
     return (
       <div className="App">
         <header className="App-header">
-        <Typography variant="h6" component="div">
+          <Typography variant="h6" component="div">
             LeetCode List
           </Typography>
           <List
             dense={false}
             style={{ maxHeight: '100%', overflow: 'auto' }}
-            // subheader={<ListSubheader>Problem List</ListSubheader>}
+          // subheader={<ListSubheader>Problem List</ListSubheader>}
           >
             {itemsList}
           </List>
