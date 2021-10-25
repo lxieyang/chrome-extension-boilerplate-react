@@ -2,7 +2,7 @@ import { printLine } from './modules/print';
 import { isToday, isPast } from './../../helper';
 
 printLine('Content Script loaded');
- 
+
 const timeValue = setInterval(function () {
 
   var nodeList = document.querySelectorAll('[data-cy="submit-wrong-result"]');
@@ -34,7 +34,7 @@ const timeValue = setInterval(function () {
           redos = [];
         } else {
           redos = items.data;
-          for(let i = 0; i < redos.length; i++) {
+          for (let i = 0; i < redos.length; i++) {
             console.log(redos[i].uri === redo.uri);
             if (redos[i].uri === redo.uri) {
               alert('You already marked this question');
@@ -44,6 +44,9 @@ const timeValue = setInterval(function () {
         }
         redo.id = redos.length + 1;
         redos.push(redo);
+        redos.sort(function (a, b) {
+          return new Date(a.reminderDate) - new Date(b.reminderDate)
+        })
         chrome.storage.sync.set({ data: redos });
         theButton.style.display = 'none';
       });
