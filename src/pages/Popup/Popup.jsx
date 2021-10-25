@@ -4,7 +4,7 @@ import Greetings from '../../containers/Greetings/Greetings';
 import './Popup.css';
 
 // react material ui
-import { green, pink } from '@mui/material/colors';
+import { green, pink, red } from '@mui/material/colors';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import List from '@mui/material/List';
@@ -100,6 +100,7 @@ class Popup extends Component {
       displayTitle = displayTitle.slice(lastSlash + 1);
       const today = new Date().toISOString();
       let daysAway = diffInDays(ISOStringToDate(today), ISOStringToDate(redo.reminderDate));
+      const avatarBgColor = daysAway <= 0 ? red[700] : green[700];
       return (
         <ListItem
           key={redo.id}
@@ -118,7 +119,7 @@ class Popup extends Component {
           }
         >
           <ListItemAvatar>
-            <Avatar sx={{ bgcolor: green[700] }}>
+            <Avatar sx={{ bgcolor: avatarBgColor }}>
               <AssignmentIcon />
             </Avatar>
           </ListItemAvatar>
