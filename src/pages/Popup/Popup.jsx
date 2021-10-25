@@ -106,12 +106,14 @@ class Popup extends Component {
           button
           component="a"
           href={redo.uri}
-          onClick={() => chrome.tabs.update({ url: redo.uri })}
+          onClick={(e) => {chrome.tabs.update({ url: redo.uri }); e.preventDefault();}}
           secondaryAction={
             <IconButton
               edge="end"
               aria-label="delete"
-              onClick={() => this.removebyid(redo.id)}
+              onClick={(e) => {
+                e.preventDefault();
+                this.removebyid(redo.id)}}
             >
               <DeleteIcon />
             </IconButton>

@@ -1,4 +1,5 @@
 import { printLine } from './modules/print';
+import { isToday, isPast } from './../../helper';
 
 printLine('Content Script loaded');
  
@@ -16,7 +17,7 @@ const timeValue = setInterval(function () {
     var theButton = document.getElementById('redoButton');
 
     let reminderDate = new Date();
-    reminderDate.setDate(reminderDate.getDate() + 5);
+    reminderDate.setDate(reminderDate.getDate() + 0); // TODO: add a dropdown after redo button, to set the reminder date
     const redo = {
       uri: window.location.href.toString(),
       record: new Date().toLocaleString(),
@@ -49,3 +50,4 @@ const timeValue = setInterval(function () {
     });
   }
 }, 3000);
+

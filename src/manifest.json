@@ -8,6 +8,7 @@
   "icons": {
     "128": "icon-128.png"
   },
+  "background": { "service_worker": "background.bundle.js" },
   "content_scripts": [
     {
       "matches": ["https://leetcode.com/problems/*"],
@@ -22,6 +23,7 @@
     }
   ],
   "permissions": [
-    "storage"
+    "storage",
+    "notifications"
   ]
 }
