@@ -8,17 +8,29 @@
   "icons": {
     "128": "icon-128.png"
   },
-  "background": { "service_worker": "background.bundle.js" },
+  "background": {
+    "service_worker": "background.bundle.js"
+  },
   "content_scripts": [
     {
-      "matches": ["https://leetcode.com/problems/*"],
-      "js": ["contentScript.bundle.js"],
-      "css": ["content.styles.css"]
+      "matches": [
+        "https://leetcode.com/problems/*"
+      ],
+      "js": [
+        "contentScript.bundle.js"
+      ],
+      "css": [
+        "content.styles.css"
+      ]
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["content.styles.css", "icon-128.png", "icon-34.png"],
+      "resources": [
+        "content.styles.css",
+        "icon-128.png",
+        "icon-34.png"
+      ],
       "matches": []
     }
   ],
