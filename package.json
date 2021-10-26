@@ -1,6 +1,6 @@
 {
   "name": "chrome-extension-boilerplate-react",
-  "version": "4.1.1",
+  "version": "4.1.2",
   "description": "A chrome extension boilerplate built with React 17 and Webpack 5",
   "license": "MIT",
   "repository": {
