@@ -98,13 +98,20 @@ Now, the content of `build` folder will be the extension ready to be submitted t
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/lakshya8066">
+            <img src="https://avatars.githubusercontent.com/u/73181332?v=4" width="100;" alt="lakshya8066"/>
+            <br />
+            <sub><b>lakshya8066</b></sub>
+        </a>
+    </td></tr>
+<tr>
+    <td align="center">
         <a href="https://github.com/raulrusu88">
             <img src="https://avatars.githubusercontent.com/u/10065009?v=4" width="100;" alt="raulrusu88"/>
             <br />
             <sub><b>Raul Rusu</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/Sukhija-Aniket">
             <img src="https://avatars.githubusercontent.com/u/79650434?v=4" width="100;" alt="Sukhija-Aniket"/>
