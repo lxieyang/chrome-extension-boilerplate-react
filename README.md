@@ -70,17 +70,17 @@ Now, the content of `build` folder will be the extension ready to be submitted t
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/architec">
+            <img src="https://avatars.githubusercontent.com/u/32494274?v=4" width="100;" alt="architec"/>
+            <br />
+            <sub><b>Architec</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/lxieyang">
             <img src="https://avatars.githubusercontent.com/u/16089305?v=4" width="100;" alt="lxieyang"/>
             <br />
             <sub><b>Michael Xieyang Liu</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/architec">
-            <img src="https://avatars.githubusercontent.com/u/32494274?v=4" width="100;" alt="architec"/>
-            <br />
-            <sub><b>architec</b></sub>
         </a>
     </td>
     <td align="center">
@@ -110,6 +110,13 @@ Now, the content of `build` folder will be the extension ready to be submitted t
             <img src="https://avatars.githubusercontent.com/u/79650434?v=4" width="100;" alt="Sukhija-Aniket"/>
             <br />
             <sub><b>Sukhija-Aniket</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/VasekS">
+            <img src="https://avatars.githubusercontent.com/u/23295673?v=4" width="100;" alt="VasekS"/>
+            <br />
+            <sub><b>Vaclav Sekret</b></sub>
         </a>
     </td>
     <td align="center">
