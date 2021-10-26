@@ -23,8 +23,8 @@
     "@babel/plugin-proposal-class-properties": "^7.14.5",
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-react": "^7.14.5",
-    "@types/chrome": "^0.0.159",
-    "@types/react": "^17.0.30",
+    "@types/chrome": "^0.0.161",
+    "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
@@ -50,8 +50,8 @@
     "terser-webpack-plugin": "^5.2.4",
     "ts-loader": "^8.3.0",
     "typescript": "^4.4.4",
-    "webpack": "^5.59.0",
+    "webpack": "^5.60.0",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^4.3.1"
   }
 }
