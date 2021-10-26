@@ -64,42 +64,42 @@ Now, the content of `build` folder will be the extension ready to be submitted t
 <tr>
     <td align="center">
         <a href="https://github.com/arctdav">
-            <img src="https://avatars.githubusercontent.com/u/93011580?v=4" width="100;" alt="arctdav"/>
+            <img src="https://avatars.githubusercontent.com/u/93011580?v=4" width="50;" alt="arctdav"/>
             <br />
             <sub><b>Arctdav</b></sub>
         </a>
     </td>
     <td align="center">
         <a href="https://github.com/architec">
-            <img src="https://avatars.githubusercontent.com/u/32494274?v=4" width="100;" alt="architec"/>
+            <img src="https://avatars.githubusercontent.com/u/32494274?v=4" width="50;" alt="architec"/>
             <br />
             <sub><b>Architec</b></sub>
         </a>
     </td>
     <td align="center">
         <a href="https://github.com/lxieyang">
-            <img src="https://avatars.githubusercontent.com/u/16089305?v=4" width="100;" alt="lxieyang"/>
+            <img src="https://avatars.githubusercontent.com/u/16089305?v=4" width="50;" alt="lxieyang"/>
             <br />
             <sub><b>Michael Xieyang Liu</b></sub>
         </a>
     </td>
     <td align="center">
         <a href="https://github.com/Ayush0730">
-            <img src="https://avatars.githubusercontent.com/u/68139755?v=4" width="100;" alt="Ayush0730"/>
+            <img src="https://avatars.githubusercontent.com/u/68139755?v=4" width="50;" alt="Ayush0730"/>
             <br />
             <sub><b>Ayush Jain</b></sub>
         </a>
     </td>
     <td align="center">
         <a href="https://github.com/GeekaholicLin">
-            <img src="https://avatars.githubusercontent.com/u/13808849?v=4" width="100;" alt="GeekaholicLin"/>
+            <img src="https://avatars.githubusercontent.com/u/13808849?v=4" width="50;" alt="GeekaholicLin"/>
             <br />
             <sub><b>Void</b></sub>
         </a>
     </td>
     <td align="center">
         <a href="https://github.com/lakshya8066">
-            <img src="https://avatars.githubusercontent.com/u/73181332?v=4" width="100;" alt="lakshya8066"/>
+            <img src="https://avatars.githubusercontent.com/u/73181332?v=4" width="50;" alt="lakshya8066"/>
             <br />
             <sub><b>Lakshya8066</b></sub>
         </a>
@@ -107,35 +107,35 @@ Now, the content of `build` folder will be the extension ready to be submitted t
 <tr>
     <td align="center">
         <a href="https://github.com/raulrusu88">
-            <img src="https://avatars.githubusercontent.com/u/10065009?v=4" width="100;" alt="raulrusu88"/>
+            <img src="https://avatars.githubusercontent.com/u/10065009?v=4" width="50;" alt="raulrusu88"/>
             <br />
             <sub><b>Raul Rusu</b></sub>
         </a>
     </td>
     <td align="center">
         <a href="https://github.com/Sukhija-Aniket">
-            <img src="https://avatars.githubusercontent.com/u/79650434?v=4" width="100;" alt="Sukhija-Aniket"/>
+            <img src="https://avatars.githubusercontent.com/u/79650434?v=4" width="50;" alt="Sukhija-Aniket"/>
             <br />
             <sub><b>Sukhija-Aniket</b></sub>
         </a>
     </td>
     <td align="center">
         <a href="https://github.com/VasekS">
-            <img src="https://avatars.githubusercontent.com/u/23295673?v=4" width="100;" alt="VasekS"/>
+            <img src="https://avatars.githubusercontent.com/u/23295673?v=4" width="50;" alt="VasekS"/>
             <br />
             <sub><b>Vaclav Sekret</b></sub>
         </a>
     </td>
     <td align="center">
         <a href="https://github.com/whyang0808">
-            <img src="https://avatars.githubusercontent.com/u/40038303?v=4" width="100;" alt="whyang0808"/>
+            <img src="https://avatars.githubusercontent.com/u/40038303?v=4" width="50;" alt="whyang0808"/>
             <br />
             <sub><b>Yang Wei Hao</b></sub>
         </a>
     </td>
     <td align="center">
         <a href="https://github.com/ghousahmed">
-            <img src="https://avatars.githubusercontent.com/u/25761034?v=4" width="100;" alt="ghousahmed"/>
+            <img src="https://avatars.githubusercontent.com/u/25761034?v=4" width="50;" alt="ghousahmed"/>
             <br />
             <sub><b>Ghous Ahmed</b></sub>
         </a>
