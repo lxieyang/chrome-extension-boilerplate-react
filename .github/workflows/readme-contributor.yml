@@ -1,9 +1,6 @@
 name: Contributor in README
 
-on: 
-    push:
-        branches:
-          - main
+on: [push, pull_request]
 
 jobs:
     contrib-readme-job:
