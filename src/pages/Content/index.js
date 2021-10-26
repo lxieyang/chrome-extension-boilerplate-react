@@ -8,7 +8,7 @@ const timeValue = setInterval(function () {
   var nodeList = document.querySelectorAll('[data-cy="submit-wrong-result"]');
   if (nodeList.length > 0) {
     var button = document.createElement('button');
-    button.innerHTML = 'Re-do Later';
+    button.innerHTML = 'Re-do in 3 days';
     button.id = 'redoButton';
     button.type = 'button';
     nodeList[0].appendChild(button);
@@ -17,7 +17,7 @@ const timeValue = setInterval(function () {
     var theButton = document.getElementById('redoButton');
 
     let reminderDate = new Date();
-    reminderDate.setDate(reminderDate.getDate() + 0); // TODO: add a dropdown after redo button, to set the reminder date
+    reminderDate.setDate(reminderDate.getDate() + 4); // TODO: add a dropdown after redo button, to set the reminder date
     const redo = {
       uri: window.location.href.toString(),
       record: new Date().toLocaleString(),
@@ -50,7 +50,8 @@ const timeValue = setInterval(function () {
         chrome.storage.sync.set({ data: redos });
         theButton.style.display = 'none';
       });
-    });
+    }
+    );
   }
 }, 3000);
 

@@ -35,7 +35,6 @@
     }
   ],
   "permissions": [
-    "storage",
-    "notifications"
+    "storage"
   ]
 }

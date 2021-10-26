@@ -117,7 +117,7 @@ class Popup extends Component {
           </ListItemAvatar>
           <ListItemText
             primary={displayTitle}
-            secondary={`${daysAway} days away`}
+            secondary={daysAway <= 0 ? 'Time to re-do!' : `${daysAway} days away`}
           />
           <ListItemSecondaryAction>
             <IconButton
@@ -135,8 +135,6 @@ class Popup extends Component {
       );
     });
 
-    console.log('itemsList');
-    console.log(itemsList);
     return (
       <div className="App">
         <header className="App-header">

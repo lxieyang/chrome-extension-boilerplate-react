@@ -45,57 +45,6 @@ or
 yarn compose
 ```
 
-## Structure
-
-All your extension's code must be placed in the `src` folder.
-
-The boilerplate is already prepared to have a popup, an options page, a background page, and a new tab page (which replaces the new tab page of your browser). But feel free to customize these.
-
-## TypeScript
-
-This boilerplate now supports TypeScript! The `Options` Page is implemented using TypeScript. Please refer to `src/pages/Options/` for example usages.
-
-## Webpack auto-reload and HRM
-
-To make your workflow much more efficient this boilerplate uses the [webpack server](https://webpack.github.io/docs/webpack-dev-server.html) to development (started with `npm start`) with auto reload feature that reloads the browser automatically every time that you save some file in your editor.
-
-You can run the dev mode on other port if you want. Just specify the env var `port` like this:
-
-```
-$ PORT=6002 npm run start
-```
-
-## Content Scripts
-
-Although this boilerplate uses the webpack dev server, it's also prepared to write all your bundles files on the disk at every code change, so you can point, on your extension manifest, to your bundles that you want to use as [content scripts](https://developer.chrome.com/extensions/content_scripts), but you need to exclude these entry points from hot reloading [(why?)](https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate/issues/4#issuecomment-261788690). To do so you need to expose which entry points are content scripts on the `webpack.config.js` using the `chromeExtensionBoilerplate -> notHotReload` config. Look the example below.
-
-Let's say that you want use the `myContentScript` entry point as content script, so on your `webpack.config.js` you will configure the entry point and exclude it from hot reloading, like this:
-
-```js
-{
-  …
-  entry: {
-    myContentScript: "./src/js/myContentScript.js"
-  },
-  chromeExtensionBoilerplate: {
-    notHotReload: ["myContentScript"]
-  }
-  …
-}
-```
-
-and on your `src/manifest.json`:
-
-```json
-{
-  "content_scripts": [
-    {
-      "matches": ["https://www.google.com/*"],
-      "js": ["myContentScript.bundle.js"]
-    }
-  ]
-}
-```
 
 ## Packing
 
@@ -107,32 +56,79 @@ $ NODE_ENV=production npm run build
 
 Now, the content of `build` folder will be the extension ready to be submitted to the Chrome Web Store. Just take a look at the [official guide](https://developer.chrome.com/webstore/publish) to more infos about publishing.
 
-## Secrets
 
-If you are developing an extension that talks with some API you probably are using different keys for testing and production. Is a good practice you not commit your secret keys and expose to anyone that have access to the repository.
+## Contributors
 
-To this task this boilerplate import the file `./secrets.<THE-NODE_ENV>.js` on your modules through the module named as `secrets`, so you can do things like this:
+<!-- readme: collaborators,contributors -start -->
+<table>
+<tr>
+    <td align="center">
+        <a href="https://github.com/arctdav">
+            <img src="https://avatars.githubusercontent.com/u/93011580?v=4" width="100;" alt="arctdav"/>
+            <br />
+            <sub><b>Arctdav</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/lxieyang">
+            <img src="https://avatars.githubusercontent.com/u/16089305?v=4" width="100;" alt="lxieyang"/>
+            <br />
+            <sub><b>Michael Xieyang Liu</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/architec">
+            <img src="https://avatars.githubusercontent.com/u/32494274?v=4" width="100;" alt="architec"/>
+            <br />
+            <sub><b>architec</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/Ayush0730">
+            <img src="https://avatars.githubusercontent.com/u/68139755?v=4" width="100;" alt="Ayush0730"/>
+            <br />
+            <sub><b>Ayush Jain</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/GeekaholicLin">
+            <img src="https://avatars.githubusercontent.com/u/13808849?v=4" width="100;" alt="GeekaholicLin"/>
+            <br />
+            <sub><b>Void</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/raulrusu88">
+            <img src="https://avatars.githubusercontent.com/u/10065009?v=4" width="100;" alt="raulrusu88"/>
+            <br />
+            <sub><b>Raul Rusu</b></sub>
+        </a>
+    </td></tr>
+<tr>
+    <td align="center">
+        <a href="https://github.com/Sukhija-Aniket">
+            <img src="https://avatars.githubusercontent.com/u/79650434?v=4" width="100;" alt="Sukhija-Aniket"/>
+            <br />
+            <sub><b>Sukhija-Aniket</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/whyang0808">
+            <img src="https://avatars.githubusercontent.com/u/40038303?v=4" width="100;" alt="whyang0808"/>
+            <br />
+            <sub><b>Yang Wei Hao</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/ghousahmed">
+            <img src="https://avatars.githubusercontent.com/u/25761034?v=4" width="100;" alt="ghousahmed"/>
+            <br />
+            <sub><b>Ghous Ahmed</b></sub>
+        </a>
+    </td></tr>
+</table>
+<!-- readme: collaborators,contributors -end -->
 
-_./secrets.development.js_
-
-```js
-export default { key: '123' };
-```
-
-_./src/popup.js_
-
-```js
-import secrets from 'secrets';
-ApiCall({ key: secrets.key });
-```
-
-:point_right: The files with name `secrets.*.js` already are ignored on the repository.
-
-## Resources:
-
-- [Webpack documentation](https://webpack.js.org/concepts/)
-- [Chrome Extension documentation](https://developer.chrome.com/extensions/getstarted)
-
-## Credits:
+## Credits
 
 - [chrome-extension-boilerplate-react](https://github.com/lxieyang/chrome-extension-boilerplate-react)
