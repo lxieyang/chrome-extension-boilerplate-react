@@ -6,7 +6,7 @@ After users specified time period, the extension will remind the users to re-do 
 
 ## User Installation
 
-TODO
+Install the extension from [here](https://chrome.google.com/webstore/detail/leetcode-mistake-tracker/gdkafhifmmkcifpdcfbppiieckgfpjbb)
 
 ## Features
 
