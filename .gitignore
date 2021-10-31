@@ -7,7 +7,8 @@
 /coverage
 
 # production
-/build
+/build/*
+!/build/icon-34.png
 
 # misc
 .DS_Store
