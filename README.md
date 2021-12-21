@@ -42,7 +42,7 @@ Please open up an issue to nudge me to keep the npm packages up-to-date. FYI, it
 ### Procedures:
 
 1. Check if your [Node.js](https://nodejs.org/) version is >= **14**.
-2. Clone this repository.
+2. Clone this repository `git clone git@github.com:lxieyang/chrome-extension-boilerplate-react.git`.
 3. Change the package's `name`, `description`, and `repository` fields in `package.json`.
 4. Change the name of your extension on `src/manifest.json`.
 5. Run `npm install` to install the dependencies.
