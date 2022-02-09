@@ -1,5 +1,6 @@
 {
   "name": "Chrome Extension with React & Webpack",
+  "description": "A chrome extension boilerplate built with React 17, Webpack 5, and Webpack Dev Server 4",
   "options_page": "options.html",
   "background": {
     "page": "background.html"
