@@ -1,11 +1,7 @@
 {
   "manifest_version": 3,
-<<<<<<< Updated upstream
-  "name": "Chrome Extension with React & Webpack",
-  "description": "A chrome extension boilerplate built with React 17, Webpack 5, and Webpack Dev Server 4",
-=======
-  "name": "Hyper Pop",
->>>>>>> Stashed changes
+  "name": "Hyperpop",
+  "description": "Fast DBQ Autopopulation",
   "options_page": "options.html",
   "background": {
     "service_worker": "background.bundle.js"

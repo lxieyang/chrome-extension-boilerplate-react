@@ -1,13 +1,7 @@
 {
-<<<<<<< Updated upstream
-  "name": "chrome-extension-boilerplate-react",
-  "version": "4.3.5",
-  "description": "A chrome extension boilerplate built with React 17, Webpack 5, and Webpack Dev Server 4",
-=======
   "name": "hyper-pop",
   "version": "0.1.0",
   "description": "VBMSR Hyper Population",
->>>>>>> Stashed changes
   "license": "MIT",
   "repository": {
     "type": "git",
