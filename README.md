@@ -1,6 +1,7 @@
 <img src="src/assets/img/icon-128.png" width="64"/>
 
-# Chrome Extension Boilerplate with React 17 and Webpack 5
+# Hyperpop
+> Based on [Chrome Extension Boilerplate with React 17 and Webpack 5](https://github.com/lxieyang/chrome-extension-boilerplate-react)
 
 [![npm](https://img.shields.io/npm/v/chrome-extension-boilerplate-react)](https://www.npmjs.com/package/chrome-extension-boilerplate-react)
 [![npm-download](https://img.shields.io/npm/dw/chrome-extension-boilerplate-react)](https://www.npmjs.com/package/chrome-extension-boilerplate-react)
