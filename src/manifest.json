@@ -19,9 +19,7 @@
   "content_scripts": [
     {
       "matches": [
-        "http://*/*",
-        "https://*/*",
-        "<all_urls>"
+        "https://amida-tech.github.io/hyperpop-static-calculators/"
       ],
       "js": [
         "contentScript.bundle.js"
