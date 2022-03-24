@@ -19,3 +19,4 @@
 
 # secrets
 secrets.*.js
+/.nova
