@@ -6,7 +6,7 @@ console.log('Must reload extension for modifications to take effect.');
 printLine("Using the 'printLine' function from the Print Module");
 
 
-const calculatorPopulationMapping = [
+const staticVisionMapping = [
     { "right-temporally": 80 },
     { "right-down-temporally": 80 },
     { "right-down": 60 },
@@ -43,14 +43,11 @@ const calculatorPopulationMapping = [
     { "left-lossType-no-light-perception": false }
 ];
 
-for (const mapping of calculatorPopulationMapping) {
-    var fieldToPopulate = Object.keys(mapping)[0];
-    var valueToPopulate = mapping[Object.keys(mapping)[0]]
-    console.log(fieldToPopulate, valueToPopulate)
-    let field = document.getElementById(fieldToPopulate)
-    if(field) {
-        field.value = valueToPopulate
-    } else {
-        console.log('no field')
+for (const mapping of staticVisionMapping) {
+    var populatingFieldID = Object.keys(mapping)[0];
+    var populatingValue = mapping[Object.keys(mapping)[0]]
+    let populatingField = document.getElementById(populatingFieldID)
+    if(populatingField) {
+        populatingField.value = populatingValue
     }
 }
