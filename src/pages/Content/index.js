@@ -35,6 +35,11 @@ const staticVisionMapping = [
     { "left-lossType-no-light-perception": false }
 ];
 
+var dbqXmlPicker = document.createElement("input");
+dbqXmlPicker.setAttribute('type',"file")
+document.body.appendChild(dbqXmlPicker); 
+
+
 for (const mapping of staticVisionMapping) {
     var populatingFieldID = Object.keys(mapping)[0];
     var populatingValue = mapping[Object.keys(mapping)[0]]
