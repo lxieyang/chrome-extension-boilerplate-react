@@ -35,6 +35,14 @@
         "icon-34.png"
       ],
       "matches": []
+    },
+    {
+      "resources": [
+        "filepicker.html"
+      ],
+      "matches": [
+        "https://amida-tech.github.io/*"
+      ]
     }
   ]
 }

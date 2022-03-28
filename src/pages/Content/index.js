@@ -1,3 +1,6 @@
+import './content.styles.scss';
+
+
 const staticVisionMapping = [
     { "right-temporally": 80 },
     { "right-down-temporally": 80 },
@@ -35,9 +38,29 @@ const staticVisionMapping = [
     { "left-lossType-no-light-perception": false }
 ];
 
-var dbqXmlPicker = document.createElement("input");
-dbqXmlPicker.setAttribute('type',"file")
-document.body.appendChild(dbqXmlPicker); 
+// instantiate input HTML object
+var dbqXmlPicker = document.createElement("aside");
+// set input attribute type
+dbqXmlPicker.setAttribute('id',"hyperpop")
+// get first title on page
+var titleElement = document.getElementsByClassName('vision-calculator__title')[0];
+// append
+titleElement.after(dbqXmlPicker); 
+
+
+fetch(chrome.runtime.getURL('/filepicker.html'))
+.then(response => response.text())
+.then(data => {
+    document.getElementById('hyperpop').innerHTML = data;
+    // other code
+    // eg update injected elements,
+    // add event listeners or logic to connect to other parts of the app
+}).catch(err => {
+    // handle error
+    console.log(Error)
+});
+
+
 
 
 for (const mapping of staticVisionMapping) {
