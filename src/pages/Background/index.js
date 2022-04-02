@@ -1,5 +1,3 @@
-// import axios from 'axios';
-
 console.log('This is the background page.');
 
 // Example for listening to tab switching/loading

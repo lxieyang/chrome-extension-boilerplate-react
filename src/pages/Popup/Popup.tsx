@@ -1,7 +1,5 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import logo from '../../assets/img/logo.svg';
-import { Greetings } from '../../containers/Greetings/Greetings';
 import './Popup.css';
 
 export const Popup = () => {
