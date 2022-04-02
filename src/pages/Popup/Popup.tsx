@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../../assets/img/logo.svg';
-import Greetings from '../../containers/Greetings/Greetings';
 import './Popup.css';
 
-const Popup = () => {
+export const Popup = () => {
+  const [clicks, setClicks] = useState(0);
+  const handleClick = () => setClicks(clicks + 1);
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/pages/Popup/Popup.jsx</code> and save to reload.
+          Edit <code>src/pages/Popup/Popup.tsx</code> and save to reload.
         </p>
+        <p>{clicks}</p>
+        <button onClick={handleClick}>Click me!</button>
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -23,5 +27,3 @@ const Popup = () => {
     </div>
   );
 };
-
-export default Popup;
