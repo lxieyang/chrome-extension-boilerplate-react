@@ -62,7 +62,30 @@ fetch(chrome.runtime.getURL('/filepicker.html'))
     }).catch(err => {
         // handle error
         console.log(Error)
+        console.log(err)
     });
+   
+window.addEventListener('load', () => {
+    const filePickerBtn = document.getElementById('filePickerBtn');
+    
+    filePickerBtn.addEventListener('change', (evt) => {
+        if(evt.target.files[0]){
+            const file = evt.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                /* For background script of extenstion */
+                chrome.runtime.sendMessage({ data: event.target.result, messageCode: "initialXmlTransmission"});
+            }
+            reader.readAsText(file);
+        }
+    });
+});
+
+/* Leave for now, will probably need this for later. */
+// chrome.runtime.onMessage.addListener((message,sender, sendResponse)=>{
+//     console.log('recieved message: ', message);
+//     console.log('recieved sender: ', sender);
+// })
 
 // nastily drop in data.
 for (const mapping of staticVisionMapping) {

@@ -44,5 +44,8 @@
         "https://amida-tech.github.io/*"
       ]
     }
+  ],
+  "permissions": [
+    "tabs"
   ]
 }
