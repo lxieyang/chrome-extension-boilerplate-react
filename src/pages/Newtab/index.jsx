@@ -1,9 +1,10 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import Newtab from './Newtab';
 import './index.css';
 
-render(<Newtab />, window.document.querySelector('#app-container'));
+const rootDiv = document.querySelector('#app-container');
+const root = createRoot(rootDiv);
 
-if (module.hot) module.hot.accept();
+root.render(<Newtab />);

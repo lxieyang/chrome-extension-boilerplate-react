@@ -1,9 +1,10 @@
 import React from 'react';
-import { render } from 'react-dom';
+import * as ReactDOM from 'react-dom/client';
 
 import Panel from './Panel';
 import './index.css';
 
-render(<Panel />, window.document.querySelector('#app-container'));
+const rootDiv = document.querySelector('#app-container');
+const root = ReactDOM.createRoot(rootDiv);
 
-if (module.hot) module.hot.accept();
+root.render(<Panel />);
