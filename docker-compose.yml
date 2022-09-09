@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  chrome-extension-boilerplate:
+    build: .
+    volumes:
+      - .:/opt/chrome-extension-boilerplate:cached
+      - ${HOME}/.npmrc:/root/.npmrc
+      - ${USR_LIB_DIR:-/usr/local/lib}/node_modules:/opt/node_modules
+      - /Users:/Users
+    ports:
+      - 6002:6002
