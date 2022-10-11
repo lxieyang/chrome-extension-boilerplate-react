@@ -1,5 +1,5 @@
 {
-  "name": "chrome-extension-boilerplate-react",
+  "name": "planes-in-the-sky",
   "version": "4.3.5",
   "description": "A chrome extension boilerplate built with React 17, Webpack 5, and Webpack Dev Server 4",
   "license": "MIT",
@@ -13,7 +13,11 @@
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
   },
   "dependencies": {
+    "@chakra-ui/react": "1.8.9",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
     "@hot-loader/react-dom": "^17.0.2",
+    "framer-motion": "6.2.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hot-loader": "^4.13.0"
@@ -28,7 +32,7 @@
     "@types/react-dom": "^17.0.11",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.3",
-    "babel-preset-react-app": "^10.0.1",
+    "babel-preset-react-app": "^10.0.1yarn star",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^7.0.0",
     "css-loader": "^6.6.0",
@@ -43,9 +47,7 @@
     "fs-extra": "^10.0.0",
     "html-loader": "^3.1.0",
     "html-webpack-plugin": "^5.5.0",
-    "node-sass": "^6.0.1",
     "prettier": "^2.5.1",
-    "sass-loader": "^12.4.0",
     "source-map-loader": "^3.0.1",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.1",
