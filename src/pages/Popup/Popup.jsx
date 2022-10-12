@@ -4,6 +4,21 @@ import './Popup.css';
 import { Text } from '@chakra-ui/react'
 
 const Popup = () => {
+  const [name, setName] = React.useState('');
+  const handleClick = () => {
+    console.log('handleClick', name);
+    // chrome.runtime.sendMessage({ name }, function (response) {
+    //   console.log(response.farewell);
+    // });
+    chrome.runtime.sendMessage({
+      type: "notification", options: {
+        type: "basic",
+        iconUrl: chrome.extension.getURL("icon128.png"),
+        title: "Test",
+        message: "Test"
+      }
+    });
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -14,6 +29,9 @@ const Popup = () => {
         <Text fontSize='20px' color='tomato'>
           PLANES
         </Text>
+
+        <input value={name} onChange={e => setName(e.target.value)} />
+        <button onClick={handleClick}>Click me</button>
         <a
           className="App-link"
           href="https://reactjs.org"
