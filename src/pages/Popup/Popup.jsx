@@ -5,19 +5,14 @@ import { Text } from '@chakra-ui/react'
 
 const Popup = () => {
   const [name, setName] = React.useState('');
+
   const handleClick = () => {
-    console.log('handleClick', name);
-    // chrome.runtime.sendMessage({ name }, function (response) {
-    //   console.log(response.farewell);
-    // });
-    chrome.runtime.sendMessage({
-      type: "notification", options: {
-        type: "basic",
-        iconUrl: chrome.extension.getURL("icon128.png"),
-        title: "Test",
-        message: "Test"
-      }
+    console.log('handleClick function!',);
+
+    chrome.runtime.sendMessage('{ greeting: name }', function (response) {
+      console.log('response in popup click handler', response);
     });
+
   }
   return (
     <div className="App">
