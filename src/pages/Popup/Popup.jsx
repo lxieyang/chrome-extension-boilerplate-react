@@ -9,9 +9,17 @@ const Popup = () => {
   const handleClick = () => {
     console.log('handleClick function!',);
 
-    chrome.runtime.sendMessage('{ greeting: name }', function (response) {
+    /*chrome.runtime.sendMessage('{ greeting: name }', function (response) {
       console.log('response in popup click handler', response);
+    });*/
+
+
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, { type: name }, function (response) {
+        alert(response)
+      });
     });
+
 
   }
   return (
