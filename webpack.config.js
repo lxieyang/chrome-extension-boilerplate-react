@@ -4,7 +4,8 @@ var webpack = require('webpack'),
   env = require('./utils/env'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
-  TerserPlugin = require('terser-webpack-plugin');
+  TerserPlugin = require('terser-webpack-plugin'),
+  MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const ASSET_PATH = process.env.ASSET_PATH || '/';
@@ -61,7 +62,9 @@ var options = {
         // in the `src` directory
         use: [
           {
-            loader: 'style-loader',
+            loader: process.env.NODE_ENV === "development"
+            ? "style-loader"
+            : MiniCssExtractPlugin.loader,
           },
           {
             loader: 'css-loader',
@@ -112,6 +115,7 @@ var options = {
   plugins: [
     new CleanWebpackPlugin({ verbose: false }),
     new webpack.ProgressPlugin(),
+    new MiniCssExtractPlugin(),
     // expose and write the allowed env vars on the compiled bundle
     new webpack.EnvironmentPlugin(['NODE_ENV']),
     new CopyWebpackPlugin({
