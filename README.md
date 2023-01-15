@@ -63,7 +63,7 @@ The boilerplate is already prepared to have a popup, an options page, a backgrou
 
 This boilerplate now supports TypeScript! The `Options` Page is implemented using TypeScript. Please refer to `src/pages/Options/` for example usages.
 
-## Webpack auto-reload and HRM
+## Webpack auto-reload and HMR
 
 To make your workflow much more efficient this boilerplate uses the [webpack server](https://webpack.github.io/docs/webpack-dev-server.html) to development (started with `npm start`) with auto reload feature that reloads the browser automatically every time that you save some file in your editor.
 
