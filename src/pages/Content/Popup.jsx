@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import logo from '../../assets/img/logo.svg';
 import './Popup.css';
 
 
@@ -9,9 +8,6 @@ const Popup = () => {
   const [result, setResult] = React.useState('Result will appear here');
   function updateInputValue(evt) {
     setUserInput(evt.target.value);
-  }
-  function updateApiKey(evt) {
-    setApiKey(evt.target.value);
   }
 
   useEffect(() => {
@@ -54,7 +50,6 @@ const Popup = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <textarea onChange={updateApiKey} value={apiKey}/>
         <textarea onChange={updateInputValue} value={userInput}/>
         <textarea value={result}/>
         <button onClick={callGPT3}></button>
