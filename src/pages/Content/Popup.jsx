@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from '../../assets/img/logo.svg';
 import './Popup.css';
 
 
 const Popup = () => {
   const [userInput, setUserInput] = React.useState('Enter prompt here');
-  const [apiKey, setApiKey] = React.useState('Enter API key here');
+  const [apiKey, setApiKey] = React.useState(null);
   const [result, setResult] = React.useState('Result will appear here');
   function updateInputValue(evt) {
     setUserInput(evt.target.value);
@@ -13,6 +13,12 @@ const Popup = () => {
   function updateApiKey(evt) {
     setApiKey(evt.target.value);
   }
+
+  useEffect(() => {
+    chrome.storage.sync.get(['apiKey'], function(result) {
+      setApiKey(result.apiKey);
+    });
+  }, []);
 
   async function callGPT3() {
     // Call GPT3 with userInput
@@ -30,11 +36,18 @@ const Popup = () => {
         })
     };
 
+
     const response = await fetch(url, options);
     const json = await response.json();
     console.log(json);
     const result = json.choices[0].text;
     setResult(result);
+  }
+
+
+  let apiKeyMessage = null;
+  if (apiKey === null || apiKey === undefined || apiKey === '') {
+    apiKeyMessage = <h1>You need to set the API key</h1>
   }
   
 
@@ -45,6 +58,7 @@ const Popup = () => {
         <textarea onChange={updateInputValue} value={userInput}/>
         <textarea value={result}/>
         <button onClick={callGPT3}></button>
+        {apiKeyMessage}
       </header>
     </div>
   );
