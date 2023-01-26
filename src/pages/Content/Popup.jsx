@@ -31,14 +31,51 @@ const Popup = () => {
             temperature:0.5
         })
     };
-
-
     const response = await fetch(url, options);
     const json = await response.json();
     console.log(json);
     const result = json.choices[0].text;
     setResult(result);
   }
+
+  async function addNote() {
+    const response = await fetch("http://localhost:8765", {
+        method: "POST",
+        // set cors
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            action: "addNote",
+            version: 6,
+            params: {
+                note: {
+                    deckName: "Default",
+                    modelName: "Basic",
+                    fields: {
+                        Front: "Testing Anki Chrome Extension",
+                        Back: "Back content",
+                    },
+                    options: {
+                        allowDuplicate: false,
+                        duplicateScope: "deck",
+                        duplicateScopeOptions: {
+                            deckName: "Default",
+                            checkChildren: false,
+                        },
+                      },
+                    },
+                  },
+        }),
+    });
+    const data = await response.json()
+    console.error(data)
+    if (data.error) {
+        throw new Error(data.error)
+    }
+    return data.result
+}
 
 
   let apiKeyMessage = null;
@@ -52,7 +89,8 @@ const Popup = () => {
       <header className="App-header">
         <textarea onChange={updateInputValue} value={userInput}/>
         <textarea value={result}/>
-        <button onClick={callGPT3}></button>
+        <button onClick={callGPT3}>Generate Result</button>
+        <button onClick={addNote}>Add Card</button>
         {apiKeyMessage}
       </header>
     </div>
