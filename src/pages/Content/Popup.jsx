@@ -5,14 +5,20 @@ import './Popup.css';
 const Popup = () => {
   const [userInput, setUserInput] = React.useState('Enter prompt here');
   const [apiKey, setApiKey] = React.useState(null);
+  const [ankiKey, setAnkiKey] = React.useState(null);
   const [result, setResult] = React.useState('Result will appear here');
   function updateInputValue(evt) {
     setUserInput(evt.target.value);
   }
 
   useEffect(() => {
-    chrome.storage.sync.get(['apiKey'], function(result) {
-      setApiKey(result.apiKey);
+    // Get API key and anki key from storage
+    chrome.storage.sync.get({
+      apiKey: '',
+      ankiKey: '',
+    }, function(items) {
+      setApiKey(items.apiKey);
+      setAnkiKey(items.ankiKey);
     });
   }, []);
 
@@ -39,7 +45,7 @@ const Popup = () => {
   }
 
   async function addNote() {
-    const response = await fetch("http://localhost:8765", {
+    await fetch("http://localhost:8765", {
         method: "POST",
         // set cors
         mode: "no-cors",
@@ -49,13 +55,14 @@ const Popup = () => {
         body: JSON.stringify({
             action: "addNote",
             version: 6,
+            key: ankiKey,
             params: {
                 note: {
                     deckName: "Default",
                     modelName: "Basic",
                     fields: {
-                        Front: "Testing Anki Chrome Extension",
-                        Back: "Back content",
+                        Front: "Created from browser",
+                        Back: "mine",
                     },
                     options: {
                         allowDuplicate: false,
@@ -69,18 +76,18 @@ const Popup = () => {
                   },
         }),
     });
-    const data = await response.json()
-    console.error(data)
-    if (data.error) {
-        throw new Error(data.error)
-    }
-    return data.result
+    return;
 }
 
 
   let apiKeyMessage = null;
   if (apiKey === null || apiKey === undefined || apiKey === '') {
-    apiKeyMessage = <h1>You need to set the API key</h1>
+    apiKeyMessage = <h1>You need to set the Open AI API key</h1>
+  }
+
+  let ankiKeyMessage = null;
+  if (ankiKey === null || ankiKey === undefined || ankiKey === '') {
+    ankiKeyMessage = <h1>You need to set the Anki API key</h1>
   }
   
 
@@ -92,6 +99,7 @@ const Popup = () => {
         <button onClick={callGPT3}>Generate Result</button>
         <button onClick={addNote}>Add Card</button>
         {apiKeyMessage}
+        {ankiKeyMessage}
       </header>
     </div>
   );
