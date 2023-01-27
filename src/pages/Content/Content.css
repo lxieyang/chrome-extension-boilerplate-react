@@ -1,0 +1,20 @@
+.App {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  /*Flex with columns */
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 100%;
+  padding: 10px;
+  background-color: #d5d5d5;
+  z-index: 2147483647;
+  opacity: 0.5;
+  
+}
+
+.Initial {
+  all: initial; /*We don't want to inherit anything from the page*/
+}

@@ -2,7 +2,7 @@ import { printLine } from './modules/print';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
-import Popup from './Popup';
+import Content from './Content';
 import './index.css';
 
 
@@ -15,5 +15,5 @@ printLine("Using the 'printLine' function from the Print Module");
 const newDiv = document.createElement('div');
 document.body.appendChild(newDiv);
 const root = createRoot(newDiv); // createRoot(container!) if you use TypeScript
-const popup = React.createElement(Popup, {});
+const popup = React.createElement(Content, {});
 root.render(popup);

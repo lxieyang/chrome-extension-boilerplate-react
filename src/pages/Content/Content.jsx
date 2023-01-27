@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import './Popup.css';
+import './Content.css';
 
 
-const Popup = () => {
+const Content = () => {
   const [userInput, setUserInput] = React.useState('Enter prompt here');
   const [apiKey, setApiKey] = React.useState(null);
   const [ankiKey, setAnkiKey] = React.useState(null);
@@ -97,9 +97,9 @@ const Popup = () => {
   
 
   return (
+    <div className="Initial">
     <div className="App">
-      <header className="App-header">
-        {isHttps && (<div>
+        {isHttps && (<div style={{display: "flex", flexDirection: "column"}}>
           <textarea onChange={updateInputValue} value={userInput}/>
           <textarea value={result}/>
           <button onClick={callGPT3}>Generate Result</button>
@@ -108,10 +108,9 @@ const Popup = () => {
           {ankiKeyMessage}
         </div>)}
         {!isHttps && (<h1>HTTPS is required for this extension to work</h1>)}
-
-      </header>
+    </div>
     </div>
   );
 };
 
-export default Popup;
+export default Content;
