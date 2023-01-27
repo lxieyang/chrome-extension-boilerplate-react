@@ -7,6 +7,7 @@ const Popup = () => {
   const [apiKey, setApiKey] = React.useState(null);
   const [ankiKey, setAnkiKey] = React.useState(null);
   const [result, setResult] = React.useState('Result will appear here');
+  const [isHttps, setIsHttps] = React.useState(true);
   function updateInputValue(evt) {
     setUserInput(evt.target.value);
   }
@@ -20,6 +21,10 @@ const Popup = () => {
       setApiKey(items.apiKey);
       setAnkiKey(items.ankiKey);
     });
+    // Check if page is https
+    if (window.location.protocol !== "https:") {
+      setIsHttps(false);
+    }
   }, []);
 
   async function callGPT3() {
@@ -94,12 +99,16 @@ const Popup = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <textarea onChange={updateInputValue} value={userInput}/>
-        <textarea value={result}/>
-        <button onClick={callGPT3}>Generate Result</button>
-        <button onClick={addNote}>Add Card</button>
-        {apiKeyMessage}
-        {ankiKeyMessage}
+        {isHttps && (<div>
+          <textarea onChange={updateInputValue} value={userInput}/>
+          <textarea value={result}/>
+          <button onClick={callGPT3}>Generate Result</button>
+          <button onClick={addNote}>Add Card</button>
+          {apiKeyMessage}
+          {ankiKeyMessage}
+        </div>)}
+        {!isHttps && (<h1>HTTPS is required for this extension to work</h1>)}
+
       </header>
     </div>
   );
