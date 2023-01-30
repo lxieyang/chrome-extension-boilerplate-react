@@ -19,6 +19,18 @@ const Content = () => {
   const [isHttps, setIsHttps] = React.useState(true);
   const [isVisible, setIsVisible] = React.useState(false);
   const [selectedText, setSelectedText] = React.useState("");
+  const [disabled, setDisabled] = React.useState(false);
+
+  // Define here so we can delete it 
+  function selectionChange() {
+    const selection = window.getSelection().toString();
+    setSelectedText(selection);
+    if (selection !== "") {
+      console.log(disabled)
+      console.log("setting visible")
+      setIsVisible(true);
+    }
+  }
 
   useEffect(() => {
     // Get API key and anki key from storage
@@ -59,14 +71,9 @@ const Content = () => {
         console.log("received message");
       }
     );
+
    // Add listener for the selection event
-   document.addEventListener("selectionchange", function() {
-    var selection = window.getSelection().toString();
-    setSelectedText(selection);
-    if (selection !== "") {
-      setIsVisible(true);
-    }
-  });
+   document.addEventListener("selectionchange", selectionChange);
   }, []);
 
   async function callGPT3() {
@@ -150,14 +157,24 @@ const Content = () => {
   if (ankiDeck === null || ankiDeck === undefined || ankiDeck === '') {
     ankiDeckMessage = <h1><button onClick={openOptions}>You need to set the Anki deck</button></h1>
   }
+
+  function disable() {
+    setDisabled(true);
+    console.log("Set disabled to true")
+    setIsVisible(false);
+    console.log("set visible to false")
+  }
   
 
   return (
     <div className="Initial">
-    <div style={{visibility: isVisible ? "visible" : "hidden"}}>
+    <div style={{visibility: (isVisible && !disabled) ? "visible" : "hidden"}}>
     <div className="App">
       <div>
         <button onClick={() => setIsVisible(false)}>Close</button>
+      </div>
+      <div>
+        <button onClick={disable}>Disable</button>
       </div>
         {isHttps && (<div style={{display: "flex", flexDirection: "column"}}>
           <textarea value={question} onChange={updateOnChange(setQuestion)}/>
