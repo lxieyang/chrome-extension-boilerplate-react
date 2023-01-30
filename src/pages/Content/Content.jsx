@@ -1,50 +1,72 @@
 import React, { useEffect } from 'react';
 import './Content.css';
 
+const promptTemplate = "You are an intelligent summarization bot that splits text passages into questions and answers for use in Anki spaced repetition cards.\n\nText: Dogs chase cats because they are hungry.\nQuestion: Why do dogs chase cats?\nAnswer: Because they are hungry\n\nText: {}"
+
+
+function updateOnChange(setter) {
+  return (e) => {
+    setter(e.target.value);
+  }
+}
 
 const Content = () => {
-  const [userInput, setUserInput] = React.useState('Enter prompt here');
   const [apiKey, setApiKey] = React.useState(null);
   const [ankiKey, setAnkiKey] = React.useState(null);
-  const [result, setResult] = React.useState('Result will appear here');
+  const [ankiDeck, setAnkiDeck] = React.useState(null);
+  const [question, setQuestion] = React.useState('Question will appear here');
+  const [answer, setAnswer] = React.useState('Answer will appear here');
   const [isHttps, setIsHttps] = React.useState(true);
-  const [isVisible, setIsVisible] = React.useState(true);
-  console.log(isVisible)
-  function updateInputValue(evt) {
-    setUserInput(evt.target.value);
-  }
+  const [isVisible, setIsVisible] = React.useState(false);
+  const [selectedText, setSelectedText] = React.useState("");
 
   useEffect(() => {
     // Get API key and anki key from storage
     chrome.storage.sync.get({
       apiKey: '',
       ankiKey: '',
+      ankiDeck: '',
     }, function(items) {
       setApiKey(items.apiKey);
       setAnkiKey(items.ankiKey);
+      setAnkiDeck(items.ankiDeck);
     });
     // Check if page is https
     if (window.location.protocol !== "https:") {
       setIsHttps(false);
     }
-    // Add listener for the popup event
-    const listener = chrome.runtime.onMessage.addListener(
+    // Add listener for the popup and options events
+    chrome.runtime.onMessage.addListener(
       function(request, sender, sendResponse) {
+        console.log(request)
+        console.log(sender)
         if (request.message === "popup") {
           console.log("receieved popup message")
-          console.log("isVisible: " + isVisible)
-          console.log("setting isVisible to: " + !isVisible)
           setIsVisible((isVisible) => !isVisible); // needed due to variable scoping reasons? seems like it gets fixed at initial value
+        }
+        if (request.message === "options") {
+          console.log("Received new options settings");
+          chrome.storage.sync.get({
+            apiKey: '',
+            ankiKey: '',
+            ankiDeck: '',
+          }, function(items) {
+            setApiKey(items.apiKey);
+            setAnkiKey(items.ankiKey);
+            setAnkiDeck(items.ankiDeck);
+          });
         }
         console.log("received message");
       }
-    ); /*
-    if (chrome.runtime.onMessage.hasListener(listener, "myMessageType")) {
-      console.log("Listener has been registered for message type 'myMessageType'.");
-    } else {
-      console.log("Listener has not been registered for message type 'myMessageType'.");
+    );
+   // Add listener for the selection event
+   document.addEventListener("selectionchange", function() {
+    var selection = window.getSelection().toString();
+    setSelectedText(selection);
+    if (selection !== "") {
+      setIsVisible(true);
     }
-    */
+  });
   }, []);
 
   async function callGPT3() {
@@ -58,15 +80,21 @@ const Content = () => {
         },
         body: JSON.stringify({
             model: "text-davinci-003",
-            prompt: userInput,
-            temperature:0.5
+            prompt: promptTemplate.replace('{}', selectedText),
+            temperature:0.5,
+            max_tokens: 100,
         })
     };
     const response = await fetch(url, options);
     const json = await response.json();
     console.log(json);
     const result = json.choices[0].text;
-    setResult(result);
+    // Question is everything after Question: and before Answer:
+    const question = result.substring(result.indexOf("Question: ") + 10, result.indexOf("Answer: "));
+    setQuestion(question);
+    // Answer is everything after Answer:
+    const answer = result.substring(result.indexOf("Answer: ") + 8);
+    setAnswer(answer);
   }
 
   async function addNote() {
@@ -83,11 +111,11 @@ const Content = () => {
             key: ankiKey,
             params: {
                 note: {
-                    deckName: "Default",
+                    deckName: ankiDeck,
                     modelName: "Basic",
                     fields: {
-                        Front: "Created from browser",
-                        Back: "mine",
+                        Front: question,
+                        Back: answer,
                     },
                     options: {
                         allowDuplicate: false,
@@ -104,15 +132,23 @@ const Content = () => {
     return;
 }
 
+  async function openOptions() {
+    await chrome.runtime.sendMessage({ action: "openOptionsPage" });
+  }
 
   let apiKeyMessage = null;
   if (apiKey === null || apiKey === undefined || apiKey === '') {
-    apiKeyMessage = <h1>You need to set the Open AI API key</h1>
+    apiKeyMessage = <h1><button onClick={openOptions}>You need to set the Open AI API key</button></h1>
   }
 
   let ankiKeyMessage = null;
   if (ankiKey === null || ankiKey === undefined || ankiKey === '') {
-    ankiKeyMessage = <h1>You need to set the Anki API key</h1>
+    ankiKeyMessage = <h1><button onClick={openOptions}>You need to set the Anki API key</button></h1>
+  }
+
+  let ankiDeckMessage = null;
+  if (ankiDeck === null || ankiDeck === undefined || ankiDeck === '') {
+    ankiDeckMessage = <h1><button onClick={openOptions}>You need to set the Anki deck</button></h1>
   }
   
 
@@ -121,12 +157,14 @@ const Content = () => {
     <div style={{visibility: isVisible ? "visible" : "hidden"}}>
     <div className="App">
         {isHttps && (<div style={{display: "flex", flexDirection: "column"}}>
-          <textarea onChange={updateInputValue} value={userInput}/>
-          <textarea value={result}/>
+          <textarea value={question} onChange={updateOnChange(setQuestion)}/>
+          <textarea value={answer} onChange={updateOnChange(setAnswer)}/>
+          <textarea value={selectedText}/>
           <button onClick={callGPT3}>Generate Result</button>
           <button onClick={addNote}>Add Card</button>
           {apiKeyMessage}
           {ankiKeyMessage}
+          {ankiDeckMessage}
         </div>)}
         {!isHttps && (<h1>HTTPS is required for this extension to work</h1>)}
     </div>        

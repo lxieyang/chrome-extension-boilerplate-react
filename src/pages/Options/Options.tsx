@@ -4,86 +4,90 @@ import './Options.css';
 const Options: React.FC = () => {
   const [apiKey, setApiKey] = React.useState<string>('');
   const [ankiKey, setAnkiKey] = React.useState<string>('');
+  const [ankiDeck, setAnkiDeck] = React.useState<string>('');
   // Load saved keys, if they exists.
   useEffect(() => {
     chrome.storage.sync.get({
       apiKey: '',
       ankiKey: '',
-    }, function(items) {
+      ankiDeck: '',
+    }, function (items) {
       setApiKey(items.apiKey);
       setAnkiKey(items.ankiKey);
+      setAnkiDeck(items.ankiDeck);
     });
   }, []);
 
-  function handleApiKeyChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
-    setApiKey(event.target.value);
+  function generateStateChangeHandler(setter) {
+    return function (event: React.ChangeEvent<HTMLTextAreaElement>) {
+      setter(event.target.value);
+    }
   }
 
-  function handleAnkiKeyChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
-    setAnkiKey(event.target.value);
+  function generateHandleSaveClick(name, state, setter) {
+    return function () {
+      chrome.storage.sync.set({
+        [name]: state,
+      }, function () {
+        // Update status to let user know options were saved.
+        const realState = state;
+        setter('Options saved');
+        setTimeout(function () {
+          setter(realState);
+        }, 750);
+        /*
+        try {
+          chrome.runtime.sendMessage({"message": "options"});
+        } catch {
+          console.error("Didn't send message")
+        }
+        */
+      })
+    }
   }
 
-  function handleSaveClick() {
-    chrome.storage.sync.set({
-      apiKey: apiKey,
-    }, function() {
-      // Update status to let user know options were saved.
-      const realApiKey = apiKey;
-      setApiKey('Options saved');
-      setTimeout(function() {
-        setApiKey(realApiKey);
-      }, 750);
-    })
+  function generateUnsetter(name, setter) {
+    return function () {
+      chrome.storage.sync.set({
+        [name]: '',
+      }, async function () {
+        // Update status to let user know options were saved.
+        await setter('Options saved');
+        setTimeout(function () {
+          setter('');
+        }, 750);
+        /*
+        console.log("Made it!")
+        try {
+          await chrome.runtime.sendMessage({"message": "options"});
+          console.log("Sent message!")
+          chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
+            var activeTab = tabs[0];
+            chrome.tabs.sendMessage(activeTab.id, {"message": "popup"});
+        });
+        } catch {
+          console.error("Didn't send message")
+        }
+        */
+      })
+    }
   }
 
-  function unsetApiKey() {
-    chrome.storage.sync.set({
-      apiKey: '',
-    }, function() {
-      // Update status to let user know options were saved.
-      setApiKey('Options saved');
-      setTimeout(function() {
-        setApiKey('');
-      }, 750);
-    })
+  function setterElement(name, state, setter, title) {
+    return <div>
+    <p>{title}</p>
+    <textarea value={state} onChange={generateStateChangeHandler(setter)}></textarea>
+    <div>
+      <button onClick={generateHandleSaveClick(name, state, setter)}>Save</button>
+      <button onClick={generateUnsetter(name, setter)}>Unset</button>
+    </div>
+  </div>
   }
-
-  function handleAnkiSaveClick() {
-    chrome.storage.sync.set({
-      ankiKey: ankiKey,
-    }, function() {
-      // Update status to let user know options were saved.
-      const realAnkiKey = ankiKey;
-      setAnkiKey('Options saved');
-      setTimeout(function() {
-        setAnkiKey(realAnkiKey);
-      }, 750);
-    })
-  }
-
-  function unsetAnkiKey() {
-    chrome.storage.sync.set({
-      ankiKey: '',
-    }, function() {
-      // Update status to let user know options were saved.
-      setAnkiKey('Options saved');
-      setTimeout(function() {
-        setAnkiKey('');
-      }, 750);
-    })
-  }
-  
-
 
   return <div className="OptionsContainer">
-    <h1>Set OpenAI API key</h1>
-    <textarea value={apiKey} onChange={handleApiKeyChange}></textarea>
-    <button onClick={handleSaveClick}>Save</button>
-    <button onClick={unsetApiKey}>Unset</button>
-    <h1>Set Anki API key</h1>
-    <textarea value={ankiKey} onChange={handleAnkiKeyChange}></textarea>
-    <button onClick={handleAnkiSaveClick}>Save</button>
-    <button onClick={unsetAnkiKey}>Unset</button>
+    {setterElement("apiKey", apiKey, setApiKey, "Open AI API Key")}
+    {setterElement("ankiKey", ankiKey, setAnkiKey, "Anki API Key")}
+    {setterElement("ankiDeck", ankiDeck, setAnkiDeck, "Anki Deck")}
   </div>;
 };
 
