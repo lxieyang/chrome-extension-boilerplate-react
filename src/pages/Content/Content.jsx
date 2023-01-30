@@ -156,6 +156,9 @@ const Content = () => {
     <div className="Initial">
     <div style={{visibility: isVisible ? "visible" : "hidden"}}>
     <div className="App">
+      <div>
+        <button onClick={() => setIsVisible(false)}>Close</button>
+      </div>
         {isHttps && (<div style={{display: "flex", flexDirection: "column"}}>
           <textarea value={question} onChange={updateOnChange(setQuestion)}/>
           <textarea value={answer} onChange={updateOnChange(setAnswer)}/>
