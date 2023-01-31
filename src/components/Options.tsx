@@ -1,13 +1,19 @@
 import React, { useEffect } from 'react';
-import './Options.css';
 
-const Options: React.FC = () => {
+interface OptionsPrompts {
+    storage: {
+      get: (keys: string | string[] | { [key: string]: any } | null, callback: (items: { [key: string]: any }) => void) => void;
+      set: (items: { [key: string]: any }, callback?: () => void) => void
+    }
+}
+
+function Options({storage}: OptionsPrompts) {
   const [apiKey, setApiKey] = React.useState<string>('');
   const [ankiKey, setAnkiKey] = React.useState<string>('');
   const [ankiDeck, setAnkiDeck] = React.useState<string>('');
   // Load saved keys, if they exists.
   useEffect(() => {
-    chrome.storage.sync.get({
+    storage.get({
       apiKey: '',
       ankiKey: '',
       ankiDeck: '',
@@ -26,7 +32,7 @@ const Options: React.FC = () => {
 
   function generateHandleSaveClick(name, state, setter) {
     return function () {
-      chrome.storage.sync.set({
+      storage.set({
         [name]: state,
       }, function () {
         // Update status to let user know options were saved.
@@ -48,7 +54,7 @@ const Options: React.FC = () => {
 
   function generateUnsetter(name, setter) {
     return function () {
-      chrome.storage.sync.set({
+      storage.set({
         [name]: '',
       }, async function () {
         // Update status to let user know options were saved.
@@ -74,7 +80,7 @@ const Options: React.FC = () => {
   }
 
   function setterElement(name, state, setter, title) {
-    return <div className="flex flex-col justify-center text-center">
+    return <div className="flex flex-col justify-center text-center text-red-400">
     <p>{title}</p>
     <textarea value={state} onChange={generateStateChangeHandler(setter)}></textarea>
     <div>
