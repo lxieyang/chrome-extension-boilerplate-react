@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 
 import Content from './Content';
 import './index.css';
+import '../../assets/styles/tailwind.css';
 
 
 console.log('Content script works!');

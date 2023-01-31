@@ -9,4 +9,4 @@ To use it:
 Happy prompt making!
 
 
-This uses the React Chrome Extension template by Michael Xieyang Liu | [Website](https://lxieyang.github.io)
+This uses the React Chrome Extension template by Michael Xieyang Liu | [Website](https://lxieyang.github.io) and code from https://github.com/yewsiang/tailwind-react-chrome-extension-template to make Tailwind work

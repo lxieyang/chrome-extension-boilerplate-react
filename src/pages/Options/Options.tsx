@@ -74,7 +74,7 @@ const Options: React.FC = () => {
   }
 
   function setterElement(name, state, setter, title) {
-    return <div>
+    return <div className="flex flex-col justify-center text-center">
     <p>{title}</p>
     <textarea value={state} onChange={generateStateChangeHandler(setter)}></textarea>
     <div>

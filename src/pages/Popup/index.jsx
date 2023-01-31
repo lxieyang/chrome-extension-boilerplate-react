@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 
 import Popup from './Popup';
 import './index.css';
+import '../../assets/styles/tailwind.css';
 
 
 chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
