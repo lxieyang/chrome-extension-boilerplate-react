@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './Content.css';
 
-const promptTemplate = "You are an intelligent summarization bot that splits text passages into questions and answers for use in Anki spaced repetition cards.\n\nText: Dogs chase cats because they are hungry.\nQuestion: Why do dogs chase cats?\nAnswer: Because they are hungry\n\nText: {}"
+const promptTemplate = "You are an intelligent summarization bot that splits text passages into questions and answers for use in Anki spaced repetition cards. The question and answer will total less than {words} words.\n\nText: Dogs chase cats because they are hungry.\nQuestion: Why do dogs chase cats?\nAnswer: Because they are hungry\n\nText: {selectedText}"
 
 
 function updateOnChange(setter) {
@@ -14,12 +14,13 @@ const Content = () => {
   const [apiKey, setApiKey] = React.useState(null);
   const [ankiKey, setAnkiKey] = React.useState(null);
   const [ankiDeck, setAnkiDeck] = React.useState(null);
-  const [question, setQuestion] = React.useState('Question will appear here');
-  const [answer, setAnswer] = React.useState('Answer will appear here');
+  const [question, setQuestion] = React.useState('');
+  const [answer, setAnswer] = React.useState('');
   const [isHttps, setIsHttps] = React.useState(true);
   const [isVisible, setIsVisible] = React.useState(false);
   const [selectedText, setSelectedText] = React.useState("");
   const [disabled, setDisabled] = React.useState(false);
+  const [words, setWords] = React.useState(100);
 
   // Define here so we can delete it 
   function selectionChange() {
@@ -87,8 +88,8 @@ const Content = () => {
         },
         body: JSON.stringify({
             model: "text-davinci-003",
-            prompt: promptTemplate.replace('{}', selectedText),
-            temperature:0.5,
+            prompt: promptTemplate.replace('{selectedText}', selectedText).replace("{words}", words),
+            temperature:0,
             max_tokens: 100,
         })
     };
@@ -164,6 +165,14 @@ const Content = () => {
     setIsVisible(false);
     console.log("set visible to false")
   }
+
+  // slider that changes token value
+  const slider = (
+    <div>
+      <input type="range" min="30" max="100" value={words} className="slider" id="myRange" onChange={updateOnChange(setWords)}/>
+      <p>Number of words: {words}</p>
+    </div>
+  );
   
 
   return (
@@ -177,11 +186,12 @@ const Content = () => {
         <button onClick={disable}>Disable</button>
       </div>
         {isHttps && (<div style={{display: "flex", flexDirection: "column"}}>
-          <textarea value={question} onChange={updateOnChange(setQuestion)}/>
-          <textarea value={answer} onChange={updateOnChange(setAnswer)}/>
+          <textarea value={question} onChange={updateOnChange(setQuestion)} placeholder="Question"/>
+          <textarea value={answer} onChange={updateOnChange(setAnswer)} placeholder="Answer"/>
           <textarea value={selectedText}/>
           <button onClick={callGPT3}>Generate Result</button>
           <button onClick={addNote}>Add Card</button>
+          {slider}
           {apiKeyMessage}
           {ankiKeyMessage}
           {ankiDeckMessage}
