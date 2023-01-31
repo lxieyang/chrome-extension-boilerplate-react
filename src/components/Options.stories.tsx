@@ -1,11 +1,11 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import Options from './Options';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Example/Options',
+  title: 'Options',
   component: Options,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
