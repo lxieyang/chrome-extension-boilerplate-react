@@ -1,5 +1,0 @@
-#app-container {
-    /*all: initial; /*We don't want to inherit anything from the page or injected stylesheets*/
-    /* We need to import the tailwind file to overwrite the website CSS */
-
-  }

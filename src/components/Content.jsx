@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import './Content.css';
 
 const promptTemplate = "You are an intelligent summarization bot that splits text passages into questions and answers for use in Anki spaced repetition cards. The question and answer will total less than {words} words.\n\nText: Dogs chase cats because they are hungry.\nQuestion: Why do dogs chase cats?\nAnswer: Because they are hungry\n\nText: {selectedText}"
 

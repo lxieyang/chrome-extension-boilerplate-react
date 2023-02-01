@@ -2,8 +2,7 @@ import { printLine } from './modules/print';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
-import Content from './Content';
-import './index.css';
+import Content from '../../components/Content';
 import ContentContainer from '../../components/ContentContainer';
 
 
