@@ -1,14 +1,23 @@
 import React, { useEffect } from "react";
-export default function ContentContainer({ children }) {
+
+export interface ContentContainerProps {
+    children: React.ReactElement;
+    // For UI testing
+    _visible?: boolean;
+    _disabled?: boolean;
+}
+
+export default function ContentContainer({ children, _visible, _disabled }: ContentContainerProps) {
     // Visibility State
-    const [visible, setVisible] = React.useState(false);
-    const [disabled, setDisabled] = React.useState(false);
+    const [visible, setVisible] = React.useState(_visible || false);
+    const [disabled, setDisabled] = React.useState(_disabled || false);
 
+    // For UI testing
     useEffect(() => {
-        console.log("ContentContainer: " + visible + " " + disabled)
-    }, [visible, disabled])
-
-    console.log("ContentContainer: " + visible + " " + disabled)
+        console.log("visibility changed")
+        setVisible(_visible || false);
+        setDisabled(_disabled || false);
+    }, [_visible, _disabled]);
 
     return (    
         <div style={{ visibility: (visible && !disabled) ? "visible" : "hidden" }}>
