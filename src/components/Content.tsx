@@ -9,16 +9,30 @@ function updateOnChange(setter) {
   }
 }
 
-const Content = ({setVisible, setDisabled}) => {
+export interface ContentProps {
+  setVisible: (isVisible: boolean) => void;
+  storage: {
+    get: (keys: string | string[] | { [key: string]: any } | null, callback: (items: { [key: string]: any }) => void) => void;
+    set: (items: { [key: string]: any }, callback?: () => void) => void
+  },
+  runtime: {
+    onMessage: {
+      addListener: (callback: (message: any, sender: any, sendResponse: any) => void) => void
+    },
+    sendMessage: (message: any, callback?: (response: any) => void) => void
+  },
+  // for UI testing
+  ignoreHttp?: boolean
+  }
+
+const Content = ({setVisible, storage, runtime, ignoreHttp}: ContentProps) => {
   const [apiKey, setApiKey] = React.useState(null);
   const [ankiKey, setAnkiKey] = React.useState(null);
   const [ankiDeck, setAnkiDeck] = React.useState(null);
   const [question, setQuestion] = React.useState('');
   const [answer, setAnswer] = React.useState('');
   const [isHttps, setIsHttps] = React.useState(true);
-  //const [isVisible, setIsVisible] = React.useState(false);
   const [selectedText, setSelectedText] = React.useState("");
-  //const [disabled, setDisabled] = React.useState(false);
   const [words, setWords] = React.useState(100);
 
   // Define here so we can delete it 
@@ -34,7 +48,7 @@ const Content = ({setVisible, setDisabled}) => {
 
   useEffect(() => {
     // Get API key and anki key from storage
-    chrome.storage.sync.get({
+    storage.get({
       apiKey: '',
       ankiKey: '',
       ankiDeck: '',
@@ -44,11 +58,11 @@ const Content = ({setVisible, setDisabled}) => {
       setAnkiDeck(items.ankiDeck);
     });
     // Check if page is https
-    if (window.location.protocol !== "https:") {
+    if (window.location.protocol !== "https:" && !ignoreHttp) {
       setIsHttps(false);
     }
     // Add listener for the popup and options events
-    chrome.runtime.onMessage.addListener(
+    runtime.onMessage.addListener(
       function(request, sender, sendResponse) {
         console.log(request)
         console.log(sender)
@@ -58,7 +72,7 @@ const Content = ({setVisible, setDisabled}) => {
         }
         if (request.message === "options") {
           console.log("Received new options settings");
-          chrome.storage.sync.get({
+          storage.get({
             apiKey: '',
             ankiKey: '',
             ankiDeck: '',
@@ -140,7 +154,7 @@ const Content = ({setVisible, setDisabled}) => {
 }
 
   async function openOptions() {
-    await chrome.runtime.sendMessage({ action: "openOptionsPage" });
+    await runtime.sendMessage({ action: "openOptionsPage" });
   }
 
   let apiKeyMessage = null;
@@ -158,13 +172,6 @@ const Content = ({setVisible, setDisabled}) => {
     ankiDeckMessage = <h1><button onClick={openOptions}>You need to set the Anki deck</button></h1>
   }
 
-  function disable() {
-    setDisabled(true);
-    console.log("Set disabled to true")
-    setVisible(false);
-    console.log("set visible to false")
-  }
-
   // slider that changes token value
   const slider = (
     <div>
@@ -179,12 +186,6 @@ const Content = ({setVisible, setDisabled}) => {
     {/*<div style={{visibility: (isVisible && !disabled) ? "visible" : "hidden"}}> */}
     <div>
     <div className="App">
-      <div>
-        <button onClick={() => setVisible(false)}>Close</button>
-      </div>
-      <div>
-        <button onClick={disable}>Disable</button>
-      </div>
         {isHttps && (<div style={{display: "flex", flexDirection: "column"}}>
           <textarea value={question} onChange={updateOnChange(setQuestion)} placeholder="Question"/>
           <textarea value={answer} onChange={updateOnChange(setAnswer)} placeholder="Answer"/>

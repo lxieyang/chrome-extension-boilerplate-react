@@ -30,5 +30,5 @@ document.body.appendChild(newDiv);
 const root = createRoot(shadow); // createRoot(container!) if you use TypeScript
 // This works.
 //const popup = React.createElement(() => <span>Inside of React!</span>, {});
-const popup = React.createElement(() => <ContentContainer><Content/></ContentContainer>, {});
+const popup = React.createElement(() => <ContentContainer><Content storage={chrome.storage.sync} runtime={chrome.runtime}/></ContentContainer>, {});
 root.render(popup);

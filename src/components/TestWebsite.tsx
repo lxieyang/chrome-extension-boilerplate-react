@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import ContentContainer, { ContentContainerProps } from "./ContentContainer";
+import Content from "./Content";
 
 export interface TestWebpageProps {
     children: React.ReactElement;
@@ -38,7 +39,7 @@ export default function TestWebpage({children, backgroundColor, containerProps})
             </p>
         </div>
         <ContentContainer _visible={visible} _disabled={disabled}>
-            <p>Test</p>
+            {children}
         </ContentContainer>
     </div>
     }

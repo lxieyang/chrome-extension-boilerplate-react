@@ -2,6 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import Options from './Options';
+import { fakeStorage } from './Fakes';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -16,16 +17,8 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Options> = (args) => <Options {...args} />;
 
-function fakeGetStorage(defaults, callback) {
-  callback(defaults);
-}
-
-function fakeSetStorage(callback) {
-  callback();
-}
-
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  storage: {get: fakeGetStorage, set: fakeSetStorage}
+  storage: fakeStorage
 };

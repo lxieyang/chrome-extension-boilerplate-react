@@ -13,37 +13,17 @@ export default {
     },
 } as ComponentMeta<typeof ContentContainer>;
 
-// A lorem ipsum website
-function webpage(args) { 
-<div>
-    <div>
-    <h1>Lorem Ipsum</h1>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl nec ultricies
-        tincidunt, nunc nisl aliquam mauris, eget aliquet nisl nunc eget nisl. Sed euismod, nisl nec
-        ultricies tincidunt, nunc nisl aliquam mauris, eget aliquet nisl nunc eget nisl. Sed euismod,
-        nisl nec ultricies tincidunt, nunc nisl aliquam mauris, eget aliquet nisl nunc eget nisl. Sed
-        euismod, nisl nec ultricies tincidunt, nunc nisl aliquam mauris, eget aliquet nisl nunc eget
-        nisl. Sed euismod, nisl nec ultricies tincidunt, nunc nisl aliquam mauris, eget aliquet nisl
-        nunc eget nisl. Sed euismod, nisl nec ultricies tincidunt, nunc nisl aliquam mauris, eget
-        aliquet nisl nunc eget nisl. Sed euismod, nisl nec ultricies tincidunt, nunc nisl aliquam
-        mauris, eget aliquet nisl nunc eget nisl. Sed euismod, nisl nec ultricies tincidunt, nunc nisl
-        aliquam mauris, eget aliquet nisl nunc eget nisl. Sed euismod, nisl nec ultricies tincidunt,
-        nunc nisl aliquam mauris, eget aliquet nisl nunc eget nisl. Sed euismod, nisl nec ultricies
-        tincidunt, nunc nisl aliquam mauris, eget aliquet nisl nunc eget nisl. Sed euismod, nisl nec
-        </p>
-    </div>
-    <ContentContainer {...args} />
-</div>
-}
-
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof ContentContainer> = (args) => webpage(args);
+const Template: ComponentStory<typeof ContentContainer> = (args) => <ContentContainer {...args} />;
 
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-    children: <p>Test</p>,
+    children: (<div className="flex flex-col">
+        <p>Testing so many differenet things</p>
+        <p>Testing so many differenet things</p>
+        <p>Testing so many differenet things</p>
+        </div>),
     _visible: true,
     _disabled: false,
 };

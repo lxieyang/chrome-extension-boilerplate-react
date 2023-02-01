@@ -2,6 +2,8 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import TestWebsite from './TestWebsite';
+import Content from './Content';
+import { fakeRuntime, fakeStorage } from './Fakes';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -20,7 +22,7 @@ const Template: ComponentStory<typeof TestWebsite> = (args) => <TestWebsite {...
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-    children: <p>Test</p>,
+    children: <Content setVisible={() => null} storage={fakeStorage} runtime={fakeRuntime} ignoreHttp={true}/>,
     containerProps: {
         _visible: true,
         _disabled: false,
