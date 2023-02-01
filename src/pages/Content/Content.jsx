@@ -10,16 +10,16 @@ function updateOnChange(setter) {
   }
 }
 
-const Content = () => {
+const Content = ({setVisible, setDisabled}) => {
   const [apiKey, setApiKey] = React.useState(null);
   const [ankiKey, setAnkiKey] = React.useState(null);
   const [ankiDeck, setAnkiDeck] = React.useState(null);
   const [question, setQuestion] = React.useState('');
   const [answer, setAnswer] = React.useState('');
   const [isHttps, setIsHttps] = React.useState(true);
-  const [isVisible, setIsVisible] = React.useState(false);
+  //const [isVisible, setIsVisible] = React.useState(false);
   const [selectedText, setSelectedText] = React.useState("");
-  const [disabled, setDisabled] = React.useState(false);
+  //const [disabled, setDisabled] = React.useState(false);
   const [words, setWords] = React.useState(100);
 
   // Define here so we can delete it 
@@ -27,9 +27,9 @@ const Content = () => {
     const selection = window.getSelection().toString();
     setSelectedText(selection);
     if (selection !== "") {
-      console.log(disabled)
+      //console.log(disabled)
       console.log("setting visible")
-      setIsVisible(true);
+      setVisible(true);
     }
   }
 
@@ -55,7 +55,7 @@ const Content = () => {
         console.log(sender)
         if (request.message === "popup") {
           console.log("receieved popup message")
-          setIsVisible((isVisible) => !isVisible); // needed due to variable scoping reasons? seems like it gets fixed at initial value
+          setVisible((isVisible) => !isVisible); // needed due to variable scoping reasons? seems like it gets fixed at initial value
         }
         if (request.message === "options") {
           console.log("Received new options settings");
@@ -162,7 +162,7 @@ const Content = () => {
   function disable() {
     setDisabled(true);
     console.log("Set disabled to true")
-    setIsVisible(false);
+    setVisible(false);
     console.log("set visible to false")
   }
 
@@ -177,10 +177,11 @@ const Content = () => {
 
   return (
     <div className="Initial">
-    <div style={{visibility: (isVisible && !disabled) ? "visible" : "hidden"}}>
+    {/*<div style={{visibility: (isVisible && !disabled) ? "visible" : "hidden"}}> */}
+    <div>
     <div className="App">
       <div>
-        <button onClick={() => setIsVisible(false)}>Close</button>
+        <button onClick={() => setVisible(false)}>Close</button>
       </div>
       <div>
         <button onClick={disable}>Disable</button>
