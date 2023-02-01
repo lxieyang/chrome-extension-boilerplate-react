@@ -567,6 +567,10 @@ video {
   right: 0px;
 }
 
+.z-max {
+  z-index: 2147483647;
+}
+
 .flex {
   display: flex;
 }
