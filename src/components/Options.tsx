@@ -57,6 +57,9 @@ function Options({storage}: OptionsPrompts) {
       ankiDeck: "",
     }, function () {
       // Update status to let user know options were saved.
+      setAnkiKey("");
+      setApiKey("");
+      setAnkiDeck("");
       setClearButtonText('Settings cleared');
       setTimeout(function () {
         setClearButtonText('Clear');
@@ -76,7 +79,7 @@ function Options({storage}: OptionsPrompts) {
     {setterElement(ankiKey, setAnkiKey, "Anki API Key")}
     {setterElement(ankiDeck, setAnkiDeck, "Anki Deck")}
     <button className="flex items-center justify-center mt-2 mb-2 border-2 rounded-md hover:bg-sky-200 bg-slate-300 px-1" onClick={save}>{saveButtonText}</button>
-    <button className="flex items-center justify-center mt-2 mb-2 border-2 rounded-md hover:bg-sky-200 bg-red-300 px-1" onClick={save}>{clearButtonText}</button>
+    <button className="flex items-center justify-center mt-2 mb-2 border-2 rounded-md hover:bg-sky-200 bg-red-300 px-1" onClick={clear}>{clearButtonText}</button>
   </div>;
 };
 
