@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Button from "./Button";
 
 export interface ContentContainerProps {
     children: React.ReactElement;
@@ -42,20 +41,20 @@ export default function ContentContainer({ children, _visible, _disabled, _minim
 
     return (
         <div className={`${visible && !disabled ? "visible" : "invisible"}`}>
-            <div className="fixed top-0 bottom-0 right-0 h-screen flex flex-row items-center bg-gray-200 border-gray-600 border z-max transition ease-in-out">
-                <div className="bg-gray-400 flex flex-col self-stretch shadow-lg">
+            <div className="fixed top-0 bottom-0 right-0 h-screen flex flex-row items-center bg-slate-100 border-gray-600 border z-max transition ease-in-out">
+                <div className="bg-slate-400 flex flex-col self-stretch shadow-lg">
                     <div className="flex self-start">
-                        <Button onClick={() => setDisabled(true)}>
+                        <button className="hover:bg-sky-200 border border-black" onClick={() => setDisabled(true)}>
                             {xIcon}
-                        </Button>
+                        </button>
                     </div>
                     <div className="flex grow self-stretch">
-                        <Button onClick={() => setMinimized((minimized) => !minimized)}>
+                        <button className="hover:bg-sky-200 border border-black" onClick={() => setMinimized((minimized) => !minimized)}>
                             {buttonIcon}
-                        </Button>
+                        </button>
                     </div>
                 </div>
-                <div className={`${minimized ? "hidden" : ""}`}>
+                <div className={`${minimized ? "hidden" : ""} self-start`}>
                     {React.cloneElement(children, { setVisible: setVisible, setDisabled: setDisabled })}
                 </div>
             </div>

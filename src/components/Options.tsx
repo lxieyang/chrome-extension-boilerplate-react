@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Button from './Button';
 
 interface OptionsPrompts {
     storage: {
@@ -13,6 +12,7 @@ function Options({storage}: OptionsPrompts) {
   const [ankiKey, setAnkiKey] = React.useState<string>('');
   const [ankiDeck, setAnkiDeck] = React.useState<string>('');
   const [saveButtonText, setSaveButtonText] = React.useState<string>('Save');
+  const [clearButtonText, setClearButtonText] = React.useState<string>('Clear');
   // Load saved keys, if they exists.
   useEffect(() => {
     storage.get({
@@ -33,6 +33,10 @@ function Options({storage}: OptionsPrompts) {
   }
 
   function save() {
+    if (apiKey === '' || ankiKey === '' || ankiDeck === '') {
+      setSaveButtonText('Please fill out all fields');
+      return;
+    }
     storage.set({
       apiKey: apiKey,
       ankiKey: ankiKey,
@@ -46,18 +50,33 @@ function Options({storage}: OptionsPrompts) {
     })
   }
 
+  function clear() {
+    storage.set({
+      apiKey: "",
+      ankiKey: "",
+      ankiDeck: "",
+    }, function () {
+      // Update status to let user know options were saved.
+      setClearButtonText('Settings cleared');
+      setTimeout(function () {
+        setClearButtonText('Clear');
+      }, 750);
+    })
+  }
+
   function setterElement(state, setter, title) {
-    return <div className="flex flex-row pb-3 items-center">
-    <p className="pr-2">{title}:</p>
-    <input className="border-2 rounded-md px-1" value={state} onChange={generateStateChangeHandler(setter)}></input>
+    return <div className="flex flex-col pb-3 items-center">
+    <p className="pr-2">{title}</p>
+    <input className="flex border-2 rounded-md px-1 justify-self-end grow" value={state} onChange={generateStateChangeHandler(setter)}></input>
   </div>
   }
 
-  return <div className="flex flex-col p-2">
+  return <div className="flex flex-col p-2 w-fit">
     {setterElement(apiKey, setApiKey, "Open AI API Key")}
     {setterElement(ankiKey, setAnkiKey, "Anki API Key")}
     {setterElement(ankiDeck, setAnkiDeck, "Anki Deck")}
-    <Button onClick={save} text={saveButtonText}/>
+    <button className="flex items-center justify-center mt-2 mb-2 border-2 rounded-md hover:bg-sky-200 bg-slate-300 px-1" onClick={save}>{saveButtonText}</button>
+    <button className="flex items-center justify-center mt-2 mb-2 border-2 rounded-md hover:bg-sky-200 bg-red-300 px-1" onClick={save}>{clearButtonText}</button>
   </div>;
 };
 
