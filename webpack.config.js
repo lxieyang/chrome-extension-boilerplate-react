@@ -95,7 +95,7 @@ var options = {
             loader: require.resolve('ts-loader'),
             options: {
               getCustomTransformers: () => ({
-                before: [isDevelopment && ReactRefreshTypeScript()].filter(
+                before: [/*isDevelopment && ReactRefreshTypeScript()*/].filter(
                   Boolean
                 ),
               }),
@@ -114,7 +114,7 @@ var options = {
             loader: require.resolve('babel-loader'),
             options: {
               plugins: [
-                isDevelopment && require.resolve('react-refresh/babel'),
+                /*isDevelopment && require.resolve('react-refresh/babel'),*/
               ].filter(Boolean),
             },
           },
@@ -130,7 +130,7 @@ var options = {
       .concat(['.js', '.jsx', '.ts', '.tsx', '.css']),
   },
   plugins: [
-    isDevelopment && new ReactRefreshWebpackPlugin(),
+    //isDevelopment && new ReactRefreshWebpackPlugin(),
     new CleanWebpackPlugin({ verbose: false }),
     new webpack.ProgressPlugin(),
     // expose and write the allowed env vars on the compiled bundle
