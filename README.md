@@ -8,5 +8,7 @@ To use it:
 
 Happy prompt making!
 
+Video of it in action: https://twitter.com/i/status/1621025729013239813
+
 
 This uses the React Chrome Extension template by Michael Xieyang Liu | [Website](https://lxieyang.github.io) and code from https://github.com/yewsiang/tailwind-react-chrome-extension-template to make Tailwind work
