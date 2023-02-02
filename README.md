@@ -4,7 +4,11 @@ To use it:
 
 Before installing extension:
 1. Install and configure anki-connect plugin for your desktop Anki client (ankiweb does not provide API access so this is necessary to programmatically insert cards).
-2. Obtain an OpenAI API Key if you do not already have one
+2. Add ankiconnect API key [ankiconnect](/ankiconnect.png)
+  1. Go to Add Ons Page in Anki
+  2. Click on AnkiConnect
+  3. It will pop up a JSON that you can edit.  Insert your secret key (something you make up), and then use that same key you made up in the chrome extension. The reason for setting this is because the extension will be talking to your Anki instance, and if we don't set a key than any random website that decides to call localhost at that port will be able to interact with your deck which you don't want.
+3. Obtain an OpenAI API Key if you do not already have one
 
 Installing extension:
 1. npm install
