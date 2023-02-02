@@ -210,15 +210,24 @@ const Content = ({ setVisible, storage, runtime, ignoreHttp }: ContentProps) => 
   return (
     <div className='p-2'>
       <h1 className='mb-2 text-center'>{"Anki + LLMs = 🖤"}</h1>
-      {isHttps && (<div style={{ display: "flex", flexDirection: "column" }}>
+      {isHttps && (<div className="flex flex-col w-fixed h-auto w-64">
       <div className="border rounded-md p-1 border-slate-400 mb-2">
           <input className="accent-sky-300" type="range" min="10" max="100" value={words} onChange={updateOnChange(setWords)} />
           <p>Max number of words: {words}</p>
         </div>
         <button className={`flex items-center justify-center mb-2 border-2 rounded-md ${canPressGenerate ? "hover:bg-sky-200" : "cursor-not-allowed"} bg-slate-300`} onClick={callGPT3} disabled={!canPressGenerate}>{callingOpenAi ? spinnerIcon : "Generate"}</button>      
-        <textarea className="mb-2 rounded-md p-1 border border-slate-400" value={question} onChange={updateOnChange(setQuestion)} placeholder="Generated Question" />
-        <textarea className="mb-2 rounded-md p-1 border border-slate-400" value={answer} onChange={updateOnChange(setAnswer)} placeholder="Generated Answer" />
-        <textarea className="mb-2 rounded-md p-1 border border-slate-400" value={selectedText} placeholder="Selection" />
+        <div className="mb-2 rounded-md p-1 border border-slate-400" onChange={updateOnChange(setQuestion)} placeholder="Generated Question" contentEditable={true}>
+          <p>{question}</p>
+          {!question && <p className="text-slate-300">Generated Question</p>}
+        </div>
+        <div className="mb-2 rounded-md p-1 border border-slate-400" onChange={updateOnChange(setAnswer)} placeholder="Generated Answer" contentEditable={true}>
+          <p>{answer}</p>
+          {!answer && <p className="text-slate-300">Generated Answer</p>}
+        </div>
+        <div className="flex mb-2 rounded-md p-1 border border-slate-400 max-h-44 overflow-auto" placeholder="Selection">
+          {selectedText}
+          {!selectedText && <p className="text-slate-300">Selection</p>}
+        </div>
         <button className={`flex items-center justify-center mb-2 border-2 rounded-md ${canPressGenerate ? "hover:bg-sky-200" : "cursor-not-allowed"} bg-slate-300`} onClick={addNote} disabled={!canPressAdd}>{callingAnki ? spinnerIcon : "Add Note"}</button>
         <button className="flex items-center justify-center mb-2 border-2 rounded-md hover:bg-sky-200 bg-slate-300" onClick={openOptions}>Settings</button>
         {errorDisplay}
