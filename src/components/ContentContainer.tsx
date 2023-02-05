@@ -38,6 +38,25 @@ export default function ContentContainer({ children, _visible, _disabled, _minim
 
     const buttonIcon = minimized ? openIcon : closeIcon;
 
+    function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
+        if (event.key === "Escape") {
+            setDisabled(true);
+            document.removeEventListener("keydown", handleKeyDown)
+        }
+    }
+
+    useEffect(() => {
+        if (visible && !disabled) {
+            document.addEventListener("keydown", handleKeyDown);
+        } else {
+            document.removeEventListener("keydown", handleKeyDown);
+        }
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [visible])
+
 
     return (
         <div className={`${visible && !disabled ? "visible" : "invisible"}`}>
