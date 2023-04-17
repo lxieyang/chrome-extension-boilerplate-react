@@ -1,0 +1,8 @@
+#app-container {
+    /*all: initial; /*We don't want to inherit anything from the page or injected stylesheets*/
+    /* Manually setting these to counteract Google's injected CSS */
+    /* Google sets to 75%. This scales it back to 100% */
+    font-size: 133.333333333333333333333333%;
+    /* Copied from tailwind file. probably better way to do this */
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }

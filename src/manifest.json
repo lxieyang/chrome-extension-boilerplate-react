@@ -1,15 +1,12 @@
 {
   "manifest_version": 3,
-  "name": "Chrome Extension with React & Webpack",
-  "description": "A chrome extension boilerplate built with React 17, Webpack 5, and Webpack Dev Server 4",
+  "name": "Anki + LLMs",
+  "description": "Create and add Anki cards while browsing the web, with the aid of LLMs",
   "options_page": "options.html",
   "background": { "service_worker": "background.bundle.js" },
   "action": {
     "default_popup": "popup.html",
-    "default_icon": "icon-34.png"
-  },
-  "chrome_url_overrides": {
-    "newtab": "newtab.html"
+    "default_icon": "icon-32.png"
   },
   "icons": {
     "128": "icon-128.png"
@@ -17,15 +14,18 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*", "<all_urls>"],
-      "js": ["contentScript.bundle.js"],
-      "css": ["content.styles.css"]
+      "js": ["contentScript.bundle.js"]
     }
+  ],
+  "permissions": [
+    "storage",
+    "runtime"
   ],
   "devtools_page": "devtools.html",
   "web_accessible_resources": [
     {
-      "resources": ["content.styles.css", "icon-128.png", "icon-34.png"],
-      "matches": []
+      "resources": ["icon-128.png", "icon-32.png", "tailwind.css"],
+      "matches": ["<all_urls>"]
     }
   ]
 }

@@ -69,10 +69,7 @@ var options = {
             loader: 'css-loader',
           },
           {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-            },
+            loader: 'postcss-loader',
           },
         ],
       },
@@ -98,7 +95,7 @@ var options = {
             loader: require.resolve('ts-loader'),
             options: {
               getCustomTransformers: () => ({
-                before: [isDevelopment && ReactRefreshTypeScript()].filter(
+                before: [/*isDevelopment && ReactRefreshTypeScript()*/].filter(
                   Boolean
                 ),
               }),
@@ -117,7 +114,7 @@ var options = {
             loader: require.resolve('babel-loader'),
             options: {
               plugins: [
-                isDevelopment && require.resolve('react-refresh/babel'),
+                /*isDevelopment && require.resolve('react-refresh/babel'),*/
               ].filter(Boolean),
             },
           },
@@ -133,7 +130,7 @@ var options = {
       .concat(['.js', '.jsx', '.ts', '.tsx', '.css']),
   },
   plugins: [
-    isDevelopment && new ReactRefreshWebpackPlugin(),
+    //isDevelopment && new ReactRefreshWebpackPlugin(),
     new CleanWebpackPlugin({ verbose: false }),
     new webpack.ProgressPlugin(),
     // expose and write the allowed env vars on the compiled bundle
@@ -160,7 +157,7 @@ var options = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'src/pages/Content/content.styles.css',
+          from: 'src/assets/styles/tailwind.css',
           to: path.join(__dirname, 'build'),
           force: true,
         },
@@ -178,7 +175,7 @@ var options = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'src/assets/img/icon-34.png',
+          from: 'src/assets/img/icon-32.png',
           to: path.join(__dirname, 'build'),
           force: true,
         },
