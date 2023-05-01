@@ -144,6 +144,42 @@ const createScroller = async (url) => {
   FulfillmentCostHeader.setAttribute('class', 'fwfACD');
   FulfillmentCostHeader.innerText = 'Fulfillment Cost';
 
+  // commission fee percentage
+  const FulfillmentCostCommissionFeePercentageDiv =
+    document.createElement('div');
+  FulfillmentCostCommissionFeePercentageDiv.setAttribute('class', 'gpuHtG');
+
+  const FulfillmentCostCommissionFeePercentageDivText =
+    document.createElement('div');
+  FulfillmentCostCommissionFeePercentageDivText.setAttribute('class', 'hUvleg');
+  FulfillmentCostCommissionFeePercentageDivText.innerText =
+    'Commission Fee Percentage';
+
+  const FulfillmentCostCommissionFeePercentageDivValue =
+    document.createElement('div');
+  FulfillmentCostCommissionFeePercentageDivValue.setAttribute(
+    'id',
+    'commission-fee-percentage-div'
+  );
+  FulfillmentCostCommissionFeePercentageDivValue.innerHTML =
+    '<div class="jXiauJ"><div class="hgakEt"><div class="fyevUS">%</div><input value="10"></div></div>';
+  FulfillmentCostCommissionFeePercentageDivValue.querySelector(
+    'input'
+  ).addEventListener('input', async (event) => {
+    const newValue = event.target.value;
+    let scrapedData = await chrome.storage.local.get(url);
+    scrapedData = scrapedData[url];
+    scrapedData['commissionFeePercentage'] = newValue;
+    await chrome.storage.local.set({ [url]: scrapedData });
+    pcUpdater(url);
+  });
+
+  FulfillmentCostCommissionFeePercentageDiv.appendChild(
+    FulfillmentCostCommissionFeePercentageDivText
+  );
+  FulfillmentCostCommissionFeePercentageDiv.appendChild(
+    FulfillmentCostCommissionFeePercentageDivValue
+  );
   // commission fee
   const FulfillmentCostCommissionFeeDiv = document.createElement('div');
   FulfillmentCostCommissionFeeDiv.setAttribute('class', 'gpuHtG');
@@ -155,18 +191,7 @@ const createScroller = async (url) => {
   const FulfillmentCostCommissionFeeDivValue = document.createElement('div');
   FulfillmentCostCommissionFeeDivValue.setAttribute('id', 'commission-fee-div');
   FulfillmentCostCommissionFeeDivValue.innerHTML =
-    '<div class="jXiauJ"><div class="excrlk"><div class="hgakEt"><div class="fyevUS">₹</div><input value="140"></div></div></div>';
-  FulfillmentCostCommissionFeeDivValue.querySelector('input').addEventListener(
-    'input',
-    async (event) => {
-      const newValue = event.target.value;
-      let scrapedData = await chrome.storage.local.get(url);
-      scrapedData = scrapedData[url];
-      scrapedData['commissionFee'] = commaSeparatedStringToNumber(newValue);
-      await chrome.storage.local.set({ [url]: scrapedData });
-      pcUpdater(url);
-    }
-  );
+    '<div class="jXiauJ"><b>₹44.00</b></div>';
   FulfillmentCostCommissionFeeDiv.appendChild(
     FulfillmentCostCommissionFeeDivText
   );
@@ -308,6 +333,7 @@ const createScroller = async (url) => {
   PickAndPackFeeDiv.appendChild(PickAndPackFeeDivValue);
 
   ScrollerContent.appendChild(FulfillmentCostHeader);
+  ScrollerContent.appendChild(FulfillmentCostCommissionFeePercentageDiv);
   ScrollerContent.appendChild(FulfillmentCostCommissionFeeDiv);
   ScrollerContent.appendChild(FulfillmentCostCollectionFeeDiv);
   ScrollerContent.appendChild(FulfillmentCostFixedFeeDiv);

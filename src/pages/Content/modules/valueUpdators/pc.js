@@ -1,14 +1,10 @@
 import { round2Decimals } from '../utils.js';
+import { fixedFeeTable } from '../constants.js';
 export const pcFirstTimeUpdator = async (url) => {
   pcUpdater(url, { firstTime: true });
 };
 
 const pcUpdater = async (url, options) => {
-  const fixedFeeTable = {
-    300: 13,
-    500: 11,
-    1000: 24,
-  };
   let scrapedData = await chrome.storage.local.get(url);
   scrapedData = scrapedData[url];
   const price = scrapedData['price'];
@@ -21,7 +17,8 @@ const pcUpdater = async (url, options) => {
   const shippingType = scrapedData['shippingType'] || 'LOCAL';
   const manufacturingCost =
     scrapedData['manufacturingCost'] || (30 * price) / 100;
-  const commissionFee = scrapedData['commissionFee'] || 200;
+  const commissionFeePercentage = scrapedData['commissionFeePercentage'] || 10;
+  const commissionFee = (price * commissionFeePercentage) / 100;
   // if (options && options.firstTime) {
   // }
   const volumetricWeight = (length * breadth * height) / 5000;
@@ -84,8 +81,11 @@ const pcUpdater = async (url, options) => {
 
   doc.querySelector('#fixed-fee-div').querySelector('b').innerText = fixedFee;
   console.log('commissionFee', commissionFee);
-  doc.querySelector('#commission-fee-div').querySelector('input').value =
-    commissionFee;
+  doc
+    .querySelector('#commission-fee-percentage-div')
+    .querySelector('input').value = commissionFeePercentage;
+  doc.querySelector('#commission-fee-div').querySelector('b').innerText =
+    round2Decimals(commissionFee);
   doc.querySelector('#pick-and-pack').querySelector('b').innerText =
     pickAndPackFee;
   doc.querySelector('#collection-fee-div').querySelector('b').innerText =
