@@ -1,9 +1,29 @@
 import { round2Decimals } from '../utils.js';
-import { fixedFeeTable } from '../constants.js';
+import { fixedFeeTable, shippingFeeChart } from '../constants.js';
 export const pcFirstTimeUpdator = async (url) => {
   pcUpdater(url, { firstTime: true });
 };
 
+const _shippingFeeCalculator = (vWeight, shippingType) => {
+  const shippingCostByType = shippingFeeChart[shippingType];
+  // let shippingCost = 0;
+  if (vWeight > 12) {
+    return (Math.ceil(vWeight) - 12) * 4 + shippingCostByType['A'];
+  } else if (vWeight > 3) {
+    return (Math.ceil(vWeight) - 3) * 7 + shippingCostByType[12];
+  } else if (vWeight > 2.5) {
+    return shippingCostByType[3];
+  } else if (vWeight > 2) {
+    return shippingCostByType[2.5];
+  } else if (vWeight > 1.5) {
+    return shippingCostByType[2];
+  } else if (vWeight > 1) {
+    return shippingCostByType[1.5];
+  } else if (vWeight > 0.5) {
+    return shippingCostByType[1];
+  }
+  return shippingCostByType[0.5];
+};
 const pcUpdater = async (url, options) => {
   let scrapedData = await chrome.storage.local.get(url);
   scrapedData = scrapedData[url];
@@ -23,14 +43,17 @@ const pcUpdater = async (url, options) => {
   // }
   const volumetricWeight = (length * breadth * height) / 5000;
   const finalWeight = Math.max(weight, volumetricWeight);
-  console.log(commissionFee);
-  let shippingCost = 50;
+
+  let shippingCost = _shippingFeeCalculator(finalWeight, shippingType);
   if (sellerType === 'SILVER') {
     shippingCost = (90 * shippingCost) / 100;
   } else if (sellerType === 'GOLD') {
     shippingCost = (80 * shippingCost) / 100;
   }
-
+  if (sellerChannel === 'Smart' || sellerChannel === 'Self-Ship') {
+    shippingCost =
+      finalWeight < 7 ? (shippingCost * 105) / 100 : (shippingCost * 95) / 100;
+  }
   // collection fee is 2% of price
   const collectionFee = (price * 2) / 100;
 
