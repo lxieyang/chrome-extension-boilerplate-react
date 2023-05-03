@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "version": "1.0.0",
   "name": "Datavio",
-  "description": "A chrome extension to help you with competitor research",
+  "description": "A chrome extension to help you with analysing product pages on Flipkart",
   "background": { "service_worker": "background.bundle.js" },
   "action": {
     "default_popup": "popup.html",

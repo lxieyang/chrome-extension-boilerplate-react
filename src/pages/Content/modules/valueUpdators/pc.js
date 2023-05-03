@@ -77,16 +77,13 @@ const pcUpdater = async (url, options) => {
   }
   const marketplaceFee =
     collectionFee + fixedFee + shippingCost + commissionFee;
-  console.log('collectionFee', collectionFee);
-  console.log('fixedFee', fixedFee);
-  console.log('marketplaceFee', marketplaceFee);
-  console.log('shippingCost', shippingCost);
+
   const gst = (marketplaceFee * 18) / 100;
-  console.log('gst', gst);
+
   const net = price - manufacturingCost - marketplaceFee - pickAndPackFee - gst;
   const margin = (net * 100) / price;
   const roi = (net * 100) / manufacturingCost;
-  console.log(commissionFee);
+
   // update document
   const doc = document.getElementById('profitability-modal');
   doc.querySelector('#price-div').querySelector('input').value = price;
@@ -103,7 +100,7 @@ const pcUpdater = async (url, options) => {
   }
 
   doc.querySelector('#fixed-fee-div').querySelector('b').innerText = fixedFee;
-  console.log('commissionFee', commissionFee);
+
   doc
     .querySelector('#commission-fee-percentage-div')
     .querySelector('input').value = commissionFeePercentage;
