@@ -45,10 +45,19 @@ const bodyHeaderHeading = document.createElement('h3');
 bodyHeaderHeading.setAttribute('class', 'dfAZhR');
 bodyHeaderHeading.innerText = 'Total Reviews 83';
 
+bodyModalPlace1.appendChild(bodyHeader);
+
+bodyModalPlace.appendChild(bodyModalPlace1);
+
+body.appendChild(bodyModalPlace);
+header.appendChild(closeModal);
+modalClass2.appendChild(header);
+modalClass2.appendChild(body);
 bodyHeader.appendChild(bodyHeaderHeading);
 //body body
 const bodyBody = document.createElement('div');
 bodyBody.setAttribute('class', 'cTeFoo');
+bodyModalPlace1.appendChild(bodyBody);
 
 const productDetails = document.createElement('div');
 productDetails.setAttribute('class', 'jvntzP');
@@ -162,18 +171,10 @@ contentTop.appendChild(reviewsDiv2);
 contentTop.appendChild(reviewsDiv3);
 contentTop.appendChild(reviewsDiv4);
 contentTop.appendChild(reviewsDiv5);
-bodyBody.appendChild(contentTop);
+bodyBody.appendChild(contentDiv);
 bodyBody.appendChild(productDetails);
 
-bodyModalPlace1.appendChild(bodyHeader);
-bodyModalPlace1.appendChild(bodyBody);
-bodyModalPlace.appendChild(bodyModalPlace1);
 
-body.appendChild(bodyModalPlace);
-
-modalClass2.appendChild(body);
-header.appendChild(closeModal);
-modalClass2.appendChild(header);
 
     reviewsType1.onclick = async function () {
     reviewsType1.removeAttribute('class');

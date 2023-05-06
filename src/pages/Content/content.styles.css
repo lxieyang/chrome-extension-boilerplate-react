@@ -336,7 +336,7 @@
   -webkit-box-pack: center;
   justify-content: center;
   line-height: 1.5rem;
-  padding: 0px 32px;
+  padding: 0px 16px;
 }
 
 .cTeFoo {
@@ -351,13 +351,13 @@
   font-stretch: normal;
   font-style: normal;
   letter-spacing: normal;
-  margin: 0px 0px 16px;
+  margin: 16px 0px 16px;
   padding: 0px;
   text-transform: none;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 32px;
   color: rgb(19, 25, 31);
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .dLsaGN {
@@ -387,7 +387,7 @@
   align-items: flex-start;
   -webkit-box-pack: justify;
   justify-content: space-between;
-  padding: 0px 24px 0px 32px;
+  padding: 16px 24px 16px 16px;
 }
 
 .kbbAZG {
@@ -416,7 +416,7 @@
   text-transform: none;
   font-size: 14px;
   line-height: 18px;
-  font-weight: 700;
+  font-weight: 500;
   color: rgb(19, 25, 31);
   white-space: normal;
   overflow: hidden;
