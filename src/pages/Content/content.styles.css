@@ -372,3 +372,129 @@
   justify-content: space-around;
   align-items: flex-end;
 }
+
+.gQzYPz {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-y: auto;
+  padding-top: 16px;
+}
+
+.jvntzP {
+  display: flex;
+  align-items: flex-start;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  padding: 0px 24px 0px 32px;
+}
+
+.kbbAZG {
+  max-width: 85%;
+}
+
+.hodNct {
+  display: inline-flex;
+  align-items: flex-start;
+  min-width: 0px;
+}
+
+.dMQqCV {
+  display: flex;
+  flex-direction: column;
+  margin-left: 16px;
+  min-width: 0px;
+}
+
+.dydjeI {
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  margin: 0px;
+  padding: 0px;
+  text-transform: none;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 700;
+  color: rgb(19, 25, 31);
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.liSWKK .A {
+  opacity: 1;
+}
+.cRbJA {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out 0s;
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: rgb(10, 111, 232);
+  bottom: -2px;
+  left: 0px;
+}
+
+.dLsaGN {
+  width: 100%;
+  border-bottom: 1px solid rgb(217, 224, 232);
+  display: flex;
+  flex-direction: row;
+}
+.didbWK {
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.didbWK > :not(:last-child) {
+  margin-right: 32px;
+}
+
+.liSWKK {
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  margin: 0px;
+  padding: 0px 0px 12px;
+  text-transform: none;
+  font-size: 16px;
+  line-height: 24px;
+  position: relative;
+  transition: border-color 0.2s ease 0s, color 0.2s ease-in-out 0s;
+  color: rgb(43, 57, 72);
+  outline: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.liSWKK .gsckYT {
+  color: rgb(10, 111, 232);
+  font-weight: 600;
+}
+
+.hiLyrj {
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  margin: 0px;
+  padding: 0px 0px 12px;
+  text-transform: none;
+  font-size: 16px;
+  line-height: 24px;
+  position: relative;
+  transition: border-color 0.2s ease 0s, color 0.2s ease-in-out 0s;
+  color: rgb(43, 57, 72);
+  outline: none;
+  user-select: none;
+  cursor: pointer;
+}
