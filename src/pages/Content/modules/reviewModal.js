@@ -176,74 +176,154 @@ contentTop.appendChild(reviewsDiv5);
 bodyBody.appendChild(contentDiv);
 bodyBody.appendChild(productDetails);
 
-//Date
-const filter = document.createElement('div');
-filter.setAttribute('class', 'jvntzP');
+//Filters
 
-const mainDiv = document.createElement('div');
-mainDiv.setAttribute('class', 'sc-jSUnYo kiqpP');
+const form = document.createElement('form')
+form.setAttribute('class', 'cnikoG')
 
-const dateRangeDiv = document.createElement('div');
-dateRangeDiv.setAttribute('class', 'sc-cXKCzB bSssay');
+bodyBody.appendChild(form);
 
-const dateInputDiv = document.createElement('div');
-dateInputDiv.setAttribute('data-testid', 'control-dateInput');
-dateInputDiv.setAttribute('class', 'sc-fQhdLw ktAmda');
-dateInputDiv.setAttribute('aria-expanded', 'false');
+const filtersDiv = document.createElement('div')
+filtersDiv.setAttribute('class', 'IGmAC')
 
-const dateInputWrapperDiv = document.createElement('div');
-dateInputWrapperDiv.setAttribute('class', 'sc-httYss fXWfqw sc-cvAOhJ eTjXPv');
+form.appendChild(filtersDiv);
 
-const dateInputFieldDiv = document.createElement('div');
-dateInputFieldDiv.setAttribute('class', 'sc-dkIXZx sc-fWPcWZ gtgZQm bpAFPj');
+const allFilter = document.createElement('div');
+allFilter.setAttribute('class', 'iaZWuG');
 
-const dateInput = document.createElement('input');
-dateInput.setAttribute('placeholder', 'Select the date range');
-dateInput.setAttribute('class', 'sc-XhUvE sc-jXktde kkDNaA');
-dateInput.setAttribute('value', '');
+filtersDiv.appendChild(allFilter);
 
-dateInputFieldDiv.appendChild(dateInput);
-dateInputWrapperDiv.appendChild(dateInputFieldDiv);
-dateInputDiv.appendChild(dateInputWrapperDiv);
-dateRangeDiv.appendChild(dateInputDiv);
+const selectRating = document.createElement('div');
+selectRating.setAttribute('class','lerQSN');
 
-const filterDiv = document.createElement('div');
-filterDiv.setAttribute('class', 'sc-fUfnfA ckHJBG');
+allFilter.appendChild(selectRating);
 
-const filterDropdownDiv = document.createElement('div');
-filterDropdownDiv.setAttribute('class', 'sc-flPZYa lerQSN');
+const dropdown = document.createElement('div');
+dropdown.setAttribute('class', 'hNeyOA')
+dropdown.setAttribute('data-open', 'false')
 
-const filterBtnDiv = document.createElement('div');
-filterBtnDiv.setAttribute('data-open', 'false');
-filterBtnDiv.setAttribute('tabindex', '0');
-filterBtnDiv.setAttribute('class', 'sc-gsxFXZ hNeyOA');
-filterBtnDiv.setAttribute('aria-expanded', 'false');
+selectRating.appendChild(dropdown);
 
-const filterTextDiv = document.createElement('div');
-filterTextDiv.setAttribute('class', 'sc-dmaBdM jMlZvI');
+const allDropdown = document.createElement('div');
+allDropdown.setAttribute('class', 'sc-dmaBdM jMlZvI')
 
-const filterText = document.createElement('span');
-filterText.setAttribute('class', 'sc-kIjwQX hlNbkn');
-filterText.innerHTML = 'Select filters';
+dropdown.appendChild(allDropdown);
 
-filterTextDiv.appendChild(filterText);
-filterBtnDiv.appendChild(filterTextDiv);
-filterDropdownDiv.appendChild(filterBtnDiv);
-filterDiv.appendChild(filterDropdownDiv);
+const dropdownIcon = document.createElement('span');
+dropdownIcon.setAttribute('class', 'sc-fWSMSg cgJLBi');
+dropdownIcon.innerHTML='<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="angle-down" class="svg-inline--fa fa-angle-down " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M360.5 217.5l-152 143.1C203.9 365.8 197.9 368 192 368s-11.88-2.188-16.5-6.562L23.5 217.5C13.87 208.3 13.47 193.1 22.56 183.5C31.69 173.8 46.94 173.5 56.5 182.6L192 310.9l135.5-128.4c9.562-9.094 24.75-8.75 33.94 .9375C370.5 193.1 370.1 208.3 360.5 217.5z"></path></svg>';
+dropdown.appendChild(dropdownIcon);
+
+const dropdownMenu = document.createElement('div');
+dropdownMenu.setAttribute('class', 'abcdef');
+dropdownMenu.innerHTML='<div data-placement="bottom-start" data-testid="undefined-dropdown"><div class="sc-eixvJN bdtKyo"><div class="sc-fOuYhK gTyetu"><div data-grouped="false" class="sc-fZKIUC fOYJlQ"><div role="option" data-value="5" class="sc-gIwoD HBZlb"><span class="sc-chCsht elxNIY"></span><span class="sc-cUOIGw kkzglY">5 stars only</span></div><div role="option" data-value="4" class="sc-gIwoD HBZlb"><span class="sc-chCsht elxNIY"></span><span class="sc-cUOIGw kkzglY">4 stars only</span></div><div role="option" data-value="3" class="sc-gIwoD HBZlb"><span class="sc-chCsht elxNIY"></span><span class="sc-cUOIGw kkzglY">3 stars only</span></div><div role="option" data-value="2" class="sc-gIwoD HBZlb"><span class="sc-chCsht elxNIY"></span><span class="sc-cUOIGw kkzglY">2 stars only</span></div><div role="option" data-value="1" class="sc-gIwoD HBZlb"><span class="sc-chCsht elxNIY"></span><span class="sc-cUOIGw kkzglY">1 star only</span></div></div></div></div></div>'
+
+const dropdownBtn = document.createElement('span');
+dropdownBtn.setAttribute('class', 'hlNbkn')
+dropdownBtn.setAttribute('data-open', 'false')
+dropdownBtn.innerHTML='Select Ratings'
+
+allDropdown.appendChild(dropdownBtn);
+
+let bool = false;
+dropdown.onclick = async function () {
+bool=!bool;
+if(bool===true)
+{
+  dropdown.removeAttribute('class')
+  dropdown.setAttribute('class', 'dsigvn')
+  selectRating.appendChild(dropdownMenu)
+  dropdownBtn.removeAttribute('data-open')
+  dropdownBtn.setAttribute('data-open', 'true')
+}
+else{
+  dropdown.removeAttribute('class')
+  dropdown.setAttribute('class', 'hNeyOA')
+  selectRating.removeChild(dropdownMenu)
+  dropdownBtn.removeAttribute('data-open')
+  dropdownBtn.setAttribute('data-open', 'false')
+}
+}
+
+
+const selectVerified = document.createElement('div');
+selectVerified.setAttribute('class','lerQSN');
+
+allFilter.appendChild(selectVerified);
+
+const verified = document.createElement('div');
+verified.setAttribute('class', 'hNeyOA')
+
+selectVerified.appendChild(verified);
+
+const checkVerified = document.createElement('div');
+checkVerified.setAttribute('class', 'HBZlb')
+
+verified.appendChild(checkVerified);
+
+const checkbox = document.createElement('span');
+checkbox.setAttribute('class', 'elxNIY')
+
+checkVerified.appendChild(checkbox)
+
+const checkboxName = document.createElement('span');
+checkboxName.setAttribute('class', 'kkzglY')
+checkboxName.innerHTML='Verified'
+
+checkVerified.appendChild(checkboxName);
+
+let bool2 = false;
+verified.onclick= async function () {
+bool2 =!bool2;
+if(bool2 === true)
+{
+  checkVerified.removeAttribute('class')
+  checkVerified.setAttribute('class', 'tAYZw')
+  checkbox.removeAttribute('class')
+  checkbox.setAttribute('class', 'kJQLCS')
+  checkbox.innerHTML='<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="check" class="svg-inline--fa fa-check sc-iExEVL dMAoiw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M440.1 103C450.3 112.4 450.3 127.6 440.1 136.1L176.1 400.1C167.6 410.3 152.4 410.3 143 400.1L7.029 264.1C-2.343 255.6-2.343 240.4 7.029 231C16.4 221.7 31.6 221.7 40.97 231L160 350.1L407 103C416.4 93.66 431.6 93.66 440.1 103V103z"></path></svg>'
+}
+else{
+  checkVerified.removeAttribute('class')
+  checkVerified.setAttribute('class', 'HBZlb')
+  checkbox.removeAttribute('class')
+  checkbox.setAttribute('class', 'elxNIY')
+  checkbox.innerHTML='';
+}
+
+}
+
+
+const enterKeyword = document.createElement('div');
+enterKeyword.setAttribute('class','lerQSN');
+
+allFilter.appendChild(enterKeyword);
+
+const keywordDiv = document.createElement('div');
+keywordDiv.setAttribute('class', 'hNeyOA')
+
+enterKeyword.appendChild(keywordDiv);
+
+const keyword = document.createElement('input');
+keyword.setAttribute('class', 'kkDNaA')
+keyword.setAttribute('placeholder', 'Enter a Keyword')
+
+keywordDiv.appendChild(keyword);
+
 
 const clearBtn = document.createElement('div');
 clearBtn.setAttribute('class', 'sc-dWddBi jSmkTg');
-clearBtn.innerHTML = '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="star" class="svg-inline--fa fa-star sc-lfnXyL fhmLEe" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M287.9 0C297.1 0 305.5 5.25 309.5 13.52L378.1 154.8L531.4 177.5C540.4 178.8 547.8 185.1 550.7 193.7C553.5 202.4 551.2 211.9 544.8 218.2L433.6 328.4L459.9 483.9C461.4 492.9 457.7 502.1 450.2 507.4C442.8 512.7 432.1 513.4 424.9 509.1L287.9 435.9L150.1 509.1C142.9 513.4 133.1 512.7 125.6 507.4C118.2 502.1 114.5 492.9 115.1 483.9L142.2 328.4L31.11 218.2C24.65 211.9 22.36 202.4 25.2 193.7C28.03 185.1 35.5 178.8 44.49 177.5L197.7 154.8L266.3 13.52C270.4 5.249 278.7 0 287.9 0L287.9 0zM287.9 78.95L235.4 187.2C231.9 194.3 225.1 199.3 217.3 200.5L98.98 217.9L184.9 303C190.4 308.5 192.9 316.4 191.6 324.1L171.4 443.7L276.6 387.5C283.7 383.7 292.2 383.7 299.2 387.5L404.4 443.7L384.2 324.1C382.9 316.4 385.5 308.5 391 303L476.9 217.9L358.6 200.5C350.7 199.3 343.9 194.3 340.5 187.2L287.9 78.95z"></path></svg>';
+clearBtn.innerHTML = 'Clear';
 
 const applyBtn = document.createElement('button');
 applyBtn.setAttribute('class', 'sc-dWddBi NZXZk');
 applyBtn.innerHTML = 'Apply Filters';
 
-mainDiv.appendChild(dateRangeDiv);
-mainDiv.appendChild(filterDiv);
-mainDiv.appendChild(clearBtn);
-mainDiv.appendChild(applyBtn);
-filter.appendChild(mainDiv);
+allFilter.appendChild(clearBtn);
+allFilter.appendChild(applyBtn);
+
+
+
 
 //Overview
 
@@ -395,7 +475,6 @@ filter.appendChild(mainDiv);
   overviewReviewHelpful.innerHTML='35 people found this helpful'
   overviewReview1.appendChild(overviewReviewHelpful);
 
-  //Review 2
  const data = [{
   "description": "Reviewing after one month use \nNice and handy phone with 6.4 display\nCompact size.\nCamera 📷 is mind blowing 🔥🔥\nBattery life is ok\nDisplay is amazing with victous glass protection which is best in market\nFor normal use its a best phone with amazing features and customisation",
   "title": "Great product",
