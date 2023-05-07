@@ -277,7 +277,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 6px;
   overflow: hidden;
-  transform: translate(214px, 110px);
+  transform: translate(137px, 0px);
   width: 1300px;
   height: 780px;
   max-width: 100%;
@@ -577,6 +577,15 @@
   box-sizing: border-box;
 }
 
+.gnaJEW2 {
+  display: none;
+  flex: 1 1 0%;
+  padding: 0px 24px 0px 32px;
+  width: 100%;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
 .gxxFEr {
   display: flex;
   padding-bottom: 16px;
@@ -584,6 +593,15 @@
 
 .jBOLsP {
   display: flex;
+  flex-direction: column;
+  max-width: 445px;
+  width: 100%;
+  height: 100%;
+  margin-right: 20px;
+}
+
+.jBOLsP2 {
+  display: none;
   flex-direction: column;
   max-width: 445px;
   width: 100%;
@@ -751,9 +769,20 @@
   text-align: right;
 }
 .epbpWv {
+  margin: 0px 32px;
   height: 100%;
   min-width: 650px;
   display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(217, 224, 232);
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.epbpWv2 {
+  display: none;
+  height: 100%;
+  min-width: 650px;
   flex-direction: column;
   border: 1px solid rgb(217, 224, 232);
   border-radius: 6px;
@@ -777,6 +806,7 @@
 .gtKjyK {
   flex: 1 1 0%;
   display: flex;
+  overflow-y: scroll;
   flex-direction: column;
 }
 

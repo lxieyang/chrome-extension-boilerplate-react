@@ -1,3 +1,5 @@
+import ReviewGenerator from "./reviewsgenerator";
+
 const modal = document.createElement('div');
 modal.setAttribute('id', 'review-modal');
 
@@ -347,7 +349,7 @@ filter.appendChild(mainDiv);
   overviewTopTitle.setAttribute('class','bgGCiT');
   overviewTopTitle.innerHTML='Top Helpful Review';
 
-  const overviewReviewDiv = document.createElement('div');
+  let overviewReviewDiv = document.createElement('div');
   overviewReviewDiv.setAttribute('class','gtKjyK');
 
   overviewRightDiv.appendChild(overviewTopTitle);
@@ -394,43 +396,74 @@ filter.appendChild(mainDiv);
   overviewReview1.appendChild(overviewReviewHelpful);
 
   //Review 2
-  const overviewReview2 = document.createElement('div');
-  overviewReview2.setAttribute('class','iynKDA');
+ const data = [{
+  "description": "Reviewing after one month use \nNice and handy phone with 6.4 display\nCompact size.\nCamera 📷 is mind blowing 🔥🔥\nBattery life is ok\nDisplay is amazing with victous glass protection which is best in market\nFor normal use its a best phone with amazing features and customisation",
+  "title": "Great product",
+  "rating": 5,
+  "total_votes": 11405,
+  "upvote": 10807,
+  "downvote": 598,
+  "city": "Haridwar",
+  "state": "Uttrakhand",
+  "author": "Udit Joshi",
+  "verified": true,
+  "created_on": "6 months ago"
+},
+{
+  "description": "Using since last 10 days and super happy with the purchase, also prompt delivery by flipkart,what an amazing camera,display and lovely one UI,received immediate android 13 one UI 5 update,overall happy and satisfied with my purchase.",
+  "title": "Awesome",
+  "rating": 5,
+  "total_votes": 4711,
+  "upvote": 4378,
+  "downvote": 333,
+  "city": "Matheran",
+  "state": "Maharashtra",
+  "author": "Flipkart Customer",
+  "verified": true,
+  "created_on": "4 months ago"
+},
+{
+  "description": "It is a great mobile, its camera is exactly like a flagship, can not get a better mobile in this range.",
+  "title": "Must buy!",
+  "rating": 5,
+  "total_votes": 5608,
+  "upvote": 5144,
+  "downvote": 464,
+  "city": "New Delhi",
+  "state": "Delhi",
+  "author": "Sandeep  Rai",
+  "verified": true,
+  "created_on": "6 months ago"
+}]
 
-  overviewReviewDiv.appendChild(overviewReview2);
 
-  const overviewReviewTitle2 = document.createElement('div');
-  overviewReviewTitle2.setAttribute('class','ixxElA');
+  for(let i=0;i<data.length; i++){
+    let newReview = ReviewGenerator(i, data[i]);
+     overviewReviewDiv.appendChild(newReview);
+  }
 
-  overviewReview2.appendChild(overviewReviewTitle2);
+  // All Reviews
+  const allReviewDiv = document.createElement('div');
+  allReviewDiv.setAttribute('class','epbpWv');
 
-  const overviewReviewTitleText2 = document.createElement('a');
-  overviewReviewTitleText2.setAttribute('class','udqtB');
-  overviewReviewTitleText2.innerHTML='Over all Review of the Redmi 12 C phone.'
+  bodyBody.appendChild(allReviewDiv);
 
-  overviewReviewTitle2.appendChild(overviewReviewTitleText2);
+  const reviewTitle = document.createElement('div');
+  reviewTitle.setAttribute('class','bgGCiT');
+  reviewTitle.innerHTML='All Reviews';
 
-  const overviewReviewUser2 = document.createElement('div');
-  overviewReviewUser2.setAttribute('class','ixxElA');
+  const reviewDiv = document.createElement('div');
+  reviewDiv.setAttribute('class','gtKjyK');
 
-  overviewReview2.appendChild(overviewReviewUser2);
+  allReviewDiv.appendChild(reviewTitle);
+  allReviewDiv.appendChild(reviewDiv);
 
-  const overviewReviewUserDetail2 = document.createElement('div');
-  overviewReviewUserDetail2.setAttribute('class','fpVYlo');
-  overviewReviewUserDetail2.innerHTML='By Rohit, Reviewed in India 🇮🇳 on 25 April 2023'
+  for(let i=0;i<data.length; i++){
+    let newReview = ReviewGenerator(i, data[i]);
+     reviewDiv.appendChild(newReview);
+  }
 
-  overviewReviewUser2.appendChild(overviewReviewUserDetail2);
-
-  const overviewReviewDetail2 = document.createElement('div');
-  overviewReviewDetail2.setAttribute('class','kqSYrC');
-  overviewReviewDetail2.innerHTML="PROS:-Decent camera at this price range.Good Speed.The display quality is excellent.The fingerprint is working properly &amp; smoothly.smooth touch screen.Excellent battery backup.CONS:-Back Panel quality bit poor.Sound a bit low (enough for normal use).To many inbuilt (unnecessary) apps.They didn't provide a back cover for the phone.Turbo Charger or C type is not provided."
-
-  overviewReview2.appendChild(overviewReviewDetail2);
-
-  const overviewReviewHelpful2 = document.createElement('div');
-  overviewReviewHelpful2.setAttribute('class','ekqgTH');
-  overviewReviewHelpful2.innerHTML='35 people found this helpful'
-  overviewReview2.appendChild(overviewReviewHelpful2);
+  allReviewDiv.appendChild(reviewDiv);
 
     reviewsType1.onclick = async function () {
     reviewsType1.removeAttribute('class');
@@ -438,11 +471,13 @@ filter.appendChild(mainDiv);
     reviewsType3.removeAttribute('class');
     reviewsType4.removeAttribute('class');
     reviewsType5.removeAttribute('class');
+    overviewDiv.removeAttribute('class')
     reviewsType1.setAttribute('class', 'liSWKK');
     reviewsType2.setAttribute('class', 'hiLyrj');
     reviewsType3.setAttribute('class', 'hiLyrj');
     reviewsType4.setAttribute('class', 'hiLyrj');
     reviewsType5.setAttribute('class', 'hiLyrj');
+    overviewDiv.setAttribute('class', 'gnaJEW');
   };
   reviewsType2.onclick = async function () {
     reviewsType1.removeAttribute('class');
@@ -450,11 +485,14 @@ filter.appendChild(mainDiv);
     reviewsType3.removeAttribute('class');
     reviewsType4.removeAttribute('class');
     reviewsType5.removeAttribute('class');
+    overviewDiv.removeAttribute('class')
     reviewsType1.setAttribute('class', 'hiLyrj');
     reviewsType2.setAttribute('class', 'liSWKK');
     reviewsType3.setAttribute('class', 'hiLyrj');
     reviewsType4.setAttribute('class', 'hiLyrj');
     reviewsType5.setAttribute('class', 'hiLyrj');
+    overviewDiv.setAttribute('class', 'gnaJEW2');
+
   };
   reviewsType3.onclick = async function () {
     reviewsType1.removeAttribute('class');
