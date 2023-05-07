@@ -277,7 +277,7 @@ filter.appendChild(mainDiv);
 
   //Rating
   const rating = document.createElement('div')
-  rating.setAttribute('class', 'dZrlxP')
+  rating.setAttribute('class', 'dZrlxP HHhCc bbPTwY')
 
   const ratingName = document.createElement('div')
   ratingName.setAttribute('class', 'bimpkv')
@@ -285,7 +285,7 @@ filter.appendChild(mainDiv);
 
   //Rating count
   const ratingCount = document.createElement('div')
-  ratingCount.setAttribute('class', 'fRhIzs')
+  ratingCount.setAttribute('class', 'fRhIzs HHhCc bbPTwY')
 
   const ratingCountDiv = document.createElement('div')
   ratingCountDiv.setAttribute('class', 'eUFYmb')
@@ -297,7 +297,7 @@ filter.appendChild(mainDiv);
   //Distribution
 
   const distribution = document.createElement('div')
-  distribution.setAttribute('class', 'fRhIzs')
+  distribution.setAttribute('class', 'fRhIzs HHhCc bbPTwY')
 
   const distributionName = document.createElement('div')
   distributionName.setAttribute('class', 'eUFymb')
@@ -306,7 +306,7 @@ filter.appendChild(mainDiv);
   //See All
 
   const seeAll = document.createElement('div')
-  seeAll.setAttribute('class', 'fRhIzs')
+  seeAll.setAttribute('class', 'fRhIzs HHhCc bbPTwY')
 
   const seeAllDiv = document.createElement('div')
   seeAllDiv.setAttribute('class', 'GtsQR')
@@ -353,15 +353,17 @@ filter.appendChild(mainDiv);
   overviewRightDiv.appendChild(overviewTopTitle);
   overviewRightDiv.appendChild(overviewReviewDiv);
 
-  const overviewReviews = document.createElement('div');
-  overviewReviews.setAttribute('class','iynKDA');
 
-  overviewReviewDiv.appendChild(overviewReviews);
+//Review 1
+  const overviewReview1 = document.createElement('div');
+  overviewReview1.setAttribute('class','iynKDA');
+
+  overviewReviewDiv.appendChild(overviewReview1);
 
   const overviewReviewTitle = document.createElement('div');
   overviewReviewTitle.setAttribute('class','ixxElA');
 
-  overviewReviews.appendChild(overviewReviewTitle);
+  overviewReview1.appendChild(overviewReviewTitle);
 
   const overviewReviewTitleText = document.createElement('a');
   overviewReviewTitleText.setAttribute('class','udqtB');
@@ -372,7 +374,7 @@ filter.appendChild(mainDiv);
   const overviewReviewUser = document.createElement('div');
   overviewReviewUser.setAttribute('class','ixxElA');
 
-  overviewReviews.appendChild(overviewReviewUser);
+  overviewReview1.appendChild(overviewReviewUser);
 
   const overviewReviewUserDetail = document.createElement('div');
   overviewReviewUserDetail.setAttribute('class','fpVYlo');
@@ -384,13 +386,51 @@ filter.appendChild(mainDiv);
   overviewReviewDetail.setAttribute('class','kqSYrC');
   overviewReviewDetail.innerHTML="PROS:-Decent camera at this price range.Good Speed.The display quality is excellent.The fingerprint is working properly &amp; smoothly.smooth touch screen.Excellent battery backup.CONS:-Back Panel quality bit poor.Sound a bit low (enough for normal use).To many inbuilt (unnecessary) apps.They didn't provide a back cover for the phone.Turbo Charger or C type is not provided."
 
-  overviewReviews.appendChild(overviewReviewDetail);
+  overviewReview1.appendChild(overviewReviewDetail);
 
   const overviewReviewHelpful = document.createElement('div');
   overviewReviewHelpful.setAttribute('class','ekqgTH');
   overviewReviewHelpful.innerHTML='35 people found this helpful'
-  overviewReviews.appendChild(overviewReviewHelpful);
+  overviewReview1.appendChild(overviewReviewHelpful);
 
+  //Review 2
+  const overviewReview2 = document.createElement('div');
+  overviewReview2.setAttribute('class','iynKDA');
+
+  overviewReviewDiv.appendChild(overviewReview2);
+
+  const overviewReviewTitle2 = document.createElement('div');
+  overviewReviewTitle2.setAttribute('class','ixxElA');
+
+  overviewReview2.appendChild(overviewReviewTitle2);
+
+  const overviewReviewTitleText2 = document.createElement('a');
+  overviewReviewTitleText2.setAttribute('class','udqtB');
+  overviewReviewTitleText2.innerHTML='Over all Review of the Redmi 12 C phone.'
+
+  overviewReviewTitle2.appendChild(overviewReviewTitleText2);
+
+  const overviewReviewUser2 = document.createElement('div');
+  overviewReviewUser2.setAttribute('class','ixxElA');
+
+  overviewReview2.appendChild(overviewReviewUser2);
+
+  const overviewReviewUserDetail2 = document.createElement('div');
+  overviewReviewUserDetail2.setAttribute('class','fpVYlo');
+  overviewReviewUserDetail2.innerHTML='By Rohit, Reviewed in India 🇮🇳 on 25 April 2023'
+
+  overviewReviewUser2.appendChild(overviewReviewUserDetail2);
+
+  const overviewReviewDetail2 = document.createElement('div');
+  overviewReviewDetail2.setAttribute('class','kqSYrC');
+  overviewReviewDetail2.innerHTML="PROS:-Decent camera at this price range.Good Speed.The display quality is excellent.The fingerprint is working properly &amp; smoothly.smooth touch screen.Excellent battery backup.CONS:-Back Panel quality bit poor.Sound a bit low (enough for normal use).To many inbuilt (unnecessary) apps.They didn't provide a back cover for the phone.Turbo Charger or C type is not provided."
+
+  overviewReview2.appendChild(overviewReviewDetail2);
+
+  const overviewReviewHelpful2 = document.createElement('div');
+  overviewReviewHelpful2.setAttribute('class','ekqgTH');
+  overviewReviewHelpful2.innerHTML='35 people found this helpful'
+  overviewReview2.appendChild(overviewReviewHelpful2);
 
     reviewsType1.onclick = async function () {
     reviewsType1.removeAttribute('class');
