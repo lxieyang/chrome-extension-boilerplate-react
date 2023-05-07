@@ -447,7 +447,7 @@
   flex-direction: row;
 }
 .didbWK {
-  width: 60%;
+  width: 33%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -891,6 +891,13 @@
 }
 
 .cnikoG {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+}
+
+.cnikoG2 {
+  display: none;
   width: 100%;
   box-sizing: border-box;
   margin-bottom: 16px;
