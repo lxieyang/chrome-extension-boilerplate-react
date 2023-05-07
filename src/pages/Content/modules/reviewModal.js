@@ -444,7 +444,7 @@ filter.appendChild(mainDiv);
 
   // All Reviews
   const allReviewDiv = document.createElement('div');
-  allReviewDiv.setAttribute('class','epbpWv');
+  allReviewDiv.setAttribute('class','epbpWv2');
 
   bodyBody.appendChild(allReviewDiv);
 
@@ -472,12 +472,14 @@ filter.appendChild(mainDiv);
     reviewsType4.removeAttribute('class');
     reviewsType5.removeAttribute('class');
     overviewDiv.removeAttribute('class')
+    allReviewDiv.removeAttribute('class');
     reviewsType1.setAttribute('class', 'liSWKK');
     reviewsType2.setAttribute('class', 'hiLyrj');
     reviewsType3.setAttribute('class', 'hiLyrj');
     reviewsType4.setAttribute('class', 'hiLyrj');
     reviewsType5.setAttribute('class', 'hiLyrj');
     overviewDiv.setAttribute('class', 'gnaJEW');
+    allReviewDiv.setAttribute('class', 'epbpWv2')
   };
   reviewsType2.onclick = async function () {
     reviewsType1.removeAttribute('class');
@@ -486,13 +488,14 @@ filter.appendChild(mainDiv);
     reviewsType4.removeAttribute('class');
     reviewsType5.removeAttribute('class');
     overviewDiv.removeAttribute('class')
+    allReviewDiv.removeAttribute('class');
     reviewsType1.setAttribute('class', 'hiLyrj');
     reviewsType2.setAttribute('class', 'liSWKK');
     reviewsType3.setAttribute('class', 'hiLyrj');
     reviewsType4.setAttribute('class', 'hiLyrj');
     reviewsType5.setAttribute('class', 'hiLyrj');
     overviewDiv.setAttribute('class', 'gnaJEW2');
-
+    allReviewDiv.setAttribute('class','epbpWv');
   };
   reviewsType3.onclick = async function () {
     reviewsType1.removeAttribute('class');

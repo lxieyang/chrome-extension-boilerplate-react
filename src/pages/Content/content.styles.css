@@ -770,7 +770,7 @@
 }
 .epbpWv {
   margin: 0px 32px;
-  height: 100%;
+  height: 550px;
   min-width: 650px;
   display: flex;
   flex-direction: column;
@@ -781,7 +781,7 @@
 
 .epbpWv2 {
   display: none;
-  height: 100%;
+  height: 550px;
   min-width: 650px;
   flex-direction: column;
   border: 1px solid rgb(217, 224, 232);
@@ -807,6 +807,7 @@
   flex: 1 1 0%;
   display: flex;
   overflow-y: scroll;
+  max-height: 500px;
   flex-direction: column;
 }
 
