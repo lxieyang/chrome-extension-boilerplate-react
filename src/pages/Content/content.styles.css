@@ -542,7 +542,7 @@
 .hNeyOA input,
 .hNeyOA select,
 .hNeyOA textarea {
-  color: rgb(166, 183, 201);
+  color: rgb(68, 71, 74);
 }
 .fXWfqw *,
 .fXWfqw ::before,
@@ -1019,7 +1019,7 @@
   text-transform: none;
   font-size: 14px;
   line-height: 24px;
-  color: rgb(166, 183, 201);
+  color: rgb(92, 96, 100);
 }
 
 .dsigvn *,
@@ -1110,7 +1110,7 @@ svg:not(:host).svg-inline--fa {
 }
 
 ::placeholder {
-  color: rgb(166, 183, 201);
+  color: rgb(63, 68, 73);
   opacity: 1;
 }
 
@@ -1180,9 +1180,17 @@ svg:not(:host).svg-inline--fa {
   align-items: center;
 }
 
+
+
 .kkzglY {
   margin-left: 8px;
   width: 250px;
+}
+
+.dMAoiw {
+  color: rgb(255, 255, 255);
+  position: relative;
+  font-size: 12px;
 }
 
 .tAYZw {
@@ -1198,7 +1206,7 @@ svg:not(:host).svg-inline--fa {
   text-transform: none;
   font-size: 14px;
   line-height: 24px;
-  color: rgb(166, 183, 201);
+  color: rgb(67, 70, 74);
   padding: 8px;
   background: rgb(255, 255, 255);
 }

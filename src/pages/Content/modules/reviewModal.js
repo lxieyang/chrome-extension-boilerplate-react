@@ -185,8 +185,200 @@ dropdown.appendChild(dropdownIcon);
 
 const dropdownMenu = document.createElement('div');
 dropdownMenu.setAttribute('class', 'abcdef');
-dropdownMenu.innerHTML =
-  '<div data-placement="bottom-start" data-testid="undefined-dropdown"><div class="sc-eixvJN bdtKyo"><div class="sc-fOuYhK gTyetu"><div data-grouped="false" class="sc-fZKIUC fOYJlQ"><div role="option" data-value="5" class="sc-gIwoD HBZlb"><span class="sc-chCsht elxNIY"></span><span class="sc-cUOIGw kkzglY">5 stars only</span></div><div role="option" data-value="4" class="sc-gIwoD HBZlb"><span class="sc-chCsht elxNIY"></span><span class="sc-cUOIGw kkzglY">4 stars only</span></div><div role="option" data-value="3" class="sc-gIwoD HBZlb"><span class="sc-chCsht elxNIY"></span><span class="sc-cUOIGw kkzglY">3 stars only</span></div><div role="option" data-value="2" class="sc-gIwoD HBZlb"><span class="sc-chCsht elxNIY"></span><span class="sc-cUOIGw kkzglY">2 stars only</span></div><div role="option" data-value="1" class="sc-gIwoD HBZlb"><span class="sc-chCsht elxNIY"></span><span class="sc-cUOIGw kkzglY">1 star only</span></div></div></div></div></div>';
+//dropdownMenu.innerHTML ='<div data-placement="bottom-start" data-testid="undefined-dropdown"><div class="sc-eixvJN bdtKyo"><div class="sc-fOuYhK gTyetu"><div data-grouped="false" class="sc-fZKIUC fOYJlQ"><div role="option" data-value="5" class="sc-gIwoD HBZlb"><span class="sc-chCsht elxNIY"></span><span class="sc-cUOIGw kkzglY">5 stars only</span></div><div role="option" data-value="4" class="sc-gIwoD HBZlb"><span class="sc-chCsht elxNIY"></span><span class="sc-cUOIGw kkzglY">4 stars only</span></div><div role="option" data-value="3" class="sc-gIwoD HBZlb"><span class="sc-chCsht elxNIY"></span><span class="sc-cUOIGw kkzglY">3 stars only</span></div><div role="option" data-value="2" class="sc-gIwoD HBZlb"><span class="sc-chCsht elxNIY"></span><span class="sc-cUOIGw kkzglY">2 stars only</span></div><div role="option" data-value="1" class="sc-gIwoD HBZlb"><span class="sc-chCsht elxNIY"></span><span class="sc-cUOIGw kkzglY">1 star only</span></div></div></div></div></div>';
+
+const dropdownDiv1 = document.createElement('div');
+dropdownDiv1.setAttribute('class', 'bdtKyo');
+const dropdownDiv2 = document.createElement('div');
+dropdownDiv2.setAttribute('class', 'gTyetu');
+const dropdownDiv3 = document.createElement('div');
+dropdownDiv3.setAttribute('class', 'fOYJlQ');
+
+dropdownMenu.appendChild(dropdownDiv1);
+dropdownDiv1.appendChild(dropdownDiv2);
+dropdownDiv2.appendChild(dropdownDiv3);
+
+const dropdown5Star = document.createElement('div');
+dropdown5Star.setAttribute('class', 'HBZlb');
+
+dropdownDiv3.appendChild(dropdown5Star);
+
+const dropdown4Star = document.createElement('div');
+dropdown4Star.setAttribute('class', 'HBZlb');
+
+dropdownDiv3.appendChild(dropdown4Star);
+
+const dropdown3Star = document.createElement('div');
+dropdown3Star.setAttribute('class', 'HBZlb');
+
+dropdownDiv3.appendChild(dropdown3Star);
+
+const dropdown2Star = document.createElement('div');
+dropdown2Star.setAttribute('class', 'HBZlb');
+
+dropdownDiv3.appendChild(dropdown2Star);
+
+const dropdown1Star = document.createElement('div');
+dropdown1Star.setAttribute('class', 'HBZlb');
+
+dropdownDiv3.appendChild(dropdown1Star);
+
+const checkbox5star = document.createElement('span');
+checkbox5star.setAttribute('class', 'elxNIY');
+
+dropdown5Star.appendChild(checkbox5star);
+
+const checkbox4star = document.createElement('span');
+checkbox4star.setAttribute('class', 'elxNIY');
+
+dropdown4Star.appendChild(checkbox4star);
+
+const checkbox3star = document.createElement('span');
+checkbox3star.setAttribute('class', 'elxNIY');
+
+dropdown3Star.appendChild(checkbox3star);
+
+const checkbox2star = document.createElement('span');
+checkbox2star.setAttribute('class', 'elxNIY');
+
+dropdown2Star.appendChild(checkbox2star);
+
+const checkbox1star = document.createElement('span');
+checkbox1star.setAttribute('class', 'elxNIY');
+
+dropdown1Star.appendChild(checkbox1star);
+
+
+const title5star = document.createElement('span');
+title5star.setAttribute('class', 'kkzglY');
+title5star.innerHTML='5 Star Only'
+
+dropdown5Star.appendChild(title5star);
+
+const title4star = document.createElement('span');
+title4star.setAttribute('class', 'kkzglY');
+title4star.innerHTML='4 Star Only'
+
+dropdown4Star.appendChild(title4star);
+
+const title3star = document.createElement('span');
+title3star.setAttribute('class', 'kkzglY');
+title3star.innerHTML='3 Star Only'
+
+dropdown3Star.appendChild(title3star);
+
+const title2star = document.createElement('span');
+title2star.setAttribute('class', 'kkzglY');
+title2star.innerHTML='2 Star Only'
+
+dropdown2Star.appendChild(title2star);
+
+const title1star = document.createElement('span');
+title1star.setAttribute('class', 'kkzglY');
+title1star.innerHTML='1 Star Only'
+
+dropdown1Star.appendChild(title1star);
+
+let bool5star = false;
+dropdown5Star.onclick = async function() {
+  bool5star = !bool5star;
+  if (bool5star === true) {
+    dropdown5Star.removeAttribute('class')
+    checkbox5star.removeAttribute('class')
+    checkbox5star.setAttribute('class', 'kJQLCS')
+    dropdown5Star.setAttribute('class', 'tAYZw')
+    checkbox5star.innerHTML =
+      '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="check" class="svg-inline--fa fa-check sc-iExEVL dMAoiw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M440.1 103C450.3 112.4 450.3 127.6 440.1 136.1L176.1 400.1C167.6 410.3 152.4 410.3 143 400.1L7.029 264.1C-2.343 255.6-2.343 240.4 7.029 231C16.4 221.7 31.6 221.7 40.97 231L160 350.1L407 103C416.4 93.66 431.6 93.66 440.1 103V103z"></path></svg>';
+  
+  } else {
+    dropdown5Star.removeAttribute('class')
+    checkbox5star.removeAttribute('class')
+    checkbox5star.setAttribute('class', 'elxNIY')
+    dropdown5Star.setAttribute('class', 'HBZlb')
+    checkbox5star.innerHTML =''
+  }
+}
+
+let bool4star = false;
+dropdown4Star.onclick = async function() {
+  bool4star = !bool4star;
+  if (bool4star === true) {
+    dropdown4Star.removeAttribute('class')
+    checkbox4star.removeAttribute('class')
+    checkbox4star.setAttribute('class', 'kJQLCS')
+    dropdown4Star.setAttribute('class', 'tAYZw')
+    checkbox4star.innerHTML =
+      '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="check" class="svg-inline--fa fa-check sc-iExEVL dMAoiw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M440.1 103C450.3 112.4 450.3 127.6 440.1 136.1L176.1 400.1C167.6 410.3 152.4 410.3 143 400.1L7.029 264.1C-2.343 255.6-2.343 240.4 7.029 231C16.4 221.7 31.6 221.7 40.97 231L160 350.1L407 103C416.4 93.66 431.6 93.66 440.1 103V103z"></path></svg>';
+  
+  } else {
+    dropdown4Star.removeAttribute('class')
+    checkbox4star.removeAttribute('class')
+    checkbox4star.setAttribute('class', 'elxNIY')
+    dropdown4Star.setAttribute('class', 'HBZlb')
+    checkbox4star.innerHTML =''
+  }
+}
+let bool3star = false;
+dropdown3Star.onclick = async function() {
+  bool3star = !bool3star;
+  if (bool3star === true) {
+    dropdown3Star.removeAttribute('class')
+    checkbox3star.removeAttribute('class')
+    checkbox3star.setAttribute('class', 'kJQLCS')
+    dropdown3Star.setAttribute('class', 'tAYZw')
+    checkbox3star.innerHTML =
+      '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="check" class="svg-inline--fa fa-check sc-iExEVL dMAoiw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M440.1 103C450.3 112.4 450.3 127.6 440.1 136.1L176.1 400.1C167.6 410.3 152.4 410.3 143 400.1L7.029 264.1C-2.343 255.6-2.343 240.4 7.029 231C16.4 221.7 31.6 221.7 40.97 231L160 350.1L407 103C416.4 93.66 431.6 93.66 440.1 103V103z"></path></svg>';
+
+  } else {
+    dropdown3Star.removeAttribute('class')
+    checkbox3star.removeAttribute('class')
+    checkbox3star.setAttribute('class', 'elxNIY')
+    dropdown3Star.setAttribute('class', 'HBZlb')
+    checkbox3star.innerHTML =''
+  }
+}
+let bool2star = false;
+dropdown2Star.onclick = async function() {
+  bool2star = !bool2star;
+  if (bool2star === true) {
+    dropdown2Star.removeAttribute('class')
+    checkbox2star.removeAttribute('class')
+    checkbox2star.setAttribute('class', 'kJQLCS')
+    dropdown2Star.setAttribute('class', 'tAYZw')
+    checkbox2star.innerHTML =
+      '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="check" class="svg-inline--fa fa-check sc-iExEVL dMAoiw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M440.1 103C450.3 112.4 450.3 127.6 440.1 136.1L176.1 400.1C167.6 410.3 152.4 410.3 143 400.1L7.029 264.1C-2.343 255.6-2.343 240.4 7.029 231C16.4 221.7 31.6 221.7 40.97 231L160 350.1L407 103C416.4 93.66 431.6 93.66 440.1 103V103z"></path></svg>';
+
+  } else {
+    dropdown2Star.removeAttribute('class')
+    checkbox2star.removeAttribute('class')
+    checkbox2star.setAttribute('class', 'elxNIY')
+    dropdown2Star.setAttribute('class', 'HBZlb')
+    checkbox2star.innerHTML =''
+  }
+}
+let bool1star = false;
+dropdown1Star.onclick = async function() {
+  bool1star = !bool1star;
+  if (bool1star === true) {
+    dropdown1Star.removeAttribute('class')
+    checkbox1star.removeAttribute('class')
+    checkbox1star.setAttribute('class', 'kJQLCS')
+    dropdown1Star.setAttribute('class', 'tAYZw')
+    checkbox1star.innerHTML =
+      '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="check" class="svg-inline--fa fa-check sc-iExEVL dMAoiw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M440.1 103C450.3 112.4 450.3 127.6 440.1 136.1L176.1 400.1C167.6 410.3 152.4 410.3 143 400.1L7.029 264.1C-2.343 255.6-2.343 240.4 7.029 231C16.4 221.7 31.6 221.7 40.97 231L160 350.1L407 103C416.4 93.66 431.6 93.66 440.1 103V103z"></path></svg>';
+
+  } else {
+    dropdown1Star.removeAttribute('class')
+    checkbox1star.removeAttribute('class')
+    checkbox1star.setAttribute('class', 'elxNIY')
+    dropdown1Star.setAttribute('class', 'HBZlb')
+    checkbox1star.innerHTML =''
+  }
+}
+
+
+
+
 
 const dropdownBtn = document.createElement('span');
 dropdownBtn.setAttribute('class', 'hlNbkn');
