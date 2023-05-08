@@ -311,9 +311,11 @@ allFilter.appendChild(applyBtn);
 
   const tableWrapper2 = document.createElement('div');
   tableWrapper2.setAttribute('class', 'cfrHHF')
+  tableWrapper2.innerHTML=''
 
   const tableGrids = document.createElement('div');
   tableGrids.setAttribute('class', 'jJAKYt')
+  
 
   const column1 = document.createElement('div')
   column1.setAttribute('style', 'display: contents;')
@@ -342,6 +344,10 @@ allFilter.appendChild(applyBtn);
   const ratingCountName = document.createElement('div')
   ratingCountName.setAttribute('class', 'uXEUb')
   ratingCountName.innerHTML= 'Rating Count'
+
+
+
+
 
   //Distribution
 
@@ -375,6 +381,7 @@ allFilter.appendChild(applyBtn);
   tableGrids.appendChild(column3);
   tableGrids.appendChild(column4);
 
+
   tableWrapper2.appendChild(tableGrids);
   tableWrapper.appendChild(tableWrapper2);
   overviewTableDiv.appendChild(tableWrapper);
@@ -403,84 +410,89 @@ allFilter.appendChild(applyBtn);
   overviewRightDiv.appendChild(overviewReviewDiv);
 
 
-//Review 1
-  const overviewReview1 = document.createElement('div');
-  overviewReview1.setAttribute('class','iynKDA');
 
-  overviewReviewDiv.appendChild(overviewReview1);
-
-  const overviewReviewTitle = document.createElement('div');
-  overviewReviewTitle.setAttribute('class','ixxElA');
-
-  overviewReview1.appendChild(overviewReviewTitle);
-
-  const overviewReviewTitleText = document.createElement('a');
-  overviewReviewTitleText.setAttribute('class','udqtB');
-  overviewReviewTitleText.innerHTML='Over all Review of the Redmi 12 C phone.'
-
-  overviewReviewTitle.appendChild(overviewReviewTitleText);
-
-  const overviewReviewUser = document.createElement('div');
-  overviewReviewUser.setAttribute('class','ixxElA');
-
-  overviewReview1.appendChild(overviewReviewUser);
-
-  const overviewReviewUserDetail = document.createElement('div');
-  overviewReviewUserDetail.setAttribute('class','fpVYlo');
-  overviewReviewUserDetail.innerHTML='By Rohit, Reviewed in India 🇮🇳 on 25 April 2023'
-
-  overviewReviewUser.appendChild(overviewReviewUserDetail);
-
-  const overviewReviewDetail = document.createElement('div');
-  overviewReviewDetail.setAttribute('class','kqSYrC');
-  overviewReviewDetail.innerHTML="PROS:-Decent camera at this price range.Good Speed.The display quality is excellent.The fingerprint is working properly &amp; smoothly.smooth touch screen.Excellent battery backup.CONS:-Back Panel quality bit poor.Sound a bit low (enough for normal use).To many inbuilt (unnecessary) apps.They didn't provide a back cover for the phone.Turbo Charger or C type is not provided."
-
-  overviewReview1.appendChild(overviewReviewDetail);
-
-  const overviewReviewHelpful = document.createElement('div');
-  overviewReviewHelpful.setAttribute('class','ekqgTH');
-  overviewReviewHelpful.innerHTML='35 people found this helpful'
-  overviewReview1.appendChild(overviewReviewHelpful);
+//Reviews
 
  const data = [{
-  "description": "Reviewing after one month use \nNice and handy phone with 6.4 display\nCompact size.\nCamera 📷 is mind blowing 🔥🔥\nBattery life is ok\nDisplay is amazing with victous glass protection which is best in market\nFor normal use its a best phone with amazing features and customisation",
-  "title": "Great product",
-  "rating": 5,
-  "total_votes": 11405,
-  "upvote": 10807,
-  "downvote": 598,
-  "city": "Haridwar",
-  "state": "Uttrakhand",
-  "author": "Udit Joshi",
+  "description": "This is my first apple product. I am using this for a week now mostly for educational purposes like taking classes and note making. \n\nPros :\n1. Battery life is good; last me more than a day on normal usage\n2. Performance is very good; I played COD on it max settings and ipad handle it like a piece of cake.\n3. Screen is large enough to do multitasking; I personally use it to watch lecture on 2/3rd of screen and take notes or solve question on the remaining 1/3rd of screen.\n4.Camera quality is decent, not too good.\n5. Weight distribution is very good; you can hold it with one hand easily\n6. Display quality is decent. I have use amoled on my phone so it feels a bit downgrade but in normal usage you won't even notice it.\n7. Speaker are decent and loud\n8. Touch id is fast\n\nCons :\n1. Screen catches too many fingerprints abd they are very hard to remove. You have to use glass cleaning solution or wet cloth to remove all the fingerprints.\n2. It has non laminated display which you won't notice until you are apple pencil. There is a slight gap between screen and apple pencil.\n3. Charging port is tight. You have to put a little extra force while plugging in or out the lightening cable.\n\nFor that's it. Thank you😊",
+  "title": "Really Nice",
+  "rating": 4,
+  "total_votes": 2160,
+  "upvote": 1845,
+  "downvote": 315,
   "verified": true,
-  "created_on": "6 months ago"
+  "created_on": "Mar, 2022"
 },
 {
-  "description": "Using since last 10 days and super happy with the purchase, also prompt delivery by flipkart,what an amazing camera,display and lovely one UI,received immediate android 13 one UI 5 update,overall happy and satisfied with my purchase.",
+  "description": "Everything is very good and box is very good condition\nI purchased this iPad only for gaming thanks Flipkart for giving me this product \n\n\nDon't think a second go and buy it I am fully satisfied 😊❤️",
   "title": "Awesome",
   "rating": 5,
-  "total_votes": 4711,
-  "upvote": 4378,
-  "downvote": 333,
-  "city": "Matheran",
-  "state": "Maharashtra",
-  "author": "Flipkart Customer",
+  "total_votes": 2426,
+  "upvote": 2037,
+  "downvote": 389,
   "verified": true,
-  "created_on": "4 months ago"
+  "created_on": "Apr, 2022"
 },
 {
-  "description": "It is a great mobile, its camera is exactly like a flagship, can not get a better mobile in this range.",
+  "description": "I bought silver colour which is really awesome 🤗. \nPerformance is very very nice unbeatable in this price range. \nCamera is decent you can understand 12 mp of apple . \nBattery backup is very nice 😊. \nThe logo of  silver colour ipad is really awesome. \nThis will be really adventurous for Android users to shift in ios atmosphere. \n\nIn the box u will get : \n1. Ipad \n2.Adapter\n3.Charging cable\n4.Apple logo sticker\n5.Some documents",
   "title": "Must buy!",
   "rating": 5,
-  "total_votes": 5608,
-  "upvote": 5144,
-  "downvote": 464,
-  "city": "New Delhi",
-  "state": "Delhi",
-  "author": "Sandeep  Rai",
+  "total_votes": 1982,
+  "upvote": 1658,
+  "downvote": 324,
   "verified": true,
-  "created_on": "6 months ago"
-}]
+  "created_on": "Dec, 2021"
+},
+{
+  "description": "Best performance in this range, no other tab can even come closer to this in performance and looks in this price range so smooth and can handle heavy works without facing any lag..",
+  "title": "Fabulous!",
+  "rating": 5,
+  "total_votes": 427,
+  "upvote": 350,
+  "downvote": 77,
+  "verified": true,
+  "created_on": "Dec, 2021"
+},
+{
+  "description": "Its Very Good Ipad. Its Too much big sreen. \nYou can edit any big size videos easily like 4K. I have purchased this device for BGMI (PUBG). This is a Big powerhouse device ever at low prize.At Bgmi playing time no lag no frame drop play like god as smooth as you think.\nNo one can beat you else Hacker in the lobby. Its great choice for gaming. \n\nPlus things - \n1. Fast CPU A13 Bionic chip\n2.Good battery backup\n3. Big Display 10.2 inch\n\nMinus things- \n1.Rear camera only 8MP \n2. too big size that very uncomfortable \n3. Only 20W charging",
+  "title": "Terrific purchase",
+  "rating": 5,
+  "total_votes": 1427,
+  "upvote": 1039,
+  "downvote": 388,
+  "verified": true,
+  "created_on": "Oct, 2021"
+},
+{
+  "description": "Did apple ever make u unhappy! No right? So what are u waiting for!! Please go for it really great performance in this price range, I love it .lastly thank you alot Flipkart 💜.",
+  "title": "Wonderful",
+  "rating": 5,
+  "total_votes": 454,
+  "upvote": 336,
+  "downvote": 118,
+  "verified": true,
+  "created_on": "Oct, 2021"
+},
+{
+  "description": "Whoaa 😍\n\n1) Screen : I can say the biggest con for this ipad is the screen it self, it's fine for watching movies etc but you will always have very thick baar on top and bottom of the scree as the screen ration is 4:3 but overall I can say its good considering the brand value and quality but surely I'm expecting better screen ration same like ipad air 6th generation\n2) Processor : This ipad now comes with apple A13 bionic chip which is super fast and provides awesome performance, you will just enjoy using this ipad \n3) Sound : Sound is very loud and clear from dual down firing speakers\n4) Built quality : The quality is the same as ipad 7th and 8th generation no changes in that department, I can say I love the metal rounded build very easy and comfortable to use \n5) Gaming : This tablet is beast in gaming performance any game you throw at it and it won't let you down , I was also surpriced by the graphics it offers in games like Asphalt, BGMI Etc\n5) Value : Overall value for money product \n\nDefinitely go for this tablet 👌🏼🔥✅",
+  "title": "Best in the market!",
+  "rating": 5,
+  "total_votes": 84,
+  "upvote": 66,
+  "downvote": 18,
+  "verified": true,
+  "created_on": "Apr, 2022"
+},
+{
+  "description": "Love it with this iPad 9th gen I’m so happy and battery life is also really good thank you flipkart \n\n* After 3 days heavy use the Battery backup is really good I’m impressed with it I use to hang out whole day in using iPad and all day of use the battery is really good ❤️",
+  "title": "Super!",
+  "rating": 5,
+  "total_votes": 89,
+  "upvote": 78,
+  "downvote": 11,
+  "verified": true,
+  "created_on": "Jan, 2022"
+},]
 
 
   for(let i=0;i<data.length; i++){

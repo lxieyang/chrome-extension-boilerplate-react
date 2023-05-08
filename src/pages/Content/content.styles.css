@@ -835,6 +835,7 @@
 }
 
 .udqtB {
+  display: flex;
   font-stretch: normal;
   font-style: normal;
   letter-spacing: normal;
@@ -845,8 +846,9 @@
   line-height: 24px;
   font-weight: 700;
   text-decoration: none;
-  transition: color 0.2s ease 0s;
-  color: rgb(19, 25, 31) !important;
+  transition: color .2s ease 0s;
+  color: #13191f !important;
+  align-items: center;
 }
 
 .fpVYlo {
@@ -854,15 +856,15 @@
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
-  margin: 10px 0px;
+  margin: 0px 0px 10px 0px;
   padding: 0px;
   text-transform: none;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 18px;
   display: flex;
   -webkit-box-align: center;
   align-items: center;
-  color: rgb(72, 94, 117);
+  color: #485e75;
 }
 .kqSYrC {
   font-stretch: normal;
@@ -1265,4 +1267,83 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
   border-color: rgb(10, 111, 232);
   color: rgb(255, 255, 255);
   outline: none !important;
+}
+
+.fXtDbt {
+  display: contents;
+}
+
+.cfrHHf .sc-kggwrJ:last-child .sc-eiBfEU {
+  border-bottom: none;
+}
+
+.jJAKYt .sc-kggwrJ .sc-eiBfEU {
+  height: initial;
+}
+
+.bepcCc {
+  display: flex;
+  flex-direction: row;
+}
+
+.kAuEFD {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.fbbPTd:not(:first-child) {
+  margin-left: 1px;
+}
+
+.fbbPTd {
+  color: rgb(239, 207, 26);
+}
+svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
+  overflow: visible;
+  box-sizing: content-box;
+}
+
+.fbbPTd > svg {
+  font-size: 16px;
+}
+
+.svg-inline--fa {
+  display: var(--fa-display, inline-block);
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+
+.hwfhbV {
+  width: auto;
+  color: rgb(43, 57, 72);
+}
+
+.kscmqn {
+  padding: 8px 16px;
+  display: flex;
+  font-size: 14px;
+  -webkit-box-align: center;
+  align-items: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: rgb(19, 25, 31);
+  -webkit-box-pack: end;
+  justify-content: flex-end;
+  background-color: rgb(255, 255, 255);
+  transition: background-color 0.2s ease-in-out 0s;
+}
+
+.fgAHMr .sc-hIPkLu {
+  display: none;
+}
+
+.fKFNkZ {
+  position: absolute;
+  z-index: 2;
+  left: 0px;
+  width: 3px;
+  height: 100%;
+  background-color: rgb(217, 224, 232);
 }
