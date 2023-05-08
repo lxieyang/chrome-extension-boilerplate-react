@@ -296,6 +296,36 @@ title1star.innerHTML='1 Star Only'
 
 dropdown1Star.appendChild(title1star);
 
+let selectedStar = [];
+
+let selectedStarSet = new Set();
+
+
+let numberOfRating ;
+async function setTitle(){
+  selectedStar = Array.from(selectedStarSet);
+  if(selectedStar.length === 0){
+    numberOfRating = 'Select Ratings'
+  }else if(selectedStar.length === 1){
+    numberOfRating = '1 Selected'
+  }else if(selectedStar.length === 2){
+    numberOfRating = '2 Selected'
+  }else if(selectedStar.length === 3){
+    numberOfRating = '3 Selected'
+  }else if(selectedStar.length === 4){
+    numberOfRating = '4 Selected'
+  }else{
+    numberOfRating = '5 Selected'
+  }
+}
+
+const dropdownBtn = document.createElement('span');
+dropdownBtn.setAttribute('class', 'hlNbkn');
+dropdownBtn.setAttribute('data-open', 'false');
+dropdownBtn.innerHTML = `Select Ratings`;
+
+
+//DROPDOWN MENU ONCLICK CHANGES
 let bool5star = false;
 dropdown5Star.onclick = async function() {
   bool5star = !bool5star;
@@ -306,13 +336,18 @@ dropdown5Star.onclick = async function() {
     dropdown5Star.setAttribute('class', 'tAYZw')
     checkbox5star.innerHTML =
       '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="check" class="svg-inline--fa fa-check sc-iExEVL dMAoiw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M440.1 103C450.3 112.4 450.3 127.6 440.1 136.1L176.1 400.1C167.6 410.3 152.4 410.3 143 400.1L7.029 264.1C-2.343 255.6-2.343 240.4 7.029 231C16.4 221.7 31.6 221.7 40.97 231L160 350.1L407 103C416.4 93.66 431.6 93.66 440.1 103V103z"></path></svg>';
-  
+    selectedStarSet.add(5)
+    await setTitle();
+    dropdownBtn.innerHTML = `${numberOfRating}`;
   } else {
     dropdown5Star.removeAttribute('class')
     checkbox5star.removeAttribute('class')
     checkbox5star.setAttribute('class', 'elxNIY')
     dropdown5Star.setAttribute('class', 'HBZlb')
     checkbox5star.innerHTML =''
+    selectedStarSet.delete(5);
+    await setTitle();
+    dropdownBtn.innerHTML = `${numberOfRating}`;
   }
 }
 
@@ -326,13 +361,18 @@ dropdown4Star.onclick = async function() {
     dropdown4Star.setAttribute('class', 'tAYZw')
     checkbox4star.innerHTML =
       '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="check" class="svg-inline--fa fa-check sc-iExEVL dMAoiw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M440.1 103C450.3 112.4 450.3 127.6 440.1 136.1L176.1 400.1C167.6 410.3 152.4 410.3 143 400.1L7.029 264.1C-2.343 255.6-2.343 240.4 7.029 231C16.4 221.7 31.6 221.7 40.97 231L160 350.1L407 103C416.4 93.66 431.6 93.66 440.1 103V103z"></path></svg>';
-  
+      selectedStarSet.add(4)
+      await setTitle();
+      dropdownBtn.innerHTML = `${numberOfRating}`;
   } else {
     dropdown4Star.removeAttribute('class')
     checkbox4star.removeAttribute('class')
     checkbox4star.setAttribute('class', 'elxNIY')
     dropdown4Star.setAttribute('class', 'HBZlb')
     checkbox4star.innerHTML =''
+    selectedStarSet.delete(4);
+    await setTitle();
+    dropdownBtn.innerHTML = `${numberOfRating}`;
   }
 }
 let bool3star = false;
@@ -345,13 +385,18 @@ dropdown3Star.onclick = async function() {
     dropdown3Star.setAttribute('class', 'tAYZw')
     checkbox3star.innerHTML =
       '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="check" class="svg-inline--fa fa-check sc-iExEVL dMAoiw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M440.1 103C450.3 112.4 450.3 127.6 440.1 136.1L176.1 400.1C167.6 410.3 152.4 410.3 143 400.1L7.029 264.1C-2.343 255.6-2.343 240.4 7.029 231C16.4 221.7 31.6 221.7 40.97 231L160 350.1L407 103C416.4 93.66 431.6 93.66 440.1 103V103z"></path></svg>';
-
+      selectedStarSet.add(3)
+      await setTitle();
+      dropdownBtn.innerHTML = `${numberOfRating}`;
   } else {
     dropdown3Star.removeAttribute('class')
     checkbox3star.removeAttribute('class')
     checkbox3star.setAttribute('class', 'elxNIY')
     dropdown3Star.setAttribute('class', 'HBZlb')
     checkbox3star.innerHTML =''
+    selectedStarSet.delete(3);
+    await setTitle();
+    dropdownBtn.innerHTML = `${numberOfRating}`;
   }
 }
 let bool2star = false;
@@ -364,13 +409,18 @@ dropdown2Star.onclick = async function() {
     dropdown2Star.setAttribute('class', 'tAYZw')
     checkbox2star.innerHTML =
       '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="check" class="svg-inline--fa fa-check sc-iExEVL dMAoiw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M440.1 103C450.3 112.4 450.3 127.6 440.1 136.1L176.1 400.1C167.6 410.3 152.4 410.3 143 400.1L7.029 264.1C-2.343 255.6-2.343 240.4 7.029 231C16.4 221.7 31.6 221.7 40.97 231L160 350.1L407 103C416.4 93.66 431.6 93.66 440.1 103V103z"></path></svg>';
-
+      selectedStarSet.add(2)
+      await setTitle();
+      dropdownBtn.innerHTML = `${numberOfRating}`;
   } else {
     dropdown2Star.removeAttribute('class')
     checkbox2star.removeAttribute('class')
     checkbox2star.setAttribute('class', 'elxNIY')
     dropdown2Star.setAttribute('class', 'HBZlb')
     checkbox2star.innerHTML =''
+    selectedStarSet.delete(2);
+    await setTitle();
+    dropdownBtn.innerHTML = `${numberOfRating}`;
   }
 }
 let bool1star = false;
@@ -383,24 +433,22 @@ dropdown1Star.onclick = async function() {
     dropdown1Star.setAttribute('class', 'tAYZw')
     checkbox1star.innerHTML =
       '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="check" class="svg-inline--fa fa-check sc-iExEVL dMAoiw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M440.1 103C450.3 112.4 450.3 127.6 440.1 136.1L176.1 400.1C167.6 410.3 152.4 410.3 143 400.1L7.029 264.1C-2.343 255.6-2.343 240.4 7.029 231C16.4 221.7 31.6 221.7 40.97 231L160 350.1L407 103C416.4 93.66 431.6 93.66 440.1 103V103z"></path></svg>';
-
+      selectedStarSet.add(1)
+      await setTitle();
+      dropdownBtn.innerHTML = `${numberOfRating}`;
   } else {
     dropdown1Star.removeAttribute('class')
     checkbox1star.removeAttribute('class')
     checkbox1star.setAttribute('class', 'elxNIY')
     dropdown1Star.setAttribute('class', 'HBZlb')
     checkbox1star.innerHTML =''
+    selectedStarSet.delete(1);
+    await setTitle();
+    dropdownBtn.innerHTML = `${numberOfRating}`;
   }
 }
 
 
-
-
-
-const dropdownBtn = document.createElement('span');
-dropdownBtn.setAttribute('class', 'hlNbkn');
-dropdownBtn.setAttribute('data-open', 'false');
-dropdownBtn.innerHTML = 'Select Ratings';
 
 allDropdown.appendChild(dropdownBtn);
 
@@ -448,10 +496,10 @@ checkboxName.innerHTML = 'Verified';
 
 checkVerified.appendChild(checkboxName);
 
-let bool2 = false;
+let verifiedBool = false;
 verified.onclick = async function () {
-  bool2 = !bool2;
-  if (bool2 === true) {
+  verifiedBool = !verifiedBool;
+  if (verifiedBool === true) {
     checkVerified.removeAttribute('class');
     checkVerified.setAttribute('class', 'tAYZw');
     checkbox.removeAttribute('class');
