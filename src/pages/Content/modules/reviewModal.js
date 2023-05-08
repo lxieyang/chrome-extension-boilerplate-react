@@ -30,6 +30,23 @@ closeModal.onclick = function () {
   }
 };
 
+let ratingsDistribution= {
+  "type": "RatingValue",
+  "average": 4.6,
+  "base": 5,
+  "breakup": [
+      395,
+      150,
+      466,
+      2552,
+      11796
+  ],
+  "count": 15359,
+  "histogramBaseCount": 11796,
+  "reviewCount": 1322,
+  "roundOffCount": "15.3K+"
+}
+
 // body
 const body = document.createElement('div');
 body.setAttribute('class', 'jbqSrN');
@@ -46,7 +63,7 @@ bodyHeader.setAttribute('class', 'hlIGvb');
 
 const bodyHeaderHeading = document.createElement('h3');
 bodyHeaderHeading.setAttribute('class', 'dfAZhR');
-bodyHeaderHeading.innerText = 'Total Reviews 83';
+bodyHeaderHeading.innerText = `Total Reviews ${ratingsDistribution.reviewCount}`;
 
 bodyModalPlace1.appendChild(bodyHeader);
 
@@ -585,7 +602,11 @@ tableGrids.appendChild(column4);
 tableGrids.appendChild(postColumn);
 
 // append rating wise rows
-tableGrids.appendChild(ratingDistGenerator(3, 3));
+for(let i = 4; i >= 0; i--)
+{
+  const ratingsDistributionDiv = ratingDistGenerator(i, ratingsDistribution.breakup[i], ratingsDistribution.count);
+  tableGrids.appendChild(ratingsDistributionDiv);
+}
 
 tableWrapper2.appendChild(tableGrids);
 tableWrapper.appendChild(tableWrapper2);

@@ -636,7 +636,7 @@
   border-image: initial;
   border-top: none;
   border-radius: 6px;
-  min-height: 295px;
+  max-height: 245px;
   height: auto;
   display: flex;
   flex-direction: column;
