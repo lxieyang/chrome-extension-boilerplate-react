@@ -1,5 +1,5 @@
 import createProfitabiltyModal from './modules/profitabiltyModal.js';
-import reviewModal from './modules/reviewModal.js';
+import reviewNewModal from './modules/reviewModal.js';
 import scrapePCData from './modules/scrapers/pcScraper.js';
 import { pcFirstTimeUpdator } from './modules/valueUpdators/pc.js';
 import './content.styles.css';
@@ -35,7 +35,7 @@ chrome.runtime.onMessage.addListener(async function (
         // remove the modal
         alreadyExists.remove();
       }
-      document.body.appendChild(reviewModal);
+      document.body.appendChild(await reviewNewModal());
     }
   } else {
     // alert not a flipkart product page
