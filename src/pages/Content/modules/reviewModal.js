@@ -29,6 +29,14 @@ async function urlGenerator() {
   return newUrl;
 }
 
+function getProductTitle() {
+  const url = window.location.href;
+  // split the url by '/'
+  const urlSplit = url.split('/');
+  // get the product title
+  return urlSplit[3];
+}
+
 async function reviewModal() {
   let updatedUrl = await urlGenerator();
   console.log(updatedUrl);
@@ -139,8 +147,7 @@ async function reviewNewModal() {
 
   const productNameDetail = document.createElement('div');
   productNameDetail.setAttribute('class', 'dydjeI');
-  productNameDetail.innerText =
-    'Redmi 12C (Royal Blue, 4GB RAM, 64GB Storage) | High Performance Mediatek Helio G85 | Big 17cm(6.71) HD+ Display with 5000mAh(typ) Battery with 10W Charger in-Box 83';
+  productNameDetail.innerText = getProductTitle();
 
   productName.appendChild(productNameDetail);
 
@@ -619,8 +626,8 @@ async function reviewNewModal() {
     console.log(selectedStar);
     allreviewdata = await allReviewData(content);
     console.log(allreviewdata);
-    reviewDiv.innerHTML='';
-    for (let i = 0; i < Math.min(allreviewdata.length,100); i++) {
+    reviewDiv.innerHTML = '';
+    for (let i = 0; i < Math.min(allreviewdata.length, 100); i++) {
       let newReview = ReviewGenerator(i, allreviewdata[i]);
       reviewDiv.appendChild(newReview);
     }
@@ -794,7 +801,7 @@ async function reviewNewModal() {
 
   allReviewDiv.appendChild(reviewDiv);
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < Math.min(allreviewdata.length, 100); i++) {
     let newReview = ReviewGenerator(i, allreviewdata[i]);
     reviewDiv.appendChild(newReview);
   }
