@@ -1,9 +1,9 @@
 import React from 'react';
-import logo from '../../assets/img/logo.svg';
+import logo from '../../assets/img/logo.png';
+import save from '../../assets/img/save.png';
 import Greetings from '../../containers/Greetings/Greetings';
-import { Button, DatePicker, Space, version } from 'antd';
-import 'antd/dist/reset.css';
-import './Popup.css';
+import { Box, Button, Switch, Typography } from "@mui/material";
+
 
 const Popup = () => {
   function profitability_modal() {
@@ -13,18 +13,39 @@ const Popup = () => {
     chrome.runtime.sendMessage({ message: 'review_modal' });
   }
   return (
-    <div className="App">
-      <header className="App-header"></header>
-      <Button type="primary" onClick={profitability_modal}>
-        Profitability Calculator
-      </Button>
-      <Space direction="vertical" size={12}>
-        {' '}
-      </Space>
-      <Button type="primary" onClick={review_modal}>
-        Analyse Review
-      </Button>
-    </div>
+    <Box sx={{borderRadius:'5px', background:'white', display:'flex', flexDirection:'column', height: '300px'}}>
+      <Box sx={{ margin:'10px',width:'100%', display:'flex',justifyContent:'space-between', flexDirection:'row', alignItems:'center'}}>
+        <Box sx={{display:'flex', flexDirection:'row', alignItems:'center'}}>
+        <Box sx={{alignItems:'center'}}>
+      <img style={{margin:'2px 10px 0 0'}} src={logo} alt="hershield" width='auto' height="30px"/>
+      </Box>
+      <Box sx={{display:'flex', alignItems:'center'}}>
+      <Typography variant='h6' color=''><strong>Extension</strong></Typography>
+      </Box>
+      </Box>
+      <Box sx={{marginRight:'20px'}}>
+      <Switch color="secondary" defaultChecked />
+      </Box>
+      </Box>
+      <Box sx={{height: '100%', width:'100%',display:'flex',alignItems:'center', flexDirection:'column'}}>
+            <Box sx={{width:'81%', justifyContent:'center', m:'10px 0 10px 0'}}>
+          <Button onClick={profitability_modal} sx={{backgroundColor:'#b85c91'}} size="small" color="secondary" fullWidth variant="contained" >Profitability Calculator</Button>
+          </Box>
+          <Box sx={{ m:'10px 0 25px 0',width:'81%',display:'flex',alignItems:'center', flexDirection:'column'}}>
+          <Button onClick={review_modal} sx={{backgroundColor:'#b85c91'}} fullWidth  size="small" color="secondary" variant="contained">Review Analyzer</Button>
+          <Typography variant="body2"> (2 Left)</Typography>
+          </Box>
+          <Box sx={{width:'81%', justifyContent:'center', m:'10px 0 10px 0'}}>
+          <Button fullWidth size="small" sx={{backgroundColor:'#b85c91'}} color="secondary" variant="contained">Login / Sign up</Button>
+          </Box>
+      </Box>
+      <Box>
+        <Box sx={{display:'flex', flexDirection:'row', alignItems:'center', cursor:'pointer',width: 'fit-content'}}>
+      <img src={save} alt="save" width='auto' height="35px"/>
+      <Typography variant="body2"> Add To Collection </Typography>
+      </Box>
+      </Box>
+    </Box>
   );
 };
 
