@@ -619,7 +619,8 @@ async function reviewNewModal() {
     console.log(selectedStar);
     allreviewdata = await allReviewData(content);
     console.log(allreviewdata);
-    for (let i = 0; i < allreviewdata.length; i++) {
+    reviewDiv.innerHTML='';
+    for (let i = 0; i < Math.min(allreviewdata.length,100); i++) {
       let newReview = ReviewGenerator(i, allreviewdata[i]);
       reviewDiv.appendChild(newReview);
     }
