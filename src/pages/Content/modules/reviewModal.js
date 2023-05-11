@@ -678,7 +678,9 @@ async function reviewNewModal() {
       values: keywordValue,
     };
     content.push(arrayObj);
+    if(verifiedBool===true)
     content.push(verifiedObj);
+    if(keywordValue !== '')
     content.push(keywordObj);
     console.log(verifiedBool);
     console.log(keywordValue);
