@@ -677,11 +677,12 @@ async function reviewNewModal() {
       metric: 'name',
       values: keywordValue,
     };
-    content.push(arrayObj);
+    if(selectedStar.length > 0)
+    {content.push(arrayObj);}
     if(verifiedBool===true)
-    content.push(verifiedObj);
+    {content.push(verifiedObj);}
     if(keywordValue !== '')
-    content.push(keywordObj);
+    {content.push(keywordObj);}
     console.log(verifiedBool);
     console.log(keywordValue);
     console.log(selectedStar);
