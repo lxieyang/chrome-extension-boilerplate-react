@@ -62,8 +62,13 @@ export async function getRatingsDist() {
   const response = await fetch(get_review_url, {
     method: 'POST',
     headers: {
-      Accept: 'application/json',
       'Content-Type': 'application/json',
+      Accept: '*/*',
+      'Accept-Language': 'en-US,en;q=0.9',
+      Connection: 'keep-alive',
+      'Content-Type': 'application/json',
+      'X-User-Agent':
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 FKUA/website/42/website/Desktop',
     },
     body: JSON.stringify({ pageUri: url }),
   });
@@ -72,6 +77,6 @@ export async function getRatingsDist() {
     throw new Error('Failed to fetch reviews');
   }
   let body = await response.json();
-  const ratingBreakup = getRatingsBreakUp(data);
+  const ratingBreakup = getRatingsBreakUp(body);
   return ratingBreakup;
 }

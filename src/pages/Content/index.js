@@ -2,6 +2,7 @@ import createProfitabiltyModal from './modules/profitabiltyModal.js';
 import reviewNewModal from './modules/reviewModal.js';
 import scrapePCData from './modules/scrapers/pcScraper.js';
 import { pcFirstTimeUpdator } from './modules/valueUpdators/pc.js';
+import getListingData from './modules/scrapers/listingScraper.js';
 import './content.styles.css';
 
 console.log('content script loaded');
@@ -19,6 +20,7 @@ const observer = new MutationObserver((mutationsList, observer) => {
         console.log('Desired element found:', desiredElement);
         // Stop observing mutations once the element is found (if needed)
         observer.disconnect();
+        getListingData();
         const listingHealthScore = document.createElement('div');
         listingHealthScore.setAttribute('id', 'listingHealthScore');
         listingHealthScore.textContent = 'New Div';
