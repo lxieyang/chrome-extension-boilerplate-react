@@ -1,44 +1,17 @@
 import ReviewGenerator from './reviewsgenerator';
 import { ratingDistGenerator } from './reviewsgenerator';
+import { urlGenerator } from './utils.js';
 
-async function urlGenerator() {
-  const url = window.location.href;
-  let newUrl = '';
-  let bool = false;
-  for (let i = 2; i < url.length; i++) {
-    if (bool === true) {
-      newUrl += url[i];
-    }
-    if (url[i - 2] === 'c' && url[i - 1] === 'o' && url[i] === 'm') {
-      bool = true;
-    }
-    if (url[i + 1] === '/' && url[i + 2] === 'p' && url[i + 3] === '/') {
-      newUrl += '/product-reviews/';
-      i += 3;
-    }
-    if (
-      url[i + 1] === '&' &&
-      url[i + 2] === 'm' &&
-      url[i + 3] === 'a' &&
-      url[i + 4] === 'r'
-    ) {
-      break;
-    }
-  }
-
-  return newUrl;
-}
-
-function getProductTitle() {
-  const url = window.location.href;
-  // split the url by '/'
-  const urlSplit = url.split('/');
-  // get the product title
-  return urlSplit[3];
-}
+// function getProductTitle() {
+//   const url = window.location.href;
+//   // split the url by '/'
+//   const urlSplit = url.split('/');
+//   // get the product title
+//   return urlSplit[3];
+// }
 
 async function reviewModal() {
-  let updatedUrl = await urlGenerator();
+  let updatedUrl = urlGenerator();
   console.log(updatedUrl);
   let url = 'https://www.datavio.co/api/ratings-reviews';
   let body = { url: `${updatedUrl}` };
@@ -54,7 +27,7 @@ async function reviewModal() {
 }
 
 async function allReviewData(conditions) {
-  let updatedUrl = await urlGenerator();
+  let updatedUrl = urlGenerator();
   let url = 'https://www.datavio.co/api/get-reviews';
   let body = {
     url: `${updatedUrl}&marketplace=FLIPKART`,
@@ -147,7 +120,7 @@ async function reviewNewModal() {
 
   const productNameDetail = document.createElement('div');
   productNameDetail.setAttribute('class', 'dydjeI');
-  productNameDetail.innerText = getProductTitle();
+  productNameDetail.innerText = document.querySelector('.B_NuCI').textContent;
 
   productName.appendChild(productNameDetail);
 
