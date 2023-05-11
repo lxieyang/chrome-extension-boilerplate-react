@@ -1128,18 +1128,18 @@ svg:not(:host).svg-inline--fa {
 }
 .abcdef {
   z-index: 10000000;
+  width: 300px;
   position: absolute;
   inset: 0px auto auto 0px;
   margin: 0px;
-  transform: translate3d(240px, 119px, 0px);
+  transform: translate3d(30px, 235px, 0px);
 }
 .bdtKyo {
-  box-shadow: rgba(103, 132, 162, 0.08) 0px 2px 3px,
-    rgba(103, 132, 162, 0.16) 0px 1px 8px;
-  width: 198px;
+  box-shadow: rgba(103,132,162,.08) 0px 2px 3px, rgba(103,132,162,.16) 0px 1px 8px;
+  width: 300px;
   min-width: 198px;
-  background: rgb(255, 255, 255);
-  border: 1px solid rgb(217, 224, 232);
+  background: #fff;
+  border: 1px solid #d9e0e8;
   border-radius: 6px;
   padding: 8px 0px;
 }

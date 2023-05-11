@@ -582,6 +582,7 @@ async function reviewNewModal() {
   const keyword = document.createElement('input');
   keyword.setAttribute('class', 'kkDNaA');
   keyword.setAttribute('placeholder', 'Enter a Keyword');
+  keyword.setAttribute('id', 'myInput')
   keywordDiv.appendChild(keyword);
 
   let keywordValue = '';
@@ -600,12 +601,70 @@ async function reviewNewModal() {
   allFilter.appendChild(clearBtn);
   allFilter.appendChild(applyBtn);
 
+  const showMoreBtn = document.createElement('button');
+  showMoreBtn.setAttribute('class', 'sc-dWddBi NZXZk');
+  showMoreBtn.innerHTML = 'Load More Reviews';
+
   let content = [];
+  let currrentReviewCount = 0
+
   let allreviewdata = await allReviewData(content);
   console.log(allreviewdata);
 
+
+  clearBtn.onclick = async function (e) {
+    e.preventDefault();
+    content = [];
+    verifiedBool=false;
+    selectedStarSet.clear()
+    selectedStar=[]
+    keywordValue=''
+    bool1star=false
+    bool2star=false
+    bool3star=false
+    bool4star=false
+    bool5star=false
+    checkbox.removeAttribute('class');
+    checkbox.setAttribute('class', 'elxNIY');
+    document.getElementById('myInput').value = ''
+    checkbox1star.removeAttribute('class');
+    checkbox1star.setAttribute('class', 'elxNIY');
+    checkbox2star.removeAttribute('class');
+    checkbox2star.setAttribute('class', 'elxNIY');
+    checkbox3star.removeAttribute('class');
+    checkbox3star.setAttribute('class', 'elxNIY');
+    checkbox4star.removeAttribute('class');
+    checkbox4star.setAttribute('class', 'elxNIY');
+    checkbox5star.removeAttribute('class');
+    checkbox5star.setAttribute('class', 'elxNIY');
+    dropdown1Star.removeAttribute('class');
+    dropdown1Star.setAttribute('class', 'HBZlb');
+    dropdown2Star.removeAttribute('class');
+    dropdown2Star.setAttribute('class', 'HBZlb');
+    dropdown3Star.removeAttribute('class');
+    dropdown3Star.setAttribute('class', 'HBZlb');
+    dropdown4Star.removeAttribute('class');
+    dropdown4Star.setAttribute('class', 'HBZlb');
+    dropdown5Star.removeAttribute('class');
+    dropdown5Star.setAttribute('class', 'HBZlb');
+    await setTitle();
+    dropdownBtn.innerHTML = `${numberOfRating}`
+    allreviewdata = await allReviewData(content);
+    currrentReviewCount=0
+    console.log(allreviewdata);
+    reviewDiv.innerHTML = '';
+    for (let i = 0; i < Math.min(allreviewdata.length, 100); i++) {
+      let newReview = ReviewGenerator(i, allreviewdata[i]);
+      reviewDiv.appendChild(newReview);
+      if( i === 99 && allreviewdata.length > 100){
+        reviewDiv.appendChild(showMoreBtn)
+      }
+    }
+  };
+
   applyBtn.onclick = async function (e) {
     e.preventDefault();
+    content = [];
     let arrayObj = {
       metric: 'rating',
       values: selectedStar,
@@ -625,13 +684,31 @@ async function reviewNewModal() {
     console.log(keywordValue);
     console.log(selectedStar);
     allreviewdata = await allReviewData(content);
+    currrentReviewCount=0
     console.log(allreviewdata);
     reviewDiv.innerHTML = '';
     for (let i = 0; i < Math.min(allreviewdata.length, 100); i++) {
       let newReview = ReviewGenerator(i, allreviewdata[i]);
       reviewDiv.appendChild(newReview);
+      if( i === 99 && allreviewdata.length > 100){
+        reviewDiv.appendChild(showMoreBtn)
+      }
     }
   };
+
+  showMoreBtn.onclick = async function (e) {
+    e.preventDefault();
+    reviewDiv.removeChild(showMoreBtn);
+    currrentReviewCount+=Math.min(100,allreviewdata.length- currrentReviewCount) ;
+    for (let i = currrentReviewCount; i < Math.min(allreviewdata.length, currrentReviewCount + 100); i++) {
+      let newReview = ReviewGenerator(i, allreviewdata[i]);
+      reviewDiv.appendChild(newReview);
+      if( i === currrentReviewCount+ 99 && allreviewdata.length > currrentReviewCount + 100){
+        reviewDiv.appendChild(showMoreBtn)
+      }
+    }
+  }
+
 
   //Overview
 
@@ -804,6 +881,11 @@ async function reviewNewModal() {
   for (let i = 0; i < Math.min(allreviewdata.length, 100); i++) {
     let newReview = ReviewGenerator(i, allreviewdata[i]);
     reviewDiv.appendChild(newReview);
+    console.log(i, allreviewdata.length)
+    if( i === 99 && allreviewdata.length > 100){
+      console.log('appended')
+      reviewDiv.appendChild(showMoreBtn)
+    }
   }
 
   reviewsType1.onclick = async function () {
