@@ -1458,7 +1458,7 @@ svg:not(:host).svg-inline--fa {
   padding: 8px 16px;
   border-radius: 6px;
   border: 1px solid rgb(217, 224, 232);
-  background-color: rgb(255, 255, 255);
+  background-color: #ffe7f0;
 }
 
 .dMMEUY {
@@ -1509,7 +1509,7 @@ svg:not(:host).svg-inline--fa {
   box-sizing: border-box;
 }
 
-.kURXgW {
+.green {
   font-stretch: normal;
   font-style: normal;
   letter-spacing: normal;
@@ -1520,9 +1520,42 @@ svg:not(:host).svg-inline--fa {
   font-weight: 700;
   border-radius: 13px;
   padding: 4px 8px;
-  color: #97386f;
-  background-color: #f3e5ed;
+  color: #389746;
+  background-color: #e5f3e6;
 }
+
+.red {
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  margin: 0px 10px;
+  text-transform: none;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 700;
+  border-radius: 13px;
+  padding: 4px 8px;
+  color: #973838;
+  background-color: #f3e5e5;
+}
+
+.yellow {
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  margin: 0px 10px;
+  text-transform: none;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 700;
+  border-radius: 13px;
+  padding: 4px 8px;
+  color: #979138;
+  background-color: #f3f2e5;
+}
+
+
+
 
 .jpPImZ {
   display: flex;

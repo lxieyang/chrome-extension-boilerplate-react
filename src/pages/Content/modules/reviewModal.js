@@ -821,6 +821,6 @@ async function reviewNewModal() {
     reviewsType2.setAttribute('class', 'hiLyrj');
     reviewsType3.setAttribute('class', 'liSWKK');
   };
-  return modal;
+  return bodyModalPlace;
 }
 export default reviewNewModal;

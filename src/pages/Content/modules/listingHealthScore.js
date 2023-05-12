@@ -14,9 +14,18 @@ listingMainDiv.setAttribute('class', 'fOhaxO');
 
 
 const map= await getListingData()
+let color;
+if(map.totalScore >=8)
+color ='green'
+if(map.totalScore >=5 && map.totalScore < 8)
+color ='yellow'
+if(map.totalScore <5)
+color ='red'
+
+
 const subDiv = document.createElement('div')
 subDiv.setAttribute('class', 'dMMEUY')
-subDiv.innerHTML=`<div class="sc-fodVek eebzdb"><div class="sc-bkzYnD kwkEfR">Listing Health Score :</div><span type="pink" class="sc-idOiZg kURXgW">${map.totalScore}</span></div></div>`
+subDiv.innerHTML=`<div class="sc-fodVek eebzdb"><div class="sc-bkzYnD kwkEfR">Listing Health Score :</div><span type="pink" class="sc-idOiZg ${color}">${map.totalScore}</span></div></div>`
 
 listingMainDiv.appendChild(subDiv);
 
@@ -68,8 +77,10 @@ let reviews=rightSvg;
 
 if(map[0]<8)
 imgNum=wrongSvg
-if(map[2]===false)
+if(map[1]===false)
 whiteBack=wrongSvg
+if(map[2]<150)
+character=wrongSvg
 if(map[3]<0.8)
 bullet=wrongSvg
 if(map[4].ratings<4)

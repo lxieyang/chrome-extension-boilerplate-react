@@ -67,7 +67,52 @@ chrome.runtime.onMessage.addListener(async function (
         // remove the modal
         alreadyExists.remove();
       }
-      document.body.appendChild(await reviewNewModal());
+      
+      const modal = document.createElement('div');
+      modal.setAttribute('id', 'review-modal');
+      document.body.appendChild(modal);
+    
+      modal.setAttribute('class', 'ivkkEA jIfStg');
+    
+      const modalClass1 = document.createElement('div');
+      modalClass1.setAttribute('class', 'doWCWF');
+      modal.appendChild(modalClass1);
+    
+      const modalClass2 = document.createElement('div');
+      modalClass2.setAttribute('class', 'oeMFGH');
+      modalClass1.appendChild(modalClass2);
+    
+      const header = document.createElement('div');
+      header.setAttribute('class', 'bAWFlm');
+      header.innerText = 'Reviews Analyser';
+    
+      const closeModal = document.createElement('span');
+      closeModal.setAttribute('id', 'closeModal');
+      closeModal.setAttribute('class', 'close');
+      closeModal.innerHTML = '&times;';
+      closeModal.onclick = function () {
+        const alreadyExists = document.getElementById('review-modal');
+        if (alreadyExists) {
+          // remove the modal
+          alreadyExists.remove();
+        }
+      };
+    
+      // body
+      const body = document.createElement('div');
+      body.setAttribute('class', 'jbqSrN');
+      header.appendChild(closeModal);
+      modalClass2.appendChild(header);
+      modalClass2.appendChild(body);
+
+      const loading = document.createElement('div')
+      loading.innerHTML='Loading...'
+
+      body.appendChild(loading)
+
+      const newDiv = await reviewNewModal()
+      body.removeChild(loading)
+      body.appendChild(newDiv);
     }
   } else {
     // alert not a flipkart product page
