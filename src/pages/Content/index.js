@@ -4,16 +4,16 @@ import scrapePCData from './modules/scrapers/pcScraper.js';
 import { pcFirstTimeUpdator } from './modules/valueUpdators/pc.js';
 import getListingData from './modules/scrapers/listingScraper.js';
 import './content.styles.css';
+import ListingModal from './modules/listingHealthScore.js';
 
 console.log('content script loaded');
-const observer = new MutationObserver((mutationsList, observer) => {
+const observer = new MutationObserver(async (mutationsList, observer) => {
   // Check each mutation in the list
   for (const mutation of mutationsList) {
     // Check if any new nodes are added
     if (mutation.type === 'childList') {
       // Check if the desired element is now available
-      const desiredElement = document.querySelector(
-        '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg'
+      const desiredElement = document.querySelector("#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-5-12._78xt5Y > div:nth-child(1)"
       );
       if (desiredElement) {
         // Perform your desired action
@@ -23,7 +23,8 @@ const observer = new MutationObserver((mutationsList, observer) => {
         getListingData();
         const listingHealthScore = document.createElement('div');
         listingHealthScore.setAttribute('id', 'listingHealthScore');
-        listingHealthScore.textContent = 'New Div';
+        listingHealthScore.appendChild(await ListingModal())
+        
         desiredElement.prepend(listingHealthScore);
         break;
         // You can also perform additional actions here
@@ -42,6 +43,7 @@ chrome.runtime.onMessage.addListener(async function (
 ) {
   const currentUrl = window.location.href;
   if (currentUrl.includes('flipkart.com')) {
+    
     if (request.type === 'profitability_modal') {
       const alreadyExists = document.getElementById('profitability-modal');
       if (alreadyExists) {
@@ -57,9 +59,6 @@ chrome.runtime.onMessage.addListener(async function (
       }
 
       const profitabilityModal = await createProfitabiltyModal(key);
-      document.body
-        .querySelector('#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg')
-        .prepend(listingHealthScore);
       document.body.appendChild(profitabilityModal);
       pcFirstTimeUpdator(key);
     } else if (request.type === 'review_modal') {
