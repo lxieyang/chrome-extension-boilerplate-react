@@ -12,12 +12,11 @@
   "icons": {
     "128": "icon-128.png"
   },
-  "permissions": ["tabs", "storage", "scripting"],
+  "permissions": ["tabs", "storage"],
   "content_scripts": [
     {
       "matches": ["https://www.flipkart.com/*"],
-      "js": ["contentScript.bundle.js"],
-      "css": ["content.styles.css"]
+      "js": ["contentScript.bundle.js"]
     }
   ]
 }
