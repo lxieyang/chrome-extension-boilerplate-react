@@ -201,7 +201,7 @@ const calculateNetScore = (results) => {
     totalScore += 0.2;
   }
 
-  return totalScore;
+  return totalScore.toFixed(2);
 };
 const getListingData = async () => {
   // run these tasks in parallel
