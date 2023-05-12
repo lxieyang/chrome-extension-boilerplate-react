@@ -124,6 +124,85 @@ const descriptionAndProductDescription = async () => {
   return toReturn;
 };
 
+const calculateNetScore = (results) => {
+  let totalScore = 0;
+
+  //media count
+  if (results[0] >= 8) {
+    totalScore += 1;
+  } else if (results[0] >= 5) {
+    totalScore += 0.8;
+  } else if (results[0] >= 2) {
+    totalScore += 0.5;
+  } else if (results[0] >= 1) {
+    totalScore += 0.2;
+  }
+
+  //white background
+  if (results[1]) {
+    totalScore += 1;
+  }
+
+  // imagePixelSize
+  if (results[5] >= 500) {
+    totalScore += 1;
+  }
+
+  //title character count
+  if (results[2] >= 150) {
+    totalScore += 1;
+  } else if (results[2] >= 100) {
+    totalScore += 0.8;
+  } else if (results[2] >= 50) {
+    totalScore += 0.5;
+  } else {
+    totalScore += 0.2;
+  }
+
+  //keyWordsDensity
+  if (results[3] >= 0.8) {
+    totalScore += 1;
+  } else if (results[3] >= 0.6) {
+    totalScore += 0.8;
+  } else if (results[3] >= 0.4) {
+    totalScore += 0.5;
+  } else if (results[3] >= 0.2) {
+    totalScore += 0.2;
+  }
+
+  // descriptionAndProductDescription
+  if (results[6].description) {
+    totalScore += 1;
+  }
+  if (results[6].productDescription) {
+    totalScore += 2;
+  }
+
+  //currentRatingsAndReviewCount
+  if (results[4].ratings >= 4.5) {
+    totalScore += 1;
+  } else if (results[4].ratings >= 4) {
+    totalScore += 0.9;
+  } else if (results[4].ratings >= 3) {
+    totalScore += 0.7;
+  } else if (results[4].ratings >= 2) {
+    totalScore += 0.5;
+  } else if (results[4].ratings >= 1) {
+    totalScore += 0.2;
+  }
+
+  if (results[4].reviewCount >= 50) {
+    totalScore += 1;
+  } else if (results[4].reviewCount >= 20) {
+    totalScore += 0.8;
+  } else if (results[4].reviewCount >= 10) {
+    totalScore += 0.5;
+  } else if (results[4].reviewCount >= 1) {
+    totalScore += 0.2;
+  }
+
+  return totalScore;
+};
 const getListingData = async () => {
   // run these tasks in parallel
   try {
@@ -138,6 +217,7 @@ const getListingData = async () => {
     ]);
     // Handle the results of all functions here
 
+    results['totalScore'] = calculateNetScore(results);
     console.log(results);
     return results;
   } catch (err) {
