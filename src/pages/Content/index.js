@@ -13,7 +13,8 @@ const observer = new MutationObserver(async (mutationsList, observer) => {
     // Check if any new nodes are added
     if (mutation.type === 'childList') {
       // Check if the desired element is now available
-      const desiredElement = document.querySelector("#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-5-12._78xt5Y > div:nth-child(1)"
+      const desiredElement = document.querySelector(
+        '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-5-12._78xt5Y > div:nth-child(1)'
       );
       if (desiredElement) {
         // Perform your desired action
@@ -23,8 +24,8 @@ const observer = new MutationObserver(async (mutationsList, observer) => {
         getListingData();
         const listingHealthScore = document.createElement('div');
         listingHealthScore.setAttribute('id', 'listingHealthScore');
-        listingHealthScore.appendChild(await ListingModal())
-        
+        listingHealthScore.appendChild(await ListingModal());
+
         desiredElement.prepend(listingHealthScore);
         break;
         // You can also perform additional actions here
@@ -43,7 +44,6 @@ chrome.runtime.onMessage.addListener(async function (
 ) {
   const currentUrl = window.location.href;
   if (currentUrl.includes('flipkart.com')) {
-    
     if (request.type === 'profitability_modal') {
       const alreadyExists = document.getElementById('profitability-modal');
       if (alreadyExists) {
@@ -67,25 +67,25 @@ chrome.runtime.onMessage.addListener(async function (
         // remove the modal
         alreadyExists.remove();
       }
-      
+
       const modal = document.createElement('div');
       modal.setAttribute('id', 'review-modal');
       document.body.appendChild(modal);
-    
+
       modal.setAttribute('class', 'ivkkEA jIfStg');
-    
+
       const modalClass1 = document.createElement('div');
       modalClass1.setAttribute('class', 'doWCWF');
       modal.appendChild(modalClass1);
-    
+
       const modalClass2 = document.createElement('div');
       modalClass2.setAttribute('class', 'oeMFGH');
       modalClass1.appendChild(modalClass2);
-    
+
       const header = document.createElement('div');
       header.setAttribute('class', 'bAWFlm');
       header.innerText = 'Reviews Analyser';
-    
+
       const closeModal = document.createElement('span');
       closeModal.setAttribute('id', 'closeModal');
       closeModal.setAttribute('class', 'close');
@@ -97,7 +97,7 @@ chrome.runtime.onMessage.addListener(async function (
           alreadyExists.remove();
         }
       };
-    
+
       // body
       const body = document.createElement('div');
       body.setAttribute('class', 'jbqSrN');
@@ -105,13 +105,13 @@ chrome.runtime.onMessage.addListener(async function (
       modalClass2.appendChild(header);
       modalClass2.appendChild(body);
 
-      const loading = document.createElement('div')
-      loading.innerHTML='Loading...'
+      const loading = document.createElement('div');
+      loading.innerHTML = 'Loading...';
 
-      body.appendChild(loading)
+      body.appendChild(loading);
 
-      const newDiv = await reviewNewModal()
-      body.removeChild(loading)
+      const newDiv = await reviewNewModal();
+      body.removeChild(loading);
       body.appendChild(newDiv);
     }
   } else {
