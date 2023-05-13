@@ -1746,3 +1746,8 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
   -webkit-box-pack: center;
   justify-content: center;
 }
+
+
+.wordcloudclass{
+  display:none
+}

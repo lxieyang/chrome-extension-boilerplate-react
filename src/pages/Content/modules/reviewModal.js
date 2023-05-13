@@ -1,6 +1,7 @@
 import ReviewGenerator from './reviewsgenerator';
 import { ratingDistGenerator } from './reviewsgenerator';
 import { urlGenerator } from './utils.js';
+import WordCloud from './wordcloud2.js';
 
 // function getProductTitle() {
 //   const url = window.location.href;
@@ -45,11 +46,30 @@ async function allReviewData(conditions) {
   return response.json();
 }
 
+async function wordcloudgenerator() {
+  let updatedUrl = urlGenerator();
+  let url = 'https://www.datavio.co/api/review-analysis';
+  let body = {
+    url: `${updatedUrl}`,
+  };
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+
+  return response.json();
+}
+
 async function reviewNewModal() {
   const modal = document.createElement('div');
   modal.setAttribute('id', 'review-modal');
 
   const apiData = await reviewModal();
+  
 
   console.log(apiData);
 
@@ -175,12 +195,19 @@ async function reviewNewModal() {
   reviewsDiv3.setAttribute('class', 'bzssCu');
 
   const reviewsType3 = document.createElement('div');
+  reviewsType3.setAttribute('id', 'review-analysis');
   reviewsType3.setAttribute('tabindex', '0');
   reviewsType3.setAttribute('class', 'hiLyrj');
 
   const reviewsTypeTitle3 = document.createElement('div');
   reviewsTypeTitle3.setAttribute('class', 'gsckYT');
   reviewsTypeTitle3.innerHTML = 'Review Analysis';
+
+  //wordcloud
+  const wordCloudDiv = document.createElement('div');
+  wordCloudDiv.setAttribute('id', 'wordcloud');
+  wordCloudDiv.setAttribute('class', 'wordcloudclass');
+  wordCloudDiv.setAttribute('style', 'height: 550px; width: 100%;');
 
   reviewsType3.appendChild(reviewsTypeTitle3);
   reviewsType3.appendChild(menuBorder3);
@@ -191,6 +218,7 @@ async function reviewNewModal() {
   contentTop.appendChild(reviewsDiv3);
   bodyBody.appendChild(contentDiv);
   bodyBody.appendChild(productDetails);
+  bodyBody.appendChild(wordCloudDiv);
 
   //Filters
 
@@ -555,7 +583,7 @@ async function reviewNewModal() {
   const keyword = document.createElement('input');
   keyword.setAttribute('class', 'kkDNaA');
   keyword.setAttribute('placeholder', 'Enter a Keyword');
-  keyword.setAttribute('id', 'myInput')
+  keyword.setAttribute('id', 'myInput');
   keywordDiv.appendChild(keyword);
 
   let keywordValue = '';
@@ -579,27 +607,26 @@ async function reviewNewModal() {
   showMoreBtn.innerHTML = 'Load More Reviews';
 
   let content = [];
-  let currrentReviewCount = 0
+  let currrentReviewCount = 0;
 
   let allreviewdata = await allReviewData(content);
   console.log(allreviewdata);
 
-
   clearBtn.onclick = async function (e) {
     e.preventDefault();
     content = [];
-    verifiedBool=false;
-    selectedStarSet.clear()
-    selectedStar=[]
-    keywordValue=''
-    bool1star=false
-    bool2star=false
-    bool3star=false
-    bool4star=false
-    bool5star=false
+    verifiedBool = false;
+    selectedStarSet.clear();
+    selectedStar = [];
+    keywordValue = '';
+    bool1star = false;
+    bool2star = false;
+    bool3star = false;
+    bool4star = false;
+    bool5star = false;
     checkbox.removeAttribute('class');
     checkbox.setAttribute('class', 'elxNIY');
-    document.getElementById('myInput').value = ''
+    document.getElementById('myInput').value = '';
     checkbox1star.removeAttribute('class');
     checkbox1star.setAttribute('class', 'elxNIY');
     checkbox2star.removeAttribute('class');
@@ -621,16 +648,16 @@ async function reviewNewModal() {
     dropdown5Star.removeAttribute('class');
     dropdown5Star.setAttribute('class', 'HBZlb');
     await setTitle();
-    dropdownBtn.innerHTML = `${numberOfRating}`
+    dropdownBtn.innerHTML = `${numberOfRating}`;
     allreviewdata = await allReviewData(content);
-    currrentReviewCount=0
+    currrentReviewCount = 0;
     console.log(allreviewdata);
     reviewDiv.innerHTML = '';
     for (let i = 0; i < Math.min(allreviewdata.length, 100); i++) {
       let newReview = ReviewGenerator(i, allreviewdata[i]);
       reviewDiv.appendChild(newReview);
-      if( i === 99 && allreviewdata.length > 100){
-        reviewDiv.appendChild(showMoreBtn)
+      if (i === 99 && allreviewdata.length > 100) {
+        reviewDiv.appendChild(showMoreBtn);
       }
     }
   };
@@ -650,24 +677,27 @@ async function reviewNewModal() {
       metric: 'name',
       values: keywordValue,
     };
-    if(selectedStar.length > 0)
-    {content.push(arrayObj);}
-    if(verifiedBool===true)
-    {content.push(verifiedObj);}
-    if(keywordValue !== '')
-    {content.push(keywordObj);}
+    if (selectedStar.length > 0) {
+      content.push(arrayObj);
+    }
+    if (verifiedBool === true) {
+      content.push(verifiedObj);
+    }
+    if (keywordValue !== '') {
+      content.push(keywordObj);
+    }
     console.log(verifiedBool);
     console.log(keywordValue);
     console.log(selectedStar);
     allreviewdata = await allReviewData(content);
-    currrentReviewCount=0
+    currrentReviewCount = 0;
     console.log(allreviewdata);
     reviewDiv.innerHTML = '';
     for (let i = 0; i < Math.min(allreviewdata.length, 100); i++) {
       let newReview = ReviewGenerator(i, allreviewdata[i]);
       reviewDiv.appendChild(newReview);
-      if( i === 99 && allreviewdata.length > 100){
-        reviewDiv.appendChild(showMoreBtn)
+      if (i === 99 && allreviewdata.length > 100) {
+        reviewDiv.appendChild(showMoreBtn);
       }
     }
   };
@@ -675,21 +705,30 @@ async function reviewNewModal() {
   showMoreBtn.onclick = async function (e) {
     e.preventDefault();
     reviewDiv.removeChild(showMoreBtn);
-    currrentReviewCount+=Math.min(100,allreviewdata.length- currrentReviewCount) ;
-    for (let i = currrentReviewCount; i < Math.min(allreviewdata.length, currrentReviewCount + 100); i++) {
+    currrentReviewCount += Math.min(
+      100,
+      allreviewdata.length - currrentReviewCount
+    );
+    for (
+      let i = currrentReviewCount;
+      i < Math.min(allreviewdata.length, currrentReviewCount + 100);
+      i++
+    ) {
       let newReview = ReviewGenerator(i, allreviewdata[i]);
       reviewDiv.appendChild(newReview);
-      if( i === currrentReviewCount+ 99 && allreviewdata.length > currrentReviewCount + 100){
-        reviewDiv.appendChild(showMoreBtn)
+      if (
+        i === currrentReviewCount + 99 &&
+        allreviewdata.length > currrentReviewCount + 100
+      ) {
+        reviewDiv.appendChild(showMoreBtn);
       }
     }
-  }
-
+  };
 
   //Overview
 
   const overviewDiv = document.createElement('div');
-  overviewDiv.setAttribute('class', 'gnaJEW');
+  overviewDiv.setAttribute('class', 'b');
 
   const overviewSplitDiv = document.createElement('div');
   overviewSplitDiv.setAttribute('class', 'gxxFEr');
@@ -857,13 +896,13 @@ async function reviewNewModal() {
   for (let i = 0; i < Math.min(allreviewdata.length, 100); i++) {
     let newReview = ReviewGenerator(i, allreviewdata[i]);
     reviewDiv.appendChild(newReview);
-    console.log(i, allreviewdata.length)
-    if( i === 99 && allreviewdata.length > 100){
-      console.log('appended')
-      reviewDiv.appendChild(showMoreBtn)
+    console.log(i, allreviewdata.length);
+    if (i === 99 && allreviewdata.length > 100) {
+      console.log('appended');
+      reviewDiv.appendChild(showMoreBtn);
     }
   }
-
+  const wordlist = await wordcloudgenerator();
   reviewsType1.onclick = async function () {
     reviewsType1.removeAttribute('class');
     reviewsType2.removeAttribute('class');
@@ -877,6 +916,7 @@ async function reviewNewModal() {
     reviewsType3.setAttribute('class', 'hiLyrj');
     overviewDiv.setAttribute('class', 'gnaJEW');
     allReviewDiv.setAttribute('class', 'epbpWv2');
+    wordCloudDiv.setAttribute('class', 'wordcloudclass');
   };
   reviewsType2.onclick = async function () {
     reviewsType1.removeAttribute('class');
@@ -891,6 +931,7 @@ async function reviewNewModal() {
     reviewsType3.setAttribute('class', 'hiLyrj');
     overviewDiv.setAttribute('class', 'gnaJEW2');
     allReviewDiv.setAttribute('class', 'epbpWv');
+    wordCloudDiv.setAttribute('class', 'wordcloudclass');
   };
   reviewsType3.onclick = async function () {
     reviewsType1.removeAttribute('class');
@@ -905,6 +946,10 @@ async function reviewNewModal() {
     reviewsType1.setAttribute('class', 'hiLyrj');
     reviewsType2.setAttribute('class', 'hiLyrj');
     reviewsType3.setAttribute('class', 'liSWKK');
+    wordCloudDiv.removeAttribute('class');
+    
+    const abc={list : wordlist["wordCloudFrequency"]}
+    WordCloud(document.getElementById('wordcloud'),abc);
   };
   return bodyModalPlace;
 }
