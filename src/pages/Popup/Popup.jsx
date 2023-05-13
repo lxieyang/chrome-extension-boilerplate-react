@@ -3,13 +3,64 @@ import logo from '../../assets/img/logo.png';
 import save from '../../assets/img/save.png';
 import Greetings from '../../containers/Greetings/Greetings';
 import { Box, Button, Switch, Typography } from '@mui/material';
+import { getAuthToken, constants, getReferrerIdKey } from './utils.js';
+import { v4 as uuidv4 } from 'uuid';
 
 const Popup = () => {
-  function profitability_modal() {
-    chrome.runtime.sendMessage({ message: 'profitability_modal' });
+  async function profitability_modal() {
+    let authToken = await getAuthToken();
+    let useCount = await chrome.storage.local.get(
+      constants.profitabiltyUseCountKey
+    );
+    if (
+      (authToken && authToken[constants.authTokenKey]) ||
+      !useCount[constants.profitabiltyUseCountKey] ||
+      useCount[constants.profitabiltyUseCountKey] < 2
+    ) {
+      let currentUseCount = useCount[constants.profitabiltyUseCountKey]
+        ? useCount[constants.profitabiltyUseCountKey] + 1
+        : 1;
+      chrome.storage.local.set({
+        [constants.profitabiltyUseCountKey]: currentUseCount,
+      });
+      chrome.runtime.sendMessage({ message: 'profitability_modal' });
+    } else {
+      // show to free login
+    }
   }
-  function review_modal() {
-    chrome.runtime.sendMessage({ message: 'review_modal' });
+  async function review_modal() {
+    let authToken = await getAuthToken();
+    let useCount = await chrome.storage.local.get(constants.reviewUseCountKey);
+    if (
+      (authToken && authToken[constants.authTokenKey]) ||
+      !useCount[constants.reviewUseCountKey] ||
+      useCount[constants.reviewUseCountKey] < 2
+    ) {
+      let currentUseCount = useCount[constants.reviewUseCountKey]
+        ? useCount[constants.reviewUseCountKey] + 1
+        : 1;
+      chrome.storage.local.set({
+        [constants.reviewUseCountKey]: currentUseCount,
+      });
+      chrome.runtime.sendMessage({ message: 'review_modal' });
+    } else {
+      // show to free login
+    }
+  }
+  async function signUp() {
+    let referrerIdValue = await getReferrerIdKey();
+    // console.log(referrerIdValue);
+    let uuid =
+      referrerIdValue && referrerIdValue[constants.referrerIdKey]
+        ? referrerIdValue[constants.referrerIdKey]
+        : uuidv4();
+    if (!referrerIdValue) {
+      chrome.storage.local.set({ [constants.referrerIdKey]: uuid });
+    }
+    chrome.tabs.create({
+      url: `${constants.API_URL}register?referrer=extension&referrerId=${uuid}`,
+      active: true,
+    });
   }
   return (
     <Box
@@ -101,6 +152,7 @@ const Popup = () => {
           sx={{ width: '81%', justifyContent: 'center', m: '10px 0 10px 0' }}
         >
           <Button
+            onClick={signUp}
             fullWidth
             size="small"
             sx={{ backgroundColor: '#b85c91' }}
