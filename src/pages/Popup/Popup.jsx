@@ -83,6 +83,7 @@ const Popup = () => {
 
   const collection = async () => {
     const urlToSave = await urlGenerator();
+    const authToken = await getAuthToken();
     console.log(urlToSave);
     let url = 'https://www.datavio.co/backend/extension/save-collection';
     let body = { url: `${urlToSave}` };
@@ -91,6 +92,7 @@ const Popup = () => {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + authToken[constants.authTokenKey],
       },
       body: JSON.stringify(body),
     });
@@ -194,7 +196,9 @@ const Popup = () => {
             Profitability Calculator
           </Button>
 
-          <Typography variant="body2"> ({pvalue} Left)</Typography>
+          {!isLogin && (
+            <Typography variant="body2"> ({pvalue} Left)</Typography>
+          )}
         </Box>
         <Box
           sx={{
@@ -215,7 +219,9 @@ const Popup = () => {
           >
             Review Analyzer
           </Button>
-          <Typography variant="body2"> ({rvalue} Left)</Typography>
+          {!isLogin && (
+            <Typography variant="body2"> ({rvalue} Left)</Typography>
+          )}
         </Box>
         <Box
           sx={{
