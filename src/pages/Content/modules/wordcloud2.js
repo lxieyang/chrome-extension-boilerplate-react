@@ -213,14 +213,14 @@ if (!window.clearImmediate) {
         '"Arial Unicode MS", "Droid Fallback Sans", sans-serif',
       fontWeight: 'normal',
       color: 'random-dark',
-      minSize: 0, // 0 to disable
-      weightFactor: 1,
+      minSize: 8, // 0 to disable
+      weightFactor: 8,
       clearCanvas: true,
       backgroundColor: '#fff', // opaque white = rgba(255, 255, 255, 1)
 
       gridSize: 8,
       drawOutOfBound: false,
-      shrinkToFit: false,
+      shrinkToFit: true,
       origin: null,
 
       drawMask: false,
@@ -231,8 +231,8 @@ if (!window.clearImmediate) {
       abortThreshold: 0, // disabled
       abort: function noop() {},
 
-      minRotation: -Math.PI / 2,
-      maxRotation: Math.PI / 2,
+      minRotation: 0,
+      maxRotation: 0,
       rotationSteps: 0,
 
       shuffle: true,

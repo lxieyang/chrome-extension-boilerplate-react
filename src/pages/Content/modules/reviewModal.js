@@ -46,11 +46,30 @@ async function allReviewData(conditions) {
   return response.json();
 }
 
+async function wordcloudgenerator() {
+  let updatedUrl = urlGenerator();
+  let url = 'https://www.datavio.co/api/review-analysis';
+  let body = {
+    url: `${updatedUrl}`,
+  };
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+
+  return response.json();
+}
+
 async function reviewNewModal() {
   const modal = document.createElement('div');
   modal.setAttribute('id', 'review-modal');
 
   const apiData = await reviewModal();
+  
 
   console.log(apiData);
 
@@ -187,7 +206,8 @@ async function reviewNewModal() {
   //wordcloud
   const wordCloudDiv = document.createElement('div');
   wordCloudDiv.setAttribute('id', 'wordcloud');
-  wordCloudDiv.setAttribute('style', 'height: 400px; width: 100%;');
+  wordCloudDiv.setAttribute('class', 'wordcloudclass');
+  wordCloudDiv.setAttribute('style', 'height: 550px; width: 100%;');
 
   reviewsType3.appendChild(reviewsTypeTitle3);
   reviewsType3.appendChild(menuBorder3);
@@ -882,7 +902,7 @@ async function reviewNewModal() {
       reviewDiv.appendChild(showMoreBtn);
     }
   }
-
+  const wordlist = await wordcloudgenerator();
   reviewsType1.onclick = async function () {
     reviewsType1.removeAttribute('class');
     reviewsType2.removeAttribute('class');
@@ -896,6 +916,7 @@ async function reviewNewModal() {
     reviewsType3.setAttribute('class', 'hiLyrj');
     overviewDiv.setAttribute('class', 'gnaJEW');
     allReviewDiv.setAttribute('class', 'epbpWv2');
+    wordCloudDiv.setAttribute('class', 'wordcloudclass');
   };
   reviewsType2.onclick = async function () {
     reviewsType1.removeAttribute('class');
@@ -910,6 +931,7 @@ async function reviewNewModal() {
     reviewsType3.setAttribute('class', 'hiLyrj');
     overviewDiv.setAttribute('class', 'gnaJEW2');
     allReviewDiv.setAttribute('class', 'epbpWv');
+    wordCloudDiv.setAttribute('class', 'wordcloudclass');
   };
   reviewsType3.onclick = async function () {
     reviewsType1.removeAttribute('class');
@@ -924,12 +946,10 @@ async function reviewNewModal() {
     reviewsType1.setAttribute('class', 'hiLyrj');
     reviewsType2.setAttribute('class', 'hiLyrj');
     reviewsType3.setAttribute('class', 'liSWKK');
-    WordCloud(document.getElementById('wordcloud'), {
-      list: [
-        ['foo', 12],
-        ['bar', 6],
-      ],
-    });
+    wordCloudDiv.removeAttribute('class');
+    
+    const abc={list : wordlist["wordCloudFrequency"]}
+    WordCloud(document.getElementById('wordcloud'),abc);
   };
   return bodyModalPlace;
 }
