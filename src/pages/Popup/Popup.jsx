@@ -102,8 +102,11 @@ const [rvalue, setRvalue] = useState(2)
       },
       body: JSON.stringify(body),
     });
-    console.log(response.message);
+    if(response.status===200)
     setCollected(true)
+    else
+    console.log(response)
+  
   }
 
   const userLogin = async ()=> {
