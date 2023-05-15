@@ -5,8 +5,10 @@ import Greetings from '../../containers/Greetings/Greetings';
 import { Box, Button, Switch, Typography } from '@mui/material';
 import { getAuthToken, constants, getReferrerIdKey } from './utils.js';
 import { v4 as uuidv4 } from 'uuid';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { urlGenerator } from './utils.js';
+
+
 
 const Popup = () => {
   const [pvalue, setPvalue] = useState(2);
@@ -14,6 +16,21 @@ const Popup = () => {
 
   const [isLogin, setIsLogin] = useState(false);
   const [tokenLeft, setTokenLeft] = useState(false);
+
+  const clickCount = async (probCount, revCount) => {
+  const authToken = await getAuthToken();
+  let url = 'https://www.datavio.co/backend/extension/click-count';
+  let body = { probability: `${probCount}`, review: `${revCount}` };
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + authToken[constants.authTokenKey],
+    },
+    body: JSON.stringify(body),
+  });
+};
 
   async function profitability_modal() {
     let authToken = await getAuthToken();
@@ -23,6 +40,12 @@ const Popup = () => {
     if (useCount[constants.reviewUseCountKey] < 2) {
       setPvalue(2 - useCount[constants.profitabiltyUseCountKey]);
     } else setPvalue(0);
+    if (useCount[constants.profitabiltyUseCountKey] % 10 === 0) {
+      clickCount(
+        useCount[constants.profitabiltyUseCountKey],
+        useCount[constants.reviewUseCountKey]
+      );
+    }
     if (
       (authToken && authToken[constants.authTokenKey]) ||
       !useCount[constants.profitabiltyUseCountKey] ||
@@ -46,10 +69,16 @@ const Popup = () => {
     if (useCount[constants.reviewUseCountKey] < 2) {
       setRvalue(2 - useCount[constants.reviewUseCountKey]);
     } else setRvalue(0);
-    if (
-      (authToken && authToken[constants.authTokenKey]) ||
-      !useCount[constants.reviewUseCountKey] ||
-      useCount[constants.reviewUseCountKey] < 2
+    if (useCount[constants.reviewUseCountKey] % 10 === 0) {
+      clickCount(
+        useCount[constants.profitabiltyUseCountKey],
+        useCount[constants.reviewUseCountKey]
+      );
+    }
+    if (true
+      // (authToken && authToken[constants.authTokenKey]) ||
+      // !useCount[constants.reviewUseCountKey] ||
+      // useCount[constants.reviewUseCountKey] < 2
     ) {
       let currentUseCount = useCount[constants.reviewUseCountKey]
         ? useCount[constants.reviewUseCountKey] + 1
@@ -288,3 +317,5 @@ const Popup = () => {
 };
 
 export default Popup;
+
+

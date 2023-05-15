@@ -106,8 +106,9 @@ chrome.runtime.onMessage.addListener(async function (
       modalClass2.appendChild(body);
 
       const loading = document.createElement('div');
-      loading.innerHTML = 'Loading...';
-
+      loading.setAttribute('class', 'sk-chase');
+      loading.innerHTML =
+        '<div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div>';
       body.appendChild(loading);
 
       const newDiv = await reviewNewModal();
