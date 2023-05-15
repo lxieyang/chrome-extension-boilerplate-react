@@ -17,7 +17,7 @@ const Popup = () => {
 
   const clickCount = async (profCount, revCount) => {
     const authToken = await getAuthToken();
-    let url = `${constants.PRODUCT_API_URL}/extension/click-count`;
+    let url = `${constants.PRODUCT_API_URL}extension/click-count`;
     let body = { profitability: `${profCount}`, review: `${revCount}` };
     const response = await fetch(url, {
       method: 'POST',
@@ -35,7 +35,7 @@ const Popup = () => {
     let useCount = await chrome.storage.sync.get(
       constants.profitabiltyUseCountKey
     );
-    if (useCount[constants.profitabilityUseCountKey] < 2) {
+    if (useCount[constants.profitabiltyUseCountKey] < 2) {
       setPvalue(2 - useCount[constants.profitabiltyUseCountKey]);
     } else setPvalue(0);
     if (
