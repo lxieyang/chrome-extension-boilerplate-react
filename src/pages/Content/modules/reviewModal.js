@@ -1,9 +1,3 @@
-
-
-
-
-
-
 import ReviewGenerator from './reviewsgenerator';
 import { ratingDistGenerator } from './reviewsgenerator';
 import { urlGenerator } from './utils.js';
@@ -974,7 +968,7 @@ async function reviewNewModal() {
     if (oneClick === false) {
       oneClick = true;
       wordCloudDiv.appendChild(loading);
-      wordlist = await wordlist
+      wordlist = await wordlist;
       wordCloudDiv.removeChild(loading);
       const abc = { list: wordlist['wordCloudFrequency'] };
       WordCloud(document.getElementById('wordcloud'), abc);
@@ -983,19 +977,3 @@ async function reviewNewModal() {
   return bodyModalPlace;
 }
 export default reviewNewModal;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

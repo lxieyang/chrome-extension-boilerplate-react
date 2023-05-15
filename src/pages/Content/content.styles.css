@@ -1,12 +1,3 @@
-
-
-
-
-
-
-
-
-
 .modal {
   display: flex;
   position: fixed;
@@ -1144,7 +1135,8 @@ svg:not(:host).svg-inline--fa {
   transform: translate3d(30px, 235px, 0px);
 }
 .bdtKyo {
-  box-shadow: rgba(103,132,162,.08) 0px 2px 3px, rgba(103,132,162,.16) 0px 1px 8px;
+  box-shadow: rgba(103, 132, 162, 0.08) 0px 2px 3px,
+    rgba(103, 132, 162, 0.16) 0px 1px 8px;
   width: 300px;
   min-width: 198px;
   background: #fff;
@@ -1188,8 +1180,6 @@ svg:not(:host).svg-inline--fa {
   -webkit-box-align: center;
   align-items: center;
 }
-
-
 
 .kkzglY {
   margin-left: 8px;
@@ -1456,7 +1446,6 @@ svg:not(:host).svg-inline--fa {
   z-index: 11;
 }
 
-
 /* listing */
 .fOhaxO {
   display: flex;
@@ -1563,9 +1552,6 @@ svg:not(:host).svg-inline--fa {
   background-color: #f3f2e5;
 }
 
-
-
-
 .jpPImZ {
   display: flex;
   align-self: center;
@@ -1573,7 +1559,8 @@ svg:not(:host).svg-inline--fa {
   align-items: center;
 }
 
-.hZeEru:hover, .hZeEru:focus {
+.hZeEru:hover,
+.hZeEru:focus {
   background: #ecdde5;
   border-color: #ecdde5;
 }
@@ -1618,11 +1605,11 @@ svg:not(:host).svg-inline--fa {
   font-size: 16px;
 }
 
-svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
+svg:not(:root).svg-inline--fa,
+svg:not(:host).svg-inline--fa {
   overflow: visible;
   box-sizing: content-box;
 }
-
 
 .iTBTao {
   transform: rotateZ(180deg);
@@ -1636,13 +1623,13 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
   vertical-align: -0.125em;
 }
 
-.listmodal{
-    z-index: 9999;
-    position: absolute;
-    inset: 0px auto auto 0px;
-    margin: 0px;
-    width: 400px;
-    transform: translate3d(2px, 52px, 0px);
+.listmodal {
+  z-index: 9999;
+  position: absolute;
+  inset: 0px auto auto 0px;
+  margin: 0px;
+  width: 400px;
+  transform: translate3d(2px, 52px, 0px);
 }
 
 .dDlBoq {
@@ -1684,7 +1671,7 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
 }
 
 #h10-style-container div {
-  font-family: "Nunito Sans", -apple-system, Neuton, sans-serif;
+  font-family: 'Nunito Sans', -apple-system, Neuton, sans-serif;
   line-height: normal;
   letter-spacing: 0px;
 }
@@ -1756,9 +1743,8 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
   justify-content: center;
 }
 
-
-.wordcloudclass{
-  display:none
+.wordcloudclass {
+  display: none;
 }
 
 .sk-chase {
@@ -1774,8 +1760,8 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
   height: 100%;
   position: absolute;
   left: 0;
-  top: 0; 
-  animation: sk-chase-dot 2.0s infinite ease-in-out both; 
+  top: 0;
+  animation: sk-chase-dot 2s infinite ease-in-out both;
 }
 
 .sk-chase-dot:before {
@@ -1785,36 +1771,65 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
   height: 25%;
   background-color: #b85c91;
   border-radius: 100%;
-  animation: sk-chase-dot-before 2.0s infinite ease-in-out both; 
+  animation: sk-chase-dot-before 2s infinite ease-in-out both;
 }
 
-.sk-chase-dot:nth-child(1) { animation-delay: -1.1s; }
-.sk-chase-dot:nth-child(2) { animation-delay: -1.0s; }
-.sk-chase-dot:nth-child(3) { animation-delay: -0.9s; }
-.sk-chase-dot:nth-child(4) { animation-delay: -0.8s; }
-.sk-chase-dot:nth-child(5) { animation-delay: -0.7s; }
-.sk-chase-dot:nth-child(6) { animation-delay: -0.6s; }
-.sk-chase-dot:nth-child(1):before { animation-delay: -1.1s; }
-.sk-chase-dot:nth-child(2):before { animation-delay: -1.0s; }
-.sk-chase-dot:nth-child(3):before { animation-delay: -0.9s; }
-.sk-chase-dot:nth-child(4):before { animation-delay: -0.8s; }
-.sk-chase-dot:nth-child(5):before { animation-delay: -0.7s; }
-.sk-chase-dot:nth-child(6):before { animation-delay: -0.6s; }
+.sk-chase-dot:nth-child(1) {
+  animation-delay: -1.1s;
+}
+.sk-chase-dot:nth-child(2) {
+  animation-delay: -1s;
+}
+.sk-chase-dot:nth-child(3) {
+  animation-delay: -0.9s;
+}
+.sk-chase-dot:nth-child(4) {
+  animation-delay: -0.8s;
+}
+.sk-chase-dot:nth-child(5) {
+  animation-delay: -0.7s;
+}
+.sk-chase-dot:nth-child(6) {
+  animation-delay: -0.6s;
+}
+.sk-chase-dot:nth-child(1):before {
+  animation-delay: -1.1s;
+}
+.sk-chase-dot:nth-child(2):before {
+  animation-delay: -1s;
+}
+.sk-chase-dot:nth-child(3):before {
+  animation-delay: -0.9s;
+}
+.sk-chase-dot:nth-child(4):before {
+  animation-delay: -0.8s;
+}
+.sk-chase-dot:nth-child(5):before {
+  animation-delay: -0.7s;
+}
+.sk-chase-dot:nth-child(6):before {
+  animation-delay: -0.6s;
+}
 
 @keyframes sk-chase {
-  100% { transform: rotate(360deg); } 
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes sk-chase-dot {
-  80%, 100% { transform: rotate(360deg); } 
+  80%,
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes sk-chase-dot-before {
   50% {
-    transform: scale(0.4); 
-  } 100%, 0% {
-    transform: scale(1.0); 
-  } 
+    transform: scale(0.4);
+  }
+  100%,
+  0% {
+    transform: scale(1);
+  }
 }
-
-
