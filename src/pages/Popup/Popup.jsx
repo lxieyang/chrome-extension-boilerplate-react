@@ -18,7 +18,7 @@ const Popup = () => {
   const clickCount = async (profCount, revCount) => {
     const authToken = await getAuthToken();
     let url = `${constants.PRODUCT_API_URL}extension/click-count`;
-    let body = { profitability: `${profCount}`, review: `${revCount}` };
+    let body = { profitabilty: `${profCount}`, review: `${revCount}` };
     const response = await fetch(url, {
       method: 'POST',
       headers: {
