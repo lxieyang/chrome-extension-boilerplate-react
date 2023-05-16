@@ -157,7 +157,7 @@ const Popup = () => {
   const userLogin = async () => {
     let referrerIdValue = await getReferrerIdKey();
     let authToken = await getAuthToken();
-    if(!authToken && !authToken[constants.authTokenKey]){
+    if(!authToken || !authToken[constants.authTokenKey]){
     if (referrerIdValue) {
       referrerIdValue = referrerIdValue[constants.referrerIdKey];
       // make  request to refresh token
