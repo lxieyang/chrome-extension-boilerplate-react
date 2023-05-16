@@ -1,12 +1,12 @@
 {
   "manifest_version": 3,
-  "version": "1.0.0",
+  "version": "2.1.0",
   "name": "Datavio",
   "description": "A chrome extension to help you with analysing product pages on Flipkart",
   "background": { "service_worker": "background.bundle.js" },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Datavio competitor research",
+    "default_title": "Datavio Flipkart competitor research",
     "default_icon": "icon-34.png"
   },
   "icons": {
