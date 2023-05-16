@@ -53,6 +53,7 @@ export async function urlChecker() {
   for (let i = 2; i < url.length; i++) {
     if (url[i + 1] === '/' && url[i + 2] === 'p' && url[i + 3] === '/') {
       bool = true;
+      break;
     }
   }
 

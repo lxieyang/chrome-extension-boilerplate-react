@@ -19,7 +19,7 @@ const Popup = () => {
   const clickCount = async (profCount, revCount) => {
     const authToken = await getAuthToken();
     let url = `${constants.PRODUCT_API_URL}extension/click-count`;
-    let body = { profitabilty: `${profCount}`, review: `${revCount}` };
+    let body = { profitability: `${profCount}`, review: `${revCount}` };
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -156,7 +156,9 @@ const Popup = () => {
 
   const userLogin = async () => {
     let referrerIdValue = await getReferrerIdKey();
-
+    let authToken = await getAuthToken();
+    const loginToken = await chrome.storage.local.get([constants.authTokenKey]);
+    if(!loginToken){
     if (referrerIdValue) {
       referrerIdValue = referrerIdValue[constants.referrerIdKey];
       // make  request to refresh token
@@ -175,6 +177,8 @@ const Popup = () => {
         });
         setIsLogin(true);
       }
+    }}else{
+      setIsLogin(true);
     }
   };
 
@@ -183,12 +187,19 @@ const Popup = () => {
       constants.profitabiltyUseCountKey
     );
     let useCountR = await chrome.storage.sync.get(constants.reviewUseCountKey);
-    if (useCountP[constants.profitabiltyUseCountKey])
+    if (
+      useCountP[constants.profitabiltyUseCountKey] &&
+      useCountP[constants.profitabiltyUseCountKey] < 3
+    )
       setPvalue(2 - useCountP[constants.profitabiltyUseCountKey]);
-    if (useCountR[constants.reviewUseCountKey])
+    if (
+      useCountR[constants.reviewUseCountKey] &&
+      useCountR[constants.reviewUseCountKey] < 3
+    )
       setRvalue(2 - useCountR[constants.reviewUseCountKey]);
   };
   counter();
+
   userLogin();
 
   return (
@@ -309,7 +320,7 @@ const Popup = () => {
           {flipPage && (
             <Typography variant="body2">
               {' '}
-              Visit Flipkart product page.
+              Please visit a Flipkart product page.
             </Typography>
           )}
           {!isLogin && (

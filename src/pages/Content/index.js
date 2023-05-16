@@ -18,7 +18,7 @@ const observer = new MutationObserver(async (mutationsList, observer) => {
       );
       if (desiredElement) {
         // Perform your desired action
-        console.log('Desired element found:', desiredElement);
+        //console.log('Desired element found:', desiredElement);
         // Stop observing mutations once the element is found (if needed)
         observer.disconnect();
         getListingData();
