@@ -156,7 +156,6 @@ const Popup = () => {
 
   const userLogin = async () => {
     let referrerIdValue = await getReferrerIdKey();
-    let authToken = await getAuthToken();
     const loginToken = await chrome.storage.local.get([constants.authTokenKey]);
     if(!loginToken){
     if (referrerIdValue) {
