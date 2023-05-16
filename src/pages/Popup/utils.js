@@ -1,4 +1,4 @@
-import {getActiveTabURL} from "../utils"
+import { getActiveTabURL } from '../utils';
 
 export const constants = {
   API_URL: 'https://www.datavio.co/',
@@ -18,7 +18,7 @@ export function getReferrerIdKey() {
 }
 
 export async function urlGenerator() {
-  let url = await getActiveTabURL() ;
+  let url = await getActiveTabURL();
   url = url.url;
   let newUrl = '';
   let bool = false;
@@ -44,4 +44,17 @@ export async function urlGenerator() {
   }
 
   return newUrl;
+}
+
+export async function urlChecker() {
+  let url = await getActiveTabURL();
+  url = url.url;
+  let bool = false;
+  for (let i = 2; i < url.length; i++) {
+    if (url[i + 1] === '/' && url[i + 2] === 'p' && url[i + 3] === '/') {
+      bool = true;
+    }
+  }
+
+  return bool;
 }

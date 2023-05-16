@@ -46,7 +46,7 @@ function isWhiteBackground() {
       const whitePixelPercentage = (whitePixelCount / imageArea) * 100;
 
       // Determine if the background is predominantly white
-      if (whitePixelPercentage > 30) {
+      if (whitePixelPercentage > 30 || canvas.width !== canvas.height) {
         resolve(true);
       } else {
         resolve(false);
@@ -121,10 +121,24 @@ const descriptionAndProductDescription = async () => {
     }
   }
 
+  if (toReturn.productDescription === 0 && toReturn.description === 0) {
+    const divSelect2 = document.querySelector(
+      '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div > div'
+    ).childNodes;
+    for (let i = 0; i < divSelect2.length; i++) {
+      const splitText = divSelect2[i].innerText.split('\n');
+      if (splitText[0] === 'Description') {
+        toReturn.description = 1;
+      } else if (splitText[0] === 'Product Description') {
+        toReturn.productDescription = 1;
+        break;
+      }
+    }
+  }
   return toReturn;
 };
 
-const calculateNetScore = (results) => {
+const calculateNetScore = async (results) => {
   let totalScore = 0;
 
   //media count
@@ -217,8 +231,8 @@ const getListingData = async () => {
     ]);
     // Handle the results of all functions here
 
-    results['totalScore'] = calculateNetScore(results);
-    console.log(results);
+    results['totalScore'] = await calculateNetScore(results);
+    //console.log(results);
     return results;
   } catch (err) {
     console.log('Error in getListingData');

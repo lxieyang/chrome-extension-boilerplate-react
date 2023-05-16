@@ -11,11 +11,6 @@ import WordCloud from './wordcloud2.js';
 //   return urlSplit[3];
 // }
 
-const dic = {
-  allreview: '',
-  wordcloud: '',
-};
-
 async function reviewModal() {
   let updatedUrl = urlGenerator();
   //console.log(updatedUrl);
@@ -74,8 +69,8 @@ async function reviewNewModal() {
   modal.setAttribute('id', 'review-modal');
 
   const apiData = await reviewModal();
-  let content = [];
-  let allreviewdata = allReviewData(content);
+  let selectedReviewFilters = [];
+  let allreviewdata = allReviewData(selectedReviewFilters);
 
   let wordlist = wordcloudgenerator();
 
@@ -621,7 +616,7 @@ async function reviewNewModal() {
 
   clearBtn.onclick = async function (e) {
     e.preventDefault();
-    content = [];
+    selectedReviewFilters = [];
     verifiedBool = false;
     selectedStarSet.clear();
     selectedStar = [];
@@ -656,7 +651,7 @@ async function reviewNewModal() {
     dropdown5Star.setAttribute('class', 'HBZlb');
     await setTitle();
     dropdownBtn.innerHTML = `${numberOfRating}`;
-    allreviewdata = await allReviewData(content);
+    allreviewdata = await allReviewData(selectedReviewFilters);
     currrentReviewCount = 0;
     //console.log(allreviewdata);
     reviewDiv.innerHTML = '';
@@ -671,7 +666,7 @@ async function reviewNewModal() {
 
   applyBtn.onclick = async function (e) {
     e.preventDefault();
-    content = [];
+    selectedReviewFilters = [];
     let arrayObj = {
       metric: 'rating',
       values: selectedStar,
@@ -685,20 +680,20 @@ async function reviewNewModal() {
       values: keywordValue,
     };
     if (selectedStar.length > 0) {
-      content.push(arrayObj);
+      selectedReviewFilters.push(arrayObj);
     }
     if (verifiedBool === true) {
-      content.push(verifiedObj);
+      selectedReviewFilters.push(verifiedObj);
     }
     if (keywordValue !== '') {
-      content.push(keywordObj);
+      selectedReviewFilters.push(keywordObj);
     }
     //console.log(verifiedBool);
     //console.log(keywordValue);
     //console.log(selectedStar);
     reviewDiv.innerHTML = '';
     reviewDiv.appendChild(loading);
-    allreviewdata = await allReviewData(content);
+    allreviewdata = await allReviewData(selectedReviewFilters);
     reviewDiv.removeChild(loading);
     currrentReviewCount = 0;
     //console.log(allreviewdata);

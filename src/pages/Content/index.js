@@ -6,7 +6,7 @@ import getListingData from './modules/scrapers/listingScraper.js';
 import './content.styles.css';
 import ListingModal from './modules/listingHealthScore.js';
 
-console.log('content script loaded');
+//console.log('content script loaded');
 const observer = new MutationObserver(async (mutationsList, observer) => {
   // Check each mutation in the list
   for (const mutation of mutationsList) {

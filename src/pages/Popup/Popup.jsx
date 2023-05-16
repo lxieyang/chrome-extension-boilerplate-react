@@ -7,11 +7,12 @@ import { getAuthToken, constants, getReferrerIdKey } from './utils.js';
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 import { urlGenerator } from './utils.js';
+import { urlChecker } from './utils.js';
 
 const Popup = () => {
   const [pvalue, setPvalue] = useState(2);
   const [rvalue, setRvalue] = useState(2);
-
+  const [flipPage, setFlipPage] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const [tokenLeft, setTokenLeft] = useState(false);
 
@@ -31,70 +32,90 @@ const Popup = () => {
   };
 
   async function profitability_modal() {
-    let authToken = await getAuthToken();
-    let useCount = await chrome.storage.sync.get(
-      constants.profitabiltyUseCountKey
-    );
-    if (useCount[constants.profitabiltyUseCountKey] < 2) {
-      setPvalue(2 - useCount[constants.profitabiltyUseCountKey]);
-    } else setPvalue(0);
-    if (
-      useCount[constants.profitabiltyUseCountKey] % 10 === 0 &&
-      authToken[constants.authTokenKey]
-    ) {
-      clickCount(
-        useCount[constants.profitabiltyUseCountKey],
-        useCount[constants.reviewUseCountKey]
+    let isFlipPage = await urlChecker();
+    if (isFlipPage) {
+      let authToken = await getAuthToken();
+      let useCount = await chrome.storage.sync.get(
+        constants.profitabiltyUseCountKey
       );
-    }
-    if (
-      (authToken && authToken[constants.authTokenKey]) ||
-      !useCount[constants.profitabiltyUseCountKey] ||
-      useCount[constants.profitabiltyUseCountKey] < 2
-    ) {
-      let currentUseCount = useCount[constants.profitabiltyUseCountKey]
-        ? useCount[constants.profitabiltyUseCountKey] + 1
-        : 1;
-      chrome.storage.sync.set({
-        [constants.profitabiltyUseCountKey]: currentUseCount,
-      });
-      chrome.runtime.sendMessage({ message: 'profitability_modal' });
+
+      let useCountR = await chrome.storage.sync.get(
+        constants.reviewUseCountKey
+      );
+      if (useCount[constants.profitabiltyUseCountKey] < 2) {
+        setPvalue(2 - useCount[constants.profitabiltyUseCountKey]);
+      } else setPvalue(0);
+      if (
+        useCount[constants.profitabiltyUseCountKey] % 10 === 0 &&
+        authToken[constants.authTokenKey]
+      ) {
+        clickCount(
+          useCount[constants.profitabiltyUseCountKey],
+          useCountR[constants.reviewUseCountKey]
+        );
+      }
+      if (
+        (authToken && authToken[constants.authTokenKey]) ||
+        !useCount[constants.profitabiltyUseCountKey] ||
+        useCount[constants.profitabiltyUseCountKey] < 2
+      ) {
+        let currentUseCount = useCount[constants.profitabiltyUseCountKey]
+          ? useCount[constants.profitabiltyUseCountKey] + 1
+          : 1;
+        chrome.storage.sync.set({
+          [constants.profitabiltyUseCountKey]: currentUseCount,
+        });
+        chrome.runtime.sendMessage({ message: 'profitability_modal' });
+        counter();
+      } else {
+        setPvalue(0);
+        setTokenLeft(true);
+      }
     } else {
-      setPvalue(0);
-      setTokenLeft(true);
+      setFlipPage(true);
     }
   }
   async function review_modal() {
-    let authToken = await getAuthToken();
-    let useCount = await chrome.storage.sync.get(constants.reviewUseCountKey);
-    if (useCount[constants.reviewUseCountKey] < 2) {
-      setRvalue(2 - useCount[constants.reviewUseCountKey]);
-    } else setRvalue(0);
-    if (
-      useCount[constants.reviewUseCountKey] % 10 === 0 &&
-      authToken[constants.authTokenKey]
-    ) {
-      clickCount(
-        useCount[constants.profitabiltyUseCountKey],
-        useCount[constants.reviewUseCountKey]
+    let isFlipPage = await urlChecker();
+    if (isFlipPage) {
+      let authToken = await getAuthToken();
+      let useCount = await chrome.storage.sync.get(constants.reviewUseCountKey);
+      let useCountP = await chrome.storage.sync.get(
+        constants.profitabiltyUseCountKey
       );
-    }
-    if (
-      (authToken && authToken[constants.authTokenKey]) ||
-      !useCount[constants.reviewUseCountKey] ||
-      useCount[constants.reviewUseCountKey] < 2
-    ) {
-      let currentUseCount = useCount[constants.reviewUseCountKey]
-        ? useCount[constants.reviewUseCountKey] + 1
-        : 1;
-      chrome.storage.sync.set({
-        [constants.reviewUseCountKey]: currentUseCount,
-      });
-      chrome.runtime.sendMessage({ message: 'review_modal' });
+
+      if (useCount[constants.reviewUseCountKey] < 2) {
+        setRvalue(2 - useCount[constants.reviewUseCountKey]);
+      } else setRvalue(0);
+      if (
+        useCount[constants.reviewUseCountKey] % 10 === 0 &&
+        authToken[constants.authTokenKey]
+      ) {
+        clickCount(
+          useCount[constants.profitabiltyUseCountKey],
+          useCountP[constants.reviewUseCountKey]
+        );
+      }
+      if (
+        (authToken && authToken[constants.authTokenKey]) ||
+        !useCount[constants.reviewUseCountKey] ||
+        useCount[constants.reviewUseCountKey] < 2
+      ) {
+        let currentUseCount = useCount[constants.reviewUseCountKey]
+          ? useCount[constants.reviewUseCountKey] + 1
+          : 1;
+        chrome.storage.sync.set({
+          [constants.reviewUseCountKey]: currentUseCount,
+        });
+        chrome.runtime.sendMessage({ message: 'review_modal' });
+        counter();
+      } else {
+        // show to free login
+        setRvalue(0);
+        setTokenLeft(true);
+      }
     } else {
-      // show to free login
-      setRvalue(0);
-      setTokenLeft(true);
+      setFlipPage(true);
     }
   }
   async function signUp() {
@@ -135,6 +156,7 @@ const Popup = () => {
 
   const userLogin = async () => {
     let referrerIdValue = await getReferrerIdKey();
+
     if (referrerIdValue) {
       referrerIdValue = referrerIdValue[constants.referrerIdKey];
       // make  request to refresh token
@@ -155,6 +177,18 @@ const Popup = () => {
       }
     }
   };
+
+  const counter = async () => {
+    let useCountP = await chrome.storage.sync.get(
+      constants.profitabiltyUseCountKey
+    );
+    let useCountR = await chrome.storage.sync.get(constants.reviewUseCountKey);
+    if (useCountP[constants.profitabiltyUseCountKey])
+      setPvalue(2 - useCountP[constants.profitabiltyUseCountKey]);
+    if (useCountR[constants.reviewUseCountKey])
+      setRvalue(2 - useCountR[constants.reviewUseCountKey]);
+  };
+  counter();
   userLogin();
 
   return (
@@ -270,6 +304,12 @@ const Popup = () => {
             <Typography variant="body2">
               {' '}
               Create a free account to use more
+            </Typography>
+          )}
+          {flipPage && (
+            <Typography variant="body2">
+              {' '}
+              Visit Flipkart product page.
             </Typography>
           )}
           {!isLogin && (
