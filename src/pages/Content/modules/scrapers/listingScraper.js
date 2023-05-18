@@ -46,7 +46,11 @@ function isWhiteBackground() {
       const whitePixelPercentage = (whitePixelCount / imageArea) * 100;
 
       // Determine if the background is predominantly white
-      if (whitePixelPercentage > 30 || canvas.width < 416 || canvas.height < 416) {
+      if (
+        whitePixelPercentage > 30 ||
+        canvas.width < 416 ||
+        canvas.height < 416
+      ) {
         resolve(true);
       } else {
         resolve(false);
@@ -108,7 +112,7 @@ const descriptionAndProductDescription = async () => {
     description: 0,
     productDescription: 0,
     specification: 0,
-    productDetail: 0,
+    productDetail: 0, // if all 3 are not present then the total score will be 0/1 which is not possible and it will also affect the overall score.
   };
   const divSelect = document.querySelector(
     '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg'
@@ -142,7 +146,12 @@ const descriptionAndProductDescription = async () => {
     toReturn.productDetail = pdDiv.length;
   }
 
-  if (toReturn.productDescription === 0 && toReturn.description === 0) {
+  if (
+    toReturn.productDescription === 0 &&
+    toReturn.description === 0 &&
+    toReturn.specification === 0 &&
+    toReturn.productDetail === 0
+  ) {
     const divSelect2 = document.querySelector(
       '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div > div'
     ).childNodes;
@@ -175,6 +184,7 @@ const descriptionAndProductDescription = async () => {
       toReturn.productDetail = pdDiv.length;
     }
   }
+
   return toReturn;
 };
 
@@ -224,29 +234,50 @@ const calculateNetScore = (results) => {
     totalScore += 0.2;
   }
 
+  let count = 0;
+  let check = 0;
+
   // descriptionAndProductDescription
   if (results[6].description) {
     totalScore += 1;
+    count++;
+    check++;
   }
   if (results[6].productDescription) {
     totalScore += 2;
+    count += 2;
+    check++;
   }
 
   if (results[6].specification >= 8) {
     totalScore += 1;
+    count++;
+    check++;
   } else if (results[6].specification >= 5) {
     totalScore += 0.8;
+    count++;
+    check++;
   } else if (results[6].specification >= 1) {
     totalScore += 0.5;
+    count++;
+    check++;
   }
 
   if (results[6].productDetail >= 8) {
     totalScore += 1;
+    count++;
+    check++;
   } else if (results[6].productDetail >= 5) {
     totalScore += 0.8;
+    count++;
+    check++;
   } else if (results[6].productDetail >= 1) {
     totalScore += 0.5;
+    count++;
+    check++;
   }
+
+  if (check === 0) count = 1;
 
   //currentRatingsAndReviewCount
   if (results[4].ratings >= 4.5) {
@@ -268,7 +299,7 @@ const calculateNetScore = (results) => {
   } else if (results[4].reviewCount >= 10) {
     totalScore += 1;
   }
-  totalScore = (totalScore * 10) / 12;
+  totalScore = (totalScore * 10) / (8 + count);
   return totalScore.toFixed(2);
 };
 const getListingData = async () => {
