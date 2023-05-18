@@ -62,7 +62,6 @@ const wrongSvg ='<div class="sc-BcYfy jYRAbk"><svg aria-hidden="true" focusable=
 
 
 
-console.log(map, '2');
 
 let imgNum =rightSvg;
 let whiteBack=rightSvg;
@@ -73,9 +72,10 @@ let description=rightSvg;
 let productdescription=rightSvg;
 let rating=rightSvg;
 let reviews=rightSvg;
+let specificationOrProductDetailSVG = rightSvg;
+let specificationOrProductDetail = "Product Details"
 
-
-if(map[0]<8)
+if(map[0]<5)
 imgNum=wrongSvg
 if(map[1]===false)
 whiteBack=wrongSvg
@@ -94,7 +94,13 @@ description=wrongSvg
 if(map[6].productDescription===0)
 productdescription=wrongSvg
 
+if(map[6].specification > 0){
+  specificationOrProductDetail ="Specifications"
+}
 
+if(map[6].productDetail + map[6].specification < 5){
+  specificationOrProductDetailSVG =wrongSvg;
+}
 
 
 
@@ -108,7 +114,8 @@ productdescription=wrongSvg
   ${character}</div></div></div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">Keyword Density in Title more than 0.8</span><div class="sc-bxITQA dXVDfe">Current: ${map[3]}</div></div><div class="sc-PTChX bVZnJl">
   ${bullet}</div></div></div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">Description</span><div class="sc-bxITQA dXVDfe">Features Enhanced Brand Content</div></div><div class="sc-PTChX bVZnJl">
   ${description}</div></div></div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">Product Description</span><div class="sc-bxITQA dXVDfe"></div></div><div class="sc-PTChX bVZnJl">
-  ${productdescription}</div></div></div></div><div class="sc-gVplKw cRTcpJ"><div class="sc-bDySYp hYESpG">Reviews &amp; Rating</div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">Rating is 4.0 or above</span><div class="sc-bxITQA dXVDfe">Current: ${map[4].ratings}</div></div><div class="sc-PTChX bVZnJl">
+  ${productdescription}</div></div></div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">${specificationOrProductDetail}</span><div class="sc-bxITQA dXVDfe"></div></div><div class="sc-PTChX bVZnJl">
+  ${specificationOrProductDetailSVG}</div></div></div></div><div class="sc-gVplKw cRTcpJ"><div class="sc-bDySYp hYESpG">Reviews &amp; Rating</div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">Rating is 4.0 or above</span><div class="sc-bxITQA dXVDfe">Current: ${map[4].ratings}</div></div><div class="sc-PTChX bVZnJl">
   ${rating}</div></div></div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">10 or more reviews</span><div class="sc-bxITQA dXVDfe">Current: ${map[4].reviewCount}</div></div><div class="sc-PTChX bVZnJl">
   ${reviews}</div></div></div></div></div>`
 
