@@ -202,7 +202,7 @@ const descriptionAndProductDescription = async () => {
   return toReturn;
 };
 
-const calculateNetScore = async (results) => {
+const calculateNetScore = (results) => {
   let totalScore = 0;
 
   //media count
@@ -330,7 +330,7 @@ const getListingData = async () => {
     ]);
     // Handle the results of all functions here
 
-    results['totalScore'] = await calculateNetScore(results);
+    results['totalScore'] = calculateNetScore(results);
     return results;
   } catch (err) {
     // console.log('Error in getListingData');
