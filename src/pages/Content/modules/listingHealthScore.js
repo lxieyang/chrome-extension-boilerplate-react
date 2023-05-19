@@ -4,7 +4,8 @@ import getListingData from './scrapers/listingScraper';
 
 
 const ListingModal = async () => {
-
+const map= await getListingData();
+// console.log(map);
 const superDiv = document.createElement('div')
 superDiv.setAttribute('class', 'super')
 
@@ -13,10 +14,10 @@ listingMainDiv.setAttribute('id', 'listing-modal');
 listingMainDiv.setAttribute('class', 'fOhaxO');
 
 
-const map= await getListingData()
-console.log(map);
+
+
 let color;
-if(map.totalScore >=8)
+if(map["totalScore"] >=8)
 color ='green'
 if(map.totalScore >=5 && map.totalScore < 8)
 color ='yellow'

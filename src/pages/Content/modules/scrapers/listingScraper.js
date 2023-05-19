@@ -112,7 +112,7 @@ const descriptionAndProductDescription = async () => {
     description: 0,
     productDescription: 0,
     specification: 0,
-    productDetail: 0, // if all 3 are not present then the total score will be 0/1 which is not possible and it will also affect the overall score.
+    productDetail: 0, 
   };
   const divSelect = document.querySelector(
     '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg'
@@ -120,31 +120,37 @@ const descriptionAndProductDescription = async () => {
   for (let i = 0; i < divSelect.length; i++) {
     const splitText = divSelect[i].innerText.split('\n');
     if (splitText[0] === 'Description') {
+      let descriptionDiv = document.querySelector(`#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div:nth-child(${i+1}) > div > div._2o-xpa > div._1mXcCf.RmoJUa`).innerText
+      if(descriptionDiv === "NA")
+      toReturn.description =0;
+      else
       toReturn.description = 1;
     } else if (splitText[0] === 'Product Description') {
       toReturn.productDescription = 1;
     } else if (splitText[0] === 'Specifications') {
-      toReturn.specification = 1;
+      const specsDiv = document.querySelector(`#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div:nth-child(${i+1}) > div > div:nth-child(2) > div`).childNodes;
+    toReturn.specification = specsDiv.length;
       break;
     } else if (splitText[0] === 'Product Details') {
-      toReturn.productDetail = 1;
+      const pdDiv = document.querySelector(
+           `#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div:nth-child(${i+1}) > div > div > div:nth-child(2) > div > div`
+           ).childNodes;
+           toReturn.productDetail = pdDiv.length-1;
       break;
     }
   }
 
-  if (toReturn.specification === 1) {
-    const specsDiv = document.querySelector(
-      '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div:nth-child(5) > div > div:nth-child(2) > div'
-    ).childNodes;
-    toReturn.specification = specsDiv.length;
-  }
+  // if (toReturn.specification === 1) {
+  //   const specsDiv = document.querySelector("#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div:nth-child(6) > div > div:nth-child(2) > div").childNodes;
+  //   toReturn.specification = specsDiv.length;
+  // }
 
-  if (toReturn.productDetail === 1) {
-    const pdDiv = document.querySelector(
-      '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div:nth-child(3) > div > div > div:nth-child(2) > div > div'
-    ).childNodes;
-    toReturn.productDetail = pdDiv.length;
-  }
+  // if (toReturn.productDetail === 1) {
+  //   const pdDiv = document.querySelector(
+  //     '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div:nth-child(3) > div > div > div:nth-child(2) > div > div'
+  //   ).childNodes;
+  //   toReturn.productDetail = pdDiv.length;
+  // }
 
   if (
     toReturn.productDescription === 0 &&
@@ -158,37 +164,45 @@ const descriptionAndProductDescription = async () => {
     for (let i = 0; i < divSelect2.length; i++) {
       const splitText = divSelect2[i].innerText.split('\n');
       if (splitText[0] === 'Description') {
+        let descriptionDiv = document.querySelector(`#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div > div > div:nth-child(${i+1}) > div > div._2o-xpa > div._1mXcCf.RmoJUa`).innerText
+        if (descriptionDiv === "NA")
+        toReturn.description = 0;
+        else
         toReturn.description = 1;
       } else if (splitText[0] === 'Product Description') {
         toReturn.productDescription = 1;
       } else if (splitText[0] === 'Specifications') {
-        toReturn.specification = 1;
+        const specsDiv = document.querySelector(
+          `#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div > div > div:nth-child(${i+1}) > div > div:nth-child(2) > div`
+        ).childNodes;
+        toReturn.specification = specsDiv.length;
         break;
       } else if (splitText[0] === 'Product Details') {
-        toReturn.productDetail = 1;
+        const pdDiv = document.querySelector(`#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div > div > div:nth-child(${i+1}) > div > div > div:nth-child(2) > div > div`).childNodes;
+        toReturn.productDetail = pdDiv.length - 1;
         break;
       }
     }
 
-    if (toReturn.specification === 1) {
-      const specsDiv = document.querySelector(
-        '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div > div > div:nth-child(5) > div > div:nth-child(2) > div'
-      ).childNodes;
-      toReturn.specification = specsDiv.length;
-    }
+    // if (toReturn.specification === 1) {
+    //   const specsDiv = document.querySelector(
+    //     '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div > div > div:nth-child(5) > div > div:nth-child(2) > div'
+    //   ).childNodes;
+    //   toReturn.specification = specsDiv.length;
+    // }
 
-    if (toReturn.productDetail === 1) {
-      const pdDiv = document.querySelector(
-        '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div > div > div:nth-child(3) > div > div > div.row._i6Wtg > div > div'
-      ).childNodes;
-      toReturn.productDetail = pdDiv.length;
-    }
+    // if (toReturn.productDetail === 1) {
+    //   const pdDiv = document.querySelector(
+    //     '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div > div > div:nth-child(3) > div > div > div.row._i6Wtg > div > div'
+    //   ).childNodes;
+    //   toReturn.productDetail = pdDiv.length;
+    // }
   }
 
   return toReturn;
 };
 
-const calculateNetScore = (results) => {
+const calculateNetScore = async (results) => {
   let totalScore = 0;
 
   //media count
@@ -316,12 +330,11 @@ const getListingData = async () => {
     ]);
     // Handle the results of all functions here
 
-    results['totalScore'] = calculateNetScore(results);
-    //console.log(results);
+    results['totalScore'] = await calculateNetScore(results);
     return results;
   } catch (err) {
-    console.log('Error in getListingData');
-    console.log(err);
+    // console.log('Error in getListingData');
+    // console.log(err);
   }
 };
 
