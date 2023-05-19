@@ -331,11 +331,11 @@ const getListingData = async () => {
     // Handle the results of all functions here
 
     results['totalScore'] = calculateNetScore(results);
-    console.log(results)
+    // console.log(results)
     return results;
   } catch (err) {
-    console.log('Error in getListingData');
-    console.log(err);
+    // console.log('Error in getListingData');
+    // console.log(err);
   }
 };
 
