@@ -120,7 +120,7 @@ const descriptionAndProductDescription = async () => {
   for (let i = 0; i < divSelect.length; i++) {
     const splitText = divSelect[i].innerText.split('\n');
     if (splitText[0] === 'Description') {
-      let descriptionDiv = document.querySelector(`#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div:nth-child(${i+1}) > div > div._2o-xpa > div._1mXcCf.RmoJUa`).innerText
+      let descriptionDiv = document.querySelector(`#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div:nth-child(${i+1}) > div > div._2o-xpa > div._1mXcCf`).innerText
       if(descriptionDiv === "NA")
       toReturn.description =0;
       else
@@ -331,10 +331,11 @@ const getListingData = async () => {
     // Handle the results of all functions here
 
     results['totalScore'] = calculateNetScore(results);
+    console.log(results)
     return results;
   } catch (err) {
-    // console.log('Error in getListingData');
-    // console.log(err);
+    console.log('Error in getListingData');
+    console.log(err);
   }
 };
 
