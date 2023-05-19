@@ -9,12 +9,16 @@ import { useState } from 'react';
 import { urlGenerator } from './utils.js';
 import { urlChecker } from './utils.js';
 
+
+
+
 const Popup = () => {
   const [pvalue, setPvalue] = useState(2);
   const [rvalue, setRvalue] = useState(2);
   const [flipPage, setFlipPage] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-  const [tokenLeft, setTokenLeft] = useState(false);
+
+
 
   const clickCount = async (profCount, revCount) => {
     const authToken = await getAuthToken();
@@ -42,9 +46,6 @@ const Popup = () => {
       let useCountR = await chrome.storage.sync.get(
         constants.reviewUseCountKey
       );
-      if (useCount[constants.profitabiltyUseCountKey] < 2) {
-        setPvalue(2 - useCount[constants.profitabiltyUseCountKey]);
-      } else setPvalue(0);
       if (
         useCount[constants.profitabiltyUseCountKey] % 10 === 0 &&
         authToken[constants.authTokenKey]
@@ -69,7 +70,6 @@ const Popup = () => {
         counter();
       } else {
         setPvalue(0);
-        setTokenLeft(true);
       }
     } else {
       setFlipPage(true);
@@ -83,10 +83,6 @@ const Popup = () => {
       let useCountP = await chrome.storage.sync.get(
         constants.profitabiltyUseCountKey
       );
-
-      if (useCount[constants.reviewUseCountKey] < 2) {
-        setRvalue(2 - useCount[constants.reviewUseCountKey]);
-      } else setRvalue(0);
       if (
         useCount[constants.reviewUseCountKey] % 10 === 0 &&
         authToken[constants.authTokenKey]
@@ -112,7 +108,6 @@ const Popup = () => {
       } else {
         // show to free login
         setRvalue(0);
-        setTokenLeft(true);
       }
     } else {
       setFlipPage(true);
@@ -269,6 +264,7 @@ const Popup = () => {
             color="secondary"
             fullWidth
             variant="contained"
+            disabled = {!pvalue ? true : false}
           >
             Profitability Calculator
           </Button>
@@ -293,6 +289,7 @@ const Popup = () => {
             size="small"
             color="secondary"
             variant="contained"
+            disabled = {!rvalue ? true : false}
           >
             Review Analyzer
           </Button>
@@ -308,16 +305,18 @@ const Popup = () => {
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'column',
+            backgroundColor:'red',
+            borderRadius:'5px'
           }}
         >
-          {tokenLeft && (
-            <Typography variant="body2">
+          {(!pvalue || !rvalue) && (
+            <Typography variant="body2" color="#ffffff">
               {' '}
               Create a free account to use more
             </Typography>
           )}
           {flipPage && (
-            <Typography variant="body2">
+            <Typography variant="body2" color="#ffffff">
               {' '}
               Please visit a Flipkart product page.
             </Typography>

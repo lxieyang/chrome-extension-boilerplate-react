@@ -4,7 +4,8 @@ import getListingData from './scrapers/listingScraper';
 
 
 const ListingModal = async () => {
-
+const map= await getListingData();
+// console.log(map);
 const superDiv = document.createElement('div')
 superDiv.setAttribute('class', 'super')
 
@@ -13,9 +14,10 @@ listingMainDiv.setAttribute('id', 'listing-modal');
 listingMainDiv.setAttribute('class', 'fOhaxO');
 
 
-const map= await getListingData()
+
+
 let color;
-if(map.totalScore >=8)
+if(map["totalScore"] >=8)
 color ='green'
 if(map.totalScore >=5 && map.totalScore < 8)
 color ='yellow'
@@ -62,7 +64,6 @@ const wrongSvg ='<div class="sc-BcYfy jYRAbk"><svg aria-hidden="true" focusable=
 
 
 
-console.log(map, '2');
 
 let imgNum =rightSvg;
 let whiteBack=rightSvg;
@@ -73,9 +74,10 @@ let description=rightSvg;
 let productdescription=rightSvg;
 let rating=rightSvg;
 let reviews=rightSvg;
+let specificationOrProductDetailSVG = rightSvg;
+let specificationOrProductDetail = "Product Details"
 
-
-if(map[0]<8)
+if(map[0]<5)
 imgNum=wrongSvg
 if(map[1]===false)
 whiteBack=wrongSvg
@@ -94,21 +96,28 @@ description=wrongSvg
 if(map[6].productDescription===0)
 productdescription=wrongSvg
 
+if(map[6].specification > 0){
+  specificationOrProductDetail ="Specifications"
+}
 
+if(map[6].productDetail + map[6].specification < 5){
+  specificationOrProductDetailSVG =wrongSvg;
+}
 
 
 
 
   const contentTop = document.createElement('div');
   contentTop.setAttribute('class', 'lefeKT');
-  contentTop.innerHTML=`<div class="sc-kJjKpj dDlBoq"><div class="sc-gVplKw cRTcpJ"><div class="sc-bDySYp hYESpG">Product Images</div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">8 or more images</span><div class="sc-bxITQA dXVDfe">Current: ${map[0]}</div></div><div class="sc-PTChX bVZnJl">
+  contentTop.innerHTML=`<div class="sc-kJjKpj dDlBoq"><div class="sc-gVplKw cRTcpJ"><div class="sc-bDySYp hYESpG">Product Images</div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">5 or more images</span><div class="sc-bxITQA dXVDfe">Current: ${map[0]}</div></div><div class="sc-PTChX bVZnJl">
   ${imgNum}</div></div></div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">White Main Image Background</span><div class="sc-bxITQA dXVDfe"></div></div><div class="sc-PTChX bVZnJl">
   ${whiteBack}</div></div></div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">Shorter Side is More than 500 px</span><div class="sc-bxITQA dXVDfe">Current: ${map[5]}</div></div><div class="sc-PTChX bVZnJl">
   ${size}</div></div></div></div><div class="sc-gVplKw cRTcpJ"><div class="sc-bDySYp hYESpG">Listing Text</div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">Title Exceeds 150 Characters</span><div class="sc-bxITQA dXVDfe">Current: ${map[2]}</div></div><div class="sc-PTChX bVZnJl">
   ${character}</div></div></div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">Keyword Density in Title more than 0.8</span><div class="sc-bxITQA dXVDfe">Current: ${map[3]}</div></div><div class="sc-PTChX bVZnJl">
   ${bullet}</div></div></div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">Description</span><div class="sc-bxITQA dXVDfe">Features Enhanced Brand Content</div></div><div class="sc-PTChX bVZnJl">
   ${description}</div></div></div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">Product Description</span><div class="sc-bxITQA dXVDfe"></div></div><div class="sc-PTChX bVZnJl">
-  ${productdescription}</div></div></div></div><div class="sc-gVplKw cRTcpJ"><div class="sc-bDySYp hYESpG">Reviews &amp; Rating</div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">Rating is 4.0 or above</span><div class="sc-bxITQA dXVDfe">Current: ${map[4].ratings}</div></div><div class="sc-PTChX bVZnJl">
+  ${productdescription}</div></div></div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">5 or more ${specificationOrProductDetail}</span><div class="sc-bxITQA dXVDfe">Current: ${map[6].productDetail + map[6].specification}</div></div><div class="sc-PTChX bVZnJl">
+  ${specificationOrProductDetailSVG}</div></div></div></div><div class="sc-gVplKw cRTcpJ"><div class="sc-bDySYp hYESpG">Reviews &amp; Rating</div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">Rating is 4.0 or above</span><div class="sc-bxITQA dXVDfe">Current: ${map[4].ratings}</div></div><div class="sc-PTChX bVZnJl">
   ${rating}</div></div></div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">10 or more reviews</span><div class="sc-bxITQA dXVDfe">Current: ${map[4].reviewCount}</div></div><div class="sc-PTChX bVZnJl">
   ${reviews}</div></div></div></div></div>`
 

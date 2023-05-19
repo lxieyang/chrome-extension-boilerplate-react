@@ -46,7 +46,11 @@ function isWhiteBackground() {
       const whitePixelPercentage = (whitePixelCount / imageArea) * 100;
 
       // Determine if the background is predominantly white
-      if (whitePixelPercentage > 30 || canvas.width !== canvas.height) {
+      if (
+        whitePixelPercentage > 30 ||
+        canvas.width < 416 ||
+        canvas.height < 416
+      ) {
         resolve(true);
       } else {
         resolve(false);
@@ -104,9 +108,11 @@ const imagePixelSize = async () => {
 };
 
 const descriptionAndProductDescription = async () => {
-  const toReturn = {
+  let toReturn = {
     description: 0,
     productDescription: 0,
+    specification: 0,
+    productDetail: 0, 
   };
   const divSelect = document.querySelector(
     '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg'
@@ -114,27 +120,85 @@ const descriptionAndProductDescription = async () => {
   for (let i = 0; i < divSelect.length; i++) {
     const splitText = divSelect[i].innerText.split('\n');
     if (splitText[0] === 'Description') {
+      let descriptionDiv = document.querySelector(`#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div:nth-child(${i+1}) > div > div._2o-xpa > div._1mXcCf`).innerText
+      if(descriptionDiv === "NA")
+      toReturn.description =0;
+      else
       toReturn.description = 1;
     } else if (splitText[0] === 'Product Description') {
       toReturn.productDescription = 1;
+    } else if (splitText[0] === 'Specifications') {
+      const specsDiv = document.querySelector(`#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div:nth-child(${i+1}) > div > div:nth-child(2) > div`).childNodes;
+    toReturn.specification = specsDiv.length;
+      break;
+    } else if (splitText[0] === 'Product Details') {
+      const pdDiv = document.querySelector(
+           `#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div:nth-child(${i+1}) > div > div > div:nth-child(2) > div > div`
+           ).childNodes;
+           toReturn.productDetail = pdDiv.length-1;
       break;
     }
   }
 
-  if (toReturn.productDescription === 0 && toReturn.description === 0) {
+  // if (toReturn.specification === 1) {
+  //   const specsDiv = document.querySelector("#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div:nth-child(6) > div > div:nth-child(2) > div").childNodes;
+  //   toReturn.specification = specsDiv.length;
+  // }
+
+  // if (toReturn.productDetail === 1) {
+  //   const pdDiv = document.querySelector(
+  //     '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div:nth-child(3) > div > div > div:nth-child(2) > div > div'
+  //   ).childNodes;
+  //   toReturn.productDetail = pdDiv.length;
+  // }
+
+  if (
+    toReturn.productDescription === 0 &&
+    toReturn.description === 0 &&
+    toReturn.specification === 0 &&
+    toReturn.productDetail === 0
+  ) {
     const divSelect2 = document.querySelector(
       '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div > div'
     ).childNodes;
     for (let i = 0; i < divSelect2.length; i++) {
       const splitText = divSelect2[i].innerText.split('\n');
       if (splitText[0] === 'Description') {
+        let descriptionDiv = document.querySelector(`#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div > div > div:nth-child(${i+1}) > div > div._2o-xpa > div._1mXcCf.RmoJUa`).innerText
+        if (descriptionDiv === "NA")
+        toReturn.description = 0;
+        else
         toReturn.description = 1;
       } else if (splitText[0] === 'Product Description') {
         toReturn.productDescription = 1;
+      } else if (splitText[0] === 'Specifications') {
+        const specsDiv = document.querySelector(
+          `#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div > div > div:nth-child(${i+1}) > div > div:nth-child(2) > div`
+        ).childNodes;
+        toReturn.specification = specsDiv.length;
+        break;
+      } else if (splitText[0] === 'Product Details') {
+        const pdDiv = document.querySelector(`#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div > div > div:nth-child(${i+1}) > div > div > div:nth-child(2) > div > div`).childNodes;
+        toReturn.productDetail = pdDiv.length - 1;
         break;
       }
     }
+
+    // if (toReturn.specification === 1) {
+    //   const specsDiv = document.querySelector(
+    //     '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div > div > div:nth-child(5) > div > div:nth-child(2) > div'
+    //   ).childNodes;
+    //   toReturn.specification = specsDiv.length;
+    // }
+
+    // if (toReturn.productDetail === 1) {
+    //   const pdDiv = document.querySelector(
+    //     '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-8-12 > div._1YokD2._3Mn1Gg > div > div > div:nth-child(3) > div > div > div.row._i6Wtg > div > div'
+    //   ).childNodes;
+    //   toReturn.productDetail = pdDiv.length;
+    // }
   }
+
   return toReturn;
 };
 
@@ -184,13 +248,50 @@ const calculateNetScore = (results) => {
     totalScore += 0.2;
   }
 
+  let count = 0;
+  let check = 0;
+
   // descriptionAndProductDescription
   if (results[6].description) {
     totalScore += 1;
+    count++;
+    check++;
   }
   if (results[6].productDescription) {
     totalScore += 2;
+    count += 2;
+    check++;
   }
+
+  if (results[6].specification >= 8) {
+    totalScore += 1;
+    count++;
+    check++;
+  } else if (results[6].specification >= 5) {
+    totalScore += 0.8;
+    count++;
+    check++;
+  } else if (results[6].specification >= 1) {
+    totalScore += 0.5;
+    count++;
+    check++;
+  }
+
+  if (results[6].productDetail >= 8) {
+    totalScore += 1;
+    count++;
+    check++;
+  } else if (results[6].productDetail >= 5) {
+    totalScore += 0.8;
+    count++;
+    check++;
+  } else if (results[6].productDetail >= 1) {
+    totalScore += 0.5;
+    count++;
+    check++;
+  }
+
+  if (check === 0) count = 1;
 
   //currentRatingsAndReviewCount
   if (results[4].ratings >= 4.5) {
@@ -205,16 +306,14 @@ const calculateNetScore = (results) => {
     totalScore += 0.2;
   }
 
-  if (results[4].reviewCount >= 50) {
-    totalScore += 1;
-  } else if (results[4].reviewCount >= 20) {
-    totalScore += 0.8;
+  if (results[4].reviewCount >= 1000) {
+    totalScore += 2;
+  } else if (results[4].reviewCount >= 200) {
+    totalScore += 1.5;
   } else if (results[4].reviewCount >= 10) {
-    totalScore += 0.5;
-  } else if (results[4].reviewCount >= 1) {
-    totalScore += 0.2;
+    totalScore += 1;
   }
-
+  totalScore = (totalScore * 10) / (8 + count);
   return totalScore.toFixed(2);
 };
 const getListingData = async () => {
@@ -232,11 +331,11 @@ const getListingData = async () => {
     // Handle the results of all functions here
 
     results['totalScore'] = calculateNetScore(results);
-    //console.log(results);
+    // console.log(results)
     return results;
   } catch (err) {
-    console.log('Error in getListingData');
-    console.log(err);
+    // console.log('Error in getListingData');
+    // console.log(err);
   }
 };
 
