@@ -9,16 +9,11 @@ import { useState } from 'react';
 import { urlGenerator } from './utils.js';
 import { urlChecker } from './utils.js';
 
-
-
-
 const Popup = () => {
   const [pvalue, setPvalue] = useState(2);
   const [rvalue, setRvalue] = useState(2);
   const [flipPage, setFlipPage] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-
-
 
   const clickCount = async (profCount, revCount) => {
     const authToken = await getAuthToken();
@@ -68,6 +63,7 @@ const Popup = () => {
         });
         chrome.runtime.sendMessage({ message: 'profitability_modal' });
         counter();
+        window.close()
       } else {
         setPvalue(0);
       }
@@ -105,6 +101,7 @@ const Popup = () => {
         });
         chrome.runtime.sendMessage({ message: 'review_modal' });
         counter();
+        window.close()
       } else {
         // show to free login
         setRvalue(0);
@@ -152,45 +149,52 @@ const Popup = () => {
   const userLogin = async () => {
     let referrerIdValue = await getReferrerIdKey();
     let authToken = await getAuthToken();
-    if(!authToken || !authToken[constants.authTokenKey]){
-    if (referrerIdValue) {
-      referrerIdValue = referrerIdValue[constants.referrerIdKey];
-      // make  request to refresh token
-      let url = `https://www.datavio.co/backend/extension/get-token?referrerId=${referrerIdValue}`;
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-      });
-      const data = await response.json();
-      if (data && data['loginToken']) {
-        chrome.storage.local.set({
-          [constants.authTokenKey]: data['loginToken'],
+    if (!authToken || !authToken[constants.authTokenKey]) {
+      if (referrerIdValue) {
+        referrerIdValue = referrerIdValue[constants.referrerIdKey];
+        // make  request to refresh token
+        let url = `https://www.datavio.co/backend/extension/get-token?referrerId=${referrerIdValue}`;
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
         });
-        setIsLogin(true);
+        const data = await response.json();
+        if (data && data['loginToken']) {
+          chrome.storage.local.set({
+            [constants.authTokenKey]: data['loginToken'],
+          });
+          setIsLogin(true);
+        }
       }
-    }}else{
+    } else {
       setIsLogin(true);
     }
   };
 
   const counter = async () => {
-    let useCountP = await chrome.storage.sync.get(
-      constants.profitabiltyUseCountKey
-    );
-    let useCountR = await chrome.storage.sync.get(constants.reviewUseCountKey);
-    if (
-      useCountP[constants.profitabiltyUseCountKey] &&
-      useCountP[constants.profitabiltyUseCountKey] < 3
-    )
-      setPvalue(2 - useCountP[constants.profitabiltyUseCountKey]);
-    if (
-      useCountR[constants.reviewUseCountKey] &&
-      useCountR[constants.reviewUseCountKey] < 3
-    )
-      setRvalue(2 - useCountR[constants.reviewUseCountKey]);
+      let useCountP = await chrome.storage.sync.get(
+        constants.profitabiltyUseCountKey
+      );
+      let useCountR = await chrome.storage.sync.get(
+        constants.reviewUseCountKey
+      );
+      if (
+        useCountP[constants.profitabiltyUseCountKey] &&
+        useCountP[constants.profitabiltyUseCountKey] < 3 && !isLogin
+      )
+        setPvalue(2 - useCountP[constants.profitabiltyUseCountKey]);
+        else
+        setPvalue(2)
+      if (
+        useCountR[constants.reviewUseCountKey] &&
+        useCountR[constants.reviewUseCountKey] < 3 && !isLogin
+      )
+        setRvalue(2 - useCountR[constants.reviewUseCountKey]);
+        else
+        setRvalue(2)
   };
   counter();
 
@@ -264,7 +268,7 @@ const Popup = () => {
             color="secondary"
             fullWidth
             variant="contained"
-            disabled = {!pvalue ? true : false}
+            disabled={!pvalue ? true : false}
           >
             Profitability Calculator
           </Button>
@@ -289,7 +293,7 @@ const Popup = () => {
             size="small"
             color="secondary"
             variant="contained"
-            disabled = {!rvalue ? true : false}
+            disabled={!rvalue ? true : false}
           >
             Review Analyzer
           </Button>
@@ -305,8 +309,8 @@ const Popup = () => {
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'column',
-            backgroundColor:'red',
-            borderRadius:'5px'
+            backgroundColor: 'red',
+            borderRadius: '5px',
           }}
         >
           {(!pvalue || !rvalue) && (

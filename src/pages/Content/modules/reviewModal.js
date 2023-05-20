@@ -208,7 +208,7 @@ async function reviewNewModal() {
   const wordCloudDiv = document.createElement('div');
   wordCloudDiv.setAttribute('id', 'wordcloud');
   wordCloudDiv.setAttribute('class', 'wordcloudclass');
-  wordCloudDiv.setAttribute('style', 'width: 1250px; height: 549px;');
+  wordCloudDiv.setAttribute('style', 'width: 90%; height: 80%; margin-left : 5%');
 
   reviewsType3.appendChild(reviewsTypeTitle3);
   reviewsType3.appendChild(menuBorder3);
