@@ -347,7 +347,7 @@ const Popup = () => {
           { (isNotCollected) && (
             <Typography variant="body2" color="#ffffff">
               {' '}
-              Create a free account to use more.
+              Please Login to use this feature.
             </Typography>
           )}
           { (!pvalue || !rvalue) && (
