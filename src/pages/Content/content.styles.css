@@ -780,7 +780,12 @@
   color: rgb(10, 111, 232);
   text-align: right;
 }
-.oeMFGH .epbpWv {
+
+.test-div{
+  width: 100%;
+}
+
+.epbpWv {
   margin: 0px 32px;
   height: fit-content;
   max-height: 500px;

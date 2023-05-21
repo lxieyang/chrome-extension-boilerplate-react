@@ -733,7 +733,7 @@ async function reviewNewModal() {
   //Overview
 
   const overviewDiv = document.createElement('div');
-  overviewDiv.setAttribute('class', 'b');
+  overviewDiv.setAttribute('class', 'gnaJEW');
 
   const overviewSplitDiv = document.createElement('div');
   overviewSplitDiv.setAttribute('class', 'gxxFEr');
@@ -856,6 +856,7 @@ async function reviewNewModal() {
   bodyBody.appendChild(overviewDiv);
 
   const overviewDiv2 = document.createElement('div');
+  overviewDiv2.setAttribute("class", "test-div")
   overviewSplitDiv.appendChild(overviewDiv2);
 
   const overviewRightDiv = document.createElement('div');

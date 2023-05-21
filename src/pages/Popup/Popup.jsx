@@ -14,6 +14,9 @@ const Popup = () => {
   const [rvalue, setRvalue] = useState(2);
   const [flipPage, setFlipPage] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const [collected, setCollected] = useState(false);
+  const [isNotCollected, setIsNotCollected] = useState(false);
+  const [collectMessage, setCollectMessage] = useState('');
 
   const clickCount = async (profCount, revCount) => {
     const authToken = await getAuthToken();
@@ -25,6 +28,26 @@ const Popup = () => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + authToken[constants.authTokenKey],
+      },
+      body: JSON.stringify(body),
+    });
+  };
+
+  const countBeforeLogin = async (field) => {
+    let referrerIdValue = await getReferrerIdKey();
+    let uuid =
+      referrerIdValue && referrerIdValue[constants.referrerIdKey]
+        ? referrerIdValue[constants.referrerIdKey]
+        : uuidv4();
+    field.referrerId = uuid;
+    const authToken = await getAuthToken();
+    let url = `${constants.PRODUCT_API_URL}extension/anonymous-click-count`;
+    let body = field;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
     });
@@ -63,7 +86,10 @@ const Popup = () => {
         });
         chrome.runtime.sendMessage({ message: 'profitability_modal' });
         counter();
-        window.close()
+        if(!authToken || !authToken[constants.authTokenKey]){
+          let body = { profitability : true, referrerId : ""}
+          countBeforeLogin(body)
+        }
       } else {
         setPvalue(0);
       }
@@ -101,7 +127,10 @@ const Popup = () => {
         });
         chrome.runtime.sendMessage({ message: 'review_modal' });
         counter();
-        window.close()
+        if(!authToken || !authToken[constants.authTokenKey]){
+          let body = { review : true, referrerId : ""}
+          countBeforeLogin(body)
+        }
       } else {
         // show to free login
         setRvalue(0);
@@ -120,12 +149,13 @@ const Popup = () => {
     if (!referrerIdValue || !referrerIdValue[constants.referrerIdKey]) {
       chrome.storage.local.set({ [constants.referrerIdKey]: uuid });
     }
+      let body = { signUpCount : true, referrerId : ""}
+      countBeforeLogin(body)
     chrome.tabs.create({
       url: `${constants.API_URL}register?referrer=extension&referrerId=${uuid}`,
       active: true,
     });
   }
-  const [collected, setCollected] = useState(false);
 
   const collection = async () => {
     const urlToSave = await urlGenerator();
@@ -143,7 +173,10 @@ const Popup = () => {
       body: JSON.stringify(body),
     });
     if (response.status === 200) setCollected(true);
-    else console.log(response);
+    else {
+      setIsNotCollected(true);
+      setCollectMessage(response.message)
+    }
   };
 
   const userLogin = async () => {
@@ -175,26 +208,24 @@ const Popup = () => {
   };
 
   const counter = async () => {
-      let useCountP = await chrome.storage.sync.get(
-        constants.profitabiltyUseCountKey
-      );
-      let useCountR = await chrome.storage.sync.get(
-        constants.reviewUseCountKey
-      );
-      if (
-        useCountP[constants.profitabiltyUseCountKey] &&
-        useCountP[constants.profitabiltyUseCountKey] < 3 && !isLogin
-      )
-        setPvalue(2 - useCountP[constants.profitabiltyUseCountKey]);
-        else
-        setPvalue(2)
-      if (
-        useCountR[constants.reviewUseCountKey] &&
-        useCountR[constants.reviewUseCountKey] < 3 && !isLogin
-      )
-        setRvalue(2 - useCountR[constants.reviewUseCountKey]);
-        else
-        setRvalue(2)
+    let useCountP = await chrome.storage.sync.get(
+      constants.profitabiltyUseCountKey
+    );
+    let useCountR = await chrome.storage.sync.get(constants.reviewUseCountKey);
+    if (
+      useCountP[constants.profitabiltyUseCountKey] &&
+      useCountP[constants.profitabiltyUseCountKey] < 3 &&
+      !isLogin
+    )
+      setPvalue(2 - useCountP[constants.profitabiltyUseCountKey]);
+    else setPvalue(2);
+    if (
+      useCountR[constants.reviewUseCountKey] &&
+      useCountR[constants.reviewUseCountKey] < 3 &&
+      !isLogin
+    )
+      setRvalue(2 - useCountR[constants.reviewUseCountKey]);
+    else setRvalue(2);
   };
   counter();
 
@@ -313,10 +344,16 @@ const Popup = () => {
             borderRadius: '5px',
           }}
         >
-          {(!pvalue || !rvalue) && (
+          { (isNotCollected) && (
             <Typography variant="body2" color="#ffffff">
               {' '}
-              Create a free account to use more
+              Create a free account to use more.
+            </Typography>
+          )}
+          { (!pvalue || !rvalue) && (
+            <Typography variant="body2" color="#ffffff">
+              {' '}
+              Create a free account to use more.
             </Typography>
           )}
           {flipPage && (
