@@ -208,7 +208,7 @@ async function reviewNewModal() {
   const wordCloudDiv = document.createElement('div');
   wordCloudDiv.setAttribute('id', 'wordcloud');
   wordCloudDiv.setAttribute('class', 'wordcloudclass');
-  wordCloudDiv.setAttribute('style', 'width: 1250px; height: 549px;');
+  wordCloudDiv.setAttribute('style', 'width: 90%; height: 80%; margin-left : 5%');
 
   reviewsType3.appendChild(reviewsTypeTitle3);
   reviewsType3.appendChild(menuBorder3);
@@ -733,7 +733,7 @@ async function reviewNewModal() {
   //Overview
 
   const overviewDiv = document.createElement('div');
-  overviewDiv.setAttribute('class', 'b');
+  overviewDiv.setAttribute('class', 'gnaJEW');
 
   const overviewSplitDiv = document.createElement('div');
   overviewSplitDiv.setAttribute('class', 'gxxFEr');
@@ -856,6 +856,7 @@ async function reviewNewModal() {
   bodyBody.appendChild(overviewDiv);
 
   const overviewDiv2 = document.createElement('div');
+  overviewDiv2.setAttribute("class", "test-div")
   overviewSplitDiv.appendChild(overviewDiv2);
 
   const overviewRightDiv = document.createElement('div');
