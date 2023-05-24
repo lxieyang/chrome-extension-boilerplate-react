@@ -160,6 +160,24 @@ const Popup = () => {
     });
   }
 
+  async function keywordResearch() {
+    let referrerIdValue = await getReferrerIdKey();
+    // console.log(referrerIdValue);
+    let uuid =
+      referrerIdValue && referrerIdValue[constants.referrerIdKey]
+        ? referrerIdValue[constants.referrerIdKey]
+        : uuidv4();
+    if (!referrerIdValue || !referrerIdValue[constants.referrerIdKey]) {
+      chrome.storage.local.set({ [constants.referrerIdKey]: uuid });
+    }
+      let body = { keywordCount : true, referrerId : ""}
+      anonymousUsageTracker(body)
+    chrome.tabs.create({
+      url: `${constants.API_URL}register?referrer=extension&referrerId=${uuid}`,
+      active: true,
+    });
+  }
+
   const collection = async () => {
     const urlToSave = await urlGenerator();
     const authToken = await getAuthToken();
@@ -345,7 +363,7 @@ const Popup = () => {
           }}
         >
           <Button
-            onClick={signUp}
+            onClick={keywordResearch}
             sx={{ backgroundColor: '#b85c91' }}
             size="small"
             color="secondary"

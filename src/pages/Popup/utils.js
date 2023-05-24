@@ -1,8 +1,8 @@
 import { getActiveTabURL } from '../utils';
 
 export const constants = {
-  API_URL: 'https://www.datavio.co/',
-  PRODUCT_API_URL: 'https://www.datavio.co/backend/',
+  API_URL: 'https://app.datavio.co/',
+  PRODUCT_API_URL: 'https://app.datavio.co/backend/',
   referrerIdKey: 'dv_referrer_id',
   authTokenKey: 'dv_authToken',
   profitabiltyUseCountKey: 'dv_pc_use_count',

@@ -26,60 +26,6 @@ async function filterData(selectedReviewFilters){
 }
 
 
-
-// async function reviewModal() {
-//   let updatedUrl = urlGenerator();
-//   //console.log(updatedUrl);
-//   let url = 'https://www.datavio.co/api/ratings-reviews';
-//   let body = { url: `${updatedUrl}` };
-//   const response = await fetch(url, {
-//     method: 'POST',
-//     headers: {
-//       Accept: 'application/json',
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(body),
-//   });
-//   return response.json();
-// }
-
-// async function allReviewData(conditions) {
-//   let updatedUrl = urlGenerator();
-//   let url = 'https://www.datavio.co/api/get-reviews';
-//   let body = {
-//     url: `${updatedUrl}&marketplace=FLIPKART`,
-//     conditions: conditions,
-//   };
-//   const response = await fetch(url, {
-//     method: 'POST',
-//     headers: {
-//       Accept: 'application/json',
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(body),
-//   });
-
-//   return response.json();
-// }
-
-// async function wordcloudgenerator() {
-//   let updatedUrl = urlGenerator();
-//   let url = 'https://www.datavio.co/api/review-analysis';
-//   let body = {
-//     url: `${updatedUrl}`,
-//   };
-//   const response = await fetch(url, {
-//     method: 'POST',
-//     headers: {
-//       Accept: 'application/json',
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(body),
-//   });
-
-//   return response.json();
-// }
-
 async function reviewNewModal() {
   const modal = document.createElement('div');
   modal.setAttribute('id', 'review-modal');
