@@ -121,4 +121,5 @@ chrome.runtime.onMessage.addListener(async function (
       'Please open a Flipkart product page. Current page is not a valid Flipkart product page'
     );
   }
+  sendResponse({test:true});
 });

@@ -1,6 +1,6 @@
 import ReviewGenerator from './reviewsgenerator';
 import { ratingDistGenerator } from './reviewsgenerator';
-import { urlGenerator } from './utils.js';
+//import { urlGenerator } from './utils.js';
 import WordCloud from './wordcloud2.js';
 
 // function getProductTitle() {
@@ -11,68 +11,88 @@ import WordCloud from './wordcloud2.js';
 //   return urlSplit[3];
 // }
 
-async function reviewModal() {
-  let updatedUrl = urlGenerator();
-  //console.log(updatedUrl);
-  let url = 'https://www.datavio.co/api/ratings-reviews';
-  let body = { url: `${updatedUrl}` };
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
-  return response.json();
+const readLocalStorage = async (key) => {
+  while(true){
+    if((await chrome.storage.local.get(key))[key]=== "undefined") //await is required
+    continue;
+    else
+    return chrome.storage.local.get(key)
+  }
+};
+
+async function filterData(selectedReviewFilters){
+  chrome.storage.local.set({"allreview":"undefined"});
+  await chrome.runtime.sendMessage({ message: 'filterData', data:selectedReviewFilters });
 }
 
-async function allReviewData(conditions) {
-  let updatedUrl = urlGenerator();
-  let url = 'https://www.datavio.co/api/get-reviews';
-  let body = {
-    url: `${updatedUrl}&marketplace=FLIPKART`,
-    conditions: conditions,
-  };
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
 
-  return response.json();
-}
 
-async function wordcloudgenerator() {
-  let updatedUrl = urlGenerator();
-  let url = 'https://www.datavio.co/api/review-analysis';
-  let body = {
-    url: `${updatedUrl}`,
-  };
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
+// async function reviewModal() {
+//   let updatedUrl = urlGenerator();
+//   //console.log(updatedUrl);
+//   let url = 'https://www.datavio.co/api/ratings-reviews';
+//   let body = { url: `${updatedUrl}` };
+//   const response = await fetch(url, {
+//     method: 'POST',
+//     headers: {
+//       Accept: 'application/json',
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(body),
+//   });
+//   return response.json();
+// }
 
-  return response.json();
-}
+// async function allReviewData(conditions) {
+//   let updatedUrl = urlGenerator();
+//   let url = 'https://www.datavio.co/api/get-reviews';
+//   let body = {
+//     url: `${updatedUrl}&marketplace=FLIPKART`,
+//     conditions: conditions,
+//   };
+//   const response = await fetch(url, {
+//     method: 'POST',
+//     headers: {
+//       Accept: 'application/json',
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(body),
+//   });
+
+//   return response.json();
+// }
+
+// async function wordcloudgenerator() {
+//   let updatedUrl = urlGenerator();
+//   let url = 'https://www.datavio.co/api/review-analysis';
+//   let body = {
+//     url: `${updatedUrl}`,
+//   };
+//   const response = await fetch(url, {
+//     method: 'POST',
+//     headers: {
+//       Accept: 'application/json',
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(body),
+//   });
+
+//   return response.json();
+// }
 
 async function reviewNewModal() {
   const modal = document.createElement('div');
   modal.setAttribute('id', 'review-modal');
 
-  const apiData = await reviewModal();
+  let apiData = await readLocalStorage('overview')
+  apiData = apiData.overview
+  //console.log(apiData);
   let selectedReviewFilters = [];
-  let allreviewdata = allReviewData(selectedReviewFilters);
+  let allreviewdata = readLocalStorage('allreview');
+  
 
-  let wordlist = wordcloudgenerator();
+  let wordlist = readLocalStorage('wordcloud')
+  
 
   modal.setAttribute('class', 'ivkkEA jIfStg');
 
@@ -651,10 +671,15 @@ async function reviewNewModal() {
     dropdown5Star.setAttribute('class', 'HBZlb');
     await setTitle();
     dropdownBtn.innerHTML = `${numberOfRating}`;
-    allreviewdata = await allReviewData(selectedReviewFilters);
+    reviewDiv.innerHTML = '';
+    reviewDiv.appendChild(loading);
+    await filterData(selectedReviewFilters);
+    allreviewdata = await readLocalStorage('allreview');
+    reviewDiv.removeChild(loading);
+    allreviewdata = allreviewdata.allreview;
     currrentReviewCount = 0;
     //console.log(allreviewdata);
-    reviewDiv.innerHTML = '';
+    
     for (let i = 0; i < Math.min(allreviewdata.length, 100); i++) {
       let newReview = ReviewGenerator(i, allreviewdata[i]);
       reviewDiv.appendChild(newReview);
@@ -693,8 +718,10 @@ async function reviewNewModal() {
     //console.log(selectedStar);
     reviewDiv.innerHTML = '';
     reviewDiv.appendChild(loading);
-    allreviewdata = await allReviewData(selectedReviewFilters);
+    await filterData(selectedReviewFilters);
+    allreviewdata = await readLocalStorage('allreview');
     reviewDiv.removeChild(loading);
+    allreviewdata = allreviewdata.allreview;
     currrentReviewCount = 0;
     //console.log(allreviewdata);
 
@@ -934,6 +961,7 @@ async function reviewNewModal() {
       oneClick2 = true;
       reviewDiv.appendChild(loading);
       allreviewdata = await allreviewdata;
+      allreviewdata = allreviewdata.allreview
       reviewDiv.removeChild(loading);
       for (let i = 0; i < Math.min(allreviewdata.length, 100); i++) {
         let newReview = ReviewGenerator(i, allreviewdata[i]);
@@ -965,6 +993,7 @@ async function reviewNewModal() {
       oneClick = true;
       wordCloudDiv.appendChild(loading);
       wordlist = await wordlist;
+      wordlist = wordlist.wordcloud;
       wordCloudDiv.removeChild(loading);
       const abc = { list: wordlist['wordCloudFrequency'] };
       WordCloud(document.getElementById('wordcloud'), abc);

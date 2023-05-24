@@ -125,6 +125,9 @@ const Popup = () => {
         chrome.storage.sync.set({
           [constants.reviewUseCountKey]: currentUseCount,
         });
+        chrome.storage.local.set({"overview":"undefined"});
+        chrome.storage.local.set({"allreview":"undefined"});
+        chrome.storage.local.set({"wordcloud":"undefined"});
         chrome.runtime.sendMessage({ message: 'review_modal' });
         counter();
         if(!authToken || !authToken[constants.authTokenKey]){
@@ -161,7 +164,7 @@ const Popup = () => {
     const urlToSave = await urlGenerator();
     const authToken = await getAuthToken();
     //console.log(urlToSave);
-    let url = 'https://www.datavio.co/backend/extension/save-collection';
+    let url = `${constants.PRODUCT_API_URL}extension/save-collection`;
     let body = { url: `${urlToSave}` };
     const response = await fetch(url, {
       method: 'POST',
@@ -185,7 +188,7 @@ const Popup = () => {
       if (referrerIdValue) {
         referrerIdValue = referrerIdValue[constants.referrerIdKey];
         // make  request to refresh token
-        let url = `https://www.datavio.co/backend/extension/get-token?referrerId=${referrerIdValue}`;
+        let url = `${constants.PRODUCT_API_URL}extension/get-token?referrerId=${referrerIdValue}`;
         const response = await fetch(url, {
           method: 'GET',
           headers: {
@@ -339,6 +342,27 @@ const Popup = () => {
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'column',
+          }}
+        >
+          <Button
+            onClick={signUp}
+            sx={{ backgroundColor: '#b85c91' }}
+            size="small"
+            color="secondary"
+            fullWidth
+            variant="contained"
+          >
+            Keyword Research
+          </Button>
+        </Box>
+        <Box
+          sx={{
+            width: '81%',
+            justifyContent: 'center',
+            m: '10px 0 10px 0',
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'column',
             backgroundColor: 'red',
             borderRadius: '5px',
           }}
@@ -375,17 +399,25 @@ const Popup = () => {
           )}
         </Box>
       </Box>
-      <Box>
+      <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent:'center',
+            cursor: 'pointer',
+          }}>
         <Box
           sx={{
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
+            justifyContent:'center',
             cursor: 'pointer',
             backgroundColor: '#b85c91',
             borderRadius: '5px',
-            width: collected ? '180px' : '160px',
-            margin: '5px',
+            width:'100%',
+            marginTop:"10px",
             height: '30px',
           }}
           onClick={collection}
@@ -394,13 +426,13 @@ const Popup = () => {
           {!collected && (
             <Typography variant="body2" color="white">
               {' '}
-              Add To Collection{' '}
+              Start Monitoring This Product{' '}
             </Typography>
           )}
           {collected && (
             <Typography variant="body2" color="white">
               {' '}
-              Added To Collection{' '}
+              Product Added Visit Datavio to Monitor{' '}
             </Typography>
           )}
         </Box>

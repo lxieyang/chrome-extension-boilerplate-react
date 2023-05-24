@@ -937,7 +937,7 @@
   -webkit-box-pack: justify;
   justify-content: space-between;
   height: 100%;
-  margin-left: 32px;
+  margin: 0px 32px;
   gap: 20px;
 }
 
