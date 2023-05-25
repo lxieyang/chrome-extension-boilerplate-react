@@ -83,7 +83,7 @@ chrome.runtime.onMessage.addListener(async function (
   if(request.message === "filterData")
   {
     //console.log(await request.data);
-    allReviewData(await request.data)
+    allReviewData(request.data)
   }
   sendResponse({test:true});
 });

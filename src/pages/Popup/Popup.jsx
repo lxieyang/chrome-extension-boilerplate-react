@@ -2,11 +2,15 @@ import React from 'react';
 import logo from '../../assets/img/logo.png';
 import save from '../../assets/img/save.png';
 import { Box, Button, Switch, Typography } from '@mui/material';
-import { getAuthToken, constants, getReferrerIdKey } from './utils.js';
+import {
+  getAuthToken,
+  constants,
+  getReferrerIdKey,
+  urlGenerator,
+  urlChecker,
+} from './utils.js';
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
-import { urlGenerator } from './utils.js';
-import { urlChecker } from './utils.js';
 
 const Popup = () => {
   const [pvalue, setPvalue] = useState(2);
@@ -32,15 +36,17 @@ const Popup = () => {
   };
 
   const anonymousUsageTracker = async (field) => {
-    let referrerIdValue = await getReferrerIdKey();
-    let uuid =
-      referrerIdValue && referrerIdValue[constants.referrerIdKey]
-        ? referrerIdValue[constants.referrerIdKey]
-        : uuidv4();
-        if (!referrerIdValue || !referrerIdValue[constants.referrerIdKey]) {
-          chrome.storage.local.set({ [constants.referrerIdKey]: uuid });
-        }
-    field.referrerId = uuid;
+    if (field.referrerId === '') {
+      let referrerIdValue = await getReferrerIdKey();
+      let uuid =
+        referrerIdValue && referrerIdValue[constants.referrerIdKey]
+          ? referrerIdValue[constants.referrerIdKey]
+          : uuidv4();
+      if (!referrerIdValue || !referrerIdValue[constants.referrerIdKey]) {
+        chrome.storage.local.set({ [constants.referrerIdKey]: uuid });
+      }
+      field.referrerId = uuid;
+    }
     let url = `${constants.PRODUCT_API_URL}extension/anonymous-click-count`;
     let body = field;
     fetch(url, {
@@ -86,9 +92,9 @@ const Popup = () => {
         });
         chrome.runtime.sendMessage({ message: 'profitability_modal' });
         counter();
-        if(!authToken || !authToken[constants.authTokenKey]){
-          let body = { profitability : true, referrerId : ""}
-          anonymousUsageTracker(body)
+        if (!authToken || !authToken[constants.authTokenKey]) {
+          let body = { profitability: true, referrerId: '' };
+          anonymousUsageTracker(body);
         }
       } else {
         setPvalue(0);
@@ -125,14 +131,14 @@ const Popup = () => {
         chrome.storage.sync.set({
           [constants.reviewUseCountKey]: currentUseCount,
         });
-        chrome.storage.local.set({"overview":"undefined"});
-        chrome.storage.local.set({"allreview":"undefined"});
-        chrome.storage.local.set({"wordcloud":"undefined"});
+        chrome.storage.local.set({ overview: 'undefined' });
+        chrome.storage.local.set({ allreview: 'undefined' });
+        chrome.storage.local.set({ wordcloud: 'undefined' });
         chrome.runtime.sendMessage({ message: 'review_modal' });
         counter();
-        if(!authToken || !authToken[constants.authTokenKey]){
-          let body = { review : true, referrerId : ""}
-          anonymousUsageTracker(body)
+        if (!authToken || !authToken[constants.authTokenKey]) {
+          let body = { review: true, referrerId: '' };
+          anonymousUsageTracker(body);
         }
       } else {
         // show to free login
@@ -152,8 +158,8 @@ const Popup = () => {
     if (!referrerIdValue || !referrerIdValue[constants.referrerIdKey]) {
       chrome.storage.local.set({ [constants.referrerIdKey]: uuid });
     }
-      let body = { signUpCount : true, referrerId : ""}
-      anonymousUsageTracker(body)
+    let body = { signUpCount: true, referrerId: `${uuid}` };
+    anonymousUsageTracker(body);
     chrome.tabs.create({
       url: `${constants.API_URL}register?referrer=extension&referrerId=${uuid}`,
       active: true,
@@ -170,8 +176,8 @@ const Popup = () => {
     if (!referrerIdValue || !referrerIdValue[constants.referrerIdKey]) {
       chrome.storage.local.set({ [constants.referrerIdKey]: uuid });
     }
-      let body = { keywordCount : true, referrerId : ""}
-      anonymousUsageTracker(body)
+    let body = { keywordCount: true, referrerId: `${uuid}` };
+    anonymousUsageTracker(body);
     chrome.tabs.create({
       url: `${constants.API_URL}register?referrer=extension&referrerId=${uuid}`,
       active: true,
@@ -385,13 +391,13 @@ const Popup = () => {
             borderRadius: '5px',
           }}
         >
-          { (isNotCollected) && (
+          {isNotCollected && (
             <Typography variant="body2" color="#ffffff">
               {' '}
               Please Login to use this feature.
             </Typography>
           )}
-          { (!pvalue || !rvalue) && (
+          {(!pvalue || !rvalue) && (
             <Typography variant="body2" color="#ffffff">
               {' '}
               Create a free account to use more.
@@ -418,24 +424,25 @@ const Popup = () => {
         </Box>
       </Box>
       <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent:'center',
-            cursor: 'pointer',
-          }}>
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+        }}
+      >
         <Box
           sx={{
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent:'center',
+            justifyContent: 'center',
             cursor: 'pointer',
             backgroundColor: '#b85c91',
             borderRadius: '5px',
-            width:'100%',
-            marginTop:"10px",
+            width: '100%',
+            marginTop: '10px',
             height: '30px',
           }}
           onClick={collection}
