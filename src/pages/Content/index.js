@@ -13,10 +13,12 @@ const observer = new MutationObserver(async (mutationsList, observer) => {
     // Check if any new nodes are added
     if (mutation.type === 'childList') {
       // Check if the desired element is now available
+      const testElement = document.querySelector("#container > div > div._331-kn > div")
+
       const desiredElement = document.querySelector(
         '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-5-12._78xt5Y > div:nth-child(1)'
       );
-      if (desiredElement) {
+      if (testElement) {
         // Perform your desired action
         //console.log('Desired element found:', desiredElement);
         // Stop observing mutations once the element is found (if needed)

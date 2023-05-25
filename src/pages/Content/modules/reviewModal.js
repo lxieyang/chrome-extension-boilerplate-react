@@ -10,14 +10,17 @@ import WordCloud from './wordcloud2.js';
 //   // get the product title
 //   return urlSplit[3];
 // }
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 const readLocalStorage = async (key) => {
-  while(true){
-    if((await chrome.storage.local.get(key))[key]=== "undefined") //await is required
-    continue;
-    else
-    return chrome.storage.local.get(key)
+  let counter = 0;
+  while((await chrome.storage.local.get(key))[key]=== "undefined" && counter < 60){
+    await sleep(1000);
+    counter++;
   }
+  return chrome.storage.local.get(key);
 };
 
 async function filterData(selectedReviewFilters){

@@ -1456,22 +1456,22 @@ svg:not(:host).svg-inline--fa {
 
 /* listing */
 .fOhaxO {
-  display: flex;
-  justify-content: space-between;
-  -webkit-box-align: stretch;
-  align-items: stretch;
-  margin: 2px 2px 10px 2px;
-  padding: 8px 16px;
-  border-radius: 6px;
-  border: 1px solid rgb(217, 224, 232);
-  background-color: #ffe7f0;
+  display: flex !important;
+  justify-content: space-between !important;
+  -webkit-box-align: stretch !important;
+  align-items: stretch !important;
+  margin: 2px 2px 10px 2px !important;
+  padding: 8px 16px !important;
+  border-radius: 6px !important;
+  border: 1px solid rgb(217, 224, 232) !important;
+  background-color: #ffe7f0 !important;
 }
 
 .dMMEUY {
-  direction: ltr;
-  display: flex;
-  z-index: 100;
-  text-align: left;
+  direction: ltr !important;
+  display: flex !important;
+  z-index: 100 !important;
+  text-align: left !important;
 }
 
 .gcLkhF {
@@ -1496,139 +1496,139 @@ svg:not(:host).svg-inline--fa {
 }
 
 .eebzdb {
-  font-stretch: normal;
-  font-style: normal;
-  letter-spacing: normal;
-  margin: 0px;
-  padding: 0px;
-  text-transform: none;
-  font-size: 14px;
-  line-height: 16px;
-  font-weight: 700;
-  color: #485e75;
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
+  font-stretch: normal !important;
+  font-style: normal !important;
+  letter-spacing: normal !important;
+  margin: 0px !important;
+  padding: 0px !important;
+  text-transform: none !important;
+  font-size: 14px !important;
+  line-height: 16px !important;
+  font-weight: 700 !important;
+  color: #485e75 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  flex-direction: row !important;
+  -webkit-box-pack: justify !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
 }
 
 .green {
-  font-stretch: normal;
-  font-style: normal;
-  letter-spacing: normal;
-  margin: 0px 10px;
-  text-transform: none;
-  font-size: 14px;
-  line-height: 18px;
-  font-weight: 700;
-  border-radius: 13px;
-  padding: 4px 8px;
-  color: #389746;
-  background-color: #e5f3e6;
+  font-stretch: normal !important;
+  font-style: normal !important;
+  letter-spacing: normal !important;
+  margin: 0px 10px !important;
+  text-transform: none !important;
+  font-size: 14px !important;
+  line-height: 18px !important;
+  font-weight: 700 !important;
+  border-radius: 13px !important;
+  padding: 4px 8px !important;
+  color: #389746 !important;
+  background-color: #e5f3e6 !important;
 }
 
 .red {
-  font-stretch: normal;
-  font-style: normal;
-  letter-spacing: normal;
-  margin: 0px 10px;
-  text-transform: none;
-  font-size: 14px;
-  line-height: 18px;
-  font-weight: 700;
-  border-radius: 13px;
-  padding: 4px 8px;
-  color: #973838;
-  background-color: #f3e5e5;
+  font-stretch: normal !important;
+  font-style: normal !important;
+  letter-spacing: normal !important;
+  margin: 0px 10px !important;
+  text-transform: none !important;
+  font-size: 14px !important;
+  line-height: 18px !important;
+  font-weight: 700 !important;
+  border-radius: 13px !important;
+  padding: 4px 8px !important;
+  color: #973838 !important;
+  background-color: #f3e5e5 !important;
 }
 
 .yellow {
-  font-stretch: normal;
-  font-style: normal;
-  letter-spacing: normal;
-  margin: 0px 10px;
-  text-transform: none;
-  font-size: 14px;
-  line-height: 18px;
-  font-weight: 700;
-  border-radius: 13px;
-  padding: 4px 8px;
-  color: #979138;
-  background-color: #f3f2e5;
+  font-stretch: normal !important;
+  font-style: normal !important;
+  letter-spacing: normal !important;
+  margin: 0px 10px !important;
+  text-transform: none !important;
+  font-size: 14px !important;
+  line-height: 18px !important;
+  font-weight: 700 !important;
+  border-radius: 13px !important;
+  padding: 4px 8px !important;
+  color: #979138 !important;
+  background-color: #f3f2e5 !important;
 }
 
 .jpPImZ {
-  display: flex;
-  align-self: center;
-  -webkit-box-align: center;
-  align-items: center;
+  display: flex !important;
+  align-self: center !important;
+  -webkit-box-align: center !important;
+  align-items: center !important;
 }
 
 .hZeEru:hover,
 .hZeEru:focus {
-  background: #ecdde5;
-  border-color: #ecdde5;
+  background: #ecdde5 !important;
+  border-color: #ecdde5 !important;
 }
 
 .hZeEru {
-  font-style: inherit;
-  font-variant: inherit;
-  font-stretch: inherit;
-  font-family: inherit;
-  font-optical-sizing: inherit;
-  font-kerning: inherit;
-  font-feature-settings: inherit;
-  font-variation-settings: inherit;
-  flex: 0 0 auto;
-  display: inline-flex;
-  -webkit-box-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  justify-content: center;
-  border-radius: 6px;
-  font-weight: 700;
-  border-width: 1px;
-  border-style: solid;
-  line-height: 1em;
-  text-decoration: none;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.2s ease-in-out 0s;
-  min-height: 32px;
-  padding: 6px 8px;
-  font-size: 14px;
-  background: #f3e5ed;
-  border-color: #f3e5ed;
-  color: #97386f;
-  outline: none !important;
+  font-style: inherit !important;
+  font-variant: inherit !important;
+  font-stretch: inherit !important;
+  font-family: inherit !important;
+  font-optical-sizing: inherit !important;
+  font-kerning: inherit !important;
+  font-feature-settings: inherit !important;
+  font-variation-settings: inherit !important;
+  flex: 0 0 auto !important;
+  display: inline-flex !important;
+  -webkit-box-align: center !important;
+  align-items: center !important;
+  -webkit-box-pack: center !important;
+  justify-content: center !important;
+  border-radius: 6px !important;
+  font-weight: 700 !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  line-height: 1em !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: all 0.2s ease-in-out 0s !important;
+  min-height: 32px !important;
+  padding: 6px 8px !important;
+  font-size: 14px !important;
+  background: #f3e5ed !important;
+  border-color: #f3e5ed !important;
+  color: #97386f !important;
+  outline: none !important ;
 }
 
 .hZeEru .sc-hzMMVR {
-  flex-shrink: 0;
-  margin-right: 8px;
-  font-size: 16px;
+  flex-shrink: 0 !important;
+  margin-right: 8px !important;
+  font-size: 16px !important;
 }
 
 svg:not(:root).svg-inline--fa,
 svg:not(:host).svg-inline--fa {
-  overflow: visible;
-  box-sizing: content-box;
+  overflow: visible !important;
+  box-sizing: content-box !important;
 }
 
 .iTBTao {
-  transform: rotateZ(180deg);
-  transition: transform 0.2s ease 0s;
+  transform: rotateZ(180deg) !important;
+  transition: transform 0.2s ease 0s !important;
 }
 
 .svg-inline--fa {
-  display: var(--fa-display, inline-block);
-  height: 1em;
-  overflow: visible;
-  vertical-align: -0.125em;
+  display: var(--fa-display, inline-block) !important;
+  height: 1em !important;
+  overflow: visible !important;
+  vertical-align: -0.125em !important;
 }
 
 .listmodal {
