@@ -418,7 +418,7 @@ const Popup = () => {
               color="secondary"
               variant="contained"
             >
-              Login / Sign up
+              Free Login / Sign up
             </Button>
           )}
         </Box>
