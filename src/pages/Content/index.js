@@ -18,7 +18,7 @@ const observer = new MutationObserver(async (mutationsList, observer) => {
       const desiredElement = document.querySelector(
         '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-5-12._78xt5Y > div:nth-child(1)'
       );
-      if (testElement) {
+      if (testElement && desiredElement) {
         // Perform your desired action
         //console.log('Desired element found:', desiredElement);
         // Stop observing mutations once the element is found (if needed)

@@ -257,6 +257,13 @@ const Popup = () => {
 
   userLogin();
 
+  const redirectToHome = async () => {
+    chrome.tabs.create({
+      url: `${constants.API_URL}`,
+      active: true,
+    });
+  }
+
   return (
     <Box
       sx={{
@@ -280,7 +287,7 @@ const Popup = () => {
         <Box
           sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
         >
-          <Box sx={{ alignItems: 'center' }}>
+          <Box sx={{ alignItems: 'center', cursor: 'pointer' }} onClick={redirectToHome}>
             <img
               style={{ margin: '2px 10px 0 0' }}
               src={logo}
@@ -418,7 +425,7 @@ const Popup = () => {
               color="secondary"
               variant="contained"
             >
-              Login / Sign up
+              Free Login / Sign up
             </Button>
           )}
         </Box>
