@@ -361,19 +361,6 @@
   font-weight: 700;
 }
 
-.dLsaGN {
-  width: 100%;
-  border-bottom: 1px solid rgb(217, 224, 232);
-  display: flex;
-  flex-direction: row;
-}
-.didbWK {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: flex-end;
-}
-
 .gQzYPz {
   flex: 1 1 0%;
   display: flex;
@@ -448,7 +435,7 @@
   flex-direction: row;
 }
 .didbWK {
-  width: 33%;
+  width: 45%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -1840,4 +1827,100 @@ svg:not(:host).svg-inline--fa {
   0% {
     transform: scale(1);
   }
+}
+
+.article-blurb-disadvantages, .blurb-title-disadvantages {
+  border-color: #ed9d9d;
+  border-top: hsla(0,0%,90%,.5);
+}
+
+.article-blurb-title {
+  width: 100%;
+  border-left-width: 10px;
+  border-bottom-width: 0px ;
+  border-style: solid;
+}
+.article-blurb {
+  margin: 0px 0px 15px!important;
+  padding: 5px 30px 10px!important;
+  color: #333;
+  background-color: hsla(0,0%,90%,.5);
+  position: relative;
+}
+
+.article-blurb li {
+  list-style: none!important;
+  list-style-position: outside;
+  position: relative;
+  padding: 3px 0 3px 30px;
+  text-indent: -6px;
+}
+
+.article-blurb-disadvantages li:before {
+  color: #ed9d9d;
+}
+.article-blurb li:before {
+  content: "\203A";
+  position: relative;
+  left: -10px;
+  opacity: .8;
+  font-size: 19px;
+  top: 0px;
+}
+
+.sectitle {
+  font-size: 18px;
+  font-weight: 400;
+  color: #000;
+  background-color: hsla(0,0%,90%,.5);
+  padding: 1em 30px;
+}
+
+.article-blurb-features, .blurb-title-features {
+ border-color: #ed9d9d;
+ border-bottom: hsla(0,0%,90%,.5);
+}
+.article-blurb-title {
+  padding: 5px 20px!important;
+  margin-bottom: 0;
+}
+.article-blurb {
+  width: 100%;
+  border-left-width: 10px;
+  border-top-width: 0px ;
+  border-style: solid;
+}
+
+.aiAnalysis{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.aiAnalysis2{
+  display: none;
+}
+
+.section1{
+  width: 50%;
+  margin-left: 1%;
+  height:95%;
+}
+
+.section2{
+  width: 45%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.locksvg{
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.lockdetail{
+  font-size: 16px;
+  margin: 10px;
 }
