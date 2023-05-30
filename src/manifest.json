@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "version": "2.4.0",
+  "version": "2.4.1",
   "name": "Flipkart Listing Analyzer - Datavio",
   "description": "A chrome extension to help you with analysing product pages on Flipkart",
   "background": { "service_worker": "background.bundle.js" },
