@@ -1,5 +1,20 @@
-import { urlGenerator } from "../Popup/utils";
-import { constants } from "../Popup/utils";
+import { urlGenerator, constants, getReferrerIdKey } from "../Popup/utils";
+
+
+const anonymousUsageTracker = async (field) => {
+  let url = `${constants.PRODUCT_API_URL}extension/anonymous-click-count`;
+  let body = field;
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+}
+
+
 
 async function reviewModal() {
   let updatedUrl = await urlGenerator();
@@ -84,6 +99,17 @@ chrome.runtime.onMessage.addListener(async function (
   {
     //console.log(await request.data);
     allReviewData(request.data)
+  }
+  if(request.message === "Register")
+  {
+    let referrerIdValue = await getReferrerIdKey();
+    let uuid = referrerIdValue[constants.referrerIdKey];
+    let body = { aiReview: true, referrerId: uuid};
+    anonymousUsageTracker(body);
+    chrome.tabs.create({
+      url: `${constants.API_URL}register?referrer=extension&referrerId=${uuid}`,
+      active: true,
+    });
   }
   sendResponse({test:true});
 });

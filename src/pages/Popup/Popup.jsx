@@ -36,27 +36,30 @@ const Popup = () => {
   };
 
   const anonymousUsageTracker = async (field) => {
-    if (field.referrerId === '') {
-      let referrerIdValue = await getReferrerIdKey();
-      let uuid =
-        referrerIdValue && referrerIdValue[constants.referrerIdKey]
-          ? referrerIdValue[constants.referrerIdKey]
-          : uuidv4();
-      if (!referrerIdValue || !referrerIdValue[constants.referrerIdKey]) {
-        chrome.storage.local.set({ [constants.referrerIdKey]: uuid });
+    let authToken = await getAuthToken();
+    if (!authToken || !authToken[constants.authTokenKey]) {
+      if (field.referrerId === '') {
+        let referrerIdValue = await getReferrerIdKey();
+        let uuid =
+          referrerIdValue && referrerIdValue[constants.referrerIdKey]
+            ? referrerIdValue[constants.referrerIdKey]
+            : uuidv4();
+        if (!referrerIdValue || !referrerIdValue[constants.referrerIdKey]) {
+          chrome.storage.local.set({ [constants.referrerIdKey]: uuid });
+        }
+        field.referrerId = uuid;
       }
-      field.referrerId = uuid;
+      let url = `${constants.PRODUCT_API_URL}extension/anonymous-click-count`;
+      let body = field;
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
     }
-    let url = `${constants.PRODUCT_API_URL}extension/anonymous-click-count`;
-    let body = field;
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    });
   };
 
   async function profitability_modal() {
@@ -92,14 +95,14 @@ const Popup = () => {
         });
         chrome.runtime.sendMessage({ message: 'profitability_modal' });
         counter();
-        if (!authToken || !authToken[constants.authTokenKey]) {
-          let body = { profitability: true, referrerId: '' };
-          anonymousUsageTracker(body);
-        }
+        let body = { profitability: true, referrerId: '' };
+        anonymousUsageTracker(body);
       } else {
         setPvalue(0);
       }
     } else {
+      let body = { wrongFlipkartPage: true, referrerId: '' };
+      anonymousUsageTracker(body);
       setFlipPage(true);
     }
   }
@@ -136,15 +139,15 @@ const Popup = () => {
         chrome.storage.local.set({ wordcloud: 'undefined' });
         chrome.runtime.sendMessage({ message: 'review_modal' });
         counter();
-        if (!authToken || !authToken[constants.authTokenKey]) {
-          let body = { review: true, referrerId: '' };
-          anonymousUsageTracker(body);
-        }
+        let body = { review: true, referrerId: '' };
+        anonymousUsageTracker(body);
       } else {
         // show to free login
         setRvalue(0);
       }
     } else {
+      let body = { wrongFlipkartPage: true, referrerId: '' };
+      anonymousUsageTracker(body);
       setFlipPage(true);
     }
   }
@@ -257,6 +260,13 @@ const Popup = () => {
 
   userLogin();
 
+  const redirectToHome = async () => {
+    chrome.tabs.create({
+      url: `${constants.API_URL}`,
+      active: true,
+    });
+  };
+
   return (
     <Box
       sx={{
@@ -280,7 +290,10 @@ const Popup = () => {
         <Box
           sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
         >
-          <Box sx={{ alignItems: 'center' }}>
+          <Box
+            sx={{ alignItems: 'center', cursor: 'pointer' }}
+            onClick={redirectToHome}
+          >
             <img
               style={{ margin: '2px 10px 0 0' }}
               src={logo}
