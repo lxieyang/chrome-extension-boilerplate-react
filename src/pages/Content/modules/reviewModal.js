@@ -152,11 +152,12 @@ async function reviewNewModal() {
 
   const reviewsType2 = document.createElement('div');
   reviewsType2.setAttribute('tabindex', '0');
+  reviewsType2.setAttribute('id', 'chatgpt');
   reviewsType2.setAttribute('class', 'hiLyrj');
 
   const reviewsTypeTitle2 = document.createElement('div');
   reviewsTypeTitle2.setAttribute('class', 'gsckYT');
-  reviewsTypeTitle2.innerHTML = 'All Reviews';
+  reviewsTypeTitle2.innerHTML = 'ChatGPT Analysis';
 
   reviewsType2.appendChild(reviewsTypeTitle2);
   reviewsType2.appendChild(menuBorder2);
@@ -166,13 +167,13 @@ async function reviewNewModal() {
   reviewsDiv3.setAttribute('class', 'bzssCu');
 
   const reviewsType3 = document.createElement('div');
-  reviewsType3.setAttribute('id', 'review-analysis');
+
   reviewsType3.setAttribute('tabindex', '0');
   reviewsType3.setAttribute('class', 'hiLyrj');
 
   const reviewsTypeTitle3 = document.createElement('div');
   reviewsTypeTitle3.setAttribute('class', 'gsckYT');
-  reviewsTypeTitle3.innerHTML = 'AI Analysis';
+  reviewsTypeTitle3.innerHTML = 'Review Analysis';
 
   const reviewsDiv4 = document.createElement('div');
   reviewsDiv4.setAttribute('class', 'bzssCu');
@@ -184,13 +185,13 @@ async function reviewNewModal() {
 
   const reviewsTypeTitle4 = document.createElement('div');
   reviewsTypeTitle4.setAttribute('class', 'gsckYT');
-  reviewsTypeTitle4.innerHTML = 'Review Analysis';
+  reviewsTypeTitle4.innerHTML = 'All Reviews';
 
   //wordcloud
   const wordCloudDiv = document.createElement('div');
   wordCloudDiv.setAttribute('id', 'wordcloud');
   wordCloudDiv.setAttribute('class', 'wordcloudclass');
-  wordCloudDiv.setAttribute('style', 'width: 90%; height: 80%; margin-left : 5%');
+  wordCloudDiv.setAttribute('style', 'width: 90%; height: 80%; margin-left : 4%; padding-right:20px; overflow-y: auto; max-height:85%;');
 
   reviewsType3.appendChild(reviewsTypeTitle3);
   reviewsType3.appendChild(menuBorder3);
@@ -848,14 +849,11 @@ async function reviewNewModal() {
   overviewDiv.appendChild(overviewSplitDiv);
   bodyBody.appendChild(overviewDiv);
 
-  const overviewDiv2 = document.createElement('div');
-  overviewDiv2.setAttribute("class", "test-div")
-  overviewSplitDiv.appendChild(overviewDiv2);
 
   const overviewRightDiv = document.createElement('div');
   overviewRightDiv.setAttribute('class', 'epbpWv');
 
-  overviewDiv2.appendChild(overviewRightDiv);
+  overviewSplitDiv.appendChild(overviewRightDiv);
 
   const overviewTopTitle = document.createElement('div');
   overviewTopTitle.setAttribute('class', 'bgGCiT');
@@ -972,7 +970,7 @@ signupbtn.onclick = async function () {
     wordCloudDiv.setAttribute('class', 'wordcloudclass');
   };
   let oneClick2 = false;
-  reviewsType2.onclick = async function () {
+  reviewsType4.onclick = async function () {
     reviewsType1.removeAttribute('class');
     reviewsType2.removeAttribute('class');
     reviewsType3.removeAttribute('class');
@@ -982,9 +980,9 @@ signupbtn.onclick = async function () {
     form.removeAttribute('class');
     form.setAttribute('class', 'cnikoG');
     reviewsType1.setAttribute('class', 'hiLyrj');
-    reviewsType2.setAttribute('class', 'liSWKK');
+    reviewsType2.setAttribute('class', 'hiLyrj');
     reviewsType3.setAttribute('class', 'hiLyrj');
-    reviewsType4.setAttribute('class', 'hiLyrj');
+    reviewsType4.setAttribute('class', 'liSWKK');
     overviewDiv.setAttribute('class', 'gnaJEW2');
     allReviewDiv.setAttribute('class', 'epbpWv');
     aiAnalysis.setAttribute('class', 'aiAnalysis2');
@@ -1008,35 +1006,6 @@ signupbtn.onclick = async function () {
     }
   };
   let oneClick = false;
-  reviewsType4.onclick = async function () {
-    reviewsType1.removeAttribute('class');
-    reviewsType2.removeAttribute('class');
-    reviewsType3.removeAttribute('class');
-    reviewsType4.removeAttribute('class');
-    overviewDiv.removeAttribute('class');
-    allReviewDiv.removeAttribute('class');
-    form.removeAttribute('class');
-    form.setAttribute('class', 'cnikoG2');
-    allReviewDiv.setAttribute('class', 'epbpWv2');
-    overviewDiv.setAttribute('class', 'gnaJEW2');
-    reviewsType1.setAttribute('class', 'hiLyrj');
-    reviewsType2.setAttribute('class', 'hiLyrj');
-    reviewsType3.setAttribute('class', 'hiLyrj');
-    reviewsType4.setAttribute('class', 'liSWKK');
-    aiAnalysis.setAttribute('class', 'aiAnalysis2');
-    wordCloudDiv.removeAttribute('class');
-    
-    if (oneClick === false) {
-      oneClick = true;
-      wordCloudDiv.appendChild(loading);
-      wordlist = await wordlist;
-      wordlist = wordlist.wordcloud;
-      wordCloudDiv.removeChild(loading);
-      const abc = { list: wordlist['wordCloudFrequency'] };
-      WordCloud(document.getElementById('wordcloud'), abc);
-    }
-  };
-
   reviewsType3.onclick = async function () {
     reviewsType1.removeAttribute('class');
     reviewsType2.removeAttribute('class');
@@ -1051,6 +1020,35 @@ signupbtn.onclick = async function () {
     reviewsType1.setAttribute('class', 'hiLyrj');
     reviewsType2.setAttribute('class', 'hiLyrj');
     reviewsType3.setAttribute('class', 'liSWKK');
+    reviewsType4.setAttribute('class', 'hiLyrj');
+    aiAnalysis.setAttribute('class', 'aiAnalysis2');
+    wordCloudDiv.removeAttribute('class');
+    
+    if (oneClick === false) {
+      oneClick = true;
+      wordCloudDiv.appendChild(loading);
+      wordlist = await wordlist;
+      wordlist = wordlist.wordcloud;
+      wordCloudDiv.removeChild(loading);
+      const abc = { list: wordlist['wordCloudFrequency'] };
+      WordCloud(document.getElementById('wordcloud'), abc);
+    }
+  };
+
+  reviewsType2.onclick = async function () {
+    reviewsType1.removeAttribute('class');
+    reviewsType2.removeAttribute('class');
+    reviewsType3.removeAttribute('class');
+    reviewsType4.removeAttribute('class');
+    overviewDiv.removeAttribute('class');
+    allReviewDiv.removeAttribute('class');
+    form.removeAttribute('class');
+    form.setAttribute('class', 'cnikoG2');
+    allReviewDiv.setAttribute('class', 'epbpWv2');
+    overviewDiv.setAttribute('class', 'gnaJEW2');
+    reviewsType1.setAttribute('class', 'hiLyrj');
+    reviewsType2.setAttribute('class', 'liSWKK');
+    reviewsType3.setAttribute('class', 'hiLyrj');
     reviewsType4.setAttribute('class', 'hiLyrj');
     aiAnalysis.setAttribute('class', 'aiAnalysis');
     

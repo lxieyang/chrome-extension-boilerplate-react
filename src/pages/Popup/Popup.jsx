@@ -20,6 +20,18 @@ const Popup = () => {
   const [collected, setCollected] = useState(false);
   const [isNotCollected, setIsNotCollected] = useState(false);
 
+
+  const TestReferrerId = async () =>{
+    let referrerIdValue = await getReferrerIdKey();
+    if (!referrerIdValue || !referrerIdValue[constants.referrerIdKey]) {
+      chrome.storage.local.set({ [constants.referrerIdKey]: "TEST" });
+    }
+  }
+  
+  TestReferrerId(); // Comment this before commit.
+
+  
+
   const clickCount = async (profCount, revCount) => {
     const authToken = await getAuthToken();
     let url = `${constants.PRODUCT_API_URL}extension/click-count`;
@@ -205,6 +217,10 @@ const Popup = () => {
   };
 
   const userLogin = async () => {
+    let isFlipPage = await urlChecker();
+    if (!isFlipPage) {
+      setFlipPage(true);
+    }
     let referrerIdValue = await getReferrerIdKey();
     let authToken = await getAuthToken();
     if (!authToken || !authToken[constants.authTokenKey]) {
@@ -319,32 +335,6 @@ const Popup = () => {
       >
         <Box
           sx={{
-            width: '81%',
-            justifyContent: 'center',
-            m: '10px 0 10px 0',
-            display: 'flex',
-            alignItems: 'center',
-            flexDirection: 'column',
-          }}
-        >
-          <Button
-            onClick={profitability_modal}
-            sx={{ backgroundColor: '#b85c91' }}
-            size="small"
-            color="secondary"
-            fullWidth
-            variant="contained"
-            disabled={!pvalue ? true : false}
-          >
-            Profitability Calculator
-          </Button>
-
-          {!isLogin && (
-            <Typography variant="body2"> ({pvalue} Left)</Typography>
-          )}
-        </Box>
-        <Box
-          sx={{
             m: '10px 0 10px 0',
             width: '81%',
             display: 'flex',
@@ -359,9 +349,9 @@ const Popup = () => {
             size="small"
             color="secondary"
             variant="contained"
-            disabled={!rvalue ? true : false}
+            disabled={(!rvalue || flipPage) ? true : false}
           >
-            Review Analyzer
+            AI Review Analyzer
           </Button>
           {!isLogin && (
             <Typography variant="body2"> ({rvalue} Left)</Typography>
@@ -383,6 +373,7 @@ const Popup = () => {
             size="small"
             color="secondary"
             fullWidth
+            disabled={flipPage ? true : false}
             variant="contained"
           >
             Keyword Research
@@ -396,7 +387,34 @@ const Popup = () => {
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'column',
-            backgroundColor: 'red',
+          }}
+        >
+          <Button
+            onClick={profitability_modal}
+            sx={{ backgroundColor: '#b85c91' }}
+            size="small"
+            color="secondary"
+            fullWidth
+            variant="contained"
+            disabled={(!pvalue || flipPage) ? true : false}
+          >
+            Profitability Calculator
+          </Button>
+
+          {!isLogin && (
+            <Typography variant="body2"> ({pvalue} Left)</Typography>
+          )}
+        </Box>
+        
+        <Box
+          sx={{
+            width: '81%',
+            justifyContent: 'center',
+            m: '10px 0 10px 0',
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'column',
+            backgroundColor: '#7828f0',
             borderRadius: '5px',
           }}
         >
