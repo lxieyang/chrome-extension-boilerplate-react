@@ -1264,7 +1264,7 @@ svg:not(:host).svg-inline--fa {
   -webkit-box-pack: center;
   justify-content: center;
   border-radius: 6px;
-  font-weight: 600;
+  font-weight: 500;
   border-width: 1px;
   border-style: solid;
   line-height: 1em;
@@ -1957,4 +1957,24 @@ svg:not(:host).svg-inline--fa {
   font-weight: 500;
   color: #000;
   transform-origin: center;
+
+}
+.jumperdiv {
+  width: 300px;
+    height: 250px;
+    position: fixed;
+    margin: 40px;
+    box-shadow: 0 14px 14px rgba(0,0,0,.22), 0 10px 10px rgba(0,0,0,.22);
+    border-radius: 10px;
+    top: 70px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    right: 0;
+    background-color: #fff;
+}
+
+.jumperdiv2{
+  display: none;
 }

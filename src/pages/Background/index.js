@@ -15,7 +15,7 @@ const anonymousUsageTracker = async (field) => {
 
 async function chatGPTAnalysis() {
   let updatedUrl = await urlGenerator();
-  let url = `${constants.API_URL}api/chatgpt-analysis`;
+  let url = `${constants.API_URL}api/gpt-review-analysis`;
   let body = { url: `${updatedUrl}` };
   const response = await fetch(url, {
     method: 'POST',
