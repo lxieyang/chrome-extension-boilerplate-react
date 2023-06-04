@@ -20,17 +20,16 @@ const Popup = () => {
   const [collected, setCollected] = useState(false);
   const [isNotCollected, setIsNotCollected] = useState(false);
 
-
-  const TestReferrerId = async () =>{
+  const TestReferrerId = async () => {
     let referrerIdValue = await getReferrerIdKey();
     if (!referrerIdValue || !referrerIdValue[constants.referrerIdKey]) {
-      chrome.storage.local.set({ [constants.referrerIdKey]: "TEST" });
+      chrome.storage.local.set({
+        [constants.referrerIdKey]: `TEST${uuidv4()}`,
+      });
     }
-  }
-  
-  TestReferrerId(); // Comment this before commit.
+  };
 
-  
+  TestReferrerId(); // Comment this in production.
 
   const clickCount = async (profCount, revCount) => {
     const authToken = await getAuthToken();
@@ -349,7 +348,7 @@ const Popup = () => {
             size="small"
             color="secondary"
             variant="contained"
-            disabled={(!rvalue || flipPage) ? true : false}
+            disabled={!rvalue || flipPage ? true : false}
           >
             AI Review Analyzer
           </Button>
@@ -396,7 +395,7 @@ const Popup = () => {
             color="secondary"
             fullWidth
             variant="contained"
-            disabled={(!pvalue || flipPage) ? true : false}
+            disabled={!pvalue || flipPage ? true : false}
           >
             Profitability Calculator
           </Button>
@@ -405,7 +404,7 @@ const Popup = () => {
             <Typography variant="body2"> ({pvalue} Left)</Typography>
           )}
         </Box>
-        
+
         <Box
           sx={{
             width: '81%',
