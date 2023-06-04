@@ -113,6 +113,8 @@ const Popup = () => {
         setPvalue(0);
       }
     } else {
+      let body = { wrongFlipkartPage: true, referrerId: '' };
+      anonymousUsageTracker(body);
       setFlipPage(true);
     }
   }
@@ -156,6 +158,8 @@ const Popup = () => {
         setRvalue(0);
       }
     } else {
+      let body = { wrongFlipkartPage: true, referrerId: '' };
+      anonymousUsageTracker(body);
       setFlipPage(true);
     }
   }
