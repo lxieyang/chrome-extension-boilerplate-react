@@ -119,19 +119,10 @@ chrome.runtime.onMessage.addListener(async function (
           referrerIdValue && referrerIdValue[constants.referrerIdKey]
             ? referrerIdValue[constants.referrerIdKey]
             : uuidv4();
-    let body = { aiReview: true, referrerId: uuid };
-    anonymousUsageTracker(body);
-    chrome.tabs.create({
-      url: `${constants.API_URL}register?referrer=extension&referrerId=${uuid}`,
-      active: true,
-    });
-  }
-  if (request.message === 'JumperRegister') {
-    let referrerIdValue = await getReferrerIdKey();
-    let uuid =
-          referrerIdValue && referrerIdValue[constants.referrerIdKey]
-            ? referrerIdValue[constants.referrerIdKey]
-            : uuidv4();
+    if(request.key === 'aiReview'){
+      let body = { aiReview: true, referrerId: uuid };
+      anonymousUsageTracker(body);
+    }
     chrome.tabs.create({
       url: `${constants.API_URL}register?referrer=extension&referrerId=${uuid}`,
       active: true,

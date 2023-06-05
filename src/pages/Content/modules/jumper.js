@@ -3,6 +3,7 @@ import { getAuthToken, constants } from '../../Popup/utils';
 const Jumper = async () => {
   const mainDiv = document.createElement('div');
   mainDiv.setAttribute('class', 'jumperdiv');
+  mainDiv.innerHTML='How to use Datavio Extension?'
 
   const youtube = document.createElement('div');
   youtube.innerHTML =
@@ -20,7 +21,7 @@ const Jumper = async () => {
   }
 
   login.onclick = () => {
-    chrome.runtime.sendMessage({ message: 'JumperRegister' });
+    chrome.runtime.sendMessage({ message: 'Register', key: 'Jumper' });
   };
 
   return mainDiv;

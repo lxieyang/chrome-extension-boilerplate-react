@@ -775,6 +775,7 @@
  .epbpWv {
   margin: 0px 32px;
   max-height: 90%;
+  width: 94%;
   height: auto;
   min-height: 40%;
   display: flex;
@@ -1452,6 +1453,7 @@ svg:not(:host).svg-inline--fa {
   direction: ltr !important;
   display: flex !important;
   z-index: 3 !important;
+  align-items: center;
   text-align: left !important;
 }
 
@@ -1833,13 +1835,12 @@ svg:not(:host).svg-inline--fa {
 }
 
 .article-blurb-disadvantages, .blurb-title-disadvantages {
-  border-color: #b85c91;
+  border-color: #d9e0e8;
 }
 
 .article-blurb-title {
   width: 100%;
-  border-left-width: 10px;
-  border-bottom-width: 0px ;
+  border: 1px solid ;
   border-style: solid;
 }
 .article-blurb {
@@ -1878,15 +1879,14 @@ svg:not(:host).svg-inline--fa {
 }
 
 .article-blurb-features, .blurb-title-features {
- border-color:#b85c91;
+ border-color:#d9e0e8;
 }
 .article-blurb-title {
-  padding: 5px 20px!important;
-  margin-bottom: 0;
+  padding: 10px 20px!important;
 }
 .article-blurb {
   width: 100%;
-  border-left-width: 10px;
+  border: 1px solid #d9e0e8;
   border-top-width: 0px ;
   border-style: solid;
 }
@@ -1951,6 +1951,7 @@ svg:not(:host).svg-inline--fa {
   align-items: center;
   flex-direction: column;
   right: 0;
+  z-index: 999;
 }
 
 .jumpertext{
@@ -1966,9 +1967,11 @@ svg:not(:host).svg-inline--fa {
 }
 .jumperdiv {
   width: 300px;
-    height: 250px;
+    height: 300px;
     position: fixed;
     margin: 40px;
+    font-size: 16px;
+    font-weight: 500;
     box-shadow: 0 14px 14px rgba(0,0,0,.22), 0 10px 10px rgba(0,0,0,.22);
     border-radius: 10px;
     top: 70px;
@@ -1978,8 +1981,16 @@ svg:not(:host).svg-inline--fa {
     flex-direction: column;
     right: 0;
     background-color: #fff;
+    z-index: 999;
 }
 
 .jumperdiv2{
   display: none;
+}
+
+.kwkEfR {
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
 }

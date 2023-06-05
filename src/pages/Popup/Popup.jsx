@@ -313,7 +313,7 @@ const Popup = () => {
             <img
               style={{ margin: '2px 10px 0 0' }}
               src={logo}
-              alt="hershield"
+              alt="Datavio"
               width="auto"
               height="30px"
             />
