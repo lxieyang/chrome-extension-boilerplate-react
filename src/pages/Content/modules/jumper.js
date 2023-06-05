@@ -12,7 +12,7 @@ const Jumper = async () => {
 
   const login = document.createElement('button');
   login.setAttribute('class', 'NZXZk');
-  login.innerHTML = 'Create a free account';
+  login.innerHTML = 'Create a free account for unlimited use';
 
   let authToken = await getAuthToken();
   if (!authToken || !authToken[constants.authTokenKey]) {
@@ -20,7 +20,7 @@ const Jumper = async () => {
   }
 
   login.onclick = () => {
-    chrome.runtime.sendMessage({ message: 'Register' });
+    chrome.runtime.sendMessage({ message: 'JumperRegister' });
   };
 
   return mainDiv;

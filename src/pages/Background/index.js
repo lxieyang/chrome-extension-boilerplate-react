@@ -1,4 +1,5 @@
 import { urlGenerator, constants, getReferrerIdKey } from '../Popup/utils';
+import { v4 as uuidv4 } from 'uuid';
 
 const anonymousUsageTracker = async (field) => {
   let url = `${constants.PRODUCT_API_URL}extension/anonymous-click-count`;
@@ -26,7 +27,7 @@ async function chatGPTAnalysis() {
     body: JSON.stringify(body),
   });
   let data = await response.json();
-  chrome.storage.local.set({ chatgpt: data });
+  chrome.storage.local.set({ chatgpt: data.neg_reviews_analysis.analysis });
 }
 
 async function reviewModal() {
@@ -106,6 +107,7 @@ chrome.runtime.onMessage.addListener(async function (
     allReviewData([]);
     wordcloudgenerator();
     reviewModal();
+    chatGPTAnalysis();
   }
   if (request.message === 'filterData') {
     //console.log(await request.data);
@@ -113,7 +115,10 @@ chrome.runtime.onMessage.addListener(async function (
   }
   if (request.message === 'Register') {
     let referrerIdValue = await getReferrerIdKey();
-    let uuid = referrerIdValue[constants.referrerIdKey];
+    let uuid =
+          referrerIdValue && referrerIdValue[constants.referrerIdKey]
+            ? referrerIdValue[constants.referrerIdKey]
+            : uuidv4();
     let body = { aiReview: true, referrerId: uuid };
     anonymousUsageTracker(body);
     chrome.tabs.create({
@@ -121,9 +126,16 @@ chrome.runtime.onMessage.addListener(async function (
       active: true,
     });
   }
-
-  if (request.message === 'chatgpt') {
-    chatGPTAnalysis();
+  if (request.message === 'JumperRegister') {
+    let referrerIdValue = await getReferrerIdKey();
+    let uuid =
+          referrerIdValue && referrerIdValue[constants.referrerIdKey]
+            ? referrerIdValue[constants.referrerIdKey]
+            : uuidv4();
+    chrome.tabs.create({
+      url: `${constants.API_URL}register?referrer=extension&referrerId=${uuid}`,
+      active: true,
+    });
   }
   sendResponse({ test: true });
 });

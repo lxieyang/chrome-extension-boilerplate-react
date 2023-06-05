@@ -85,7 +85,7 @@ const Popup = () => {
         constants.reviewUseCountKey
       );
       if (
-        useCount[constants.profitabiltyUseCountKey] % 10 === 0 &&
+        useCount[constants.profitabiltyUseCountKey] % 2 === 0 &&
         authToken[constants.authTokenKey]
       ) {
         clickCount(
@@ -126,7 +126,7 @@ const Popup = () => {
         constants.profitabiltyUseCountKey
       );
       if (
-        useCount[constants.reviewUseCountKey] % 10 === 0 &&
+        useCount[constants.reviewUseCountKey] % 2 === 0 &&
         authToken[constants.authTokenKey]
       ) {
         clickCount(
@@ -148,6 +148,7 @@ const Popup = () => {
         chrome.storage.local.set({ overview: 'undefined' });
         chrome.storage.local.set({ allreview: 'undefined' });
         chrome.storage.local.set({ wordcloud: 'undefined' });
+        chrome.storage.local.set({ chatgpt: 'undefined' });
         chrome.runtime.sendMessage({ message: 'review_modal' });
         counter();
         let body = { review: true, referrerId: '' };
