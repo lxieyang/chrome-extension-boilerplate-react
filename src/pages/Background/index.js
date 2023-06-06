@@ -119,6 +119,9 @@ chrome.runtime.onMessage.addListener(async function (
           referrerIdValue && referrerIdValue[constants.referrerIdKey]
             ? referrerIdValue[constants.referrerIdKey]
             : uuidv4();
+    if (!referrerIdValue || !referrerIdValue[constants.referrerIdKey]) {
+      chrome.storage.local.set({ [constants.referrerIdKey]: uuid });
+    }
     if(request.track === true){
       let body = {};
       body[request.key] = true;
