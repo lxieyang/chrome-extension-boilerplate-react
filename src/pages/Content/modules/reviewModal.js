@@ -1056,7 +1056,7 @@ signupbtn.onclick = async function () {
       for(let i = 0; i < chatgpt.length; i++){
         const negReviews = document.createElement('li');
         negReviews.innerHTML = `${chatgpt[i]}`;
-        console.log(chatgpt[i]);
+        //console.log(chatgpt[i]);
         analysis1Div.appendChild(negReviews);
       }
       aiAnalysis.appendChild(aiSection1);
