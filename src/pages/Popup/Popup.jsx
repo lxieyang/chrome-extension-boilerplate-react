@@ -31,10 +31,11 @@ const Popup = () => {
 
   TestReferrerId(); // Comment this in production.
 
-  const clickCount = async (profCount, revCount) => {
+  const clickCount = async (key) => {
     const authToken = await getAuthToken();
     let url = `${constants.PRODUCT_API_URL}extension/click-count`;
-    let body = { profitability: `${profCount}`, review: `${revCount}` };
+    let body = {};
+    body[key] = true;
     fetch(url, {
       method: 'POST',
       headers: {
@@ -88,10 +89,7 @@ const Popup = () => {
         useCount[constants.profitabiltyUseCountKey] % 2 === 0 &&
         authToken[constants.authTokenKey]
       ) {
-        clickCount(
-          useCount[constants.profitabiltyUseCountKey],
-          useCountR[constants.reviewUseCountKey]
-        );
+        clickCount('profitability');
       }
       if (
         (authToken && authToken[constants.authTokenKey]) ||
@@ -129,10 +127,7 @@ const Popup = () => {
         useCount[constants.reviewUseCountKey] % 2 === 0 &&
         authToken[constants.authTokenKey]
       ) {
-        clickCount(
-          useCountP[constants.profitabiltyUseCountKey],
-          useCount[constants.reviewUseCountKey]
-        );
+        clickCount('review');
       }
       if (
         (authToken && authToken[constants.authTokenKey]) ||
