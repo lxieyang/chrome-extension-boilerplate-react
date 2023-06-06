@@ -21,7 +21,7 @@ const Jumper = async () => {
   }
 
   login.onclick = () => {
-    chrome.runtime.sendMessage({ message: 'Register', key: 'Jumper' });
+    chrome.runtime.sendMessage({ message: 'Register', key: 'Jumper', track: false });
   };
 
   return mainDiv;

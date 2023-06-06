@@ -941,7 +941,7 @@ if ((!authToken || !authToken[constants.authTokenKey])){
 }
 
 signupbtn.onclick = async function () {
-  chrome.runtime.sendMessage({ message: 'Register', key: 'aiReview' });
+  chrome.runtime.sendMessage({ message: 'Register', key: 'aiReview', track: true });
 }
 
   reviewsType1.onclick = async function () {

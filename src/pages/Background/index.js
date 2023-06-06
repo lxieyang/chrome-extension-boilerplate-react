@@ -119,8 +119,10 @@ chrome.runtime.onMessage.addListener(async function (
           referrerIdValue && referrerIdValue[constants.referrerIdKey]
             ? referrerIdValue[constants.referrerIdKey]
             : uuidv4();
-    if(request.key === 'aiReview'){
-      let body = { aiReview: true, referrerId: uuid };
+    if(request.track === true){
+      let body = {};
+      body[request.key] = true;
+      body['referrerId'] = uuid;
       anonymousUsageTracker(body);
     }
     chrome.tabs.create({

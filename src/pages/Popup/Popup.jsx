@@ -164,39 +164,11 @@ const Popup = () => {
     }
   }
   async function signUp() {
-    let referrerIdValue = await getReferrerIdKey();
-    // console.log(referrerIdValue);
-    let uuid =
-      referrerIdValue && referrerIdValue[constants.referrerIdKey]
-        ? referrerIdValue[constants.referrerIdKey]
-        : uuidv4();
-    if (!referrerIdValue || !referrerIdValue[constants.referrerIdKey]) {
-      chrome.storage.local.set({ [constants.referrerIdKey]: uuid });
-    }
-    let body = { signUpCount: true, referrerId: `${uuid}` };
-    anonymousUsageTracker(body);
-    chrome.tabs.create({
-      url: `${constants.API_URL}register?referrer=extension&referrerId=${uuid}`,
-      active: true,
-    });
+    chrome.runtime.sendMessage({message:'Register', key: 'signUpCount', track: true})
   }
 
   async function keywordResearch() {
-    let referrerIdValue = await getReferrerIdKey();
-    // console.log(referrerIdValue);
-    let uuid =
-      referrerIdValue && referrerIdValue[constants.referrerIdKey]
-        ? referrerIdValue[constants.referrerIdKey]
-        : uuidv4();
-    if (!referrerIdValue || !referrerIdValue[constants.referrerIdKey]) {
-      chrome.storage.local.set({ [constants.referrerIdKey]: uuid });
-    }
-    let body = { keywordCount: true, referrerId: `${uuid}` };
-    anonymousUsageTracker(body);
-    chrome.tabs.create({
-      url: `${constants.API_URL}register?referrer=extension&referrerId=${uuid}`,
-      active: true,
-    });
+    chrome.runtime.sendMessage({message:'Register', key: 'keywordCount', track: true});
   }
 
   const collection = async () => {
