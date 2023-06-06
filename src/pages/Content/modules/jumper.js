@@ -7,7 +7,7 @@ const Jumper = async () => {
 
   const youtube = document.createElement('div');
   youtube.innerHTML =
-    '<iframe width="280" height="180" src="https://www.youtube.com/embed/j6tLAQmlCT0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+    '<iframe width="280" height="180" src="https://www.youtube.com/embed/j6tLAQmlCT0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen></iframe>';
 
   mainDiv.appendChild(youtube);
 
