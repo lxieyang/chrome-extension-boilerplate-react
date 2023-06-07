@@ -20,10 +20,22 @@ const Popup = () => {
   const [collected, setCollected] = useState(false);
   const [isNotCollected, setIsNotCollected] = useState(false);
 
-  const clickCount = async (profCount, revCount) => {
+  const TestReferrerId = async () => {
+    let referrerIdValue = await getReferrerIdKey();
+    if (!referrerIdValue || !referrerIdValue[constants.referrerIdKey]) {
+      chrome.storage.local.set({
+        [constants.referrerIdKey]: `TEST${uuidv4()}`,
+      });
+    }
+  };
+
+  TestReferrerId(); // Comment this in production.
+
+  const clickCount = async (key) => {
     const authToken = await getAuthToken();
     let url = `${constants.PRODUCT_API_URL}extension/click-count`;
-    let body = { profitability: `${profCount}`, review: `${revCount}` };
+    let body = {};
+    body[key] = true;
     fetch(url, {
       method: 'POST',
       headers: {
@@ -74,13 +86,10 @@ const Popup = () => {
         constants.reviewUseCountKey
       );
       if (
-        useCount[constants.profitabiltyUseCountKey] % 10 === 0 &&
+        useCount[constants.profitabiltyUseCountKey] % 2 === 0 &&
         authToken[constants.authTokenKey]
       ) {
-        clickCount(
-          useCount[constants.profitabiltyUseCountKey],
-          useCountR[constants.reviewUseCountKey]
-        );
+        clickCount('profitability');
       }
       if (
         (authToken && authToken[constants.authTokenKey]) ||
@@ -115,13 +124,10 @@ const Popup = () => {
         constants.profitabiltyUseCountKey
       );
       if (
-        useCount[constants.reviewUseCountKey] % 10 === 0 &&
+        useCount[constants.reviewUseCountKey] % 2 === 0 &&
         authToken[constants.authTokenKey]
       ) {
-        clickCount(
-          useCountP[constants.profitabiltyUseCountKey],
-          useCount[constants.reviewUseCountKey]
-        );
+        clickCount('review');
       }
       if (
         (authToken && authToken[constants.authTokenKey]) ||
@@ -137,6 +143,7 @@ const Popup = () => {
         chrome.storage.local.set({ overview: 'undefined' });
         chrome.storage.local.set({ allreview: 'undefined' });
         chrome.storage.local.set({ wordcloud: 'undefined' });
+        chrome.storage.local.set({ chatgpt: 'undefined' });
         chrome.runtime.sendMessage({ message: 'review_modal' });
         counter();
         let body = { review: true, referrerId: '' };
@@ -152,39 +159,11 @@ const Popup = () => {
     }
   }
   async function signUp() {
-    let referrerIdValue = await getReferrerIdKey();
-    // console.log(referrerIdValue);
-    let uuid =
-      referrerIdValue && referrerIdValue[constants.referrerIdKey]
-        ? referrerIdValue[constants.referrerIdKey]
-        : uuidv4();
-    if (!referrerIdValue || !referrerIdValue[constants.referrerIdKey]) {
-      chrome.storage.local.set({ [constants.referrerIdKey]: uuid });
-    }
-    let body = { signUpCount: true, referrerId: `${uuid}` };
-    anonymousUsageTracker(body);
-    chrome.tabs.create({
-      url: `${constants.API_URL}register?referrer=extension&referrerId=${uuid}`,
-      active: true,
-    });
+    chrome.runtime.sendMessage({message:'Register', key: 'signUpCount', track: true})
   }
 
   async function keywordResearch() {
-    let referrerIdValue = await getReferrerIdKey();
-    // console.log(referrerIdValue);
-    let uuid =
-      referrerIdValue && referrerIdValue[constants.referrerIdKey]
-        ? referrerIdValue[constants.referrerIdKey]
-        : uuidv4();
-    if (!referrerIdValue || !referrerIdValue[constants.referrerIdKey]) {
-      chrome.storage.local.set({ [constants.referrerIdKey]: uuid });
-    }
-    let body = { keywordCount: true, referrerId: `${uuid}` };
-    anonymousUsageTracker(body);
-    chrome.tabs.create({
-      url: `${constants.API_URL}register?referrer=extension&referrerId=${uuid}`,
-      active: true,
-    });
+    chrome.runtime.sendMessage({message:'Register', key: 'keywordCount', track: true});
   }
 
   const collection = async () => {
@@ -209,6 +188,10 @@ const Popup = () => {
   };
 
   const userLogin = async () => {
+    let isFlipPage = await urlChecker();
+    if (!isFlipPage) {
+      setFlipPage(true);
+    }
     let referrerIdValue = await getReferrerIdKey();
     let authToken = await getAuthToken();
     if (!authToken || !authToken[constants.authTokenKey]) {
@@ -297,7 +280,7 @@ const Popup = () => {
             <img
               style={{ margin: '2px 10px 0 0' }}
               src={logo}
-              alt="hershield"
+              alt="Datavio"
               width="auto"
               height="30px"
             />
@@ -323,32 +306,6 @@ const Popup = () => {
       >
         <Box
           sx={{
-            width: '81%',
-            justifyContent: 'center',
-            m: '10px 0 10px 0',
-            display: 'flex',
-            alignItems: 'center',
-            flexDirection: 'column',
-          }}
-        >
-          <Button
-            onClick={profitability_modal}
-            sx={{ backgroundColor: '#b85c91' }}
-            size="small"
-            color="secondary"
-            fullWidth
-            variant="contained"
-            disabled={!pvalue ? true : false}
-          >
-            Profitability Calculator
-          </Button>
-
-          {!isLogin && (
-            <Typography variant="body2"> ({pvalue} Left)</Typography>
-          )}
-        </Box>
-        <Box
-          sx={{
             m: '10px 0 10px 0',
             width: '81%',
             display: 'flex',
@@ -363,9 +320,9 @@ const Popup = () => {
             size="small"
             color="secondary"
             variant="contained"
-            disabled={!rvalue ? true : false}
+            disabled={!rvalue || flipPage ? true : false}
           >
-            Review Analyzer
+            AI Review Analyzer
           </Button>
           {!isLogin && (
             <Typography variant="body2"> ({rvalue} Left)</Typography>
@@ -387,6 +344,7 @@ const Popup = () => {
             size="small"
             color="secondary"
             fullWidth
+            disabled={flipPage ? true : false}
             variant="contained"
           >
             Keyword Research
@@ -400,7 +358,34 @@ const Popup = () => {
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'column',
-            backgroundColor: 'red',
+          }}
+        >
+          <Button
+            onClick={profitability_modal}
+            sx={{ backgroundColor: '#b85c91' }}
+            size="small"
+            color="secondary"
+            fullWidth
+            variant="contained"
+            disabled={!pvalue || flipPage ? true : false}
+          >
+            Profitability Calculator
+          </Button>
+
+          {!isLogin && (
+            <Typography variant="body2"> ({pvalue} Left)</Typography>
+          )}
+        </Box>
+
+        <Box
+          sx={{
+            width: '81%',
+            justifyContent: 'center',
+            m: '10px 0 10px 0',
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'column',
+            backgroundColor: '#7828f0',
             borderRadius: '5px',
           }}
         >

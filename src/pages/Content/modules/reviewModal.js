@@ -40,7 +40,7 @@ async function reviewNewModal() {
   let selectedReviewFilters = [];
   let allreviewdata = readLocalStorage('allreview');
   
-
+  let chatgpt = readLocalStorage('chatgpt');
   let wordlist = readLocalStorage('wordcloud')
   
 
@@ -152,11 +152,12 @@ async function reviewNewModal() {
 
   const reviewsType2 = document.createElement('div');
   reviewsType2.setAttribute('tabindex', '0');
+  reviewsType2.setAttribute('id', 'chatgpt');
   reviewsType2.setAttribute('class', 'hiLyrj');
 
   const reviewsTypeTitle2 = document.createElement('div');
   reviewsTypeTitle2.setAttribute('class', 'gsckYT');
-  reviewsTypeTitle2.innerHTML = 'All Reviews';
+  reviewsTypeTitle2.innerHTML = 'ChatGPT Analysis';
 
   reviewsType2.appendChild(reviewsTypeTitle2);
   reviewsType2.appendChild(menuBorder2);
@@ -166,13 +167,13 @@ async function reviewNewModal() {
   reviewsDiv3.setAttribute('class', 'bzssCu');
 
   const reviewsType3 = document.createElement('div');
-  reviewsType3.setAttribute('id', 'review-analysis');
+
   reviewsType3.setAttribute('tabindex', '0');
   reviewsType3.setAttribute('class', 'hiLyrj');
 
   const reviewsTypeTitle3 = document.createElement('div');
   reviewsTypeTitle3.setAttribute('class', 'gsckYT');
-  reviewsTypeTitle3.innerHTML = 'AI Analysis';
+  reviewsTypeTitle3.innerHTML = 'Review Analysis';
 
   const reviewsDiv4 = document.createElement('div');
   reviewsDiv4.setAttribute('class', 'bzssCu');
@@ -184,13 +185,13 @@ async function reviewNewModal() {
 
   const reviewsTypeTitle4 = document.createElement('div');
   reviewsTypeTitle4.setAttribute('class', 'gsckYT');
-  reviewsTypeTitle4.innerHTML = 'Review Analysis';
+  reviewsTypeTitle4.innerHTML = 'All Reviews';
 
   //wordcloud
   const wordCloudDiv = document.createElement('div');
   wordCloudDiv.setAttribute('id', 'wordcloud');
   wordCloudDiv.setAttribute('class', 'wordcloudclass');
-  wordCloudDiv.setAttribute('style', 'width: 90%; height: 80%; margin-left : 5%');
+  wordCloudDiv.setAttribute('style', 'width: 90%; height: 80%; margin-left : 4%; padding-right:20px; overflow-y: auto; max-height:85%;');
 
   reviewsType3.appendChild(reviewsTypeTitle3);
   reviewsType3.appendChild(menuBorder3);
@@ -848,14 +849,11 @@ async function reviewNewModal() {
   overviewDiv.appendChild(overviewSplitDiv);
   bodyBody.appendChild(overviewDiv);
 
-  const overviewDiv2 = document.createElement('div');
-  overviewDiv2.setAttribute("class", "test-div")
-  overviewSplitDiv.appendChild(overviewDiv2);
 
   const overviewRightDiv = document.createElement('div');
   overviewRightDiv.setAttribute('class', 'epbpWv');
 
-  overviewDiv2.appendChild(overviewRightDiv);
+  overviewSplitDiv.appendChild(overviewRightDiv);
 
   const overviewTopTitle = document.createElement('div');
   overviewTopTitle.setAttribute('class', 'bgGCiT');
@@ -902,12 +900,8 @@ const aiSection1 = document.createElement('div');
 aiSection1.setAttribute('class', 'section1')
 
 const aiSection2 = document.createElement('div');
-aiSection2.setAttribute('class', 'section2')
-aiSection2.innerHTML='<svg class = "locksvg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100px" height="100px" viewBox="0 0 100 100" version="1.1"><g id="surface1"><path style=" stroke:none;fill-rule:nonzero;fill:rgb(94.509804%,76.862745%,5.882353%);fill-opacity:1;" d="M 20.832031 37.5 C 16.230469 37.5 12.5 41.25 12.5 45.832031 L 12.5 79.167969 C 12.5 83.75 16.230469 87.5 20.832031 87.5 L 79.167969 87.5 C 83.769531 87.5 87.5 83.75 87.5 79.167969 L 87.5 45.832031 C 87.5 41.25 83.769531 37.5 79.167969 37.5 Z M 20.832031 37.5 "/><path style=" stroke:none;fill-rule:nonzero;fill:rgb(95.294118%,61.176471%,7.058824%);fill-opacity:1;" d="M 20.832031 50 C 16.230469 50 12.5 53.75 12.5 58.332031 L 12.5 91.667969 C 12.5 96.25 16.230469 100 20.832031 100 L 79.167969 100 C 83.769531 100 87.5 96.25 87.5 91.667969 L 87.5 58.332031 C 87.5 53.75 83.769531 50 79.167969 50 Z M 20.832031 50 "/><path style=" stroke:none;fill-rule:nonzero;fill:rgb(74.117647%,76.470588%,78.039216%);fill-opacity:1;" d="M 50 4.167969 C 33.890625 4.167969 20.832031 17.082031 20.832031 33.332031 L 33.332031 33.332031 C 33.332031 24.167969 40.796875 16.667969 50 16.667969 C 59.203125 16.667969 66.667969 24.167969 66.667969 33.332031 L 79.167969 33.332031 C 79.167969 17.082031 66.109375 4.167969 50 4.167969 Z M 50 4.167969 "/><path style=" stroke:none;fill-rule:nonzero;fill:rgb(90.196078%,49.411765%,13.333333%);fill-opacity:1;" d="M 20.832031 58.332031 L 20.832031 62.5 L 79.167969 62.5 L 79.167969 58.332031 Z M 20.832031 66.667969 L 20.832031 70.832031 L 79.167969 70.832031 L 79.167969 66.667969 Z M 20.832031 75 L 20.832031 79.167969 L 79.167969 79.167969 L 79.167969 75 Z M 20.832031 83.332031 L 20.832031 87.5 L 79.167969 87.5 L 79.167969 83.332031 Z M 20.832031 83.332031 "/><path style=" stroke:none;fill-rule:nonzero;fill:rgb(49.803922%,54.901961%,55.294118%);fill-opacity:1;" d="M 20.832031 37.5 L 20.832031 41.667969 C 20.832031 43.75 23.632812 45.832031 27.082031 45.832031 C 30.535156 45.832031 33.332031 43.75 33.332031 41.667969 L 33.332031 37.5 C 33.332031 39.582031 30.535156 41.667969 27.082031 41.667969 C 23.632812 41.667969 20.832031 39.582031 20.832031 37.5 Z M 20.832031 37.5 "/><path style=" stroke:none;fill-rule:nonzero;fill:rgb(49.803922%,54.901961%,55.294118%);fill-opacity:1;" d="M 66.667969 37.5 L 66.667969 41.667969 C 66.667969 43.75 69.464844 45.832031 72.917969 45.832031 C 76.367188 45.832031 79.167969 43.75 79.167969 41.667969 L 79.167969 37.5 C 79.167969 39.582031 76.367188 41.667969 72.917969 41.667969 C 69.464844 41.667969 66.667969 39.582031 66.667969 37.5 Z M 66.667969 37.5 "/><path style=" stroke:none;fill-rule:nonzero;fill:rgb(58.431373%,64.705882%,65.098039%);fill-opacity:1;" d="M 50 10.15625 C 48.539062 10.15625 47.085938 10.296875 45.703125 10.546875 C 44.675781 10.734375 43.675781 11.015625 42.707031 11.328125 C 41.804688 11.621094 40.945312 11.980469 40.105469 12.371094 C 39.664062 12.574219 39.226562 12.789062 38.800781 13.019531 C 38.253906 13.320312 37.753906 13.722656 37.238281 14.0625 C 36.757812 14.382812 36.257812 14.621094 35.808594 14.972656 C 35.222656 15.429688 34.640625 15.894531 34.113281 16.40625 C 33.960938 16.558594 33.871094 16.773438 33.722656 16.925781 C 33.023438 17.652344 32.34375 18.324219 31.769531 19.140625 C 31.1875 19.972656 30.644531 20.835938 30.207031 21.746094 C 30.191406 21.78125 30.226562 21.839844 30.207031 21.875 C 29.746094 22.859375 29.308594 23.941406 29.035156 25 C 27.984375 27.433594 25.109375 29.167969 21.746094 29.167969 C 21.496094 29.167969 21.398438 29.175781 21.222656 29.167969 C 21.179688 29.164062 21.152344 29.171875 21.09375 29.167969 L 20.832031 33.332031 L 20.832031 41.667969 L 33.332031 41.667969 L 33.332031 33.332031 C 33.332031 32.183594 33.503906 31.03125 33.722656 29.949219 C 35.277344 22.351562 41.945312 16.667969 50 16.667969 C 59.203125 16.667969 66.667969 24.128906 66.667969 33.332031 L 66.667969 41.667969 L 79.167969 41.667969 L 79.167969 33.332031 L 78.910156 29.167969 C 78.847656 29.171875 78.820312 29.164062 78.773438 29.167969 L 78.253906 29.167969 C 74.890625 29.167969 72.015625 27.433594 70.960938 25 C 70.691406 23.941406 70.253906 22.859375 69.792969 21.875 C 69.773438 21.839844 69.808594 21.78125 69.792969 21.746094 C 69.355469 20.835938 68.8125 19.972656 68.230469 19.140625 C 67.652344 18.324219 66.980469 17.652344 66.273438 16.925781 C 66.125 16.769531 66.046875 16.558594 65.882812 16.40625 C 65.359375 15.894531 64.777344 15.429688 64.191406 14.972656 C 63.757812 14.632812 63.226562 14.371094 62.757812 14.0625 C 62.25 13.726562 61.742188 13.316406 61.199219 13.019531 C 60.777344 12.792969 60.332031 12.574219 59.894531 12.371094 C 59.054688 11.980469 58.195312 11.621094 57.292969 11.328125 C 56.324219 11.015625 55.324219 10.734375 54.296875 10.546875 C 52.914062 10.296875 51.460938 10.15625 50 10.15625 Z M 50 10.15625 "/></g></svg>'
+aiSection2.setAttribute('class', 'section2');
 
-
-aiAnalysis.appendChild(aiSection1)
-aiAnalysis.appendChild(aiSection2)
 
 const section1Title = document.createElement('h3')
 section1Title.setAttribute('class', 'sectitle article-blurb-title blurb-title-features');
@@ -920,37 +914,34 @@ aiSection1.appendChild(section1Title);
 
 const analysis1Div = document.createElement('ul');
 analysis1Div.setAttribute('class', 'article-blurb article-blurb-disadvantages');
-analysis1Div.innerHTML=`<li>Poor build quality - thin and weak plastic body, poor pre-filter cartridge, and pump making noise while in use.</li><li>Poor customer service - no response from customer care, distributors demanding money for service, and rude customer care executives.</li><li>Poor product quality - TDS value not lowering, water not being purified, water having plastic taste, and water having bad taste.</li><li>Poor installation - water leakage from UV chamber, installation not done even after booking, and installation person asking for additional money.</li><li>Warranty issues - no warranty except motor and SMPS, no response from company side in warranty period, and not being able to claim warranty.</li>`
-
 
 aiSection1.appendChild(analysis1Div);
 
 
 const contentLocked = document.createElement('div')
 contentLocked.setAttribute('class', 'lockdetail')
-contentLocked.innerHTML='Provided analysis is a sample, Please create a free account to get live analysis of the current product reviews.'
+contentLocked.innerHTML='The following response is generated by analyzing product reviews, but it may not always provide accurate information due to its reliance on subjective user opinions or less number of product reviews.'
 
 const contentLockedSignin = document.createElement('div')
-contentLockedSignin.setAttribute('class', 'lockdetail')
-contentLockedSignin.innerHTML="Provided analysis is a sample, we are developing the feature right now. We'll let you know once it is completed"
+contentLockedSignin.setAttribute('class', 'signupbtn')
+contentLockedSignin.innerHTML='Create a free account. '
 
 const signupbtn = document.createElement('button')
 signupbtn.setAttribute('class', 'NZXZk')
 signupbtn.innerHTML='Register'
 
+contentLockedSignin.appendChild(signupbtn);
 
+aiSection2.appendChild(contentLocked);
 
 let authToken = await getAuthToken();
 
-if ((authToken && authToken[constants.authTokenKey])){
-  aiSection2.appendChild(contentLockedSignin);
-}else{
-  aiSection2.appendChild(contentLocked);
-  aiSection2.appendChild(signupbtn);
+if ((!authToken || !authToken[constants.authTokenKey])){
+  aiAnalysis.appendChild(contentLockedSignin)
 }
 
 signupbtn.onclick = async function () {
-  chrome.runtime.sendMessage({ message: 'Register' });
+  chrome.runtime.sendMessage({ message: 'Register', key: 'aiReview', track: true });
 }
 
   reviewsType1.onclick = async function () {
@@ -972,7 +963,7 @@ signupbtn.onclick = async function () {
     wordCloudDiv.setAttribute('class', 'wordcloudclass');
   };
   let oneClick2 = false;
-  reviewsType2.onclick = async function () {
+  reviewsType4.onclick = async function () {
     reviewsType1.removeAttribute('class');
     reviewsType2.removeAttribute('class');
     reviewsType3.removeAttribute('class');
@@ -982,9 +973,9 @@ signupbtn.onclick = async function () {
     form.removeAttribute('class');
     form.setAttribute('class', 'cnikoG');
     reviewsType1.setAttribute('class', 'hiLyrj');
-    reviewsType2.setAttribute('class', 'liSWKK');
+    reviewsType2.setAttribute('class', 'hiLyrj');
     reviewsType3.setAttribute('class', 'hiLyrj');
-    reviewsType4.setAttribute('class', 'hiLyrj');
+    reviewsType4.setAttribute('class', 'liSWKK');
     overviewDiv.setAttribute('class', 'gnaJEW2');
     allReviewDiv.setAttribute('class', 'epbpWv');
     aiAnalysis.setAttribute('class', 'aiAnalysis2');
@@ -1008,35 +999,6 @@ signupbtn.onclick = async function () {
     }
   };
   let oneClick = false;
-  reviewsType4.onclick = async function () {
-    reviewsType1.removeAttribute('class');
-    reviewsType2.removeAttribute('class');
-    reviewsType3.removeAttribute('class');
-    reviewsType4.removeAttribute('class');
-    overviewDiv.removeAttribute('class');
-    allReviewDiv.removeAttribute('class');
-    form.removeAttribute('class');
-    form.setAttribute('class', 'cnikoG2');
-    allReviewDiv.setAttribute('class', 'epbpWv2');
-    overviewDiv.setAttribute('class', 'gnaJEW2');
-    reviewsType1.setAttribute('class', 'hiLyrj');
-    reviewsType2.setAttribute('class', 'hiLyrj');
-    reviewsType3.setAttribute('class', 'hiLyrj');
-    reviewsType4.setAttribute('class', 'liSWKK');
-    aiAnalysis.setAttribute('class', 'aiAnalysis2');
-    wordCloudDiv.removeAttribute('class');
-    
-    if (oneClick === false) {
-      oneClick = true;
-      wordCloudDiv.appendChild(loading);
-      wordlist = await wordlist;
-      wordlist = wordlist.wordcloud;
-      wordCloudDiv.removeChild(loading);
-      const abc = { list: wordlist['wordCloudFrequency'] };
-      WordCloud(document.getElementById('wordcloud'), abc);
-    }
-  };
-
   reviewsType3.onclick = async function () {
     reviewsType1.removeAttribute('class');
     reviewsType2.removeAttribute('class');
@@ -1052,9 +1014,55 @@ signupbtn.onclick = async function () {
     reviewsType2.setAttribute('class', 'hiLyrj');
     reviewsType3.setAttribute('class', 'liSWKK');
     reviewsType4.setAttribute('class', 'hiLyrj');
+    aiAnalysis.setAttribute('class', 'aiAnalysis2');
+    wordCloudDiv.removeAttribute('class');
+    
+    if (oneClick === false) {
+      oneClick = true;
+      wordCloudDiv.appendChild(loading);
+      wordlist = await wordlist;
+      wordlist = wordlist.wordcloud;
+      wordCloudDiv.removeChild(loading);
+      const abc = { list: wordlist['wordCloudFrequency'] };
+      WordCloud(document.getElementById('wordcloud'), abc);
+    }
+  };
+
+  let callonce = false;
+  reviewsType2.onclick = async function () {
+    reviewsType1.removeAttribute('class');
+    reviewsType2.removeAttribute('class');
+    reviewsType3.removeAttribute('class');
+    reviewsType4.removeAttribute('class');
+    overviewDiv.removeAttribute('class');
+    allReviewDiv.removeAttribute('class');
+    form.removeAttribute('class');
+    form.setAttribute('class', 'cnikoG2');
+    allReviewDiv.setAttribute('class', 'epbpWv2');
+    overviewDiv.setAttribute('class', 'gnaJEW2');
+    reviewsType1.setAttribute('class', 'hiLyrj');
+    reviewsType2.setAttribute('class', 'liSWKK');
+    reviewsType3.setAttribute('class', 'hiLyrj');
+    reviewsType4.setAttribute('class', 'hiLyrj');
     aiAnalysis.setAttribute('class', 'aiAnalysis');
     
     wordCloudDiv.setAttribute('class', 'wordcloudclass');
+    if(!callonce){
+      callonce = true;
+      aiAnalysis.appendChild(loading);
+      chatgpt = await chatgpt;
+      chatgpt = chatgpt.chatgpt;
+      aiAnalysis.removeChild(loading);
+      for(let i = 0; i < chatgpt.length; i++){
+        const negReviews = document.createElement('li');
+        negReviews.innerHTML = `${chatgpt[i]}`;
+        //console.log(chatgpt[i]);
+        analysis1Div.appendChild(negReviews);
+      }
+      aiAnalysis.appendChild(aiSection1);
+      aiAnalysis.appendChild(aiSection2);
+    }
+
   };
   return bodyModalPlace;
 }

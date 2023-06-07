@@ -1,5 +1,5 @@
-import { urlGenerator, constants, getReferrerIdKey } from "../Popup/utils";
-
+import { urlGenerator, constants, getReferrerIdKey } from '../Popup/utils';
+import { v4 as uuidv4 } from 'uuid';
 
 const anonymousUsageTracker = async (field) => {
   let url = `${constants.PRODUCT_API_URL}extension/anonymous-click-count`;
@@ -12,9 +12,23 @@ const anonymousUsageTracker = async (field) => {
     },
     body: JSON.stringify(body),
   });
+};
+
+async function chatGPTAnalysis() {
+  let updatedUrl = await urlGenerator();
+  let url = `${constants.API_URL}api/gpt-review-analysis`;
+  let body = { url: `${updatedUrl}` };
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+  let data = await response.json();
+  chrome.storage.local.set({ chatgpt: data.neg_reviews_analysis.analysis });
 }
-
-
 
 async function reviewModal() {
   let updatedUrl = await urlGenerator();
@@ -29,8 +43,8 @@ async function reviewModal() {
     },
     body: JSON.stringify(body),
   });
-  let data = await response.json()
-  chrome.storage.local.set({"overview":data});
+  let data = await response.json();
+  chrome.storage.local.set({ overview: data });
 }
 
 async function allReviewData(filterData) {
@@ -49,8 +63,8 @@ async function allReviewData(filterData) {
     body: JSON.stringify(body),
   });
 
-  let data = await response.json()
-  chrome.storage.local.set({"allreview":data});
+  let data = await response.json();
+  chrome.storage.local.set({ allreview: data });
 }
 
 async function wordcloudgenerator() {
@@ -68,10 +82,9 @@ async function wordcloudgenerator() {
     body: JSON.stringify(body),
   });
 
-  let data = await response.json()
-  chrome.storage.local.set({"wordcloud":data});
+  let data = await response.json();
+  chrome.storage.local.set({ wordcloud: data });
 }
-
 
 chrome.runtime.onMessage.addListener(async function (
   request,
@@ -90,26 +103,35 @@ chrome.runtime.onMessage.addListener(async function (
       });
     });
   }
-  if(request.message === 'review_modal'){
+  if (request.message === 'review_modal') {
     allReviewData([]);
     wordcloudgenerator();
     reviewModal();
+    chatGPTAnalysis();
   }
-  if(request.message === "filterData")
-  {
+  if (request.message === 'filterData') {
     //console.log(await request.data);
-    allReviewData(request.data)
+    allReviewData(request.data);
   }
-  if(request.message === "Register")
-  {
+  if (request.message === 'Register') {
     let referrerIdValue = await getReferrerIdKey();
-    let uuid = referrerIdValue[constants.referrerIdKey];
-    let body = { aiReview: true, referrerId: uuid};
-    anonymousUsageTracker(body);
+    let uuid =
+          referrerIdValue && referrerIdValue[constants.referrerIdKey]
+            ? referrerIdValue[constants.referrerIdKey]
+            : uuidv4();
+    if (!referrerIdValue || !referrerIdValue[constants.referrerIdKey]) {
+      chrome.storage.local.set({ [constants.referrerIdKey]: uuid });
+    }
+    if(request.track === true){
+      let body = {};
+      body[request.key] = true;
+      body['referrerId'] = uuid;
+      anonymousUsageTracker(body);
+    }
     chrome.tabs.create({
       url: `${constants.API_URL}register?referrer=extension&referrerId=${uuid}`,
       active: true,
     });
   }
-  sendResponse({test:true});
+  sendResponse({ test: true });
 });
