@@ -29,7 +29,7 @@ const Popup = () => {
     }
   };
 
-  TestReferrerId(); // Comment this in production.
+  // TestReferrerId(); // Comment this in production.
 
   const clickCount = async (key) => {
     const authToken = await getAuthToken();
@@ -159,11 +159,19 @@ const Popup = () => {
     }
   }
   async function signUp() {
-    chrome.runtime.sendMessage({message:'Register', key: 'signUpCount', track: true})
+    chrome.runtime.sendMessage({
+      message: 'Register',
+      key: 'signUpCount',
+      track: true,
+    });
   }
 
   async function keywordResearch() {
-    chrome.runtime.sendMessage({message:'Register', key: 'keywordCount', track: true});
+    chrome.runtime.sendMessage({
+      message: 'Register',
+      key: 'keywordCount',
+      track: true,
+    });
   }
 
   const collection = async () => {
