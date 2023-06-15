@@ -18,6 +18,8 @@ const Popup = () => {
   const [flipPage, setFlipPage] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const [collected, setCollected] = useState(false);
+  const [showcollection, setShowCollection] = useState(false);
+  const [collectionData, setCollectionData] = useState([]);
   const [isNotCollected, setIsNotCollected] = useState(false);
 
   const TestReferrerId = async () => {
@@ -29,7 +31,7 @@ const Popup = () => {
     }
   };
 
-  // TestReferrerId(); // Comment this in production.
+  TestReferrerId(); // Comment this in production.
 
   const clickCount = async (key) => {
     const authToken = await getAuthToken();
@@ -81,10 +83,6 @@ const Popup = () => {
       let useCount = await chrome.storage.sync.get(
         constants.profitabiltyUseCountKey
       );
-
-      let useCountR = await chrome.storage.sync.get(
-        constants.reviewUseCountKey
-      );
       if (
         useCount[constants.profitabiltyUseCountKey] % 2 === 0 &&
         authToken[constants.authTokenKey]
@@ -120,9 +118,6 @@ const Popup = () => {
     if (isFlipPage) {
       let authToken = await getAuthToken();
       let useCount = await chrome.storage.sync.get(constants.reviewUseCountKey);
-      let useCountP = await chrome.storage.sync.get(
-        constants.profitabiltyUseCountKey
-      );
       if (
         useCount[constants.reviewUseCountKey] % 2 === 0 &&
         authToken[constants.authTokenKey]
@@ -174,12 +169,12 @@ const Popup = () => {
     });
   }
 
-  const collection = async () => {
+  const URLcollection = async (id) => {
     const urlToSave = await urlGenerator();
     const authToken = await getAuthToken();
     //console.log(urlToSave);
     let url = `${constants.PRODUCT_API_URL}extension/save-collection`;
-    let body = { url: `${urlToSave}` };
+    let body = { url: `${urlToSave}`, _id: id };
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -190,9 +185,6 @@ const Popup = () => {
       body: JSON.stringify(body),
     });
     if (response.status === 200) setCollected(true);
-    else {
-      setIsNotCollected(true);
-    }
   };
 
   const userLogin = async () => {
@@ -258,6 +250,25 @@ const Popup = () => {
     });
   };
 
+  const getCollection = async () => {
+    const authToken = await getAuthToken();
+    if (authToken && authToken[constants.authTokenKey]) {
+      let url = `${constants.PRODUCT_API_URL}collection/get-collections`;
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + authToken[constants.authTokenKey],
+        },
+      });
+      setCollectionData(await response.json());
+      setShowCollection(true);
+    } else {
+      setIsNotCollected(true);
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -303,141 +314,135 @@ const Popup = () => {
           <Switch color="secondary" defaultChecked />
         </Box>
       </Box>
-      <Box
-        sx={{
-          height: '100%',
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'column',
-        }}
-      >
+      {!showcollection && (
         <Box
           sx={{
-            m: '10px 0 10px 0',
-            width: '81%',
+            height: '100%',
+            width: '100%',
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'column',
           }}
         >
-          <Button
-            onClick={review_modal}
-            sx={{ backgroundColor: '#b85c91' }}
-            fullWidth
-            size="small"
-            color="secondary"
-            variant="contained"
-            disabled={!rvalue || flipPage ? true : false}
+          <Box
+            sx={{
+              m: '10px 0 10px 0',
+              width: '81%',
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'column',
+            }}
           >
-            AI Review Analyzer
-          </Button>
-          {!isLogin && (
-            <Typography variant="body2"> ({rvalue} Left)</Typography>
-          )}
-        </Box>
-        <Box
-          sx={{
-            width: '81%',
-            justifyContent: 'center',
-            m: '10px 0 10px 0',
-            display: 'flex',
-            alignItems: 'center',
-            flexDirection: 'column',
-          }}
-        >
-          <Button
-            onClick={keywordResearch}
-            sx={{ backgroundColor: '#b85c91' }}
-            size="small"
-            color="secondary"
-            fullWidth
-            disabled={flipPage ? true : false}
-            variant="contained"
-          >
-            Keyword Research
-          </Button>
-        </Box>
-        <Box
-          sx={{
-            width: '81%',
-            justifyContent: 'center',
-            m: '10px 0 10px 0',
-            display: 'flex',
-            alignItems: 'center',
-            flexDirection: 'column',
-          }}
-        >
-          <Button
-            onClick={profitability_modal}
-            sx={{ backgroundColor: '#b85c91' }}
-            size="small"
-            color="secondary"
-            fullWidth
-            variant="contained"
-            disabled={!pvalue || flipPage ? true : false}
-          >
-            Profitability Calculator
-          </Button>
-
-          {!isLogin && (
-            <Typography variant="body2"> ({pvalue} Left)</Typography>
-          )}
-        </Box>
-
-        <Box
-          sx={{
-            width: '81%',
-            justifyContent: 'center',
-            m: '10px 0 10px 0',
-            display: 'flex',
-            alignItems: 'center',
-            flexDirection: 'column',
-            backgroundColor: '#7828f0',
-            borderRadius: '5px',
-          }}
-        >
-          {isNotCollected && (
-            <Typography variant="body2" color="#ffffff">
-              {' '}
-              Please Login to use this feature.
-            </Typography>
-          )}
-          {(!pvalue || !rvalue) && (
-            <Typography variant="body2" color="#ffffff">
-              {' '}
-              Create a free account to use more.
-            </Typography>
-          )}
-          {flipPage && (
-            <Typography variant="body2" color="#ffffff">
-              {' '}
-              Please visit a Flipkart product page.
-            </Typography>
-          )}
-          {!isLogin && (
             <Button
-              onClick={signUp}
+              onClick={review_modal}
+              sx={{ backgroundColor: '#b85c91' }}
               fullWidth
               size="small"
-              sx={{ backgroundColor: '#b85c91' }}
               color="secondary"
               variant="contained"
+              disabled={!rvalue || flipPage ? true : false}
             >
-              Free Login / Sign up
+              AI Review Analyzer
             </Button>
-          )}
+            {!isLogin && (
+              <Typography variant="body2"> ({rvalue} Left)</Typography>
+            )}
+          </Box>
+          <Box
+            sx={{
+              width: '81%',
+              justifyContent: 'center',
+              m: '10px 0 10px 0',
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'column',
+            }}
+          >
+            <Button
+              onClick={keywordResearch}
+              sx={{ backgroundColor: '#b85c91' }}
+              size="small"
+              color="secondary"
+              fullWidth
+              disabled={flipPage ? true : false}
+              variant="contained"
+            >
+              Keyword Research
+            </Button>
+          </Box>
+          <Box
+            sx={{
+              width: '81%',
+              justifyContent: 'center',
+              m: '10px 0 10px 0',
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'column',
+            }}
+          >
+            <Button
+              onClick={profitability_modal}
+              sx={{ backgroundColor: '#b85c91' }}
+              size="small"
+              color="secondary"
+              fullWidth
+              variant="contained"
+              disabled={!pvalue || flipPage ? true : false}
+            >
+              Profitability Calculator
+            </Button>
+
+            {!isLogin && (
+              <Typography variant="body2"> ({pvalue} Left)</Typography>
+            )}
+          </Box>
+
+          <Box
+            sx={{
+              width: '81%',
+              justifyContent: 'center',
+              m: '10px 0 10px 0',
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'column',
+              backgroundColor: '#7828f0',
+              borderRadius: '5px',
+            }}
+          >
+            {isNotCollected && (
+              <Typography variant="body2" color="#ffffff">
+                {' '}
+                Please Login to use this feature.
+              </Typography>
+            )}
+            {(!pvalue || !rvalue) && (
+              <Typography variant="body2" color="#ffffff">
+                {' '}
+                Create a free account to use more.
+              </Typography>
+            )}
+            {flipPage && (
+              <Typography variant="body2" color="#ffffff">
+                {' '}
+                Please visit a Flipkart product page.
+              </Typography>
+            )}
+            {!isLogin && (
+              <Button
+                onClick={signUp}
+                fullWidth
+                size="small"
+                sx={{ backgroundColor: '#b85c91' }}
+                color="secondary"
+                variant="contained"
+              >
+                Free Login / Sign up
+              </Button>
+            )}
+          </Box>
         </Box>
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-          cursor: 'pointer',
-        }}
-      >
+      )}
+      {!showcollection && (
         <Box
           sx={{
             display: 'flex',
@@ -445,29 +450,76 @@ const Popup = () => {
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
-            backgroundColor: '#b85c91',
-            borderRadius: '5px',
-            width: '100%',
-            marginTop: '10px',
-            height: '30px',
           }}
-          onClick={collection}
         >
-          <img src={save} alt="save" width="auto" height="35px" />
-          {!collected && (
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              backgroundColor: '#b85c91',
+              borderRadius: '5px',
+              width: '100%',
+              marginTop: '10px',
+              height: '30px',
+            }}
+            onClick={getCollection}
+          >
+            <img src={save} alt="save" width="auto" height="35px" />
+
             <Typography variant="body2" color="white">
               {' '}
               Start Monitoring This Product{' '}
             </Typography>
-          )}
+          </Box>
+        </Box>
+      )}
+      {showcollection && (
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Typography variant="body2">Please select a collection</Typography>
+          {collectionData.data?.map((item) => {
+            return (
+              <Box
+                sx={{
+                  width: '81%',
+                  justifyContent: 'center',
+                  m: '10px 0 10px 0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  flexDirection: 'column',
+                }}
+              >
+                <Button
+                  onClick={() => URLcollection(item._id)}
+                  sx={{ backgroundColor: '#b85c91' }}
+                  size="small"
+                  color="secondary"
+                  fullWidth
+                  variant="contained"
+                >
+                  {item.collectionName}
+                </Button>
+              </Box>
+            );
+          })}
+
           {collected && (
-            <Typography variant="body2" color="white">
+            <Typography variant="body2" color="black" sx={{ margin: '10px' }}>
               {' '}
               Product Added Visit Datavio to Monitor{' '}
             </Typography>
           )}
         </Box>
-      </Box>
+      )}
     </Box>
   );
 };
