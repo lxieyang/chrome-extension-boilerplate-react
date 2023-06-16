@@ -982,11 +982,11 @@ signupbtn.onclick = async function () {
     wordCloudDiv.setAttribute('class', 'wordcloudclass');
 
     if (oneClick2 === false) {
-      oneClick2 = true;
       reviewDiv.appendChild(loading);
       allreviewdata = await allreviewdata;
       allreviewdata = allreviewdata.allreview
       reviewDiv.removeChild(loading);
+      oneClick2 = true;
       for (let i = 0; i < Math.min(allreviewdata.length, 100); i++) {
         let newReview = ReviewGenerator(i, allreviewdata[i]);
         reviewDiv.appendChild(newReview);
@@ -1018,11 +1018,11 @@ signupbtn.onclick = async function () {
     wordCloudDiv.removeAttribute('class');
     
     if (oneClick === false) {
-      oneClick = true;
       wordCloudDiv.appendChild(loading);
       wordlist = await wordlist;
       wordlist = wordlist.wordcloud;
       wordCloudDiv.removeChild(loading);
+      oneClick = true;
       const abc = { list: wordlist['wordCloudFrequency'] };
       WordCloud(document.getElementById('wordcloud'), abc);
     }
@@ -1048,10 +1048,10 @@ signupbtn.onclick = async function () {
     
     wordCloudDiv.setAttribute('class', 'wordcloudclass');
     if(!callonce){
-      callonce = true;
       aiAnalysis.appendChild(loading);
       chatgpt = await chatgpt;
       chatgpt = chatgpt.chatgpt;
+      callonce = true;
       aiAnalysis.removeChild(loading);
       for(let i = 0; i < chatgpt.length; i++){
         const negReviews = document.createElement('li');
