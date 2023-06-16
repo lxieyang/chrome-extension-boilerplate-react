@@ -31,7 +31,7 @@ const Popup = () => {
     }
   };
 
-  TestReferrerId(); // Comment this in production.
+  // TestReferrerId(); // Comment this in production.
 
   const clickCount = async (key) => {
     const authToken = await getAuthToken();
