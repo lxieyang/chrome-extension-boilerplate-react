@@ -269,6 +269,13 @@ const Popup = () => {
     }
   };
 
+  const addCollection = async () => {
+    chrome.tabs.create({
+      url: `${constants.API_URL}product/flipkart-collection/new-collection`,
+      active: true,
+    });
+  };
+
   return (
     <Box
       sx={{
@@ -480,7 +487,7 @@ const Popup = () => {
         <Box
           sx={{
             display: 'flex',
-            justifyContent: 'center',
+            height: '100%',
             flexDirection: 'column',
             alignItems: 'center',
           }}
@@ -518,6 +525,30 @@ const Popup = () => {
               Product Added Visit Datavio to Monitor{' '}
             </Typography>
           )}
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              backgroundColor: '#b85c91',
+              borderRadius: '5px',
+              width: '100%',
+              marginTop: '10px',
+              height: '30px',
+              bottom: '0',
+              position: 'fixed',
+            }}
+            onClick={addCollection}
+          >
+            <img src={save} alt="save" width="auto" height="35px" />
+
+            <Typography variant="body2" color="white">
+              {' '}
+              Create A New Collection{' '}
+            </Typography>
+          </Box>
         </Box>
       )}
     </Box>
