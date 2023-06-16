@@ -252,20 +252,22 @@ const Popup = () => {
 
   const getCollection = async () => {
     const authToken = await getAuthToken();
-    if (authToken && authToken[constants.authTokenKey]) {
-      let url = `${constants.PRODUCT_API_URL}collection/get-collections`;
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + authToken[constants.authTokenKey],
-        },
-      });
-      setCollectionData(await response.json());
-      setShowCollection(true);
-    } else {
-      setIsNotCollected(true);
+    if (!flipPage) {
+      if (authToken && authToken[constants.authTokenKey]) {
+        let url = `${constants.PRODUCT_API_URL}collection/get-collections`;
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + authToken[constants.authTokenKey],
+          },
+        });
+        setCollectionData(await response.json());
+        setShowCollection(true);
+      } else {
+        setIsNotCollected(true);
+      }
     }
   };
 
@@ -466,7 +468,7 @@ const Popup = () => {
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
-              backgroundColor: '#b85c91',
+              backgroundColor: !flipPage ? '#b85c91' : 'lightgrey',
               borderRadius: '5px',
               width: '100%',
               marginTop: '10px',
@@ -476,7 +478,7 @@ const Popup = () => {
           >
             <img src={save} alt="save" width="auto" height="35px" />
 
-            <Typography variant="body2" color="white">
+            <Typography variant="body2" color={!flipPage ? 'white' : 'grey'}>
               {' '}
               Start Monitoring This Product{' '}
             </Typography>

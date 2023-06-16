@@ -1047,7 +1047,7 @@ signupbtn.onclick = async function () {
     aiAnalysis.setAttribute('class', 'aiAnalysis');
     
     wordCloudDiv.setAttribute('class', 'wordcloudclass');
-    if(!callonce || !chatgpt){
+    if(!callonce){
       aiAnalysis.appendChild(loading);
       chatgpt = await chatgpt;
       chatgpt = chatgpt.chatgpt;
