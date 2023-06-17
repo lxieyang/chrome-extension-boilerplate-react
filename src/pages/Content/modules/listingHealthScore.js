@@ -80,7 +80,7 @@ if(map[0]<5)
 imgNum=wrongSvg
 if(map[1]===false)
 whiteBack=wrongSvg
-if(map[2]<150)
+if(map[2]<110)
 character=wrongSvg
 if(map[3]<0.8)
 bullet=wrongSvg
@@ -111,7 +111,7 @@ if(map[6].productDetail + map[6].specification < 5){
   contentTop.innerHTML=`<div class="sc-kJjKpj dDlBoq"><div class="sc-gVplKw cRTcpJ"><div class="sc-bDySYp hYESpG">Product Images</div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">5 or more images</span><div class="sc-bxITQA dXVDfe">Current: ${map[0]}</div></div><div class="sc-PTChX bVZnJl">
   ${imgNum}</div></div></div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">White Main Image Background</span><div class="sc-bxITQA dXVDfe"></div></div><div class="sc-PTChX bVZnJl">
   ${whiteBack}</div></div></div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">Shorter Side is More than 500 px</span><div class="sc-bxITQA dXVDfe">Current: ${map[5]}</div></div><div class="sc-PTChX bVZnJl">
-  ${size}</div></div></div></div><div class="sc-gVplKw cRTcpJ"><div class="sc-bDySYp hYESpG">Listing Text</div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">Title Exceeds 150 Characters</span><div class="sc-bxITQA dXVDfe">Current: ${map[2]}</div></div><div class="sc-PTChX bVZnJl">
+  ${size}</div></div></div></div><div class="sc-gVplKw cRTcpJ"><div class="sc-bDySYp hYESpG">Listing Text</div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">Title Exceeds 110 Characters</span><div class="sc-bxITQA dXVDfe">Current: ${map[2]}</div></div><div class="sc-PTChX bVZnJl">
   ${character}</div></div></div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">Keyword Density in Title more than 0.8</span><div class="sc-bxITQA dXVDfe">Current: ${map[3]}</div></div><div class="sc-PTChX bVZnJl">
   ${bullet}</div></div></div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">Description</span><div class="sc-bxITQA dXVDfe">Features Enhanced Brand Content</div></div><div class="sc-PTChX bVZnJl">
   ${description}</div></div></div><div class="sc-jhlqpQ fQSxhv"><div class="sc-cZHnPT bZwWXg"><div class="sc-cKQJNu kuwbCK"><span class="sc-bMzxSZ fVzDaX">Product Description</span><div class="sc-bxITQA dXVDfe"></div></div><div class="sc-PTChX bVZnJl">
