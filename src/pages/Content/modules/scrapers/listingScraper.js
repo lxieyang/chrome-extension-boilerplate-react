@@ -1,9 +1,12 @@
 import { getRatingsDist } from '../utils.js';
 import { stopWords } from '../constants.js';
 async function mediaCount() {
-  const media_count = document.querySelector(
-    '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-5-12._78xt5Y > div:nth-child(1) > div > div._3li7GG > div._35DpL- > div > div._2mLllQ > ul'
-  ).childNodes.length;
+  let media_count = 1;
+  try{
+    media_count = document.querySelector(
+      '#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-5-12._78xt5Y > div:nth-child(1) > div > div._3li7GG > div._35DpL- > div > div._2mLllQ > ul'
+    ).childNodes.length;
+  } catch(err){}
   return media_count;
 }
 
@@ -227,7 +230,7 @@ const calculateNetScore = (results) => {
   }
 
   //title character count
-  if (results[2] >= 150) {
+  if (results[2] >= 110) {
     totalScore += 1;
   } else if (results[2] >= 100) {
     totalScore += 0.8;
@@ -334,8 +337,7 @@ const getListingData = async () => {
     // console.log(results)
     return results;
   } catch (err) {
-    // console.log('Error in getListingData');
-    // console.log(err);
+    // console.log('Error in getListingData', err);
   }
 };
 
