@@ -520,13 +520,13 @@ const Popup = () => {
               </Box>
             );
           })}
-
           {collected && (
             <Typography variant="body2" color="black" sx={{ margin: '10px' }}>
               {' '}
               Product Added Visit Datavio to Monitor{' '}
             </Typography>
           )}
+          <Box sx={{marginBottom:'50px'}}></Box>
           <Box
             sx={{
               display: 'flex',
