@@ -1994,3 +1994,85 @@ svg:not(:host).svg-inline--fa {
   font-weight: 500;
   color: #fff;
 }
+
+table {
+  width: 100%;
+  border-spacing: 2px;
+}
+.table100.ver1 th {
+  /* font-family: Lato-Bold; */
+  font-size: 18px;
+  color: #fff;
+  line-height: 1.4;
+  background-color: #6c7ae0;
+  font-weight: 500;
+}
+.table100-head {
+  width: 100%;
+}
+.table100-head th {
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.table100.ver1 td {
+  /* font-family: Lato-Regular; */
+  font-size: 15px;
+  color: gray;
+  line-height: 1.4;
+  margin-left: 10px;
+}
+
+.table100.ver1 .table100-body tr:nth-child(even) {
+  background-color: #f8f6ff;
+}
+
+.table100-body td {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.table100-body {
+  max-height: 585px;
+  overflow: auto;
+}
+.table100.ver1 {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
+  -o-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
+  -ms-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
+  margin-bottom: 50px;
+}
+.column11 {
+  width: 15%;
+  padding: 5px;
+  max-width: 150px;
+}
+.column21 {
+  width: 25%;
+  padding: 5px;
+}
+.column31 {
+  width: 15%;
+  padding: 5px;
+}
+.column41 {
+  width: 15%;
+  padding: 5px;
+}
+.column51 {
+  width: 15%;
+  padding: 5px;
+}
+.column61 {
+  width: 15%;
+  padding: 5px;
+}
+.cell100 {
+  text-align: center;
+}
+br {
+  margin-top: 5px;
+}

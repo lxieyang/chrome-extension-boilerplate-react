@@ -113,7 +113,7 @@ const Popup = () => {
       setFlipPage(true);
     }
   }
-  async function review_modal() {
+  async function revie_modal() {
     let isFlipPage = await urlChecker();
     if (isFlipPage) {
       let authToken = await getAuthToken();
@@ -161,12 +161,8 @@ const Popup = () => {
     });
   }
 
-  async function keywordResearch() {
-    chrome.runtime.sendMessage({
-      message: 'Register',
-      key: 'keywordCount',
-      track: true,
-    });
+  async function keyword_modal() {
+    chrome.runtime.sendMessage({ message: 'keyword_modal' });
   }
 
   const URLcollection = async (id) => {
@@ -343,7 +339,7 @@ const Popup = () => {
             }}
           >
             <Button
-              onClick={review_modal}
+              onClick={revie_modal}
               sx={{ backgroundColor: '#b85c91' }}
               fullWidth
               size="small"
@@ -368,7 +364,7 @@ const Popup = () => {
             }}
           >
             <Button
-              onClick={keywordResearch}
+              onClick={keyword_modal}
               sx={{ backgroundColor: '#b85c91' }}
               size="small"
               color="secondary"

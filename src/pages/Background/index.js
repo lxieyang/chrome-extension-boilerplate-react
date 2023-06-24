@@ -93,7 +93,7 @@ chrome.runtime.onMessage.addListener(async function (
 ) {
   if (
     request.message === 'profitability_modal' ||
-    request.message === 'review_modal'
+    request.message === 'review_modal' || request.message ==="keyword_modal"
   ) {
     chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
       // await new Promise(resolve => setTimeout(resolve, 1000));

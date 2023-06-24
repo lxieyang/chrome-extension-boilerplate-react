@@ -6,6 +6,7 @@ import getListingData from './modules/scrapers/listingScraper.js';
 import './content.styles.css';
 import ListingModal from './modules/listingHealthScore.js';
 import Jumper from './modules/jumper.js'
+import KeywordModal from './modules/tempKeywordAnalysis.js'
 
 //console.log('content script loaded');
 const observer = new MutationObserver(async (mutationsList, observer) => {
@@ -83,6 +84,7 @@ chrome.runtime.onMessage.addListener(async function (
 ) {
   const currentUrl = window.location.href;
   if (currentUrl.includes('flipkart.com')) {
+    console.log(request.type);
     if (request.type === 'profitability_modal') {
       const alreadyExists = document.getElementById('profitability-modal');
       if (alreadyExists) {
@@ -151,6 +153,60 @@ chrome.runtime.onMessage.addListener(async function (
       body.appendChild(loading);
 
       const newDiv = await reviewNewModal();
+      body.removeChild(loading);
+      body.appendChild(newDiv);
+    } else if (request.type === 'keyword_modal'){
+      console.log("YES")
+      const alreadyExists = document.getElementById('keyword-modal');
+      if (alreadyExists) {
+        // remove the modal
+        alreadyExists.remove();
+      }
+
+      const modal = document.createElement('div');
+      modal.setAttribute('id', 'keyword-modal');
+      document.body.appendChild(modal);
+
+      modal.setAttribute('class', 'ivkkEA jIfStg');
+
+      const modalClass1 = document.createElement('div');
+      modalClass1.setAttribute('class', 'doWCWF');
+      modal.appendChild(modalClass1);
+
+      const modalClass2 = document.createElement('div');
+      modalClass2.setAttribute('class', 'oeMFGH');
+      modalClass1.appendChild(modalClass2);
+
+      const header = document.createElement('div');
+      header.setAttribute('class', 'bAWFlm');
+      header.innerText = 'Keyword Analyser';
+
+      const closeModal = document.createElement('span');
+      closeModal.setAttribute('id', 'closeModal');
+      closeModal.setAttribute('class', 'close');
+      closeModal.innerHTML = '&times;';
+      closeModal.onclick = function () {
+        const alreadyExists = document.getElementById('keyword-modal');
+        if (alreadyExists) {
+          // remove the modal
+          alreadyExists.remove();
+        }
+      };
+
+      // body
+      const body = document.createElement('div');
+      body.setAttribute('class', 'jbqSrN');
+      header.appendChild(closeModal);
+      modalClass2.appendChild(header);
+      modalClass2.appendChild(body);
+
+      const loading = document.createElement('div');
+      loading.setAttribute('class', 'sk-chase');
+      loading.innerHTML =
+        '<div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div>';
+      body.appendChild(loading);
+
+      const newDiv = await KeywordModal();
       body.removeChild(loading);
       body.appendChild(newDiv);
     }
