@@ -16,10 +16,18 @@
   },
   "content_scripts": [
     {
-      "matches": ["http://*/*", "https://*/*", "<all_urls>"],
+      "run_at": "document_end",
+      "matches": ["https://robinhood.com/*"],
       "js": ["contentScript.bundle.js"],
       "css": ["content.styles.css"]
     }
+  ],
+  "permissions": [
+    "activeTab", "webRequest"
+  ],
+  "host_permissions": [
+    "https://api.robinhood.com/*",
+    "https://robinhood.com/*"
   ],
   "devtools_page": "devtools.html",
   "web_accessible_resources": [

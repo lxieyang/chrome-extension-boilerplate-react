@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/lhoang1/.nvm/versions/node/v14.21.3/bin/node /opt/homebrew/Cellar/yarn/1.22.19/libexec/bin/yarn.js add react-query
+  /Users/lhoang1/.nvm/versions/node/v14.21.3/bin/node /opt/homebrew/Cellar/yarn/1.22.19/libexec/bin/yarn.js add @mui/material/styles
 
 PATH: 
   /Users/lhoang1/.pyenv/shims:/Users/lhoang1/.local/bin:/Users/lhoang1/.pyenv/bin:/opt/homebrew/bin:/Users/lhoang1/.nvm/versions/node/v14.21.3/bin:/Users/lhoang1/apache-maven-3.9.0/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
@@ -14,15 +14,15 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.npmjs.intuit.com/react-query: Request "https://registry.npmjs.intuit.com/react-query" returned a 403
-      at Request.params.callback [as _callback] (/opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:66154:18)
+  Error: https://registry.npmjs.intuit.com/@mui%2fmaterial/styles: not_found
+      at Request.params.callback [as _callback] (/opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:66145:18)
       at Request.self.callback (/opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:140890:22)
       at Request.emit (events.js:400:28)
       at Request.<anonymous> (/opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:141862:10)
       at Request.emit (events.js:400:28)
-      at IncomingMessage.<anonymous> (/opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:141784:12)
+      at Gunzip.<anonymous> (/opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:141784:12)
       at Object.onceWrapper (events.js:519:28)
-      at IncomingMessage.emit (events.js:412:35)
+      at Gunzip.emit (events.js:400:28)
       at endReadableNT (internal/streams/readable.js:1333:12)
       at processTicksAndRejections (internal/process/task_queues.js:82:21)
 
@@ -42,6 +42,8 @@ npm manifest:
       "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
     },
     "dependencies": {
+      "@mui/x-date-pickers": "^6.16.1",
+      "@mui/x-date-pickers-pro": "^6.16.1",
       "react": "^18.2.0",
       "react-dom": "^18.2.0"
     },
@@ -1175,6 +1177,13 @@ Lockfile:
     dependencies:
       regenerator-runtime "^0.14.0"
   
+  "@babel/runtime@^7.22.6", "@babel/runtime@^7.23.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.7":
+    version "7.23.1"
+    resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@babel/runtime/-/runtime-7.23.1.tgz#72741dc4d413338a91dcb044a86f3c0bc402646d"
+    integrity sha512-hC2v6p8ZSI/W0HUzh3V8C5g+NwSKzKPtJwSpTjwl0o297GP9+ZLQSkdvHz46CM3LqyoXxq+5G9komY+eSqSO0g==
+    dependencies:
+      regenerator-runtime "^0.14.0"
+  
   "@babel/template@^7.22.5":
     version "7.22.5"
     resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@babel/template/-/template-7.22.5.tgz#0c8c4d944509875849bd0344ff0050756eefc6ec"
@@ -1246,6 +1255,33 @@ Lockfile:
     resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@eslint/js/-/js-8.47.0.tgz#5478fdf443ff8158f9de171c704ae45308696c7d"
     integrity sha512-P6omY1zv5MItm93kLM8s2vr1HICJH8v0dvddDhysbIuZ+vcjOHg5Zbkf1mTkcmi2JA9oBG2anOkRnW8WJTS8Og==
   
+  "@floating-ui/core@^1.4.2":
+    version "1.5.0"
+    resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@floating-ui/core/-/core-1.5.0.tgz#5c05c60d5ae2d05101c3021c1a2a350ddc027f8c"
+    integrity sha512-kK1h4m36DQ0UHGj5Ah4db7R0rHemTqqO0QLvUqi1/mUUp3LuAWbWxdxSIf/XsnH9VS6rRVPLJCncjRzUvyCLXg==
+    dependencies:
+      "@floating-ui/utils" "^0.1.3"
+  
+  "@floating-ui/dom@^1.5.1":
+    version "1.5.3"
+    resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@floating-ui/dom/-/dom-1.5.3.tgz#54e50efcb432c06c23cd33de2b575102005436fa"
+    integrity sha512-ClAbQnEqJAKCJOEbbLo5IUlZHkNszqhuxS4fHAVxRPXPya6Ysf2G8KypnYcOTpx6I8xcgF9bbHb6g/2KpbV8qA==
+    dependencies:
+      "@floating-ui/core" "^1.4.2"
+      "@floating-ui/utils" "^0.1.3"
+  
+  "@floating-ui/react-dom@^2.0.2":
+    version "2.0.2"
+    resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@floating-ui/react-dom/-/react-dom-2.0.2.tgz#fab244d64db08e6bed7be4b5fcce65315ef44d20"
+    integrity sha512-5qhlDvjaLmAst/rKb3VdlCinwTF4EYMiVxuuc/HVUjs46W0zgtbMmAZ1UTsDrRTxRmUEzl92mOtWbeeXL26lSQ==
+    dependencies:
+      "@floating-ui/dom" "^1.5.1"
+  
+  "@floating-ui/utils@^0.1.3":
+    version "0.1.6"
+    resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@floating-ui/utils/-/utils-0.1.6.tgz#22958c042e10b67463997bd6ea7115fe28cbcaf9"
+    integrity sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==
+  
   "@humanwhocodes/config-array@^0.11.10":
     version "0.11.10"
     resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@humanwhocodes/config-array/-/config-array-0.11.10.tgz#5a3ffe32cc9306365fb3fd572596cd602d5e12d2"
@@ -1310,6 +1346,69 @@ Lockfile:
     resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
     integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
   
+  "@mui/base@^5.0.0-beta.17":
+    version "5.0.0-beta.18"
+    resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@mui/base/-/base-5.0.0-beta.18.tgz#f95d393cf80974e77c0823170cc15c854d5af84b"
+    integrity sha512-e9ZCy/ndhyt5MTshAS3qAUy/40UiO0jX+kAo6a+XirrPJE+rrQW+mKPSI0uyp+5z4Vh+z0pvNoJ2S2gSrNz3BQ==
+    dependencies:
+      "@babel/runtime" "^7.23.1"
+      "@floating-ui/react-dom" "^2.0.2"
+      "@mui/types" "^7.2.5"
+      "@mui/utils" "^5.14.12"
+      "@popperjs/core" "^2.11.8"
+      clsx "^2.0.0"
+      prop-types "^15.8.1"
+  
+  "@mui/types@^7.2.5":
+    version "7.2.5"
+    resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@mui/types/-/types-7.2.5.tgz#cd62a1fc5eb1044137ccab2053b431dd7cfc3cb8"
+    integrity sha512-S2BwfNczr7VwS6ki8GoAXJyARoeSJDLuxOEPs3vEMyTALlf9PrdHv+sluX7kk3iKrCg/ML2mIWwapZvWbkMCQA==
+  
+  "@mui/utils@^5.13.7", "@mui/utils@^5.14.11", "@mui/utils@^5.14.12":
+    version "5.14.12"
+    resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@mui/utils/-/utils-5.14.12.tgz#58b570839e22e0fba71e17d37d9c083fe233704d"
+    integrity sha512-RFNXnhKQlzIkIUig6mmv0r5VbtjPdWoaBPYicq25LETdZux59HAqoRdWw15T7lp3c7gXOoE8y67+hTB8C64m2g==
+    dependencies:
+      "@babel/runtime" "^7.23.1"
+      "@types/prop-types" "^15.7.7"
+      prop-types "^15.8.1"
+      react-is "^18.2.0"
+  
+  "@mui/x-date-pickers-pro@^6.16.1":
+    version "6.16.1"
+    resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@mui/x-date-pickers-pro/-/x-date-pickers-pro-6.16.1.tgz#c3f00ecb87eb466f02851ecc779b153d0e4c8f9f"
+    integrity sha512-QiW7ggejZl4iqmQFUE1EFoaM1lrm7q4E0w7yB3sGPuknrM7H4T6FroJCatJuyjj3EXpfop53sxrE0ykuUoU/YQ==
+    dependencies:
+      "@babel/runtime" "^7.23.1"
+      "@mui/base" "^5.0.0-beta.17"
+      "@mui/utils" "^5.14.11"
+      "@mui/x-date-pickers" "6.16.1"
+      "@mui/x-license-pro" "6.10.2"
+      clsx "^2.0.0"
+      prop-types "^15.8.1"
+      react-transition-group "^4.4.5"
+  
+  "@mui/x-date-pickers@6.16.1", "@mui/x-date-pickers@^6.16.1":
+    version "6.16.1"
+    resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@mui/x-date-pickers/-/x-date-pickers-6.16.1.tgz#76341384ef51db5f405f779fe5f2e9456b2cdc53"
+    integrity sha512-4B2+DU7aywYdvmr10o2qai6kbbR26zta/v1y8x3bmTilI/KcbhZ2OlsyArPKmTRNC8VYirejSnhLkPR/+JIkPg==
+    dependencies:
+      "@babel/runtime" "^7.23.1"
+      "@mui/base" "^5.0.0-beta.17"
+      "@mui/utils" "^5.14.11"
+      "@types/react-transition-group" "^4.4.7"
+      clsx "^2.0.0"
+      prop-types "^15.8.1"
+      react-transition-group "^4.4.5"
+  
+  "@mui/x-license-pro@6.10.2":
+    version "6.10.2"
+    resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@mui/x-license-pro/-/x-license-pro-6.10.2.tgz#68b069214efb085f7f8c34b73d450743857e0aea"
+    integrity sha512-Baw3shilU+eHgU+QYKNPFUKvfS5rSyNJ98pQx02E0gKA22hWp/XAt88K1qUfUMPlkPpvg/uci6gviQSSLZkuKw==
+    dependencies:
+      "@babel/runtime" "^7.22.6"
+      "@mui/utils" "^5.13.7"
+  
   "@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1":
     version "5.1.1-v1"
     resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@nicolo-ribaudo/eslint-scope-5-internals/-/eslint-scope-5-internals-5.1.1-v1.tgz#dbf733a965ca47b1973177dc0bb6c889edcfb129"
@@ -1352,6 +1451,11 @@ Lockfile:
       loader-utils "^2.0.4"
       schema-utils "^3.0.0"
       source-map "^0.7.3"
+  
+  "@popperjs/core@^2.11.8":
+    version "2.11.8"
+    resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@popperjs/core/-/core-2.11.8.tgz#6b79032e760a0899cd4204710beede972a3a185f"
+    integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
   
   "@rushstack/eslint-patch@^1.1.0":
     version "1.3.3"
@@ -1519,6 +1623,11 @@ Lockfile:
     resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@types/prop-types/-/prop-types-15.7.5.tgz#5f19d2b85a98e9558036f6a3cacc8819420f05cf"
     integrity sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==
   
+  "@types/prop-types@^15.7.7":
+    version "15.7.8"
+    resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@types/prop-types/-/prop-types-15.7.8.tgz#805eae6e8f41bd19e88917d2ea200dc992f405d3"
+    integrity sha512-kMpQpfZKSCBqltAJwskgePRaYRFukDkm1oItcAbC3gNELR20XIBcN9VRgg4+m8DKsTfkWeA4m4Imp4DDuWy7FQ==
+  
   "@types/qs@*":
     version "6.9.7"
     resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@types/qs/-/qs-6.9.7.tgz#63bb7d067db107cc1e457c303bc25d511febf6cb"
@@ -1533,6 +1642,13 @@ Lockfile:
     version "18.2.7"
     resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@types/react-dom/-/react-dom-18.2.7.tgz#67222a08c0a6ae0a0da33c3532348277c70abb63"
     integrity sha512-GRaAEriuT4zp9N4p1i8BDBYmEyfo+xQ3yHjJU4eiK5NDa1RmUZG+unZABUTK4/Ox/M+GaHwb6Ow8rUITrtjszA==
+    dependencies:
+      "@types/react" "*"
+  
+  "@types/react-transition-group@^4.4.7":
+    version "4.4.7"
+    resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/@types/react-transition-group/-/react-transition-group-4.4.7.tgz#bf69f269d74aa78b99097673ca6dd6824a68ef1c"
+    integrity sha512-ICCyBl5mvyqYp8Qeq9B5G/fyBSRC0zx3XM3sCC6KkcMsNeAHqXBKkmat4GqdJET5jtYUpZXrxI5flve5qhi2Eg==
     dependencies:
       "@types/react" "*"
   
@@ -2341,6 +2457,11 @@ Lockfile:
       kind-of "^6.0.2"
       shallow-clone "^3.0.0"
   
+  clsx@^2.0.0:
+    version "2.0.0"
+    resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/clsx/-/clsx-2.0.0.tgz#12658f3fd98fafe62075595a5c30e43d18f3d00b"
+    integrity sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q==
+  
   color-convert@^1.9.0:
     version "1.9.3"
     resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/color-convert/-/color-convert-1.9.3.tgz#bb71850690e1f136567de629d2d5471deda4c1e8"
@@ -2674,6 +2795,14 @@ Lockfile:
     integrity sha512-gd3ypIPfOMr9h5jIKq8E3sHOTCjeirnl0WK5ZdS1AW0Odt0b1PaWaHdJ4Qk4klv+YB9aJBS7mESXjFoDQPu6DA==
     dependencies:
       utila "~0.4"
+  
+  dom-helpers@^5.0.1:
+    version "5.2.1"
+    resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/dom-helpers/-/dom-helpers-5.2.1.tgz#d9400536b2bf8225ad98fe052e029451ac40e902"
+    integrity sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==
+    dependencies:
+      "@babel/runtime" "^7.8.7"
+      csstype "^3.0.2"
   
   dom-serializer@^1.0.1:
     version "1.4.1"
@@ -4796,7 +4925,7 @@ Lockfile:
     resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
     integrity sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==
   
-  prop-types@^15.8.1:
+  prop-types@^15.6.2, prop-types@^15.8.1:
     version "15.8.1"
     resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
     integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -4865,6 +4994,11 @@ Lockfile:
     resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
     integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
   
+  react-is@^18.2.0:
+    version "18.2.0"
+    resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
+    integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
+  
   react-refresh-typescript@^2.0.7:
     version "2.0.9"
     resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/react-refresh-typescript/-/react-refresh-typescript-2.0.9.tgz#f8a86efcb34f8d717100230564b9b57477d74b10"
@@ -4874,6 +5008,16 @@ Lockfile:
     version "0.14.0"
     resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/react-refresh/-/react-refresh-0.14.0.tgz#4e02825378a5f227079554d4284889354e5f553e"
     integrity sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==
+  
+  react-transition-group@^4.4.5:
+    version "4.4.5"
+    resolved "https://registry.npmjs.intuit.com:443/artifactory/api/npm/npm-intuit/react-transition-group/-/react-transition-group-4.4.5.tgz#e53d4e3f3344da8521489fbef8f2581d42becdd1"
+    integrity sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==
+    dependencies:
+      "@babel/runtime" "^7.5.5"
+      dom-helpers "^5.0.1"
+      loose-envify "^1.4.0"
+      prop-types "^15.6.2"
   
   react@^18.2.0:
     version "18.2.0"
