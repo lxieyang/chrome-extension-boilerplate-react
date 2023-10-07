@@ -1,7 +1,7 @@
 {
-  "name": "chrome-extension-boilerplate-react",
+  "name": "better-robinhood-reports",
   "version": "5.0.4",
-  "description": "A chrome extension boilerplate built with React 18, Webpack 5, and Webpack Dev Server 4",
+  "description": "A chrome extension to enhance robinhood's expierence with reports, graphs,and more",
   "license": "MIT",
   "repository": {
     "type": "git",
