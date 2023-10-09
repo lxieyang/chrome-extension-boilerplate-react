@@ -47,13 +47,13 @@ const RangeHeader = () => {
             <h3>Profit and Loss {parsedOrders.length}</h3>
                 <div style={{display:"flex", gap:"20px", justifyContent: "start", alignContent:"center", flexDirection: "row"}}>
                     <span >
-                    <Calendar   showButtonBar showIcon dateFormat={"yy/mm/dd"} value={startDate} onChange={(e) => {
+                    <Calendar   showButtonBar showIcon dateFormat={"mm/dd/yy"} value={startDate} onChange={(e) => {
                         setStartDate(e.value);
                     }}/>
                             <label htmlFor="start_date">Start Date</label>
                         </span>
                     <span >
-                    <Calendar  showButtonBar showIcon dateFormat={"yy/mm/dd"} value={endDate} onChange={(e) => setEndDate(e.value)}/>
+                    <Calendar  showButtonBar showIcon dateFormat={"mm/dd/yy"} value={endDate} onChange={(e) => setEndDate(e.value)}/>
                                             <label htmlFor="end_date">End Date</label>
                     </span>
                     </div>
