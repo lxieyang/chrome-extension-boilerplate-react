@@ -15,10 +15,13 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@extend-chrome/messages": "^1.2.2",
     "@mui/material": "^5.14.12",
     "@mui/x-date-pickers": "^6.16.1",
     "@mui/x-date-pickers-pro": "^6.16.1",
+    "luxon": "^3.4.3",
     "moment": "^2.29.4",
+    "primereact": "^10.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
