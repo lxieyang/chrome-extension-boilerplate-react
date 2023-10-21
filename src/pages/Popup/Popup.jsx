@@ -9,7 +9,7 @@ const Popup = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/pages/Popup/Popup.jsx</code> and save to reload.
+          Edit <code>src/pages/Popup/Popup.jsx</code> and save to reload. ss s 
         </p>
         <a
           className="App-link"

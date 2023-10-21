@@ -1,7 +1,7 @@
 {
-  "name": "chrome-extension-boilerplate-react",
+  "name": "sudoLinkedin",
   "version": "5.0.4",
-  "description": "A chrome extension boilerplate built with React 18, Webpack 5, and Webpack Dev Server 4",
+  "description": "A extension for Linkedin creators to increase their engagment Rate with use of AI",
   "license": "MIT",
   "repository": {
     "type": "git",
