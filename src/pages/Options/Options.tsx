@@ -1,5 +1,4 @@
 import React from 'react';
-import './Options.css';
 
 interface Props {
   title: string;
