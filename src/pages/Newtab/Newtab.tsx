@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Newtab = () => {
-  return <div>hello</div>;
+  return <div className="w-3/4 mx-auto"></div>;
 };
 
 export default Newtab;
