@@ -35,6 +35,35 @@
   color: #61dafb;
 }
 
+.popuptext {
+  height: 100px;
+  width: 100%;
+}
+
+.popupbutton{
+  width: 100%;
+  background-color: #2cbde9;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    margin: 4px 2px;
+    border: none;
+    border-radius: 50px;
+    font-weight:bold
+}
+
+.post_url{
+  width: 100%;
+}
+
+.post_title{
+  width: 100%;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

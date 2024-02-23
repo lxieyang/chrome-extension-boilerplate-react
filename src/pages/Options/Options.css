@@ -1,8 +1,55 @@
 .OptionsContainer {
   width: 100%;
-  height: 50vh;
+  height: 5vh;
   font-size: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.optionTitle{
+  width:150px
+}
+
+.box{
+  display: inline-block;
+  font-size:15px
+}
+
+.inputBox{
+   width:200px
+}
+.optionRow{
+  width: 50%;
+  text-align: center;
+  margin: 0 auto;
+
+}
+
+.optionButton{
+  width: 50%;
+  background-color: #2cbde9;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    margin: 4px 2px;
+    border: none;
+    border-radius: 50px;
+    font-weight:bold
+}
+
+.notauth{
+  background-color: #2cbde9;
+  color: white;
+}
+.auth{
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+}
+.autherror{
+  background-color: #fffb02;
+  color: rgb(230, 18, 18);
 }
