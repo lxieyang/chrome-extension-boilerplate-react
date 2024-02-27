@@ -73,7 +73,9 @@ var options = {
             options: {
               sourceMap: true,
             },
-          },
+          }, {
+            loader: 'postcss-loader'
+          }
         ],
       },
       {
