@@ -1,0 +1,46 @@
+/* Modal.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  width: 80%; /* 모달 너비 */
+  max-width: 600px; /* 최대 너비 */
+}
+
+.modal-header {
+  background-color: #f1f1f1;
+  padding: 8px;
+  text-align: right;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 16px;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.search-popup-container {
+  margin-top: 10px; /* SearchPopup과 다른 내용 사이에 공간을 추가 */
+}

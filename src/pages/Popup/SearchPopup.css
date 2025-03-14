@@ -1,0 +1,39 @@
+.search-popup {
+    width: 300px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .search-popup input {
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  .search-popup button {
+    padding: 8px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .search-popup button:hover {
+    background-color: #0056b3;
+  }
+  
+  .search-result {
+    margin-top: 10px;
+  }
+  
+  .search-result ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .search-result li {
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+  }
+  
