@@ -1,0 +1,45 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "responseHeaders": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "https://conisoft.org/cakes/loadvehicles.php",
+      "resourceTypes": ["xmlhttprequest", "fetch","main_frame","websocket"]
+    }
+  },
+  {
+    "id": 2,
+    "priority": 2,
+    "action": {
+      "type": "modifyBody",
+      "response": {
+        "from": "{\"model\":\"fgfgfgfg\",\"year\":\"2000\",\"make\":\"Nissan\"}", 
+        "to": " { \"model\": \"101\", \"year\": \"Modified Item A\", \"make\": \"110\" }"
+      }
+    },
+    "condition": {
+      "urlFilter": "https://conisoft.org/cakes/loadvehicles.php",
+      "resourceTypes": ["xmlhttprequest", "fetch", "main_frame", "websocket"]
+    }
+  },   
+    {
+    "id" : 3,
+    "priority": 2,
+    "action" : {
+      "type" : "allowAllRequests"
+    },
+    "condition" : {
+      "urlFilter" : "||conisoft.org/*",
+      "resourceTypes" : ["main_frame"]
+    }
+  }
+]
