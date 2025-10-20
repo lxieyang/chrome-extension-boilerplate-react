@@ -1,12 +1,12 @@
 import React from 'react';
 import './Options.css';
 
-interface Props {
-  title: string;
+interface OptionsProps {
+    title: string;
 }
 
-const Options: React.FC<Props> = ({ title }: Props) => {
-  return <div className="OptionsContainer">{title} Page</div>;
+const Options: React.FC<OptionsProps> = ({ title }: OptionsProps) => {
+    return <div className='OptionsContainer'>{title} Page</div>;
 };
 
 export default Options;

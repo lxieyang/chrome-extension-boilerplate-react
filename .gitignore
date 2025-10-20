@@ -1,24 +1,35 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
-# dependencies
-/node_modules
+# Dependencies
+**/node_modules
 
-# testing
-/coverage
+# Development
+**/coverage
+**/test
+**/testing
 
-# production
-/build
-
-# zip
+# Deployment
+**/build
+**/dist
 /zip
+**/*.min.*
+**/*.bundle.*
+**/*.map.js
 
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-.history
+# Secrets
+**/.DS_Store
+**/*.env
+**/*.env.*
+**/.history
+**/secrets.*
+**/secrets/**
+**/*.crt
+**/*.key
 
-# secrets
-secrets.*.js
+# Temporary files
+**/tmp
+**/temp
+**/backup
+**/cache
+**/logs
+**/*.log

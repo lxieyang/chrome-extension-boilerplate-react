@@ -1,0 +1,32 @@
+# Dependencies
+**/node_modules
+
+# Development
+**/coverage
+
+# Deployment
+**/build
+**/dist
+**/zip
+**/*.min.*
+**/*.bundle.*
+**/*.map.js
+
+# Secrets
+**/.DS_Store
+**/*.env
+**/*.env.*
+**/.history
+
+# Temporary files
+**/tmp
+**/temp
+**/backup
+**/cache
+**/logs
+**/*.log
+
+# Licenses
+**/LICENSE
+**/LICENSE.md
+**/*.license

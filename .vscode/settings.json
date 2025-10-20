@@ -1,3 +1,22 @@
 {
-  "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "prettier.configPath": "./prettier.config.mjs",
+    "prettier.ignorePath": "./.prettierignore",
+    "markdownlint.configFile": "./.markdownlint-cli2.jsonc",
+    "eslint.useFlatConfig": true,
+    "eslint.workingDirectories": ["."],
+    "eslint.options": {
+        "overrideConfigFile": "/eslint.config.mjs" // Absolute path
+    },
+    "search.exclude": {
+        "**/dist": true,
+        "**/build": true,
+        "**/coverage": true,
+        "**/*.bundle.*": true,
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/package-lock.json": true
+    }
 }
