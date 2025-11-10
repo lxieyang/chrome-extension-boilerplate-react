@@ -1,11 +1,11 @@
 {
-  "name": "chrome-extension-boilerplate-react",
-  "version": "5.0.4",
-  "description": "A chrome extension boilerplate built with React 18, Webpack 5, and Webpack Dev Server 4",
+  "name": "on-the-spot-dictionary",
+  "version": "0.0.1",
+  "description": "Pop up a dictionary when you hover over a word",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lxieyang/chrome-extension-boilerplate-react.git"
+    "url": "https://github.com/EthanH1973/chrome-extension-basic-react.git"
   },
   "scripts": {
     "build": "node utils/build.js",
