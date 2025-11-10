@@ -1,6 +1,7 @@
 {
   "manifest_version": 3,
   "name": "On the spot dictionary for learning vocabulary",
+  "version": "1.0.0",
   "description": "Pop up a dictionary when you hover over a word",
   "options_page": "options.html",
   "background": {
